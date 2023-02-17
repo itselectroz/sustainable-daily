@@ -3,5 +3,6 @@
 
 from .index import index
 from .login import login
+from .profile import profile
 
-__all__ = ['index', 'login']
+__all__ = ['index', 'login', 'profile']
