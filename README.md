@@ -9,3 +9,4 @@ Views are in the views directory, when creating a new file remember to add it to
 Urls are in `urls.py`
 
 Remember test driven development.
+Remember your a womble.
