@@ -1,9 +1,13 @@
-.body {
+body {
+        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
+        background-image: url("login_background.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
         height: 100%;
-        background: #f2f2f2;
+        width: 100%;
 }
 
 .outerContainer {
@@ -33,10 +37,10 @@ form {
         justify-content: center;
         align-items: center;
         width: 80%;
+        font-family: "Arial Rounded MT";
 }
 
 input {
-        font-family: Arial, Helvetica, sans-serif;
         outline: none;
         border-top: none;
         border-left: none;
@@ -50,6 +54,7 @@ input {
         height: 45px;
         background: 0 0;
         padding: 0;
+        font-family: "Arial Rounded MT";
 }
 
 #pass {
@@ -58,10 +63,10 @@ input {
 
 /* Title */
 h1 {
-        font-family: Arial, Helvetica, sans-serif;
         font-weight: 700;
         margin-top: 0;
         margin-bottom: 75px;
+        font-family: "Arial Rounded MT";
 }
 
 /* ------------ button ------------ */
@@ -88,7 +93,7 @@ button {
         transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
         user-select: none;
         vertical-align: middle;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "Arial Rounded MT";
 }
 
 
@@ -114,7 +119,7 @@ button:disabled {
 /* ------------ forgot pass ------------  */
 .forgotPass {
         margin-top: 30px;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "Arial Rounded MT";
 }
 
 a {
