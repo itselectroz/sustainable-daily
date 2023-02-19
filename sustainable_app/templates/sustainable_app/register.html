@@ -7,8 +7,8 @@
     <title>Team Name Registration</title>
   </head>
   <body>
-    <h1 id="title">Register to Play</h1>
-    <img id="hat" src="{% static 'sustainable_app/party.png' %}" alt="party hat">
+    <h1 class="title">Register to Play</h1>
+    <img id="hat" class="hat" src="{% static 'sustainable_app/party.png' %}" alt="party hat">
     <form id="form" action="{% url 'register' %}" method="post">
       {% csrf_token %}
       <div class="registrationBit">
@@ -45,7 +45,7 @@
       </div>
     </form>
 
-    <div id="runningAnimals" class="hide">
+    <div id="runningAnimals" class="runners hide">
       <img class="runner" src="{% static 'sustainable_app/cat_character.png' %}" alt="cat">
       <img class="runner" src="{% static 'sustainable_app/fish.png' %}" alt="fish">
       <img class="runner" src="{% static 'sustainable_app/badger.png' %}" alt="badger">

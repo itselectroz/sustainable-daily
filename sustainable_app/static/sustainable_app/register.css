@@ -1,10 +1,10 @@
-#title {
+.title {
     font-size: 3em;
     font-weight: bold;
     text-align: center;
 }
 
-#hat {
+.hat {
   display: block;
   margin: 0 auto;
   opacity: 0;
@@ -12,7 +12,7 @@
   transition: height 0.5s ease;
 }
 
-#hat.shown {
+.hat.shown {
   opacity: 1;
 }
 
@@ -99,7 +99,7 @@ input[type="submit"]:hover ~ .shaker {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-#runningAnimals {
+.runners {
   display: flex;
   justify-content: flex-start;
   position: fixed;
@@ -116,10 +116,10 @@ input[type="submit"]:hover ~ .shaker {
   width: auto;
 }
 
-#runningAnimals.hide {
+.runners.hide {
   opacity: 0;
 }
 
-#runningAnimals.running {
+.runners.running {
   transform: translateX(calc(100% - 500px));
 }
