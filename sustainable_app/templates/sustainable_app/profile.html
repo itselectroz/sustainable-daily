@@ -42,16 +42,28 @@
             </div>
 
             <div class="settings_container">
-                <div class="settings">
-                    <div class="setting_icon">
-                        <img src="../static/sustainable_app/settings_icon.png" img>
+                <div class="action">
+                    <div class="profile" onclick="menuToggle();">
+                        <img class="settings_img" src="../static/sustainable_app/settings_icon.png" img>
                     </div>
                     <div class="menu">
+                        <h3>Dor_arrr<br><span>Dora Napier</span></h3>
                     <ul>
-                        <li><img src="../static/sustainable_app/logout_icon.png"> logout</li>
+                        <li><img src="../static/sustainable_app/logout_icon.png"><a href="#">Logout</a></li>
+                        <li><img src="../static/sustainable_app/logout_icon.png"><a href="#">Item</a></li>
+                        <li><img src="../static/sustainable_app/logout_icon.png"><a href="#">Item</a></li>
+                        <li><img src="../static/sustainable_app/logout_icon.png"><a href="#">Item</a></li>
                     </ul> 
                     </div>
                 </div>
+                <script>
+                    function menuToggle() {
+                        const toggleMenu = document.querySelector('.menu');
+                        const toggleImg = document.querySelector('.profile')
+                        toggleMenu.classList.toggle('active');
+                        toggleImg.classList.toggle('active');
+                    }
+                </script>
             </div>
         </div>
         
