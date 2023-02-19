@@ -4,6 +4,7 @@
 <div class="page">
 
         <div class="top_layer">
+
             
             <div class="profile_container" id="top_container">
                 <div class="pfp"> </div>
@@ -13,7 +14,7 @@
                     </p>
                 </div>
             </div>
-                
+            
             <div class="xp_container" id="top_container">
                 <div class="level">
                     <label>3</label>
@@ -28,7 +29,7 @@
                     </div>  
                 </div> 
             </div>
-
+            
             <div class="point_container" id="top_container">
                 <div class="point_icon">
                     <img src="../static/sustainable_app/point_symbol.png">
@@ -39,6 +40,31 @@
                     </div>
                 </div>  
             </div>
+
+            <div class="settings_container">
+                <div class="action">
+                    <div class="profile" onclick="menuToggle();">
+                        <img class="settings_img" src="../static/sustainable_app/settings_icon.png" img>
+                    </div>
+                    <div class="menu">
+                        <h3>Dor_arrr<br><span>Dora Napier</span></h3>
+                    <ul>
+                        <li><img src="../static/sustainable_app/logout_icon.png"><a href="#">Logout</a></li>
+                        <li><img src="../static/sustainable_app/logout_icon.png"><a href="#">Item</a></li>
+                        <li><img src="../static/sustainable_app/logout_icon.png"><a href="#">Item</a></li>
+                        <li><img src="../static/sustainable_app/logout_icon.png"><a href="#">Item</a></li>
+                    </ul> 
+                    </div>
+                </div>
+                <script>
+                    function menuToggle() {
+                        const toggleMenu = document.querySelector('.menu');
+                        const toggleImg = document.querySelector('.profile')
+                        toggleMenu.classList.toggle('active');
+                        toggleImg.classList.toggle('active');
+                    }
+                </script>
+            </div>
         </div>
         
         <div class="bottom_layer">
@@ -48,7 +74,7 @@
                 <div class="tab">   
                     <input type="radio" id="badger" name="character_select" checked="checked">
                     <label class="tab_content" id="character_badger" for="badger"></label>      
-
+                    
                     <input type="radio" id="frog" name="character_select" >
                     <label class="tab_content" id="character_frog" for="frog"></label>
                 
@@ -82,7 +108,12 @@
                             <label class="tab_content" id="accessory_crown" for="crown"></label>
 
                             <input type="radio" id="locked" name="accessory_select" >
-                            <label class="tab_content" id="accessory_locked" for="locked"></label>
+                            <label class="tab_content" id="accessory_locked" for="locked">
+                                <div class="points_required">
+                                <img src="../static/sustainable_app/point_symbol.png">100
+                                </div>
+                            </label>
+                               
                 </div>
     
                 <input type="radio" id="name_color_tab" name="tabs">
@@ -100,8 +131,8 @@
                                 <input type="radio" id="orange" name="name_color_select" >
                                 <label class="tab_content" id="name_color_orange" for="orange"></label>
 
-                                <input type="radio" id="blue" name="name_color_select" >
-                                <label class="tab_content" id="name_color_blue" for="blue"></label>          
+                                <input type="radio" id="n_blue" name="name_color_select" >
+                                <label class="tab_content" id="name_color_blue" for="n_blue"></label>          
                 </div>
     
                 <input type="radio" id="background_tab" name="tabs">
