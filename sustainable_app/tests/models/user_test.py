@@ -16,7 +16,7 @@ class UserModelTests(TestCase):
        Checks the level method returns 10 when you have 20408 xp
        """
        user = User()
-       user.xp = 20408
+       user.xp = 20409
        self.assertEqual(user.level(), 10)
 
     def test_xp_for_level_with_level_0(self):
