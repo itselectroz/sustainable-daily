@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/profile.css' %}">
 
 <div class="page">
+
         <div class="top_layer">
             
             <div class="profile_container" id="top_container">
@@ -14,27 +15,30 @@
             </div>
                 
             <div class="xp_container" id="top_container">
+                <div class="level">
+                    <label>3</label>
+                    <img src="../static/sustainable_app/xp_symbol.png">
+                </div>
                 <div class="xp_bar">
                     <div class="line_box"> 
-                        <div class="line"></div>  
+                        <div class="line">
+                            <div class="blue_line"></div>
+                        </div>
                         <div class="writing_xp">100/200</div>
                     </div>  
-                    <div class="level">
-                        <label>3</label>
-                        <img src="../static/sustainable_app/xp_symbol.png">
-                    </div>
-                </div>
+                </div> 
             </div>
 
             <div class="point_container" id="top_container">
-                <div class="points_bar">
-                    <div class="writing_points">200</div>
-                </div>
                 <div class="point_icon">
                     <img src="../static/sustainable_app/point_symbol.png">
+                </div>
+                <div class="point_bar_container">
+                    <div class="points_bar">
+                        <div class="writing_points">200</div>
+                    </div>
                 </div>  
             </div>
-
         </div>
         
         <div class="bottom_layer">
@@ -56,85 +60,69 @@
                 
                     <input type="radio" id="bird" name="character_select" >
                     <label class="tab_content" id="character_bird" for="bird"></label>
+
+                    <input type="radio" id="fox" name="character_select" >
+                    <label class="tab_content" id="character_fox" for="fox"><p>6</p></label>
+
                 </div>
     
                 <input type="radio" id="accessory_tab" name="tabs">
                 <label id="accessory" for="accessory_tab"></label>
                 <div class="tab"> 
-                <table>
-                    <tr>
-                        <td>
                             <input type="radio" id="none" name="accessory_select" checked="checked" >
                             <label class="tab_content" id="accessory_none" for="none"></label>
-                        </td>
-                        <td>
+
                             <input type="radio" id="party" name="accessory_select" >
                             <label class="tab_content" id="accessory_party" for="party"></label>
-                        </td>
-                        <td>
+
                             <input type="radio" id="viking" name="accessory_select" >
                             <label class="tab_content" id="accessory_viking" for="viking"></label>
-                        </td>
-                        <td>
+
                             <input type="radio" id="crown" name="accessory_select" >
                             <label class="tab_content" id="accessory_crown" for="crown"></label>
-                        </td>
-                    </tr>
-                </table>
+
+                            <input type="radio" id="locked" name="accessory_select" >
+                            <label class="tab_content" id="accessory_locked" for="locked"></label>
                 </div>
     
                 <input type="radio" id="name_color_tab" name="tabs">
                 <label id="name_color" for="name_color_tab"></label>
                 <div class="tab">
-                    <table>
-                        <tr>
-                            <td>
                                 <input type="radio" id="black" name="name_color_select" checked="checked" >
                                 <label class="tab_content" id="name_color_black" for="black"></label>
-                            </td>
-                            <td>
+                        
                                 <input type="radio" id="green" name="name_color_select" >
                                 <label class="tab_content" id="name_color_green" for="green"></label>
-                            </td>
-                            <td>
+                           
                                 <input type="radio" id="purple" name="name_color_select" >
                                 <label class="tab_content" id="name_color_purple" for="purple"></label>
-                            </td>
-                            <td>
+                           
                                 <input type="radio" id="orange" name="name_color_select" >
                                 <label class="tab_content" id="name_color_orange" for="orange"></label>
-                            </td>
-                        </tr>
-                    </table>
+
+                                <input type="radio" id="blue" name="name_color_select" >
+                                <label class="tab_content" id="name_color_blue" for="blue"></label>          
                 </div>
     
                 <input type="radio" id="background_tab" name="tabs">
                 <label id="background" for="background_tab"></label>
                 <div class="tab">
-                    <table>
-                        <tr>
-                            <td>
+                    
                                 <input type="radio" id="white" name="background_select" checked="checked">
                                     <label class="tab_content" id="background_white" for="white"></label>      
-                            </td>
-                            <td>
+                            
                                 <input type="radio" id="blue" name="background_select" >
                                 <label class="tab_content" id="background_blue" for="blue"></label>
-                            </td>
-                            <td>
+                            
                                 <input type="radio" id="pink" name="background_select" >
                                 <label class="tab_content" id="background_pink" for="pink"></label>
-                            </td>
-                            <td>
+                            
                                 <input type="radio" id="b_grey" name="background_select" >
                                 <label class="tab_content" id="background_grey" for="b_grey"></label>
-                            </td>
-                            <td>
+                            
                                 <input type="radio" id="b_green" name="background_select" >
                                 <label class="tab_content" id="background_green" for="b_green"></label>
-                            </td>
-                        </tr>
-                    </table>
+                            
                 </div>
             </div>
         </div>
