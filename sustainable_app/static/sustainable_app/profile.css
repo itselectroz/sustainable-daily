@@ -23,7 +23,38 @@
 div#top_container{
     margin: 15px;
     width: 100%;
- }   
+ }  
+
+ .settings_container{
+    width: 15%;
+    display: flex;
+    align-items: flex-start;
+ }
+
+ .settings img{
+    width: 50%;
+ }
+ .menu{
+    background: #ffffff;
+    border-radius: 20%;
+ }
+  
+ .menu img{
+    opacity: 0.5;
+    transition: 0.5s;
+
+ }
+ .menu ul li:hover img{
+    opacity: 1;
+ }
+  
+  .btn:hover {
+    background-color: rgb(253, 244, 244);
+  }
+
+.btn img{
+    width: 100%;
+}
 
 /*styling of the div diplaying the amount of points a player has*/
 .point_container{
@@ -70,7 +101,7 @@ div#top_container{
      
 }
 .point_icon img{
-    width: 90%;
+    width: 100%;
 }
 /*styling of the div diplaying the amount of xp a player has*/
 .xp_container{
@@ -130,12 +161,13 @@ div#top_container{
     position: relative;
     text-align: center;
     font-weight: bold;  
-    width: 70px;
+    max-width: 80px;
+    min-width: 20px;
     z-index: 1;
 }
 
 .level img {
-    width: 90%;
+    width: 100%;
 }
 /*palces the level number in the center is the icon*/
 .level label {
@@ -198,7 +230,7 @@ div#top_container{
     flex-wrap: wrap;
 }
 
-/*stlying of checked labels*/
+/*styling of checked labels*/
 .tabs input[type="radio"]:checked + label{
     background-color:rgb(255, 255, 255) ;
     border-color: #14820a;
@@ -327,12 +359,13 @@ label#accessory_locked{
     background-image: url("locked.png"); 
 }
 
+
 label#name_color_black{
     background-color: #000000;
 }
 
 label#name_color_blue{
-    background-color: #071f67;
+    background-color: #192e6c;
     background-image: url(locked.png);
 }
 
