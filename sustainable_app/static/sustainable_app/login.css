@@ -26,7 +26,7 @@ body {
         padding: 77px 55px 33px;
 }
 
-form {
+.loginForm {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -44,7 +44,7 @@ form {
         font-family: "Arial Rounded MT";
 }
 
-input {
+.tInput {
         outline: none;
         border-top: none;
         border-left: none;
@@ -66,7 +66,7 @@ input {
 }
 
 /* Title */
-h1 {
+.title {
         font-weight: 700;
         margin-top: 0;
         margin-bottom: 75px;
@@ -75,7 +75,7 @@ h1 {
 
 /* ------------ button ------------ */
 
-button {
+.loginButton {
         margin-top: 40px;
         align-items: center;
         background-color: #0A66C2;
@@ -102,18 +102,18 @@ button {
 
 
 
-button:hover,
-button:focus { 
+.loginButton:hover,
+.loginButton:focus { 
   background-color: #16437E;
   color: #ffffff;
 }
 
-button:active {
+.loginButton:active {
   background: #09223b;
   color: rgb(255, 255, 255, .7);
 }
 
-button:disabled { 
+.loginButton:disabled { 
   cursor: not-allowed;
   background: rgba(0, 0, 0, .08);
   color: rgba(0, 0, 0, .3);
@@ -126,7 +126,7 @@ button:disabled {
         font-family: "Arial Rounded MT";
 }
 
-a {
+.forgotPassLink {
         color: #555;
         text-decoration: none;
 }
