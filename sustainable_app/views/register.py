@@ -13,20 +13,20 @@ def register_user(request):
 
     for var in [username, password, first_name, last_name, email]:
         if not var:
-            return redirect(reverse('register') + "?error=1") # TODO: better error here
-    
+            # TODO: better error here
+            return redirect(reverse('register') + "?error=1")
+
     user = User.objects.create_user(username, email, password)
 
     user.first_name = first_name
     user.last_name = last_name
 
     user.save()
-    
+
     login(request, user)
 
     # TODO: change to home
     return redirect(reverse('profile'))
-
 
 
 def register(request):
