@@ -2,4 +2,6 @@
 # e.g. from .test import *
 # add all names to __all__ array
 
-__all__ = []
+from .models import UserModelTests
+
+__all__ = ['UserModelTests']

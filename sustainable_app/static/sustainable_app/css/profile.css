@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .page {
 
     display: flex;
@@ -12,155 +17,288 @@
     width: 100%;
     display: flex;
 }
-/* styling of the content at the bottom of the view (profile selection) */
-.bottom_layer{
+
+.profile {
+    width: 50%;
     display: flex;
     justify-content: flex-start;
+}
+
+.bars {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* settings */
+
+.settings_container{
+    width: 15%;
+    display: flex;
     align-items: flex-start;
+ }
+
+ .action {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+ }
+
+ .action .profile {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+ }
+
+ .action .profile img {
+    position: absolute;
+    margin: auto;
+    height: 80%;
+    width: 80%;
+    object-fit: cover;
+ }
+
+ .action .menu {
+    position: absolute;
+    top: 80px;
+    right: -10px;
+    padding: 10px 20px;
+    background-color: #fff;
+    width: 200px;
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+ }
+
+ .action .menu.active {
+    visibility: visible;
+    opacity: 1;
+ }
+
+ .action .profile.active {
+    background-color: white;
+ }
+
+ .action .menu ::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    transform: rotate(45deg);
+ }
+
+ .action .menu h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    font-size: 18px;
+    color: #555;
+    line-height: 1.2em;
+ }
+
+ .action .menu h3 span {
+    font-size: 14px;
+    color: #cecece;
+    font-weight: 400;
+ }
+
+ .action .menu ul {
+    padding: 10px;
+ }
+
+ .action .menu ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+ }
+
+ .action .menu ul li img {
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: 0.5s;
+ }
+
+ .action .menu ul li:hover img {
+    opacity: 1;
+ }
+
+ .action .menu ul li a {
+    display: inline-block;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: 0.5s;
+ }
+
+ .action .menu ul li:hover a {
+    color: #ff5d94;
+ }
+
+.settings_img {
+    padding: 5px;
+}
+
+/* styling of the content at the bottom of the view (profile selection) */
+
+.bottom_layer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     display: flex;
     height: 100%;
 }
-div#top_container{
-    margin: 15px;
-    width: 100%;
- }   
 
 /*styling of the div diplaying the amount of points a player has*/
 .point_container{
+    margin-top: .5rem;
+    margin-right: .5rem;
     display: flex;
-    align-items: flex-start;
-    
+    align-items: center;
 }
 
-.point_bar_container{
-    margin-top: 20px;
-    margin-left: -25px;
+.point_bar{
     position: relative;
+    width: clamp(150px, 150px + 5vw, 500px);
+    height: clamp(1.5em, 1em + 2vw, 2em);
+    background-color: white;
+    border-radius: 1.5rem;
+    color: black;
+}
+
+.point_bar::before {
+    content: attr(data-label);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: .2rem;
+    top: .2rem;
+    bottom: .2rem;
+    min-width: .2rem;
+    max-width: calc(92%);
     width: 100%;
-    z-index: 0;
+    background-color: #14820a;
+    border-radius: 1rem;
+    font-size: clamp(.8rem, 2vw, 1.2rem);
+    padding-left: .5em;
 }
 
-.points_bar{
-    width: 60%;
-    height: 10%;
-    background-color: #ffffff;
-    border: 2px solid#000000;
-    border-radius: 20px;
-    padding: 2px;
-    text-align: center;
-    position: relative;
+/*styling of the icon displaying current level*/
+.points{
+
+    width: clamp(3.5rem, 2rem + 4vw, 6rem);
     display: flex;
     justify-content: center;
-    align-items: center;  
-
-}
-
-.writing_points{
-    font-size: calc(3px + 2vw);
-
-}
-
-.point_icon {
-    position: relative;
-    text-align: center;
-    font-weight: bold;  
-    max-width: 80px;
-    min-width: 20px;
+    align-items: center;
     z-index: 1;
-     
 }
-.point_icon img{
-    width: 90%;
+
+.points img {
+    width: 75%;
 }
+
+
 /*styling of the div diplaying the amount of xp a player has*/
 .xp_container{
+    margin-top: .5rem;
+    margin-right: .5rem;
     display: flex;
-    align-items: flex-start;
-    
+    align-items: center;
 }
 
 .xp_bar{
-    margin-top: 15px;
-    margin-left: -25px;
     position: relative;
-    width: 100%;
-    z-index: 0;
+    width: clamp(150px, 150px + 5vw, 500px);
+    height: clamp(1.5em, 1em + 2vw, 2em);
+    background-color: white;
+    border-radius: 1.5rem;
+    color: black;
 }
 
-.line_box {
-    width: 60%;
-    height: 10%;
-    background-color: #ffffff;
-    border: 2px solid#000000;
-    border-radius: 20px;
-    padding: 2px;
-    text-align: center;
-    position: relative;
+.xp_bar::before {
+    content: attr(data-label);
     display: flex;
-    justify-content: center;
-    align-items: center;  
-
+    align-items: center;
+    position: absolute;
+    left: .2rem;
+    top: .2rem;
+    bottom: .2rem;
+    min-width: .2rem;
+    max-width: calc(92%);
+    width: 100%;
+    background-color: #17a3c9;
+    border-radius: 1rem;
+    font-size: clamp(.8rem, 2vw, 1.2rem);
+    padding-left: .5em;
 }
+
 .writing_xp{
     position: absolute;
-    width: 50%;
-    left: 25%;
-    font-size: calc(3px + 2vw);
+    text-align: center;
+    width: 8rem;
+    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
+    font-family: 'Arial Rounded MT';
 }
-
-/*styling of green bar repersenting xp as a percent of the bar filled*/
-.line {
-    height: 100%;
-    width: 100%;
-    border-radius: 20px;
-    
-}
-
-.blue_line {
-    height: 100%;
-    width: 50%;
-    left: 0;
-    border-radius: 20px;
-    background-color: #1591aa;  
-}
-
 
 /*styling of the icon displaying current level*/
 .level{
-    position: relative;
-    text-align: center;
-    font-weight: bold;  
-    width: 70px;
+
+    width: clamp(3.5rem, 2rem + 4vw, 6rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1;
 }
 
 .level img {
-    width: 90%;
+    width: 75%;
 }
-/*palces the level number in the center is the icon*/
+
+
 .level label {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 8rem;
+    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
+    font-family: 'Arial Rounded MT';
 }
 
 
 /*styling of the div diplaying the players chosen profile picture and username*/
-.pfp{
-    width: 80%;
-    min-width: 30px;
-    aspect-ratio: 1/1;
-    flex-wrap: wrap;
-    border-radius: 25px;
-    padding: 17px;
-    border: 3px solid #000000;
-    background: url(fish.png);
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-color: #69d6e7;
 
+.profile_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 1rem;
+    max-width: 7rem;
+}
+
+.pfp {
+    width: 100%;
+    background-color: #17a3c9;
+    border-radius: .5rem;
+    border: .2rem solid black;
+}
+
+.pfp_img {
+    padding: 0;
+    width: 100%;
+    
 }
 
 .username {
@@ -169,23 +307,18 @@ div#top_container{
 
 .username p {
     font-weight: bold;
-    font-size: calc(3px + 2vw);
+    font-size: clamp(.1rem, 1rem + .1vw, 5rem)
 }
 
-.profile_container {
 
-    display: flex;
-    flex-direction: column;
-    max-width: 15%;
-}
 /*styling of the div diplaying the profile customization menu*/
+
 .tabs{
     display: flex;
     flex-wrap: wrap;
-    max-width: 80%;
+    min-width: 17rem;
     align-content: center;
-    margin-left: 25%;
-    margin-top: -50px;
+    margin: 2rem;
 }
 
 /*hides radio button for the tabs class*/
@@ -198,7 +331,7 @@ div#top_container{
     flex-wrap: wrap;
 }
 
-/*stlying of checked labels*/
+/*styling of checked labels*/
 .tabs input[type="radio"]:checked + label{
     background-color:rgb(255, 255, 255) ;
     border-color: #14820a;
@@ -211,7 +344,6 @@ div#top_container{
 }
 /*stlying of the content */
 .tab{
-
     border-radius: 0px 20px 20px 20px ;
     width: 100%;
     padding: 25px;
@@ -219,13 +351,14 @@ div#top_container{
     order: 1;
     display: none;
     min-height: 100px;
+    justify-content: flex-start;
 }
 
 /*stlying of the character tab icon */
 label#character{
     background-repeat: no-repeat;
     background-size: 90%;
-    background-image: url("cat.png");
+    background-image: url("../img/cat.png");
     background-position: center;
     
 }
@@ -235,7 +368,7 @@ label#accessory{
 
     background-repeat: no-repeat;
     background-size: 75%;
-    background-image: url("hat.png");
+    background-image: url("../img/hat.png");
     background-position: center;
     
 }
@@ -245,7 +378,7 @@ label#name_color{
 
     background-repeat: no-repeat;
     background-size: 70%;
-    background-image: url("abc.png");
+    background-image: url("../img/abc.png");
     background-position: center;
     
 }
@@ -255,7 +388,7 @@ label#background{
 
     background-repeat: no-repeat;
     background-size: 90%;
-    background-image: url("background.png");
+    background-image: url("../img/background.png");
     background-position: center;
     
 }
@@ -275,7 +408,7 @@ label.tab_content {
 }
 
 label#character_badger{
-    background-image: url("badger.png");
+    background-image: url("../img/badger.png");
 }
 
 label#character_fox{
@@ -291,49 +424,50 @@ label#character_fox p{
 }
 
 label#character_frog{
-    background-image: url("frog.png");  
+    background-image: url("../img/frog.png");  
 }
 
 label#character_cat{
-    background-image: url("cat_character.png");
+    background-image: url("../img/cat_character.png");
 }
 
 label#character_fish{
-    background-image: url("fish.png");
+    background-image: url("../img/fish.png");
     
 }
 
 label#character_bird{
-    background-image: url("bird.png"); 
+    background-image: url("../img/bird.png"); 
 }
 
 label#accessory_none{
-    background-image: url("none.png");  
+    background-image: url("../img/none.png");  
 }
 
 label#accessory_crown{
-    background-image: url("crown.png");    
+    background-image: url("../img/crown.png");    
 }
 
 label#accessory_party{
-    background-image: url("party.png");    
+    background-image: url("../img/party.png");    
 }
 
 label#accessory_viking{
-    background-image: url("viking.png"); 
+    background-image: url("../img/viking.png"); 
 }
 
 label#accessory_locked{
-    background-image: url("locked.png"); 
+    background-image: url("../img/locked.png"); 
 }
+
 
 label#name_color_black{
     background-color: #000000;
 }
 
 label#name_color_blue{
-    background-color: #071f67;
-    background-image: url(locked.png);
+    background-color: #192e6c;
+    background-image: url("../img/locked.png");
 }
 
 label#name_color_green{
