@@ -5,5 +5,6 @@ from .index import index
 from .login import login
 from .profile import profile
 from .register import register
+from .leaderboard import leaderboard
 
-__all__ = ['index', 'login', 'profile', 'register']
+__all__ = ['index', 'login', 'profile', 'register', 'leaderboard']
