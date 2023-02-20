@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/register.css' %}">
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <title>Team Name Registration</title>
+  </head>
+  <body>
+    <h1 class="title">Register to Play</h1>
+    <img id="hat" class="hat" src="{% static 'sustainable_app/img/party.png' %}" alt="party hat">
+    <form id="form" action="{% url 'register' %}" method="post">
+      {% csrf_token %}
+      <div class="registrationBit">
+        <label for="first-name">First Name:</label>
+        <input type="text" placeholder="First Name" id="first-name" name="first-name">
+      </div>
+
+      <div class="registrationBit">
+        <label for="last-name">Last Name:</label>
+        <input type="text" placeholder="Last Name" id="last-name" name="last-name">
+      </div>
+
+      <div class="registrationBit">
+        <label for="email">Email:</label>
+        <input type="email" placeholder="E-mail" id="email" name="email">
+      </div>
+
+      <div class="registrationBit">
+        <label for="username">Username:</label>
+        <input type="text" placeholder="Username" id="username" name="username">
+      </div>
+
+      <div class="registrationBit">
+        <label for="password">Password:</label>
+        <input type="password" placeholder="Password" id="password" name="password">
+      </div>
+
+      <div class="registrationBit">
+        <input type="submit" value="Register">
+        <img class="image shaker" src="{% static 'sustainable_app/img/cat_character.png' %}" alt="cat">
+        <img class="image shaker" src="{% static 'sustainable_app/img/fish.png' %}" alt="fish">
+        <img class="image shaker" src="{% static 'sustainable_app/img/badger.png' %}" alt="badger">
+        <img class="image shaker" src="{% static 'sustainable_app/img/frog.png' %}" alt="frog">
+      </div>
+    </form>
+
+    <div id="runningAnimals" class="runners hide">
+      <img class="runner" src="{% static 'sustainable_app/img/cat_character.png' %}" alt="cat">
+      <img class="runner" src="{% static 'sustainable_app/img/fish.png' %}" alt="fish">
+      <img class="runner" src="{% static 'sustainable_app/img/badger.png' %}" alt="badger">
+      <img class="runner" src="{% static 'sustainable_app/img/frog.png' %}" alt="frog">
+      <img class="runner" src="{% static 'sustainable_app/img/bird.png' %}" alt="bird">
+    </div>
+
+    <script>
+      let intervalId;
+      const submit = document.querySelector('#form input[type="submit"]');
+      const hat = document.querySelector('#hat');
+      const runners = document.querySelector('#runningAnimals');
+
+      submit.addEventListener('mouseover', function() {
+        hat.classList.add('shown');
+        runners.classList.remove('hide');
+        runners.classList.add('running');
+        intervalId = setInterval(function() {
+          runners.classList.toggle('running');
+        }, 2000);
+      });
+
+      submit.addEventListener('mouseout', function() {
+        hat.classList.remove('shown');
+        runners.classList.add('hide');
+        runners.classList.remove('running');
+        clearInterval(intervalId);
+      });
+    </script>
+  </body>
+</html>
