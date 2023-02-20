@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/register.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/register.css' %}">
 
 <html>
   <head>
@@ -9,7 +9,7 @@
   </head>
   <body>
     <h1 class="title">Register to Play</h1>
-    <img id="hat" class="hat" src="{% static 'sustainable_app/party.png' %}" alt="party hat">
+    <img id="hat" class="hat" src="{% static 'sustainable_app/img/party.png' %}" alt="party hat">
     <form id="form" action="{% url 'register' %}" method="post">
       {% csrf_token %}
       <div class="registrationBit">
@@ -39,19 +39,19 @@
 
       <div class="registrationBit">
         <input type="submit" value="Register">
-        <img class="image shaker" src="{% static 'sustainable_app/cat_character.png' %}" alt="cat">
-        <img class="image shaker" src="{% static 'sustainable_app/fish.png' %}" alt="fish">
-        <img class="image shaker" src="{% static 'sustainable_app/badger.png' %}" alt="badger">
-        <img class="image shaker" src="{% static 'sustainable_app/frog.png' %}" alt="frog">
+        <img class="image shaker" src="{% static 'sustainable_app/img/cat_character.png' %}" alt="cat">
+        <img class="image shaker" src="{% static 'sustainable_app/img/fish.png' %}" alt="fish">
+        <img class="image shaker" src="{% static 'sustainable_app/img/badger.png' %}" alt="badger">
+        <img class="image shaker" src="{% static 'sustainable_app/img/frog.png' %}" alt="frog">
       </div>
     </form>
 
     <div id="runningAnimals" class="runners hide">
-      <img class="runner" src="{% static 'sustainable_app/cat_character.png' %}" alt="cat">
-      <img class="runner" src="{% static 'sustainable_app/fish.png' %}" alt="fish">
-      <img class="runner" src="{% static 'sustainable_app/badger.png' %}" alt="badger">
-      <img class="runner" src="{% static 'sustainable_app/frog.png' %}" alt="frog">
-      <img class="runner" src="{% static 'sustainable_app/bird.png' %}" alt="bird">
+      <img class="runner" src="{% static 'sustainable_app/img/cat_character.png' %}" alt="cat">
+      <img class="runner" src="{% static 'sustainable_app/img/fish.png' %}" alt="fish">
+      <img class="runner" src="{% static 'sustainable_app/img/badger.png' %}" alt="badger">
+      <img class="runner" src="{% static 'sustainable_app/img/frog.png' %}" alt="frog">
+      <img class="runner" src="{% static 'sustainable_app/img/bird.png' %}" alt="bird">
     </div>
 
     <script>
