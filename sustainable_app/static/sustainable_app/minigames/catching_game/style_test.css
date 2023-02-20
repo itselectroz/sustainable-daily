@@ -30,3 +30,9 @@ body {
     bottom: 0;
 }
 
+.rubbish {
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    position: absolute;
+}
