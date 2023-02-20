@@ -5,31 +5,42 @@
 
         <div class="top_layer">
 
+            <div class="profile">
             
-            <div class="profile_container" id="top_container">
-                <div class="pfp"> </div>
-                <div class="username">
-                    <p>
-                        Dora Napier
-                    </p>
+                <div class="profile_container">
+                    <div class="pfp"> 
+                        <img class="pfp_img" src="../static/sustainable_app/fish.png">
+                    </div>
+                    <div class="username">
+                        <p>
+                            Dora Napier
+                        </p>
+                    </div>
                 </div>
-            </div>
+         </div>
+
+         <div class="bars">
             
-            <div class="xp_container" id="top_container">
+            <div class="xp_container">
                 <div class="level">
                     <label>3</label>
                     <img src="../static/sustainable_app/xp_symbol.png">
                 </div>
-                <div class="xp_bar">
-                    <div class="line_box"> 
-                        <div class="line">
-                            <div class="blue_line"></div>
-                        </div>
-                        <div class="writing_xp">100/200</div>
-                    </div>  
+                <div class="xp_bar" data-label="100/200">
                 </div> 
             </div>
+
+            <div class="point_container">
+                <div class="points">
+                    <img src="../static/sustainable_app/point_symbol.png">
+                </div>
+                <div class="point_bar" data-label="100">
+                </div> 
+            </div>
+
+        </div>
             
+            <!--
             <div class="point_container" id="top_container">
                 <div class="point_icon">
                     <img src="../static/sustainable_app/point_symbol.png">
@@ -41,6 +52,7 @@
                 </div>  
             </div>
 
+            
             <div class="settings_container">
                 <div class="action">
                     <div class="profile" onclick="menuToggle();">
@@ -65,6 +77,7 @@
                     }
                 </script>
             </div>
+            -->
         </div>
         
         <div class="bottom_layer">
@@ -108,12 +121,7 @@
                             <label class="tab_content" id="accessory_crown" for="crown"></label>
 
                             <input type="radio" id="locked" name="accessory_select" >
-                            <label class="tab_content" id="accessory_locked" for="locked">
-                                <div class="points_required">
-                                <img src="../static/sustainable_app/point_symbol.png">100
-                                </div>
-                            </label>
-                               
+                            <label class="tab_content" id="accessory_locked" for="locked"></label>   
                 </div>
     
                 <input type="radio" id="name_color_tab" name="tabs">
