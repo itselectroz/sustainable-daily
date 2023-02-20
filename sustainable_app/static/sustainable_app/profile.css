@@ -19,8 +19,9 @@ body {
 }
 
 .profile {
-    width: 100%;
+    width: 50%;
     display: flex;
+    justify-content: flex-start;
 }
 
 .bars {
@@ -41,12 +42,6 @@ body {
     position: fixed;
     top: 20px;
     right: 30px;
- }
-
- .profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
  }
 
  .action .profile {
@@ -171,14 +166,13 @@ body {
     margin-top: .5rem;
     margin-right: .5rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .point_bar{
-    margin-top: .5rem;
     position: relative;
-    min-width: 150px;
-    height: 1.5em;
+    width: clamp(150px, 150px + 5vw, 500px);
+    height: clamp(1.5em, 1em + 2vw, 2em);
     background-color: white;
     border-radius: 1.5rem;
     color: black;
@@ -193,18 +187,18 @@ body {
     top: .2rem;
     bottom: .2rem;
     min-width: .2rem;
-    max-width: calc(100% - .8rem);
+    max-width: calc(92%);
     width: 100%;
     background-color: #14820a;
     border-radius: 1rem;
-    font-size: clamp(.8rem, 2vw, 5rem);
+    font-size: clamp(.8rem, 2vw, 1.2rem);
     padding-left: .5em;
 }
 
 /*styling of the icon displaying current level*/
 .points{
 
-    min-width: 3.5rem;
+    width: clamp(3.5rem, 2rem + 4vw, 6rem);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,26 +210,18 @@ body {
 }
 
 
-.points label {
-    position: absolute;
-    text-align: center;
-    width: 8rem;
-    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
-    font-family: 'Arial Rounded MT';
-}
 /*styling of the div diplaying the amount of xp a player has*/
 .xp_container{
     margin-top: .5rem;
     margin-right: .5rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .xp_bar{
-    margin-top: .5rem;
     position: relative;
-    min-width: 150px;
-    height: 1.5em;
+    width: clamp(150px, 150px + 5vw, 500px);
+    height: clamp(1.5em, 1em + 2vw, 2em);
     background-color: white;
     border-radius: 1.5rem;
     color: black;
@@ -250,11 +236,11 @@ body {
     top: .2rem;
     bottom: .2rem;
     min-width: .2rem;
-    max-width: calc(100% - .8rem);
+    max-width: calc(92%);
     width: 100%;
     background-color: #17a3c9;
     border-radius: 1rem;
-    font-size: clamp(.8rem, 2vw, 5rem);
+    font-size: clamp(.8rem, 2vw, 1.2rem);
     padding-left: .5em;
 }
 
@@ -269,7 +255,7 @@ body {
 /*styling of the icon displaying current level*/
 .level{
 
-    min-width: 3.5rem;
+    width: clamp(3.5rem, 2rem + 4vw, 6rem);
     display: flex;
     justify-content: center;
     align-items: center;
