@@ -1,25 +1,27 @@
 
  {% load static %}
- <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/login.css' %}">
+ <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/login.css' %}">
+
+<!-- TODO: detect login error -->
 
  <div class="body">
-  <div class="outerContainer">
-    <form action"" method="post">
-        {% csrf_token %}
-
-        <h1>Login</h1>
-
-        <div class="fieldsContainer">
-          <input id="username" type="text" placeholder="Username" name="uname" required>
-      
-          <input id="pass" type="password" placeholder="Password" name="psw" required>
-      
-          <button type="submit">Login</button>
-        </div>
-      
-        <div class="forgotPass">
-          <span class="psw"><a href="#">Forgot password?</a></span>
-        </div>
-    </form> 
+    <div class="outerContainer">
+      <form class="loginForm" action="" method="post">
+          {% csrf_token %}
+  
+          <h1 class="title">Login</h1>
+  
+          <div class="fieldsContainer">
+            <input class="tInput username" type="text" placeholder="Username" name="username" required>
+        
+            <input class="tInput pass" type="password" placeholder="Password" name="password" required>
+        
+            <button class="loginButton" type="submit">Login</button>
+          </div>
+        
+          <div class="forgotPass">
+            <span><a class="forgotPassLink" href="#">Forgot password?</a></span>
+          </div>
+      </form> 
     </div>
   </div>

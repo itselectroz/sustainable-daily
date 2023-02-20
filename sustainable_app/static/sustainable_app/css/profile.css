@@ -19,8 +19,9 @@ body {
 }
 
 .profile {
-    width: 100%;
+    width: 50%;
     display: flex;
+    justify-content: flex-start;
 }
 
 .bars {
@@ -41,12 +42,6 @@ body {
     position: fixed;
     top: 20px;
     right: 30px;
- }
-
- .profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
  }
 
  .action .profile {
@@ -171,14 +166,13 @@ body {
     margin-top: .5rem;
     margin-right: .5rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .point_bar{
-    margin-top: .5rem;
     position: relative;
-    min-width: 150px;
-    height: 1.5em;
+    width: clamp(150px, 150px + 5vw, 500px);
+    height: clamp(1.5em, 1em + 2vw, 2em);
     background-color: white;
     border-radius: 1.5rem;
     color: black;
@@ -193,18 +187,18 @@ body {
     top: .2rem;
     bottom: .2rem;
     min-width: .2rem;
-    max-width: calc(100% - .8rem);
+    max-width: calc(92%);
     width: 100%;
     background-color: #14820a;
     border-radius: 1rem;
-    font-size: clamp(.8rem, 2vw, 5rem);
+    font-size: clamp(.8rem, 2vw, 1.2rem);
     padding-left: .5em;
 }
 
 /*styling of the icon displaying current level*/
 .points{
 
-    min-width: 3.5rem;
+    width: clamp(3.5rem, 2rem + 4vw, 6rem);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -216,26 +210,18 @@ body {
 }
 
 
-.points label {
-    position: absolute;
-    text-align: center;
-    width: 8rem;
-    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
-    font-family: 'Arial Rounded MT';
-}
 /*styling of the div diplaying the amount of xp a player has*/
 .xp_container{
     margin-top: .5rem;
     margin-right: .5rem;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .xp_bar{
-    margin-top: .5rem;
     position: relative;
-    min-width: 150px;
-    height: 1.5em;
+    width: clamp(150px, 150px + 5vw, 500px);
+    height: clamp(1.5em, 1em + 2vw, 2em);
     background-color: white;
     border-radius: 1.5rem;
     color: black;
@@ -250,11 +236,11 @@ body {
     top: .2rem;
     bottom: .2rem;
     min-width: .2rem;
-    max-width: calc(100% - .8rem);
+    max-width: calc(92%);
     width: 100%;
     background-color: #17a3c9;
     border-radius: 1rem;
-    font-size: clamp(.8rem, 2vw, 5rem);
+    font-size: clamp(.8rem, 2vw, 1.2rem);
     padding-left: .5em;
 }
 
@@ -269,7 +255,7 @@ body {
 /*styling of the icon displaying current level*/
 .level{
 
-    min-width: 3.5rem;
+    width: clamp(3.5rem, 2rem + 4vw, 6rem);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -372,7 +358,7 @@ body {
 label#character{
     background-repeat: no-repeat;
     background-size: 90%;
-    background-image: url("cat.png");
+    background-image: url("../img/cat.png");
     background-position: center;
     
 }
@@ -382,7 +368,7 @@ label#accessory{
 
     background-repeat: no-repeat;
     background-size: 75%;
-    background-image: url("hat.png");
+    background-image: url("../img/hat.png");
     background-position: center;
     
 }
@@ -392,7 +378,7 @@ label#name_color{
 
     background-repeat: no-repeat;
     background-size: 70%;
-    background-image: url("abc.png");
+    background-image: url("../img/abc.png");
     background-position: center;
     
 }
@@ -402,7 +388,7 @@ label#background{
 
     background-repeat: no-repeat;
     background-size: 90%;
-    background-image: url("background.png");
+    background-image: url("../img/background.png");
     background-position: center;
     
 }
@@ -422,7 +408,7 @@ label.tab_content {
 }
 
 label#character_badger{
-    background-image: url("badger.png");
+    background-image: url("../img/badger.png");
 }
 
 label#character_fox{
@@ -438,40 +424,40 @@ label#character_fox p{
 }
 
 label#character_frog{
-    background-image: url("frog.png");  
+    background-image: url("../img/frog.png");  
 }
 
 label#character_cat{
-    background-image: url("cat_character.png");
+    background-image: url("../img/cat_character.png");
 }
 
 label#character_fish{
-    background-image: url("fish.png");
+    background-image: url("../img/fish.png");
     
 }
 
 label#character_bird{
-    background-image: url("bird.png"); 
+    background-image: url("../img/bird.png"); 
 }
 
 label#accessory_none{
-    background-image: url("none.png");  
+    background-image: url("../img/none.png");  
 }
 
 label#accessory_crown{
-    background-image: url("crown.png");    
+    background-image: url("../img/crown.png");    
 }
 
 label#accessory_party{
-    background-image: url("party.png");    
+    background-image: url("../img/party.png");    
 }
 
 label#accessory_viking{
-    background-image: url("viking.png"); 
+    background-image: url("../img/viking.png"); 
 }
 
 label#accessory_locked{
-    background-image: url("locked.png"); 
+    background-image: url("../img/locked.png"); 
 }
 
 
@@ -481,7 +467,7 @@ label#name_color_black{
 
 label#name_color_blue{
     background-color: #192e6c;
-    background-image: url(locked.png);
+    background-image: url("../img/locked.png");
 }
 
 label#name_color_green{
