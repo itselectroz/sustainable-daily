@@ -471,7 +471,7 @@ label#accessory_viking{
 }
 
 label#accessory_locked{
-    background-image: url("locked.png"); 
+    background-image: url("../img/locked.png"); 
 }
 
 
@@ -481,7 +481,7 @@ label#name_color_black{
 
 label#name_color_blue{
     background-color: #192e6c;
-    background-image: url(locked.png);
+    background-image: url("../img/locked.png");
 }
 
 label#name_color_green{
