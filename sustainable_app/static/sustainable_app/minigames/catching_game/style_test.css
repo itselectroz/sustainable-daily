@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.main-container {
+    margin: 0;
+    padding: 0;
+
+    min-width: 320px;
+    max-width: 100vw;
+    min-height: 600px;
+    height: 100%;
+    
+    background-color: grey;
+    overflow: hidden;
+}
+
+.player {
+    background-image: url("img/cat_general.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center    ;
+    position: absolute;
+    width: 64px;
+    height: 128px;
+    bottom: 0;
+}
+
