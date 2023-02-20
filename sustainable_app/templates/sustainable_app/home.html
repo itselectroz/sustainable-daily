@@ -1,11 +1,15 @@
+{% load static %}
+
 <html>
+
 <tml lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width">
     <title>Home</title>
-    <link rel="stylesheet" href="home_style.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/home.css' %}">
 </head>
 
 <body>
@@ -20,7 +24,7 @@
             </li>
             <li class="nav-item">
                 <div class="profile-icon">
-                    <img src="bird.png" alt="profile icon image">
+                    <img src="{% static 'img/bird.png' %}" alt="profile icon image">
                 </div>
             </li>
         </ul>
