@@ -1,6 +1,14 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .page {
+
+    display: flex;
+    flex-direction: column;
     background-color:lightgray;
-    font-family: 'Brush Script MT',cursive;
+    font-family: 'Arial Rounded MT';
     width: 100%;
     height: 100%;
 }
@@ -8,151 +16,323 @@
 .top_layer {
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-content: center;
-    margin: 0px;
-    padding: 0px;
-
 }
-/* styling of the content at the bottom of the view (profile selection) */
-.bottom_layer{
-    margin: 0px;
-    padding: 0px;
+
+.profile {
+    width: 100%;
+    display: flex;
+}
+
+.bars {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* settings */
+
+.settings_container{
+    width: 15%;
+    display: flex;
+    align-items: flex-start;
+ }
+
+ .action {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+ }
+
+ .profile {
     display: flex;
     justify-content: center;
-    align-content: center;
-}
-div#top_container{
-    margin: 10px;
     align-items: center;
+ }
+
+ .action .profile {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+ }
+
+ .action .profile img {
+    position: absolute;
+    margin: auto;
+    height: 80%;
+    width: 80%;
+    object-fit: cover;
+ }
+
+ .action .menu {
+    position: absolute;
+    top: 80px;
+    right: -10px;
+    padding: 10px 20px;
+    background-color: #fff;
+    width: 200px;
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+ }
+
+ .action .menu.active {
+    visibility: visible;
+    opacity: 1;
+ }
+
+ .action .profile.active {
+    background-color: white;
+ }
+
+ .action .menu ::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    transform: rotate(45deg);
+ }
+
+ .action .menu h3 {
     width: 100%;
- }   
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    font-size: 18px;
+    color: #555;
+    line-height: 1.2em;
+ }
+
+ .action .menu h3 span {
+    font-size: 14px;
+    color: #cecece;
+    font-weight: 400;
+ }
+
+ .action .menu ul {
+    padding: 10px;
+ }
+
+ .action .menu ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+ }
+
+ .action .menu ul li img {
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: 0.5s;
+ }
+
+ .action .menu ul li:hover img {
+    opacity: 1;
+ }
+
+ .action .menu ul li a {
+    display: inline-block;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: 0.5s;
+ }
+
+ .action .menu ul li:hover a {
+    color: #ff5d94;
+ }
+
+.settings_img {
+    padding: 5px;
+}
+
+/* styling of the content at the bottom of the view (profile selection) */
+
+.bottom_layer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    display: flex;
+    height: 100%;
+}
 
 /*styling of the div diplaying the amount of points a player has*/
-.points_container{
+.point_container{
+    margin-top: .5rem;
+    margin-right: .5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.point_bar{
+    margin-top: .5rem;
     position: relative;
+    min-width: 150px;
+    height: 1.5em;
+    background-color: white;
+    border-radius: 1.5rem;
+    color: black;
+}
+
+.point_bar::before {
+    content: attr(data-label);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: .2rem;
+    top: .2rem;
+    bottom: .2rem;
+    min-width: .2rem;
+    max-width: calc(100% - .8rem);
+    width: 100%;
+    background-color: #14820a;
+    border-radius: 1rem;
+    font-size: clamp(.8rem, 2vw, 5rem);
+    padding-left: .5em;
+}
+
+/*styling of the icon displaying current level*/
+.points{
+
+    min-width: 3.5rem;
+    display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
+}
+
+.points img {
+    width: 75%;
 }
 
 
-.points_bar{
-    width: 60%;
-    padding: 2px;
-    background-color: #ffffff;
-    border: 2px solid#000000;
-    border-radius: 20px;
+.points label {
+    position: absolute;
     text-align: center;
-
+    width: 8rem;
+    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
+    font-family: 'Arial Rounded MT';
 }
-
-.writing_points{
-    font-size: calc(5px + 2vw);
-
-}
-
-.point_icon img{
-    width: 20%;
-}
-
 /*styling of the div diplaying the amount of xp a player has*/
 .xp_container{
-    position: relative;
-    justify-content: center;
-    align-items: center;
+    margin-top: .5rem;
+    margin-right: .5rem;
+    display: flex;
+    align-items: flex-start;
 }
 
 .xp_bar{
+    margin-top: .5rem;
     position: relative;
-    justify-content: center;
-    align-items: center;  
+    min-width: 150px;
+    height: 1.5em;
+    background-color: white;
+    border-radius: 1.5rem;
+    color: black;
 }
 
-.line_box {
-    width: 60%;
-
-    background-color: #ffffff;
-    border: 2px solid#000000;
-    border-radius: 20px;
-    padding: 2px;
-    text-align: center;
-    position: relative;
-    justify-content: center;
-    align-items: center;  
-
+.xp_bar::before {
+    content: attr(data-label);
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: .2rem;
+    top: .2rem;
+    bottom: .2rem;
+    min-width: .2rem;
+    max-width: calc(100% - .8rem);
+    width: 100%;
+    background-color: #17a3c9;
+    border-radius: 1rem;
+    font-size: clamp(.8rem, 2vw, 5rem);
+    padding-left: .5em;
 }
+
 .writing_xp{
-    font-size: calc(5px + 2vw);
+    position: absolute;
+    text-align: center;
+    width: 8rem;
+    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
+    font-family: 'Arial Rounded MT';
 }
-
-/*styling of green bar repersenting xp as a percent of the bar filled*/
-.line {
-    position:absolute;
-    width: 50%;
-    height: 89%;
-    border-radius: 20px;
-    background-color: #14820a;  
-}
-
 
 /*styling of the icon displaying current level*/
 .level{
-    position: relative;
-    text-align: center;
-    font-weight: bold;
 
-
-}
-
-/*palces the level number in the center is the icon*/
-.level label {
-    position: absolute;
-    top: 43%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    min-width: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
 .level img {
-    width: 25%;
+    width: 75%;
 }
+
+
+.level label {
+    position: absolute;
+    text-align: center;
+    width: 8rem;
+    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
+    font-family: 'Arial Rounded MT';
+}
+
 
 /*styling of the div diplaying the players chosen profile picture and username*/
-.pfp{
-    width: 25%;
-    min-width: 60px;
-    aspect-ratio: 1/1;
-    flex-wrap: wrap;
-    border-radius: 25px;
-    padding: 17px;
-    border: 3px solid #000000;
-    background: url("../img/fish.png");
-    background-position: center;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-color: #69d6e7;
-
-}
-
-.username {
-    min-width: 50px;
-}
-
-.username p {
-    font-size: calc(10px + 2vw);
-}
 
 .profile_container {
     display: flex;
     flex-direction: column;
-    max-width: 40%;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 1rem;
+    max-width: 7rem;
 }
+
+.pfp {
+    width: 100%;
+    background-color: #17a3c9;
+    border-radius: .5rem;
+    border: .2rem solid black;
+}
+
+.pfp_img {
+    padding: 0;
+    width: 100%;
+    
+}
+
+.username {
+    min-width: 50%;
+}
+
+.username p {
+    font-weight: bold;
+    font-size: clamp(.1rem, 1rem + .1vw, 5rem)
+}
+
+
 /*styling of the div diplaying the profile customization menu*/
+
 .tabs{
     display: flex;
     flex-wrap: wrap;
-    max-width: 80%;
-    margin: 10px auto;
+    min-width: 17rem;
     align-content: center;
+    margin: 2rem;
 }
 
 /*hides radio button for the tabs class*/
@@ -161,10 +341,11 @@ div#top_container{
 }
  
 .tabs input[type="radio"]:checked + label + .tab {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-/*stlying of checked labels*/
+/*styling of checked labels*/
 .tabs input[type="radio"]:checked + label{
     background-color:rgb(255, 255, 255) ;
     border-color: #14820a;
@@ -183,11 +364,12 @@ div#top_container{
     background-color:rgb(255, 255, 255) ;
     order: 1;
     display: none;
+    min-height: 100px;
+    justify-content: flex-start;
 }
 
 /*stlying of the character tab icon */
 label#character{
-
     background-repeat: no-repeat;
     background-size: 90%;
     background-image: url("../img/cat.png");
@@ -243,6 +425,18 @@ label#character_badger{
     background-image: url("../img/badger.png");
 }
 
+label#character_fox{
+    background-image: url("xp_symbol.png");
+    justify-content: center;
+
+}
+
+label#character_fox p{
+    margin: auto;
+    font-weight: bold;
+    text-align: center;
+}
+
 label#character_frog{
     background-image: url("../img/frog.png");  
 }
@@ -276,8 +470,18 @@ label#accessory_viking{
     background-image: url("../img/viking.png"); 
 }
 
+label#accessory_locked{
+    background-image: url("locked.png"); 
+}
+
+
 label#name_color_black{
     background-color: #000000;
+}
+
+label#name_color_blue{
+    background-color: #192e6c;
+    background-image: url(locked.png);
 }
 
 label#name_color_green{
