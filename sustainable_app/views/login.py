@@ -27,6 +27,7 @@ def login(request):
         # TODO: change this to home when home page is done
         return redirect(reverse('profile'))
 
+    # if the login form was submitted
     if request.method == "POST" and request.POST is not None:
         response = authenticate_request(request)
         if response is not False:

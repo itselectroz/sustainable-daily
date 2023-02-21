@@ -8,6 +8,7 @@ from ..models import User
 def register_user(request):
     issues = []
 
+    # Check all fields are present and note down those that aren't
     for name in ['username', 'password', 'first-name', 'last-name', 'email']:
         if not request.POST.get(name, ''):
             issues.append(name)
@@ -27,6 +28,7 @@ def register_user(request):
     email = request.POST.get('email', '')
 
     try:
+        # Create user object
         user = User.objects.create_user(username, email, password)
     except IntegrityError:
         return render(request, 'sustainable_app/register.html', {
@@ -38,8 +40,10 @@ def register_user(request):
     user.first_name = first_name
     user.last_name = last_name
 
+    # Commit user to database
     user.save()
 
+    # Login the user to streamline process
     login(request, user)
 
     # TODO: change to home
