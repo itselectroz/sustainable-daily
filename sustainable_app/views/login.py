@@ -17,7 +17,9 @@ def authenticate_request(request):
         # TODO: change this to home when home page is done
         return redirect(reverse('profile'))
     else:
-        return redirect(reverse('login') + '?error=1')
+        return render(request, 'sustainable_app/login.html', {
+            'error': True
+        })
 
 
 def login(request):
@@ -30,4 +32,6 @@ def login(request):
         if response is not False:
             return response
 
-    return render(request, 'sustainable_app/login.html')
+    return render(request, 'sustainable_app/login.html', {
+        'error': False
+    })

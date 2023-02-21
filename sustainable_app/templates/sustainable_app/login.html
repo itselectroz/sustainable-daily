@@ -10,11 +10,17 @@
           {% csrf_token %}
   
           <h1 class="title">Login</h1>
+          
+          {% if error %}
+          <div class="error-heading">
+            Incorrect username/password.
+          </div>
+          {% endif %}
   
           <div class="fieldsContainer">
-            <input class="tInput username" type="text" placeholder="Username" name="username" required>
+            <input class="tInput username {% if error %} error {% endif %}" type="text" placeholder="Username" name="username" required>
         
-            <input class="tInput pass" type="password" placeholder="Password" name="password" required>
+            <input class="tInput pass {% if error %} error {% endif %}" type="password" placeholder="Password" name="password" required>
         
             <button class="loginButton" type="submit">Login</button>
           </div>
@@ -23,5 +29,9 @@
             <span><a class="forgotPassLink" href="#">Forgot password?</a></span>
           </div>
       </form> 
+    </div>
+
+    <div class="signup-container">
+      <a href="/register" class="signup-link">Don't have an account yet? <b>Sign up</b></a>
     </div>
   </div>
