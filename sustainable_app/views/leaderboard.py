@@ -1,14 +1,13 @@
-from django.http import HttpResponse
-from django.template import loader
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, reverse
 
 from sustainable_app.models.user import User
 
 
-def leaderboard(request):
-
-    template = loader.get_template("sustainable_app/leaderboard.html")
-
-    # Figure out how to get names for leaderboard
+@login_required(login_url=reverse('login'))
+def leaderboard(request): # TODO: write tests maybe?
     names = User.objects.order_by("-xp")
-    context = {"names": names}
-    return HttpResponse(template.render(context))
+
+    return render(request, 'sustainable_app/leaderboard.html', {
+        "names": names
+    })
