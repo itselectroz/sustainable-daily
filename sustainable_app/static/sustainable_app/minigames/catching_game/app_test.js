@@ -19,38 +19,41 @@ let vxr = 0;
 function updateFrame() {
 
     // Update X position based on velocity
-    if(getOffest(player) < (container.offsetWidth - player.offsetWidth)) {
+    if(player.offsetLeft < (container.offsetWidth - player.offsetWidth)) {
         x += vxr;
     }
 
-    if(getOffest(player) > 0) {
+    if(player.offsetLeft > 0) {
         x += vxl;
     }
 
     // Move player
-    
     player.style.left = x + 'px';
     
     requestAnimationFrame(updateFrame);
 }
 
-function getOffest(el) {
-    const rect = el.getBoundingClientRect();
-    return rect.left + window.scrollX;
-}
 
+
+/**
+ * Generate rubbish
+ */
 function generateRubbish() {
+
+    // Create piece of rubbish
     let rubbish = document.createElement('div');
     let rubbishBottom = container.offsetHeight;
     let type = getRandomClass();
     rubbish.setAttribute("class", "rubbish " + type);
-    let rubbishLeft = Math.floor(Math.random() * (container.offsetWidth - rubbish.offsetWidth));
-    console.log("Container: " + container.offsetWidth);
-    console.log("Rubbish: " + rubbish.offsetWidth);
-    console.log(container.offsetWidth - rubbish.offsetWidth);
     rubbish.style.backgroundImage = 'url(img/' + type + '.png)';
     rubbish_group.appendChild(rubbish);
 
+    // Randomize start pos
+    let rubbishLeft = Math.floor(Math.random() * (container.offsetWidth - rubbish.offsetWidth));
+
+    /**
+     * Gives the rubbish gravity
+     */
     function fallDown() {
 
         if(rubbishBottom > playerBottom && rubbishBottom < (playerBottom + (player.offsetHeight / 2)) && rubbishLeft > (player.offsetLeft - (player.offsetWidth / 2)) && 
@@ -70,7 +73,7 @@ function generateRubbish() {
     }
 
     let fallInterval = setInterval(fallDown, 20);
-    let rubbishTimeout = setTimeout(generateRubbish, 2000);
+    let rubbishTimeout = setTimeout(generateRubbish, 1000);
     rubbish.style.bottom = rubbishBottom + 'px';
     rubbish.style.left = rubbishLeft + 'px';
 }
