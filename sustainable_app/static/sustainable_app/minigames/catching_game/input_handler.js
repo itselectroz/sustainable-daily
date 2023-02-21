@@ -3,7 +3,6 @@
 
 addEventListener("keydown", function(e) {
     if(e.code == "KeyD") {
-        console.log(getOffest(player))
         vxr = container.offsetWidth / 64;
     }
     if(e.code == "KeyA") {

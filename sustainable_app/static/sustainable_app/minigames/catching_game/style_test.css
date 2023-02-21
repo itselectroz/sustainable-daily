@@ -23,7 +23,7 @@ body {
     background-image: url("img/cat_general.png");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center    ;
+    background-position: center;
     position: absolute;
     width: 64px;
     height: 128px;
@@ -31,8 +31,12 @@ body {
 }
 
 .rubbish {
-    width: 30px;
-    height: 30px;
-    background-color: black;
+    width: 60px;
+    height: 60px;
     position: absolute;
+
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }

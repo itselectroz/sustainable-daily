@@ -6,6 +6,8 @@ const rubbish_group = document.querySelector(".rubbish_group");
 const playerLeft = parseInt(window.getComputedStyle(player).getPropertyValue("left"));
 const playerBottom = parseInt(window.getComputedStyle(player).getPropertyValue("bottom"));
 
+let score = 0;
+
 // Define X value
 let x = 0;
 let vxl = 0;
@@ -38,20 +40,27 @@ function getOffest(el) {
 }
 
 function generateRubbish() {
-    let rubbishBottom = container.offsetHeight;
-    let rubbishLeft = Math.floor(Math.random() * container.offsetWidth);
     let rubbish = document.createElement('div');
-    rubbish.setAttribute("class", "rubbish");
+    let rubbishBottom = container.offsetHeight;
+    let type = getRandomClass();
+    rubbish.setAttribute("class", "rubbish " + type);
+    let rubbishLeft = Math.floor(Math.random() * (container.offsetWidth - rubbish.offsetWidth));
+    console.log("Container: " + container.offsetWidth);
+    console.log("Rubbish: " + rubbish.offsetWidth);
+    console.log(container.offsetWidth - rubbish.offsetWidth);
+    rubbish.style.backgroundImage = 'url(img/' + type + '.png)';
     rubbish_group.appendChild(rubbish);
 
     function fallDown() {
 
-        if(rubbishBottom == playerBottom && rubbishLeft > playerLeft && rubbishLeft < playerLeft + player.offsetWidth) {
+        if(rubbishBottom > playerBottom && rubbishBottom < (playerBottom + (player.offsetHeight / 2)) && rubbishLeft > (player.offsetLeft - (player.offsetWidth / 2)) && 
+        rubbishLeft < (player.offsetLeft + (player.offsetWidth / 2))) {
             rubbish_group.removeChild(rubbish);
             clearInterval(fallInterval);
+            score ++;
         }
         if(rubbishBottom < playerBottom) {
-            alert("Game Over! Score:");
+            alert("Game Over! Score:" + score);
             clearInterval(fallInterval);
             clearTimeout(rubbishTimeout);
             location.reload();
@@ -64,6 +73,13 @@ function generateRubbish() {
     let rubbishTimeout = setTimeout(generateRubbish, 2000);
     rubbish.style.bottom = rubbishBottom + 'px';
     rubbish.style.left = rubbishLeft + 'px';
+}
+
+function getRandomClass() {
+    let chosen = Math.floor(Math.random() * 10);
+    let arr_rubbish = ["can", "banana", "crisps", "glass_bottle", "jelly", "milk", "paper", "plastic_bag", "plastic_bottle", "sweet"];
+    
+    return arr_rubbish[chosen];
 }
 
 generateRubbish();
