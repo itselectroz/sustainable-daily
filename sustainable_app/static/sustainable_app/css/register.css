@@ -1,7 +1,41 @@
-.title {
-    font-size: 3em;
-    font-weight: bold;
-    text-align: center;
+body {
+  margin: 0;
+}
+
+.body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../img/login_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.outerContainer {
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+  width: 50%;
+  height: 60%;
+  max-width: 300px;
+  max-height: 550px;
+  
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  padding: 77px 55px 33px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .hat {
@@ -16,19 +50,7 @@
   opacity: 1;
 }
 
-form {
-  padding: 20px;
-  background-color: green;
-  border-radius: 10px;
-  border: 2px solid black;
-  transition: border-color 0.5s, background-color 0.5s;
-  width: fit-content;
-  margin: 0 auto;
-  align-content: center;
-  justify-content: center;
-  margin-top: -23px;
-  margin-bottom: 10px;
-}
+
 
 @media only screen and (max-width: 600px) {
   form {
@@ -36,11 +58,6 @@ form {
     max-width: 600px;
     height: auto;
   }
-}
-
-form:hover {
-  border-color: silver;
-  background-color: yellowgreen;
 }
 
 .registrationBit {
