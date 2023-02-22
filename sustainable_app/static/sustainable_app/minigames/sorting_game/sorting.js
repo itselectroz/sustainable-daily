@@ -3,6 +3,8 @@ const container = document.getElementById("container")
 const rubbish = document.getElementById("spawn")
 const scoreLabel = document.getElementById("score")
 const bins = document.querySelectorAll(".bin")
+const touchLeft = document.getElementById("left-button")
+const touchRight = document.getElementById("right-button")
 
 // Items
 const items = [
@@ -117,6 +119,20 @@ document.addEventListener('keydown', function (event) {
     } else if (event.key === 'ArrowRight') {
         moveRight()
     }
+})
+
+touchLeft.addEventListener("touchstart", function () {
+    moveLeft()
+})
+touchRight.addEventListener("touchstart", function () {
+    moveRight()
+})
+
+touchLeft.addEventListener("click", function () {
+    moveLeft()
+})
+touchRight.addEventListener("click", function () {
+    moveRight()
 })
 
 function update() {
