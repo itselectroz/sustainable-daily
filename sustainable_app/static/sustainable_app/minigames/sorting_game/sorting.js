@@ -121,12 +121,7 @@ document.addEventListener('keydown', function (event) {
     }
 })
 
-touchLeft.addEventListener("touchstart", function () {
-    moveLeft()
-})
-touchRight.addEventListener("touchstart", function () {
-    moveRight()
-})
+
 
 touchLeft.addEventListener("click", function () {
     moveLeft()
