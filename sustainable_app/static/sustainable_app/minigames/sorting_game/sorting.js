@@ -94,6 +94,15 @@ function resetRubbish() {
     newImg.alt = currentImage["alt"]
     currentImageNode = newImg
     rubbish.appendChild(newImg)
+    if (rubbish.classList.contains("right")) {
+        rubbish.classList.remove("right")
+        rubbish.classList.add("center")
+    } else if (rubbish.classList.contains("center")) {
+        return
+    } else if (rubbish.classList.contains("left")) {
+        rubbish.classList.remove("left")
+        rubbish.classList.add("center")
+    }
 }
 
 function checkCollision() {

@@ -4,6 +4,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    margin: 0;
   }
   
   .game_container {
@@ -66,4 +67,19 @@ body {
     flex-direction: row;
     height: 20%;
   }
-  
+
+  @media screen and (min-width: 600px) {
+    /* CSS styles to apply when screen width is at least 768px */
+    .test {
+      height: auto;
+      font-size: 24px;
+    }
+    .rubbish {
+      width: calc(100% / 6);
+      height: auto;
+    }
+    .bin {
+      width: calc(100% / 6);
+      height: auto;
+    }
+  }
