@@ -19,6 +19,7 @@ body {
     
     background-color: grey;
     overflow: hidden;
+    display: none;
 }
 
 .player {

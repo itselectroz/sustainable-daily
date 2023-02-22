@@ -1,29 +1,21 @@
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            
-        {% load static %}  
-        
-        <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/minigame_catching.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/game_over.css' %}">
-            
-        <title>Catching Game</title>
-    </head>
 
-    <body>
-        <div class="main-container" id="container">
-            <div class="player" id="player"></div>
-            <div class="rubbish_group"></div>
-        </div>
+{% load static %}  
 
-        {% include "sustainable_app/game_over.html" %}
-        
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/minigame_catching.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/game_menu.css' %}">
 
-    </body>
+{% include "sustainable_app/game_menu.html" %}
 
-        <script src="{% static 'sustainable_app/js/minigame_catching.js' %}"></script>
-        <script src="{% static 'sustainable_app/js/input_handler.js' %}"></script>
-    
-</html>
+<div class="main-container" id="container">
+    <div class="player" id="player"></div>
+    <div class="rubbish_group"></div>
+</div>
+
+{% include "sustainable_app/game_over.html" %}
+
+
+
+
+<script src="{% static 'sustainable_app/js/minigame_catching.js' %}"></script>
+<script src="{% static 'sustainable_app/js/input_handler_catching.js' %}"></script>
+
