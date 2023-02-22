@@ -8,8 +8,11 @@ const playerBottom = parseInt(window.getComputedStyle(player).getPropertyValue("
 // Different screens
 const menuScreen = document.getElementById("menu");
 const container = document.getElementById("container");
-const gameOverScreen = document.getElementById("gameOver");
-const gameOverText = document.getElementById("gameOverText");
+const menuText = document.getElementById("menuText");
+const menuButton = document.getElementById("btnMenu");
+
+// Set element text
+menuText.innerText = "Catching Game";
 
 // Game over boolean
 let gameOver = false;
@@ -134,24 +137,22 @@ function lostLife() {
  */
 function gameState(state) {
 
-    
-
     if(state == "start") {
-        console.log("STARTED");
         rubbishTimeout = setInterval(generateRubbish, 1000);
         menu.style.display = "none";
-        gameOverScreen.style.display = "none";
+        menuScreen.style.display = "none";
         container.style.display = "flex";
         gameOver = false;
+        lives = 2;
         updateFrame();
         
     }
     else {
-        console.log("ENDED");
         clearInterval(rubbishTimeout);
         gameOver = true;
-        gameOverText.innerText = gameOverText.innerText + "\nScore: " + score;
-        gameOverScreen.style.display = "flex";
+        menuButton.textContent = "Play Again";
+        menuText.innerText = "Game Over\nScore: " + score;
+        menuScreen.style.display = "flex";
         container.style.display = "none";
     }
 }
