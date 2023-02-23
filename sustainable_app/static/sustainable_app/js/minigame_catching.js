@@ -144,6 +144,7 @@ function gameState(state) {
         container.style.display = "flex";
         gameOver = false;
         lives = 2;
+        score = 0;
         updateFrame();
         
     }
