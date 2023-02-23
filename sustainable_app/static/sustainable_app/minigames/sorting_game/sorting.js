@@ -27,6 +27,7 @@ let currentImage
 let currentImageNode = -1
 let gameOver = false
 
+// Converts the bin type to column number
 function binToCol(bin) {
     switch (bin) {
         case "recycle":
@@ -40,77 +41,81 @@ function binToCol(bin) {
     }
 }
 
+// Moves the rubbish down the screen
 function moveRubbish() {
     let top = parseInt(rubbish.style.top || '0')
     top += 5;
     rubbish.style.top = top + 'px'
 }
 
+
+// Moves the rubbish left by one column if able to
 function moveLeft() {
-    if (rubbish.classList.contains("left")) {
-        return
-    } else if (rubbish.classList.contains("center")) {
+    // if (rubbish.classList.contains("left")) { do nothing }
+    if (rubbish.classList.contains("center")) {
         rubbish.classList.remove("center")
         rubbish.classList.add("left")
-        return
     } else if (rubbish.classList.contains("right")) {
         rubbish.classList.remove("right")
         rubbish.classList.add("center")
-        return
-    } else {
-        return
     }
 }
 
+// Moves the rubbish right by one column if able to
 function moveRight() {
-    if (rubbish.classList.contains("right")) {
-        return
-    } else if (rubbish.classList.contains("center")) {
+    // if (rubbish.classList.contains("right")) { do nothing }
+    if (rubbish.classList.contains("center")) {
         rubbish.classList.remove("center")
         rubbish.classList.add("right")
-        return
     } else if (rubbish.classList.contains("left")) {
         rubbish.classList.remove("left")
         rubbish.classList.add("center")
-        return
-    } else {
-        return
     }
 }
 
+// Moves the rubbish back to starting position and creates next piece
 function resetRubbish() {
+    // Remove old rubbish piece
     if (currentImageNode != -1) {
         rubbish.removeChild(currentImageNode)
     }
+
+    // Check for game win
     currentImagePos += 1
     if ((currentImagePos) >= items.length) {
         gameOver = true
         return
     }
-    rubbish.style.top = 0 + 'px'
+
+    // Create new rubbish piece
+    rubbish.style.top = '0px'
     currentImage = items[currentImagePos]
+
     let newImg = document.createElement('img')
     newImg.src = "img/" + currentImage["image"]
     newImg.alt = currentImage["alt"]
     currentImageNode = newImg
     rubbish.appendChild(newImg)
+
+    // Center piece
     if (rubbish.classList.contains("right")) {
         rubbish.classList.remove("right")
         rubbish.classList.add("center")
-    } else if (rubbish.classList.contains("center")) {
-        return
     } else if (rubbish.classList.contains("left")) {
         rubbish.classList.remove("left")
         rubbish.classList.add("center")
     }
+    // else if (rubbish.classList.contains("center")) { do nothing }
 }
 
+// Check if rubbish has reached the bins
 function checkCollision() {
     let binNo = binToCol(currentImage["bin"])
     let bin = bins[binNo]
     let rubbishRect = rubbish.getBoundingClientRect()
     let binRect = bin.getBoundingClientRect()
 
+    // Check if in correct bin
     if (rubbishRect.bottom > (binRect.top+100) && ((binNo == 0 && rubbish.classList.contains("left"))||(binNo == 1 && rubbish.classList.contains("center"))||(binNo == 2 && rubbish.classList.contains("right")))) {
         score += currentImage["points"]
         resetRubbish()
@@ -122,6 +127,7 @@ function checkCollision() {
     }
 }
 
+// Listen for arrow keys (desktop)
 document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowLeft') {
         moveLeft()
@@ -130,8 +136,7 @@ document.addEventListener('keydown', function (event) {
     }
 })
 
-
-
+// Listen for buttons (mobile)
 touchLeft.addEventListener("click", function () {
     moveLeft()
 })
@@ -139,6 +144,7 @@ touchRight.addEventListener("click", function () {
     moveRight()
 })
 
+// Gameloop
 function update() {
     if (!gameOver) {
         moveRubbish()
@@ -153,5 +159,6 @@ function update() {
     }
 }
 
+// Start gameloop
 resetRubbish()
 const gameLoop = setInterval(update, 50)
