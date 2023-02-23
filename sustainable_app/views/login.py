@@ -14,16 +14,14 @@ def authenticate_request(request):
 
     if user is not None:
         user_login(request, user)
-        # TODO: change this to home when home page is done
-        return redirect(reverse('profile'))
+        return redirect(reverse('home'))
     else:
         return redirect(reverse('login') + '?error=1')
 
 
 def login(request):
     if request.user.is_authenticated:
-        # TODO: change this to home when home page is done
-        return redirect(reverse('profile'))
+        return redirect(reverse('home'))
 
     if request.method == "POST" and request.POST is not None:
         response = authenticate_request(request)
