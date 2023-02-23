@@ -49,7 +49,7 @@ body {
     background-color: #f0f0f0;
     width: 100%;
   }
-  
+
   .button {
     flex-grow: 1;
     margin: 8px;
@@ -74,12 +74,7 @@ body {
       height: auto;
       font-size: 24px;
     }
-    .rubbish {
-      width: calc(100% / 6);
-      height: auto;
-    }
-    .bin {
-      width: calc(100% / 6);
-      height: auto;
+    .button {
+      display: none;
     }
   }

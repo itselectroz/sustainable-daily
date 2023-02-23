@@ -111,11 +111,11 @@ function checkCollision() {
     let rubbishRect = rubbish.getBoundingClientRect()
     let binRect = bin.getBoundingClientRect()
 
-    if (rubbishRect.bottom > binRect.top && ((binNo == 0 && rubbish.classList.contains("left"))||(binNo == 1 && rubbish.classList.contains("center"))||(binNo == 2 && rubbish.classList.contains("right")))) {
+    if (rubbishRect.bottom > (binRect.top+100) && ((binNo == 0 && rubbish.classList.contains("left"))||(binNo == 1 && rubbish.classList.contains("center"))||(binNo == 2 && rubbish.classList.contains("right")))) {
         score += currentImage["points"]
         resetRubbish()
         return
-    } else if (rubbishRect.bottom > binRect.top) {
+    } else if (rubbishRect.bottom > (binRect.top+100)) {
         score = Math.max(score - currentImage["points"], 0)
         resetRubbish()
         return
