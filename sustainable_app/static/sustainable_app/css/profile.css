@@ -4,7 +4,6 @@ body {
 }
 
 .page {
-
     display: flex;
     flex-direction: column;
     background-color:lightgray;
@@ -12,7 +11,9 @@ body {
     width: 100%;
     height: 100%;
 }
+
 /* styling of the content at the top of the view (profile points and xp) */
+
 .top_layer {
     width: 100%;
     display: flex;
