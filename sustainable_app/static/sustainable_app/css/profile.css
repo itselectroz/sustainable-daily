@@ -163,6 +163,8 @@ body {
     align-items: flex-end;
     display: flex;
     height: 100%;
+    
+    
 }
 
 /*styling of the div diplaying the amount of points a player has*/
@@ -323,6 +325,7 @@ body {
     min-width: 17rem;
     align-content: center;
     margin: 2rem;
+
 }
 
 /*hides radio button for the tabs class*/
@@ -408,6 +411,8 @@ label.tab_content {
     background-position: center;
     width:9%;
     aspect-ratio: 1/1;
+    
+    
 
 }
 
