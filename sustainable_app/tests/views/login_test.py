@@ -29,11 +29,11 @@ class LoginViewTests(TestCase):
         self.client.login(username=self.username, password=self.password)
 
         response = self.client.get(reverse('login'), follow=True)
-        self.assertRedirects(response, reverse('profile'))
+        self.assertRedirects(response, reverse('home'))
 
         # check for post as well
         response = self.client.post(reverse('login'), {}, follow=True)
-        self.assertRedirects(response, reverse('profile'))
+        self.assertRedirects(response, reverse('home'))
 
     def test_post_view_for_login(self):
         """
@@ -47,7 +47,7 @@ class LoginViewTests(TestCase):
         }, follow=True)
 
         self.assertTrue(auth.get_user(self.client).is_authenticated)
-        self.assertRedirects(response, reverse('profile'))
+        self.assertRedirects(response, reverse('home'))
 
     def test_post_view_for_incorrect_login(self):
         """
