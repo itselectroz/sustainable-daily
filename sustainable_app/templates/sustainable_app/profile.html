@@ -5,6 +5,7 @@
   href="{% static 'sustainable_app/css/profile.css' %}"
 />
 
+
 <div class="page">
   <div class="top_layer">
     <div class="profile">
@@ -13,7 +14,7 @@
           <img class="pfp_img" src="{% static 'sustainable_app/img/fish.png' %}" />
         </div>
         <div class="username">
-          <p>Dora Napier</p>
+          <p id="display_name"></p>
         </div>
       </div>
     </div>
@@ -21,17 +22,17 @@
     <div class="bars">
       <div class="xp_container">
         <div class="level">
-          <label>3</label>
+          <label id="level_num"></label>
           <img src="{% static 'sustainable_app/img/xp_symbol.png' %}" />
         </div>
-        <div class="xp_bar" data-label="100/200"></div>
+        <div class="xp_bar" data-label="100/200" id="xp_bar"></div>
       </div>
 
       <div class="point_container">
         <div class="points">
           <img src="{% static 'sustainable_app/img/point_symbol.png' %}" />
         </div>
-        <div class="point_bar" data-label="100"></div>
+        <div class="point_bar" data-label="100" id="point_bar"></div>
       </div>
     </div>
   </div>
@@ -62,18 +63,15 @@
         <label class="tab_content" id="character_bird" for="bird"></label>
 
         <input type="radio" id="fox" name="character_select" />
-        <label class="tab_content" id="character_fox" for="fox"><p>6</p></label>
+        <label class="tab_content" id="character_fox" for="fox">
+          <p>6</p>
+        </label>
       </div>
 
       <input type="radio" id="accessory_tab" name="tabs" />
       <label id="accessory" for="accessory_tab"></label>
       <div class="tab">
-        <input
-          type="radio"
-          id="none"
-          name="accessory_select"
-          checked="checked"
-        />
+        <input type="radio" id="none" name="accessory_select" checked="checked"/>
         <label class="tab_content" id="accessory_none" for="none"></label>
 
         <input type="radio" id="party" name="accessory_select" />
@@ -139,3 +137,20 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  // Grab html elements
+  const username = document.getElementById("display_name");
+  const xp_bar=document.getElementById("xp_bar");
+  const point_bar=document.getElementById("point_bar");
+  const level_num=document.getElementById("level_num");
+
+  // Set attributes of elements
+  xp_bar.setAttribute("data-label", "{{ user.xp }}");
+  point_bar.setAttribute("data-label", "{{ user.points }}");
+  level_num.innerText = "{{ user_level }}";
+  username.innerText = "{{ user.username }}";
+  username.style.color = "{{ text_color }}";
+
+</script>

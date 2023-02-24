@@ -176,7 +176,6 @@ body {
     height: clamp(1.5em, 1em + 2vw, 2em);
     background-color: white;
     border-radius: 1.5rem;
-    color: black;
 }
 
 .point_bar::before {
@@ -191,6 +190,7 @@ body {
     max-width: calc(92%);
     width: 100%;
     background-color: #14820a;
+    color: white;
     border-radius: 1rem;
     font-size: clamp(.8rem, 2vw, 1.2rem);
     padding-left: .5em;
@@ -225,7 +225,7 @@ body {
     height: clamp(1.5em, 1em + 2vw, 2em);
     background-color: white;
     border-radius: 1.5rem;
-    color: black;
+
 }
 
 .xp_bar::before {
@@ -238,6 +238,7 @@ body {
     bottom: .2rem;
     min-width: .2rem;
     max-width: calc(92%);
+    color: white;
     width: 100%;
     background-color: #17a3c9;
     border-radius: 1rem;
@@ -271,6 +272,7 @@ body {
 .level label {
     position: absolute;
     text-align: center;
+    color: white;
     width: 8rem;
     font-size: clamp(.05rem, .75rem + .5vw, 2rem);
     font-family: 'Arial Rounded MT';
@@ -405,7 +407,6 @@ label.tab_content {
     background-position: center;
     width:9%;
     aspect-ratio: 1/1;
-
 }
 
 label#character_badger{
@@ -413,13 +414,12 @@ label#character_badger{
 }
 
 label#character_fox{
-    background-image: url("xp_symbol.png");
-    justify-content: center;
-
+    background-image: url("../img/xp_symbol.png");
 }
 
 label#character_fox p{
     margin: auto;
+    color: white;
     font-weight: bold;
     text-align: center;
 }
