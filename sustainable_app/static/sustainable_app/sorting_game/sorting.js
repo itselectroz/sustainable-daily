@@ -8,7 +8,7 @@ const touchRight = document.getElementById("right-button")
 
 // Items
 const items = [
-    { "image":"../img/can.png", "alt":"Can", "bin":"recycle", "points":1 },
+    { "image":"can.png", "alt":"Can", "bin":"recycle", "points":1 },
     { "image":"wine_glass.png", "alt":"Wine Glass", "bin":"glass", "points":1 },
     { "image":"jar.png", "alt":"Jar", "bin":"glass", "points":2 },
     { "image":"plastic_bag.png", "alt":"Plastic Bag", "bin":"general", "points":1 },
@@ -92,7 +92,7 @@ function resetRubbish() {
     currentImage = items[currentImagePos]
 
     let newImg = document.createElement('img')
-    newImg.src = currentImage["image"]
+    newImg.src = "../static/sustainable_app/img/" + currentImage["image"]
     newImg.alt = currentImage["alt"]
     currentImageNode = newImg
     rubbish.appendChild(newImg)
