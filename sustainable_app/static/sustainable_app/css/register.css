@@ -30,6 +30,23 @@ body {
   padding: 77px 55px 33px;
 }
 
+.tInput {
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: rgba(10, 102, 194, 0.8);
+  font-size: 15px;
+  color: #555;
+  line-height: 1.2;
+  display: block;
+  width: 100%;
+  height: 45px;
+  background: 0 0;
+  padding: 0;
+
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -56,7 +73,7 @@ body {
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom-color: green;
+  border-bottom-color: #4CAF50;
   font-size: 15px;
   color: #555;
   line-height: 1.2;
@@ -76,6 +93,7 @@ body {
 }
 
 .registrationBit {
+  border: none;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -93,9 +111,6 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
   margin-top: 5px;
 }
 
