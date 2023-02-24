@@ -1,5 +1,10 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/leaderboard.css' %}">
+<script src="{% static 'sustainable_app/js/leaderboard_sorting.js'%}"></script>
+<script>
+    let dict;
+</script>
+
 
 <div class = "body">
     <div class = "header">
@@ -9,15 +14,18 @@
 
     <table class = "styled-table"> 
         <tr>
-            <td><button>Username</button></td>
-            <td><button>Level</button></td>
-            <td><button>Points</button></td>
+            <form method = "get" action = "{% url 'leaderboard' %}"> 
+                {% csrf_token %}
+                <td><button type ="submit" name = "param" value = "username">Username</button></td>
+                <td><button type ="submit" name = "param" value = "level">Level</button></td>
+                <td><button type ="submit" name = "param" value = "points">Points</button></td>
+            </form>
         </tr>
 
 
         
-        {% for user in names %}
-            <tr>    
+        {% for user in users %}
+            <tr id = "table">    
                 <td>{{user.username}}</td>
                 <td>{{user.level}}</td>
                 <td>{{user.points}}</td>
