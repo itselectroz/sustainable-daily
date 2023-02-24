@@ -1,4 +1,6 @@
 
+
+
 // Define html elements
 const player = document.getElementById("player");
 const rubbish_group = document.querySelector(".rubbish_group");
@@ -17,6 +19,8 @@ menuText.innerText = "Catching Game";
 // Game over boolean
 let gameOver = false;
 let rubbishTimeout;
+let speedTimeout
+let generateSpeed = 1000;
 
 // Score and lives
 let score = 0;
@@ -138,7 +142,6 @@ function lostLife() {
 function gameState(state) {
 
     if(state == "start") {
-        rubbishTimeout = setInterval(generateRubbish, 1000);
         menu.style.display = "none";
         menuScreen.style.display = "none";
         container.style.display = "flex";
@@ -146,16 +149,26 @@ function gameState(state) {
         lives = 2;
         score = 0;
         updateFrame();
-        
+        increaseSpeed();
     }
     else {
         clearInterval(rubbishTimeout);
+        clearTimeout(speedTimeout);
         gameOver = true;
+        generateSpeed = 1000;
         menuButton.textContent = "Play Again";
         menuText.innerText = "Game Over\nScore: " + score;
         menuScreen.style.display = "flex";
         container.style.display = "none";
     }
+}
+
+function increaseSpeed() {
+    generateSpeed -= 50;
+    clearInterval(rubbishTimeout);
+    clearTimeout(speedTimeout);
+    rubbishTimeout = setInterval(generateRubbish, generateSpeed);
+    speedTimeout = setTimeout(increaseSpeed, 5000);
 }
 
 /**

@@ -1,9 +1,7 @@
-body {
+body, html {
     margin: 0;
-    padding: 0;
-    height: 100vh;
+    height: 100%;
     width: 100%;
-    overflow: hidden;
 }
 
 /* Main Game */
@@ -17,7 +15,8 @@ body {
     min-height: 600px;
     height: 100%;
     
-    background-color: grey;
+    background: url("../img/game_background.jpg");
+    background-size: 150%;
     overflow: hidden;
     display: none;
 }
@@ -42,4 +41,18 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+}
+
+.button-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    gap: 10px;
+}
+
+.btn {
+    height: 100%;
+    width: 100%;
+    border: none;
+    background-color: transparent;
 }
