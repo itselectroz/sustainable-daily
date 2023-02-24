@@ -3,6 +3,7 @@ body {
 }
 
 .body {
+        font-family: Helvetica, sans-serif;
         margin: 0;
         display: flex;
         justify-content: center;
@@ -44,7 +45,7 @@ body {
         justify-content: center;
         align-items: center;
         width: 80%;
-        font-family: "Arial Rounded MT";
+
 }
 
 .tInput {
@@ -61,7 +62,7 @@ body {
         height: 45px;
         background: 0 0;
         padding: 0;
-        font-family: "Arial Rounded MT";
+
 }
 
 .pass {
@@ -73,7 +74,7 @@ body {
         font-weight: 700;
         margin-top: 0;
         margin-bottom: 75px;
-        font-family: "Arial Rounded MT";
+
 }
 
 /* ------------ button ------------ */
@@ -114,7 +115,7 @@ body {
 /* ------------ forgot pass ------------  */
 .forgotPass {
         margin-top: 30px;
-        font-family: "Arial Rounded MT";
+
 }
 
 .forgotPassLink {

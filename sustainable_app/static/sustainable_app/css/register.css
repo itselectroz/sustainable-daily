@@ -3,6 +3,7 @@ body {
 }
 
 .body {
+  font-family: 'Arial Rounded MT';
   margin: 0;
   display: flex;
   justify-content: center;
@@ -63,7 +64,7 @@ body {
   width: 100%;
   background: 0 0;
   padding: 0;
-  font-family: "Arial Rounded MT";
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -77,7 +78,7 @@ body {
 .registrationBit {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   align-self: center;
 }
 
@@ -105,7 +106,7 @@ input[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 20px;
+  margin-top: 5x;
   align-self: center;
   position: relative;
 }
@@ -121,6 +122,7 @@ input[type="submit"]:hover ~ .shaker {
 
 .image {
   height: 50px;
+  padding-bottom: 10px;
   width: auto;
 }
 
