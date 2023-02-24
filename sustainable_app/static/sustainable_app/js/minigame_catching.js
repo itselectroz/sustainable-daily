@@ -6,6 +6,7 @@ const player = document.getElementById("player");
 const rubbish_group = document.querySelector(".rubbish_group");
 const playerLeft = parseInt(window.getComputedStyle(player).getPropertyValue("left"));
 const playerBottom = parseInt(window.getComputedStyle(player).getPropertyValue("bottom"));
+const livesElement = document.getElementById("lives");
 
 // Different screens
 const menuScreen = document.getElementById("menu");
@@ -129,9 +130,24 @@ function lostLife() {
     // Check if out of lives
     if(lives > 0) {
         lives -= 1;
+        livesElement.removeChild(livesElement.lastElementChild)
     }
     else {
+        livesElement.removeChild(livesElement.lastElementChild)
         gameState("end");
+    }
+}
+
+/**
+ * Create a new life div element
+ * @returns life div element
+ */
+function createLives(num) {
+
+    for(i = 0; i < num; i++) {
+        let newLife = document.createElement('div');
+        newLife.setAttribute("class", "life");
+        livesElement.appendChild(newLife);
     }
 }
 
@@ -142,6 +158,7 @@ function lostLife() {
 function gameState(state) {
 
     if(state == "start") {
+        createLives(3);
         menu.style.display = "none";
         menuScreen.style.display = "none";
         container.style.display = "flex";
