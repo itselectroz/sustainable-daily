@@ -9,4 +9,7 @@ from .profile import profile
 from .register import register
 from .leaderboard import leaderboard
 
-__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home']
+__all__ = [
+    'index', 'login', 'logout', 'profile', 'register',
+    'leaderboard', 'home'
+]
