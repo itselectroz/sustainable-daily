@@ -7,5 +7,6 @@ from .logout import logout
 from .profile import profile
 from .register import register
 from .leaderboard import leaderboard
+from .sorting import sorting
 
-__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard']
+__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'sorting']

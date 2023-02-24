@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+{% load static %}
 <html>
     <head>
         <title>Sorting Rubbish</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/minigames/sorting_game/style.css' %}">
     </head>
 
     <body>
@@ -10,19 +10,19 @@
         <div class="game_container" id="container">
             <div class="rubbish center" id="spawn"></div>
             <div class="bin left">
-                <img src="img/general_bin.png" alt="Trash Can">
+                <img src="{% static 'sustainable_app/minigames/sorting_game/img/general_bin.png' %}" alt="Trash Can">
             </div>
             <div class="bin center">
-                <img src="img/recycle_bin.png" alt="Recycling Bin">
+                <img src="{% static 'sustainable_app/minigames/sorting_game/img/recycle_bin.png' %}" alt="Recycling Bin">
             </div>
             <div class="bin right">
-                <img src="img/glass_bin.png" alt="Recycling Bin">
+                <img src="{% static 'sustainable_app/minigames/sorting_game/img/glass_bin.png' %}" alt="Recycling Bin">
             </div>
         </div>
         <div class="test">
             <button class="button" id="left-button">Left</button>
             <button class="button" id="right-button">Right</button>
         </div>
-        <script src="sorting.js"></script>
+        <script src="{% static 'sustainable_app/minigames/sorting_game/sorting.js' %}"></script>
     </body>
 </html>
