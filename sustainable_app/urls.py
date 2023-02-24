@@ -10,5 +10,8 @@ urlpatterns = [
     path('profile/', views.profile, name="profile"),
     path('register/', views.register, name="register"),
     path('leaderboard/', views.leaderboard, name="leaderboard"),
-    path('minigame_catching/', views.minigame_catching, name="minigame_catching"),
+    path(
+        'minigame_catching/', views.minigame_catching,
+        name="minigame_catching"
+    ),
 ]
