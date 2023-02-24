@@ -13,11 +13,11 @@ class Goal(models.Model):
 
     type = models.CharField(
         max_length=8,
-        choices = [
+        choices=[
             (MINIGAME, "Minigame"),
             (LOCATION, "Location"),
             (POLL, "Poll"),
-            (PERSONAL, "Personal"),   
+            (PERSONAL, "Personal"),
         ]
     )
 
