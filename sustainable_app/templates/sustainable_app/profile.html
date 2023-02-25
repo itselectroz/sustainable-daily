@@ -5,6 +5,7 @@
   href="{% static 'sustainable_app/css/profile.css' %}"
 />
 
+{% csrf_token %}
 
 <div class="page">
   <div class="top_layer">
@@ -89,27 +90,23 @@
 
       <input type="radio" id="name_color_tab" name="tabs" />
       <label id="name_color" for="name_color_tab"></label>
-      <div class="tab">
-        <input
-          type="radio"
-          id="black"
-          name="name_color_select"
-          checked="checked"
-        />
-        <label class="tab_content" id="name_color_black" for="black"></label>
 
-        <input type="radio" id="green" name="name_color_select" />
-        <label class="tab_content" id="name_color_green" for="green"></label>
+      <form class="tab" id="name_color">
+          <input type="radio" id="n_black" name="name_color_select" value="black"/>
+          <label class="tab_content" id="name_color_black" for="n_black"></label>
 
-        <input type="radio" id="purple" name="name_color_select" />
-        <label class="tab_content" id="name_color_purple" for="purple"></label>
+          <input type="radio" id="n_green" name="name_color_select" value="green" />
+          <label class="tab_content" id="name_color_green" for="n_green"></label>
 
-        <input type="radio" id="orange" name="name_color_select" />
-        <label class="tab_content" id="name_color_orange" for="orange"></label>
+          <input type="radio" id="n_purple" name="name_color_select" value="purple"/>
+          <label class="tab_content" id="name_color_purple" for="n_purple"></label>
 
-        <input type="radio" id="n_blue" name="name_color_select" />
-        <label class="tab_content" id="name_color_blue" for="n_blue"></label>
-      </div>
+          <input type="radio" id="n_orange" name="name_color_select" value="orange"/>
+          <label class="tab_content" id="name_color_orange" for="n_orange"></label>
+
+          <input type="radio" id="n_blue" name="name_color_select" value="blue"/>
+          <label class="tab_content" id="name_color_blue" for="n_blue"></label>
+      </form>
 
       <input type="radio" id="background_tab" name="tabs" />
       <label id="background" for="background_tab"></label>
@@ -137,6 +134,9 @@
     </div>
   </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{% static 'sustainable_app/js/profile.js' %}"></script>
 
 <script>
 

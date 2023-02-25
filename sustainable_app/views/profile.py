@@ -1,8 +1,8 @@
 from django.template import loader
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-from sustainable_app.models.user import User
+from django.shortcuts import render, redirect
+from sustainable_app.models.user import User, Item
 
 
 
@@ -12,7 +12,7 @@ def profile(request):
     template = loader.get_template("sustainable_app/profile.html")
 
     current_user = request.user
-    current_user.equipped_items.add(1)
+    #current_user.equipped_items.add(1)
 
     # get user attributes
     user_name_color = current_user.equipped_items.get(type="username_color")
@@ -32,3 +32,21 @@ def profile(request):
                }
 
     return render(request, "sustainable_app/profile.html", context)
+
+def equip(request):
+
+    current_user = request.user
+    username_color = request.POST.get('username_color', False)
+
+    ## find item to remove and remove it
+    for item_to_remove in Item.objects.all():
+        if item_to_remove.type == "username_color":
+            current_user.equipped_items.remove(item_to_remove.id)
+
+    ## find item to add and add it
+    for item_to_add in Item.objects.all():
+        if item_to_add.type == "username_color":
+            if item_to_add.name == str(username_color):
+                current_user.equipped_items.add(item_to_add.id)
+
+    return redirect('/')
