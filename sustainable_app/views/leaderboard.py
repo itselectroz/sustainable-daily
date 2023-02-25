@@ -1,51 +1,34 @@
-from django.http import HttpResponse
 from django.template import loader
+from django.shortcuts import render
+import json
+
 
 from sustainable_app.models.user import User
 
 
-
+# Sends view user data sorted by name, level and points
 def leaderboard(request):
 
-    template = loader.get_template("sustainable_app/leaderboard.html")
 
-    if request.method == 'GET':
-        param = request.GET.get("param",None)
-        
-        if param == "username" :
-            context = sorted_by_username()
-        elif param == "level":
-            context =  sorted_by_xp()
-        elif param == "points":
-            context = sorted_by_points()
-        else:
-            return HttpResponse(template.render(sorted_by_username()))
+    #Gets leaderboard info ordered by username, level and points
+    users = list(User.objects.order_by("username").values('username', 'xp', 'points'))
+    users = add_users_level(users)
+    level = list(User.objects.order_by("-xp").values('username', 'xp', 'points'))
+    level = add_users_level(level)
+    points = list(User.objects.order_by("-points").values('username', 'xp', 'points'))
+    points = add_users_level(points)
 
-        return HttpResponse(template.render(context))
+    
+    #Will send leaderboard info to html page for use by javascript
+    context = {'name':json.dumps(users),'level': json.dumps(level),'points':json.dumps(points)}
 
-    else:
-        return HttpResponse(template.render(sorted_by_username()))
    
-    
+    return render(request, "sustainable_app/leaderboard.html", context)
+   
 
-# Returns dictionary sorted by username
-def sorted_by_username():
-    
-    users = User.objects.order_by("username")
-    context = {"users": users}
-    return context
+#Returns a dictionary that is the same as the one passed to it but the level of each user has been added to it
+def add_users_level(dict):
+    for user in dict:
+        user['level'] = User.objects.get(username = user["username"]).level()
 
-# Returns dictionary sorted by xp
-def sorted_by_xp():
-    
-    users = User.objects.order_by("-xp")
-    context = {"users": users}
-    return context
-
-# Returns dictionary sorted by level
-def sorted_by_points():
-    
-    users = User.objects.order_by("-points")
-    context = {"users": users}
-    return context
-
+    return dict

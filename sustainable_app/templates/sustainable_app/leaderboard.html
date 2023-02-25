@@ -2,7 +2,12 @@
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/leaderboard.css' %}">
 <script src="{% static 'sustainable_app/js/leaderboard_sorting.js'%}"></script>
 <script>
-    let dict;
+    let sortedByName = '{{name|safe}}';
+    let sortedByPoints = '{{points|safe}}';
+    let sortedByLevel = '{{level|safe}}';
+
+    
+
 </script>
 
 
@@ -12,30 +17,17 @@
     </div>
 
 
-    <table class = "styled-table"> 
+    <table id = "leaderboard-table" class = "styled-table"> 
         <tr>
-            <form method = "get" action = "{% url 'leaderboard' %}"> 
-                {% csrf_token %}
-                <td><button type ="submit" name = "param" value = "username">Username</button></td>
-                <td><button type ="submit" name = "param" value = "level">Level</button></td>
-                <td><button type ="submit" name = "param" value = "points">Points</button></td>
-            </form>
+            
+            <td><button onclick="orderTable(sortedByName)" name = "param" value = "username">Username</button></td>
+            <td><button onclick="orderTable(sortedByLevel)" name = "param" value = "level">Level</button></td>
+            <td><button onclick="orderTable(sortedByPoints)" name = "param" value = "points">Points</button></td>
+        
         </tr>
-
-
-        
-        {% for user in users %}
-            <tr id = "table">    
-                <td>{{user.username}}</td>
-                <td>{{user.level}}</td>
-                <td>{{user.points}}</td>
-            </tr>
-        {% endfor %}
-        
-        
-
     </table>
 
 </div>
    
+<script>orderTable(sortedByLevel);</script>
 
