@@ -11,7 +11,7 @@
   <div class="top_layer">
     <div class="profile">
       <div class="profile_container">
-        <div class="pfp">
+        <div class="pfp" id="pfp">
           <img class="pfp_img" src="{% static 'sustainable_app/img/fish.png' %}" />
         </div>
         <div class="username">
@@ -110,27 +110,22 @@
 
       <input type="radio" id="background_tab" name="tabs" />
       <label id="background" for="background_tab"></label>
-      <div class="tab">
-        <input
-          type="radio"
-          id="white"
-          name="background_select"
-          checked="checked"
-        />
-        <label class="tab_content" id="background_white" for="white"></label>
+      <form class="tab" id="background_color">
+        <input type="radio" id="b_white" name="background_select" value="white"/>
+        <label class="tab_content" id="background_white" for="b_white"></label>
 
-        <input type="radio" id="blue" name="background_select" />
-        <label class="tab_content" id="background_blue" for="blue"></label>
+        <input type="radio" id="b_blue" name="background_select" value="blue"/>
+        <label class="tab_content" id="background_blue" for="b_blue"></label>
 
-        <input type="radio" id="pink" name="background_select" />
-        <label class="tab_content" id="background_pink" for="pink"></label>
+        <input type="radio" id="b_pink" name="background_select" value="pink" />
+        <label class="tab_content" id="background_pink" for="b_pink"></label>
 
-        <input type="radio" id="b_grey" name="background_select" />
+        <input type="radio" id="b_grey" name="background_select" value="grey"/>
         <label class="tab_content" id="background_grey" for="b_grey"></label>
 
-        <input type="radio" id="b_green" name="background_select" />
+        <input type="radio" id="b_green" name="background_select" value="green"/>
         <label class="tab_content" id="background_green" for="b_green"></label>
-      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -145,6 +140,7 @@
   const xp_bar=document.getElementById("xp_bar");
   const point_bar=document.getElementById("point_bar");
   const level_num=document.getElementById("level_num");
+  const user_background = document.getElementById("pfp");
 
   // Set attributes of elements
   xp_bar.setAttribute("data-label", "{{ user.xp }}");
@@ -152,5 +148,6 @@
   level_num.innerText = "{{ user_level }}";
   username.innerText = "{{ user.username }}";
   username.style.color = "{{ text_color }}";
+  user_background.style.background = "{{ background_color }}"
 
 </script>
