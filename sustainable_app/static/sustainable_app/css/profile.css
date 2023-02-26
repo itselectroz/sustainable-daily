@@ -367,7 +367,7 @@ label#character{
 }
 
 /*stlying of the accessory tab icon */
-label#accessory{
+label.accessory{
 
     background-repeat: no-repeat;
     background-size: 75%;
@@ -410,7 +410,7 @@ label.tab_content {
 }
 
 label#character_badger{
-    background-image: url("../img/badger.png");
+    background-image: url("../img/badgernone.png");
 }
 
 label#character_fox{
@@ -425,20 +425,20 @@ label#character_fox p{
 }
 
 label#character_frog{
-    background-image: url("../img/frog.png");  
+    background-image: url("../img/frognone.png");  
 }
 
 label#character_cat{
-    background-image: url("../img/cat_character.png");
+    background-image: url("../img/catnone.png");
 }
 
 label#character_fish{
-    background-image: url("../img/fish.png");
+    background-image: url("../img/fishnone.png");
     
 }
 
 label#character_bird{
-    background-image: url("../img/bird.png"); 
+    background-image: url("../img/birdnone.png"); 
 }
 
 label#accessory_none{

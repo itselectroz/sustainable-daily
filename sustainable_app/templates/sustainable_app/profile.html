@@ -12,7 +12,7 @@
     <div class="profile">
       <div class="profile_container">
         <div class="pfp" id="pfp">
-          <img class="pfp_img" src="{% static 'sustainable_app/img/fish.png' %}" />
+          <img class="pfp_img" id="profile_image"/>
         </div>
         <div class="username">
           <p id="display_name"></p>
@@ -42,51 +42,46 @@
     <div class="tabs">
       <input type="radio" id="character_tab" name="tabs" checked="checked" />
       <label id="character" for="character_tab"></label>
-      <div class="tab">
-        <input
-          type="radio"
-          id="badger"
-          name="character_select"
-          checked="checked"
-        />
+      <form class="tab" id="character">
+        <input type="radio" id="badger" name="character_select" value="badger"/>
         <label class="tab_content" id="character_badger" for="badger"></label>
 
-        <input type="radio" id="frog" name="character_select" />
+        <input type="radio" id="frog" name="character_select" value="frog"/>
         <label class="tab_content" id="character_frog" for="frog"></label>
 
-        <input type="radio" id="cat" name="character_select" />
+        <input type="radio" id="cat" name="character_select" value="cat"/>
         <label class="tab_content" id="character_cat" for="cat"></label>
 
-        <input type="radio" id="fish" name="character_select" />
+        <input type="radio" id="fish" name="character_select" value="fish"/>
         <label class="tab_content" id="character_fish" for="fish"></label>
 
-        <input type="radio" id="bird" name="character_select" />
+        <input type="radio" id="bird" name="character_select" value="bird"/>
         <label class="tab_content" id="character_bird" for="bird"></label>
 
-        <input type="radio" id="fox" name="character_select" />
+        <input type="radio" id="fox" name="character_select" value="fox"/>
         <label class="tab_content" id="character_fox" for="fox">
           <p>6</p>
         </label>
-      </div>
+      </form>
 
       <input type="radio" id="accessory_tab" name="tabs" />
-      <label id="accessory" for="accessory_tab"></label>
-      <div class="tab">
-        <input type="radio" id="none" name="accessory_select" checked="checked"/>
+      <label class="accessory" for="accessory_tab"></label>
+      <form class="tab" id="accessory">
+        <input type="radio" id="none" name="accessory_select" value="none"/>
         <label class="tab_content" id="accessory_none" for="none"></label>
 
-        <input type="radio" id="party" name="accessory_select" />
+        <input type="radio" id="party" name="accessory_select" value="party"/>
         <label class="tab_content" id="accessory_party" for="party"></label>
 
-        <input type="radio" id="viking" name="accessory_select" />
+        <input type="radio" id="viking" name="accessory_select" value="viking"/>
         <label class="tab_content" id="accessory_viking" for="viking"></label>
 
-        <input type="radio" id="crown" name="accessory_select" />
+        <input type="radio" id="crown" name="accessory_select" value="crown"/>
         <label class="tab_content" id="accessory_crown" for="crown"></label>
 
-        <input type="radio" id="locked" name="accessory_select" />
+        <input type="radio" id="locked" name="accessory_select" value="locked"/>
         <label class="tab_content" id="accessory_locked" for="locked"></label>
-      </div>
+      </form>
 
       <input type="radio" id="name_color_tab" name="tabs" />
       <label id="name_color" for="name_color_tab"></label>
@@ -141,6 +136,7 @@
   const point_bar=document.getElementById("point_bar");
   const level_num=document.getElementById("level_num");
   const user_background = document.getElementById("pfp");
+  const profile_image = document.getElementById("profile_image");
 
   // Set attributes of elements
   xp_bar.setAttribute("data-label", "{{ user.xp }}");
@@ -148,6 +144,9 @@
   level_num.innerText = "{{ user_level }}";
   username.innerText = "{{ user.username }}";
   username.style.color = "{{ text_color }}";
-  user_background.style.background = "{{ background_color }}"
+  user_background.style.background = "{{ background_color }}";
+
+
+  profile_image.src="{% static "" %}sustainable_app/img/{{character}}{{accessory}}.png";
 
 </script>

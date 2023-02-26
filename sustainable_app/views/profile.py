@@ -12,6 +12,7 @@ def profile(request):
     template = loader.get_template("sustainable_app/profile.html")
 
     current_user = request.user
+    #current_user.equipped_items.(31)
 
     # get user attributes
     user_name_color = current_user.equipped_items.get(type="username_color")
@@ -22,14 +23,16 @@ def profile(request):
     user_level = current_user.level
 
     # user_background_color = current_user.equipped_items.get(type="background_color")
-    # user_hat = current_user.equipped_items.get(type="hat")
-    # user_character = current_user.equipped_items.get(type="character")
+    user_accessory = current_user.equipped_items.get(type="accessory")
+    user_character = current_user.equipped_items.get(type="character")
 
     # pass user attributes to template
     context = {"user": current_user,
                "text_color": user_name_color,
                "background_color": background_color,
                "user_level":user_level,
+               "character": user_character,
+               "accessory": user_accessory,
                }
 
     return render(request, "sustainable_app/profile.html", context)
@@ -52,7 +55,7 @@ def equip(request):
 def changeAccessory(type, name, current_user):
     
     ## find item to remove and remove it
-    for item_to_remove in Item.objects.all():
+    for item_to_remove in current_user.equipped_items.all():
         if item_to_remove.type == type:
             current_user.equipped_items.remove(item_to_remove.id)
 
