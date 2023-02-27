@@ -1,9 +1,12 @@
 
+
+
 // Define html elements
 const player = document.getElementById("player");
 const rubbish_group = document.querySelector(".rubbish_group");
 const playerLeft = parseInt(window.getComputedStyle(player).getPropertyValue("left"));
 const playerBottom = parseInt(window.getComputedStyle(player).getPropertyValue("bottom"));
+const livesElement = document.getElementById("lives");
 
 // Different screens
 const menuScreen = document.getElementById("menu");
@@ -17,6 +20,8 @@ menuText.innerText = "Catching Game";
 // Game over boolean
 let gameOver = false;
 let rubbishTimeout;
+let speedTimeout
+let generateSpeed = 1000;
 
 // Score and lives
 let score = 0;
@@ -125,9 +130,24 @@ function lostLife() {
     // Check if out of lives
     if(lives > 0) {
         lives -= 1;
+        livesElement.removeChild(livesElement.lastElementChild)
     }
     else {
+        livesElement.removeChild(livesElement.lastElementChild)
         gameState("end");
+    }
+}
+
+/**
+ * Create a new life div element
+ * @returns life div element
+ */
+function createLives(num) {
+
+    for(i = 0; i < num; i++) {
+        let newLife = document.createElement('div');
+        newLife.setAttribute("class", "life");
+        livesElement.appendChild(newLife);
     }
 }
 
@@ -138,7 +158,7 @@ function lostLife() {
 function gameState(state) {
 
     if(state == "start") {
-        rubbishTimeout = setInterval(generateRubbish, 1000);
+        createLives(3);
         menu.style.display = "none";
         menuScreen.style.display = "none";
         container.style.display = "flex";
@@ -146,16 +166,26 @@ function gameState(state) {
         lives = 2;
         score = 0;
         updateFrame();
-        
+        increaseSpeed();
     }
     else {
         clearInterval(rubbishTimeout);
+        clearTimeout(speedTimeout);
         gameOver = true;
+        generateSpeed = 1000;
         menuButton.textContent = "Play Again";
         menuText.innerText = "Game Over\nScore: " + score;
         menuScreen.style.display = "flex";
         container.style.display = "none";
     }
+}
+
+function increaseSpeed() {
+    generateSpeed -= 50;
+    clearInterval(rubbishTimeout);
+    clearTimeout(speedTimeout);
+    rubbishTimeout = setInterval(generateRubbish, generateSpeed);
+    speedTimeout = setTimeout(increaseSpeed, 5000);
 }
 
 /**

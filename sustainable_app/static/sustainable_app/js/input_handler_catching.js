@@ -3,19 +3,34 @@
 
 addEventListener("keydown", function(e) {
     if(e.code == "KeyD") {
-        vxr = container.offsetWidth / 64;
+       moveRight()
     }
     if(e.code == "KeyA") {
-        vxl = -(container.offsetWidth / 64);
+        moveLeft()
     }
 })
 
 addEventListener("keyup", function(e) {
     if(e.code == "KeyD") {
-        vxr = 0;
+        stopRight()
     }
     if(e.code == "KeyA") {
-        vxl = 0;
+       stopLeft();
     }
 })
 
+function moveRight() {
+    vxr = container.offsetWidth / 128;
+}
+
+function moveLeft() {
+    vxl = -(container.offsetWidth / 128);
+}
+
+function stopRight() {
+    vxr = 0;
+}
+
+function stopLeft() {
+    vxl = 0;
+}

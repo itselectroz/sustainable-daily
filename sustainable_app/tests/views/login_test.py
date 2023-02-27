@@ -37,7 +37,8 @@ class LoginViewTests(TestCase):
 
     def test_post_view_for_login(self):
         """
-        check the user is succeessfully logged in upon correct username/password
+        check the user is succeessfully logged in
+        upon correct username/password
         """
         self.assertFalse(auth.get_user(self.client).is_authenticated)
 
@@ -51,7 +52,8 @@ class LoginViewTests(TestCase):
 
     def test_post_view_for_incorrect_login(self):
         """
-        check the user is given an error upon logging in with incorrect details
+        check the user is given an error upon logging in
+        with incorrect details
         """
         self.assertFalse(auth.get_user(self.client).is_authenticated)
 

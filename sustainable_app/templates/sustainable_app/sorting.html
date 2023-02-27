@@ -1,0 +1,28 @@
+{% load static %}
+<html>
+    <head>
+        <title>Sorting Rubbish</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/sorting_game/style.css' %}">
+    </head>
+
+    <body>
+        <div class="score" id="score"></div>
+        <div class="game_container" id="container">
+            <div class="rubbish center" id="spawn"></div>
+            <div class="bin left">
+                <img src="{% static 'sustainable_app/img/general_bin.png' %}" alt="Trash Can">
+            </div>
+            <div class="bin center">
+                <img src="{% static 'sustainable_app/img/recycle_bin.png' %}" alt="Recycling Bin">
+            </div>
+            <div class="bin right">
+                <img src="{% static 'sustainable_app/img/glass_bin.png' %}" alt="Recycling Bin">
+            </div>
+        </div>
+        <div class="test">
+            <button class="button" id="left-button">Left</button>
+            <button class="button" id="right-button">Right</button>
+        </div>
+        <script src="{% static 'sustainable_app/sorting_game/sorting.js' %}"></script>
+    </body>
+</html>

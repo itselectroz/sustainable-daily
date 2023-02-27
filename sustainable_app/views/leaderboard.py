@@ -1,12 +1,15 @@
+
 from django.template import loader
 from django.shortcuts import render
 import json
-
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 from sustainable_app.models.user import User
 
 
 # Sends view user data sorted by name, level and points
+@login_required(login_url=reverse_lazy('login'))
 def leaderboard(request):
 
 
