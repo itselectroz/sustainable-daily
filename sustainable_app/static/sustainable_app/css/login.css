@@ -3,6 +3,7 @@ body {
 }
 
 .body {
+        font-family: Helvetica, sans-serif;
         margin: 0;
         display: flex;
         justify-content: center;
@@ -12,14 +13,18 @@ body {
         background-size: cover;
         height: 100%;
         width: 100%;
+        
 }
 
 .outerContainer {
         display: flex;
         border-radius: 10px;
         box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
-        width: 300px;
-        height: 550px;
+        width: 50%;
+        height: 60%;
+        max-width: 300px;
+        max-height: 550px;
+        
         justify-content: center;
         align-items: center;
         background: #ffffff;
@@ -41,7 +46,7 @@ body {
         justify-content: center;
         align-items: center;
         width: 80%;
-        font-family: "Arial Rounded MT";
+
 }
 
 .tInput {
@@ -49,7 +54,7 @@ body {
         border-top: none;
         border-left: none;
         border-right: none;
-        border-bottom-color: rgba(10, 102, 194, 0.8);
+        border-bottom-color: #4CAF50;
         font-size: 15px;
         color: #555;
         line-height: 1.2;
@@ -58,7 +63,7 @@ body {
         height: 45px;
         background: 0 0;
         padding: 0;
-        font-family: "Arial Rounded MT";
+
 }
 
 .pass {
@@ -70,34 +75,22 @@ body {
         font-weight: 700;
         margin-top: 0;
         margin-bottom: 75px;
-        font-family: "Arial Rounded MT";
+
 }
 
 /* ------------ button ------------ */
 
 .loginButton {
-        margin-top: 40px;
-        align-items: center;
-        background-color: #0A66C2;
-        border: 0;
-        border-radius: 100px;
-        color: #ffffff;
+        padding: 8px 12px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
         cursor: pointer;
-        font-size: 15px;
-        font-weight: 600;
-        justify-content: center;
-        line-height: 20px;
-        max-width: 480px;
-        min-height: 40px;
-        min-width: 0px;
-        padding: 0px;
-        padding-left: 20px;
-        padding-right: 20px;
-        text-align: center;
-        transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-        user-select: none;
-        vertical-align: middle;
-        font-family: "Arial Rounded MT";
+        transition: all 0.3s ease-in-out;
+        margin: 40px 20px 20px;
+
+        
 }
 
 
@@ -123,7 +116,7 @@ body {
 /* ------------ forgot pass ------------  */
 .forgotPass {
         margin-top: 30px;
-        font-family: "Arial Rounded MT";
+
 }
 
 .forgotPassLink {

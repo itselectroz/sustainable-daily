@@ -3,6 +3,8 @@ import math
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from .item import Item
+
 
 class User(AbstractUser):
     # Account stuff
@@ -11,8 +13,8 @@ class User(AbstractUser):
 
     weekly_xp = models.IntegerField(default=0)  # gets reset every monday
 
-    # owned_items = models.ManyToManyField(Item)
-    # equipped_items = models.ManyToManyField(Item)
+    owned_items = models.ManyToManyField(Item, related_name="owned_by")
+    equipped_items = models.ManyToManyField(Item, related_name="equipped_by")
 
     # Personal goals is a relation that will be in goal maybe?
 
