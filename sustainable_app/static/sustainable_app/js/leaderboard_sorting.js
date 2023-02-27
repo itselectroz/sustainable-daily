@@ -1,3 +1,6 @@
+//The current order of the leaderboard/the last way the table was ordered
+let lastAction = ""
+
 /**
  * Deletes all generated rows in a table
  */
@@ -11,7 +14,7 @@ function delete_table() {
 
 /**
  * Creates a table with username, points and level field
- * Gets the order from the dictionary
+ * Gets the order from the dictionary (actually an array of dictionary)
  */
 function createTable(dictionary) {
 
@@ -20,7 +23,7 @@ function createTable(dictionary) {
     let table = document.getElementById("leaderboard-table");
     
 
-    dictionary = JSON.parse(dictionary);
+    
 
     
 
@@ -44,13 +47,42 @@ function createTable(dictionary) {
         newRow.setAttribute("id", "generated");
     }
 }
+
+
         
 /**
  * Delete all rows in table apart from top and creates new table using dictionary parameter
  */
-function orderTable(dictionary) {
+function orderTable(dictionary, changeToState) {
+
+    dictionary = JSON.parse(dictionary);
+
+    //If the user is clicks the button to order the leaderboard the same way it is currently ordered, reverses the leaderboard so lowest values at top
+    if (changeToState == lastAction) {
+        //Sets lastaction to "" so leaderboard will be ordered normally if same button clicked
+        lastAction = "";
+
+        //Blank array that will hold reverse of dictionary
+        newDictionary = [];
+        
+        lastIndex = dictionary.length - 1;
+
+        //Reverses dictionary
+        for (user in dictionary) {
+            newDictionary.push(dictionary[lastIndex - user]);
+
+        }
+
+        //Will create table using new revered dictionary
+        dictionary = newDictionary
+    } else {
+        lastAction = changeToState
+    }
+
+    //Clearing leaderboard
     delete_table();
 
+    //Creating new table
     createTable(dictionary);
 }
     
