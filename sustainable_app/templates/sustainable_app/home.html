@@ -1,48 +1,51 @@
 {% load static %}
 
-{% include 'sustainable_app/base.html' %}
 
 <tml lang="en">
-
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width">
 <title>Home</title>
 
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/home.css' %}">
 
+{% include 'sustainable_app/base.html' %}
 
-<div class = "body">
+<div class="body">
     <main>
         <div class="container">
             <div class="universal-goals">
                 <span class="universal-goals-text">Daily Goals</span>
+                <div class="line-test"></div>
                 <div class="completed">
-                    <span class="universal-goals-completed">0 of 5</span>
-                    <span class="universal-goals-text">completed</span>
+                    <span class="universal-goals-completed">2 of 5</span>
                 </div>
+                
                 <div class="wrapper">
-                    <div class="item"><span class="goal-text">Goal-1</span></div>
-                    <div class="item"><span class="goal-text">Goal-2</span></div>
-                    <div class="item"><span class="goal-text">Goal-3</span></div>
-                    <div class="item"><span class="goal-text">Goal-4</span></div>
-                    <div class="item"><span class="goal-text">Goal-5</span></div>
+                    <div class="item" id="u-one"><div class="click-effect"></div></div>
+                    <div class="item" id="u-two"><div class="click-effect"></div></div>
+                    <div class="item" id="u-three"><div class="click-effect"></div></div>
+                    <div class="item" id="u-four"><div class="click-effect"></div></div>
+                    <div class="item" id="u-five"><div class="click-effect"></div></div>
                 </div>
             </div>
+            
             <div class="personal-goals">
                 <span class="personal-goals-text">Personal Goals</span>
+                <div class="line-test"></div>
                 <div class="completed">
                     <span class="personal-goals-completed">0 of 5</span>
-                    <span class="personal-goals-text">completed</span>
                 </div>
+                
                 <div class="wrapper">
-                    <div class="item"><span class="goal-text">Goal-1</span></div>
-                    <div class="item"><span class="goal-text">Goal-2</span></div>
-                    <div class="item"><span class="goal-text">Goal-3</span></div>
-                    <div class="item"><span class="goal-text">Goal-4</span></div>
-                    <div class="item"><span class="goal-text">Goal-5</span></div>
+                    <div class="item" id="p-one"><span class="goal-text"></span></div>
+                    <div class="item" id="p-two"><span class="goal-text"></span></div>
+                    <div class="item" id="p-three"><span class="goal-text"></span></div>
+                    <div class="item" id="p-four"><span class="goal-text"></span></div>
+                    <div class="item" id="p-five"><span class="goal-text"></span></div>
                 </div>
             </div>
         </div>
     </main>
 </div>
+
+<script src="{% static 'sustainable_app/js/home.js' %}"></script>

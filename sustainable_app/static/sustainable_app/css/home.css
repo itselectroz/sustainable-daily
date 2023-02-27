@@ -7,7 +7,16 @@
     --background-main: #1e1e24;
     --background-second: #313132;
     --background-third: #e9e8e6;
-    --background-fourth: #dad9d8;
+    --background-fourth: #d3d3d3;
+    --main-green: #4CAF50;
+    --dark-green: #3e8a40;
+    --background-completed: grey;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 .body{
@@ -29,11 +38,6 @@
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-main{
-    padding: 1rem;
-    background-color: var(--background-second);
-}
-
 .main > *:first-child {
     margin-top: 4rem;
 }
@@ -43,13 +47,14 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 10px;
     align-items: center;
-    background-color: var(--background-third);
+    background-color: var(--background-fourth);
 }
 
 .universal-goals{
     width: 100%;
-    background-color: var(--background-fourth);
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -66,14 +71,14 @@ main{
 }
 
 .universal-goals-completed{
-    color: var(--second-color);
+    color: var(--main-green);
     font-weight: 700;
     margin-right: 0.5rem;
 }
 
 .personal-goals{
     width: 100%;
-    background-color: var(--background-fourth);
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -90,7 +95,7 @@ main{
 }
 
 .personal-goals-completed{
-    color: var(--second-color);
+    color: var(--main-green);
     font-weight: 700;
     margin-right: 0.5rem;
 }
@@ -105,10 +110,12 @@ main{
     width: 95%;
     max-width: 60.5rem;
     max-height: 14rem;
-    border: 1px solid var(--background-fourth);
+    border: 2px solid var(--background-fourth);
+    border-radius: 10px;
     margin: 0.8rem;
     display: flex;
     overflow-x: auto;
+    scrollbar-width: none;
 }
 
 .wrapper::-webkit-scrollbar{
@@ -126,17 +133,44 @@ main{
 }
 
 .wrapper .item{
+    position: relative;
     min-width: 8rem;
     height: 8rem;
-    line-height: 8rem;
     text-align: center;
-    border: 0.05rem solid var(--background-second);
-    background-color: var(--background-fourth);
+    border-radius: 10%;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+    background-color: var(--background-third);
     margin: 2rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: .1s;
 }
 
-.goal-text{
-    color: var(--main-color);
+.wrapper .item:after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    right: -90px;
+    top: -90px;
+    transform:rotate(45deg);
+    background-color: var(--background-completed);
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: top right;
+  }
+
+.line-test {
+    width: 70%;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-top: 5%;
+    margin-bottom: 5%;
+    height: 2px;
 }
+
