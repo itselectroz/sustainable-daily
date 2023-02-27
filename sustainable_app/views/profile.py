@@ -2,11 +2,11 @@ from django.template import loader
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from sustainable_app.models.user import User, Item
 
 
-
-@login_required(login_url='/login')
+@login_required(login_url=reverse_lazy('login'))
 def profile(request):
 
     template = loader.get_template("sustainable_app/profile.html")

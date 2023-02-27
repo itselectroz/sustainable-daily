@@ -4,12 +4,24 @@
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/minigame_catching.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/game_menu.css' %}">
 
+{% include 'sustainable_app/base.html' %}
+
+
 {% include "sustainable_app/game_menu.html" %}
 
 <div class="main-container" id="container">
+    <div class="lives" id="lives"></div>
     <div class="player" id="player"></div>
     <div class="rubbish_group"></div>
+
+    <div class="button-container">
+        <button class="btn" ontouchstart="moveLeft()" ontouchend="stopLeft()" ontouchcancel="stopLeft()"></button>
+        <button class="btn" ontouchstart="moveRight()" ontouchend="stopRight()" ontouchcancel="stopRight()"></button>
+    </div>
+
 </div>
+
+
 
 <script src="{% static 'sustainable_app/js/minigame_catching.js' %}"></script>
 <script src="{% static 'sustainable_app/js/input_handler_catching.js' %}"></script>

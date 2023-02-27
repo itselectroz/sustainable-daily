@@ -1,8 +1,8 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/leaderboard.css' %}">
 
-<div id = "body">
-    <div id = "header">
+<div class = "body">
+    <div class = "header">
         <h1>Leaderboard</h1>
     </div>
 
@@ -15,7 +15,7 @@
         </tr>
 
 
-
+        
         {% for user in names %}
             <tr>    
                 <td>{{user.username}}</td>
@@ -23,7 +23,7 @@
                 <td>{{user.points}}</td>
             </tr>
         {% endfor %}
-
+        
         
 
     </table>

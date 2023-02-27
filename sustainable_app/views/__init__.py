@@ -10,4 +10,5 @@ from .register import register
 from .leaderboard import leaderboard
 from .minigame_catching import minigame_catching
 
+
 __all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home', 'minigame_catching', 'equip']
