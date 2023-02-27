@@ -10,13 +10,13 @@
     --background-fourth: #d3d3d3;
     --main-green: #4CAF50;
     --dark-green: #3e8a40;
-    --background-completed: grey;
+    --background-completed: rgb(165, 162, 162);
 }
 
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    overflow: hidden;
 }
 
 .body{
@@ -47,23 +47,49 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
     align-items: center;
+    gap: 10px;
     background-color: var(--background-fourth);
 }
 
+.welcome {
+    font-size: 2rem;
+    margin: 0 auto 20% auto;
+}
+
 .universal-goals{
-    width: 100%;
-    background-color: transparent;
+    position: relative;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
+}
+
+.goal-image {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    background-image: url("../img/goal.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
 }
 
 .universal-goals-text{
     color: var(--background-main);
+    width: 100%;
+    margin-left: 90px;
+    margin-top: 10px;
     font-weight: 500;
+    display: flex;;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .universal-goals-text:first-child{
@@ -73,21 +99,42 @@ html, body {
 .universal-goals-completed{
     color: var(--main-green);
     font-weight: 700;
-    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .personal-goals{
-    width: 100%;
-    background-color: transparent;
+    position: relative;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.personal-goal-image {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    background-image: url("../img/tick.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+}
+
 .personal-goals-text{
     color: var(--background-main);
+    width: 100%;
+    margin-left: 90px;
+    margin-top: 10px;
     font-weight: 500;
+    display: flex;;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .personal-goals-text:first-child{
@@ -97,22 +144,22 @@ html, body {
 .personal-goals-completed{
     color: var(--main-green);
     font-weight: 700;
-    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .completed{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 .wrapper{
     width: 95%;
     max-width: 60.5rem;
     max-height: 14rem;
-    border: 2px solid var(--background-fourth);
     border-radius: 10px;
-    margin: 0.8rem;
+    margin: 0.8rem, 0.8rem, 0.8rem, 0.4rem;
     display: flex;
     overflow-x: auto;
     scrollbar-width: none;
@@ -132,14 +179,13 @@ html, body {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-.wrapper .item{
+.wrapper .item {
     position: relative;
     min-width: 8rem;
     height: 8rem;
     text-align: center;
     border-radius: 10%;
-    box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
-    background-color: var(--background-third);
+    border: 2px solid var(--background-completed);
     margin: 2rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -155,10 +201,10 @@ html, body {
 .wrapper .item:after {
     content: "";
     position: absolute;
-    width: 150px;
-    height: 150px;
-    right: -90px;
-    top: -90px;
+    width: 100px;
+    height: 100px;
+    right: -60px;
+    top: -60px;
     transform:rotate(45deg);
     background-color: var(--background-completed);
     background-repeat: no-repeat;

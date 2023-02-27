@@ -3,8 +3,10 @@ const click_effects = document.querySelectorAll(".click-effect");
 const goal1 = document.getElementById("u-one");
 const goal2 = document.getElementById("u-two");
 
+goal1.style.backgroundImage = "url(/static/sustainable_app/img/test_home_tile.jpg)";
+
 let u_goals_urls = ["/minigame_catching", "#", "#", "#", "#"];
-let u_goals_complete = ["grey", "grey", "grey", "grey", "grey"];
+let u_goals_complete = ["green", "grey", "grey", "grey", "grey"];
 
 //TODO: implement images
 let u_goals_type = ["game", "qr", "quiz", "survey"];
@@ -28,10 +30,8 @@ for(let i = 0; i < goal_items.length; i++) {
     });
 };
 
-// set img to represent goal
-goal1.style.backgroundImage = "url(/static/sustainable_app/img/cat_general.png)";
 
 // setting completed color
-for(let i = 0; i < goal_items.length; i++) {
-    goal_items[i].setProperty('--background-completed', u_goals_complete[i]);
-}
+goal_items.forEach(item => {
+    item.style.setProperty('--background-completed', item.getAttribute('value'));
+});
