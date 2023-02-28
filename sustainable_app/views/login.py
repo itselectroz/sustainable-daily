@@ -14,8 +14,7 @@ def authenticate_request(request):
 
     if user is not None:
         user_login(request, user)
-        # TODO: change this to home when home page is done
-        return redirect(reverse('profile'))
+        return redirect(reverse('home'))
     else:
         return render(request, 'sustainable_app/login.html', {
             'error': True
@@ -24,8 +23,7 @@ def authenticate_request(request):
 
 def login(request):
     if request.user.is_authenticated:
-        # TODO: change this to home when home page is done
-        return redirect(reverse('profile'))
+        return redirect(reverse('home'))
 
     # if the login form was submitted
     if request.method == "POST" and request.POST is not None:

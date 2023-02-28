@@ -46,14 +46,12 @@ def register_user(request):
     # Login the user to streamline process
     login(request, user)
 
-    # TODO: change to home
-    return redirect(reverse('profile'))
+    return redirect(reverse('home'))
 
 
 def register(request):
     if request.user.is_authenticated:
-        # TODO: change this to home when home page is done
-        return redirect(reverse('profile'))
+        return redirect(reverse('home'))
 
     if request.method == "POST" and request.POST is not None:
         try:

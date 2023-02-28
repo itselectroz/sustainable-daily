@@ -29,15 +29,16 @@ class LoginViewTests(TestCase):
         self.client.login(username=self.username, password=self.password)
 
         response = self.client.get(reverse('login'), follow=True)
-        self.assertRedirects(response, reverse('profile'))
+        self.assertRedirects(response, reverse('home'))
 
         # check for post as well
         response = self.client.post(reverse('login'), {}, follow=True)
-        self.assertRedirects(response, reverse('profile'))
+        self.assertRedirects(response, reverse('home'))
 
     def test_post_view_for_login(self):
         """
-        check the user is succeessfully logged in upon correct username/password
+        check the user is succeessfully logged in
+        upon correct username/password
         """
         self.assertFalse(auth.get_user(self.client).is_authenticated)
 
@@ -47,11 +48,12 @@ class LoginViewTests(TestCase):
         }, follow=True)
 
         self.assertTrue(auth.get_user(self.client).is_authenticated)
-        self.assertRedirects(response, reverse('profile'))
+        self.assertRedirects(response, reverse('home'))
 
     def test_post_view_for_incorrect_login(self):
         """
-        check the user is given an error upon logging in with incorrect details
+        check the user is given an error upon logging in
+        with incorrect details
         """
         self.assertFalse(auth.get_user(self.client).is_authenticated)
 

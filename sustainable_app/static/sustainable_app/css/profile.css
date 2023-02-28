@@ -1,18 +1,23 @@
 body {
+    font-family: Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url("../img/login_background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
 
 .page {
-
     display: flex;
     flex-direction: column;
     background-color:lightgray;
-    font-family: 'Arial Rounded MT';
     width: 100%;
     height: 100%;
 }
+
 /* styling of the content at the top of the view (profile points and xp) */
+
 .top_layer {
     width: 100%;
     display: flex;
@@ -159,6 +164,8 @@ body {
     align-items: flex-end;
     display: flex;
     height: 100%;
+    
+    
 }
 
 /*styling of the div diplaying the amount of points a player has*/
@@ -175,7 +182,6 @@ body {
     height: clamp(1.5em, 1em + 2vw, 2em);
     background-color: white;
     border-radius: 1.5rem;
-    color: black;
 }
 
 .point_bar::before {
@@ -190,6 +196,7 @@ body {
     max-width: calc(92%);
     width: 100%;
     background-color: #14820a;
+    color: white;
     border-radius: 1rem;
     font-size: clamp(.8rem, 2vw, 1.2rem);
     padding-left: .5em;
@@ -224,7 +231,7 @@ body {
     height: clamp(1.5em, 1em + 2vw, 2em);
     background-color: white;
     border-radius: 1.5rem;
-    color: black;
+
 }
 
 .xp_bar::before {
@@ -237,6 +244,7 @@ body {
     bottom: .2rem;
     min-width: .2rem;
     max-width: calc(92%);
+    color: white;
     width: 100%;
     background-color: #17a3c9;
     border-radius: 1rem;
@@ -249,7 +257,7 @@ body {
     text-align: center;
     width: 8rem;
     font-size: clamp(.05rem, .75rem + .5vw, 2rem);
-    font-family: 'Arial Rounded MT';
+
 }
 
 /*styling of the icon displaying current level*/
@@ -270,9 +278,9 @@ body {
 .level label {
     position: absolute;
     text-align: center;
+    color: white;
     width: 8rem;
     font-size: clamp(.05rem, .75rem + .5vw, 2rem);
-    font-family: 'Arial Rounded MT';
 }
 
 
@@ -319,6 +327,7 @@ body {
     min-width: 17rem;
     align-content: center;
     margin: 2rem;
+
 }
 
 /*hides radio button for the tabs class*/
@@ -364,7 +373,7 @@ label#character{
 }
 
 /*stlying of the accessory tab icon */
-label#accessory{
+label.accessory{
 
     background-repeat: no-repeat;
     background-size: 75%;
@@ -404,40 +413,38 @@ label.tab_content {
     background-position: center;
     width:9%;
     aspect-ratio: 1/1;
-
 }
 
 label#character_badger{
-    background-image: url("../img/badger.png");
+    background-image: url("../img/badgernone.png");
 }
 
 label#character_fox{
-    background-image: url("xp_symbol.png");
-    justify-content: center;
-
+    background-image: url("../img/xp_symbol.png");
 }
 
 label#character_fox p{
     margin: auto;
+    color: white;
     font-weight: bold;
     text-align: center;
 }
 
 label#character_frog{
-    background-image: url("../img/frog.png");  
+    background-image: url("../img/frognone.png");  
 }
 
 label#character_cat{
-    background-image: url("../img/cat_character.png");
+    background-image: url("../img/catnone.png");
 }
 
 label#character_fish{
-    background-image: url("../img/fish.png");
+    background-image: url("../img/fishnone.png");
     
 }
 
 label#character_bird{
-    background-image: url("../img/bird.png"); 
+    background-image: url("../img/birdnone.png"); 
 }
 
 label#accessory_none{

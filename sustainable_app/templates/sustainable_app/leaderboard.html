@@ -1,33 +1,36 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/leaderboard.css' %}">
 
-<div id = "body">
-    <div id = "header">
+{% include 'sustainable_app/base.html' %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/leaderboard.css' %}">
+<script src="{% static 'sustainable_app/js/leaderboard_sorting.js'%}"></script>
+<script>
+    let sortedByName = '{{name|safe}}';
+    let sortedByPoints = '{{points|safe}}';
+    let sortedByLevel = '{{level|safe}}';
+
+    
+
+</script>
+
+
+<div class = "body">
+    <div class = "header">
         <h1>Leaderboard</h1>
     </div>
 
 
-    <table class = "styled-table"> 
+    <table id = "leaderboard-table" class = "styled-table"> 
         <tr>
-            <td><button>Username</button></td>
-            <td><button>Level</button></td>
-            <td><button>Points</button></td>
-        </tr>
-
-
-
-        {% for user in names %}
-            <tr>    
-                <td>{{user.username}}</td>
-                <td>{{user.level}}</td>
-                <td>{{user.points}}</td>
-            </tr>
-        {% endfor %}
-
+            
+            <td><button onclick="orderTable(sortedByName,'username')" name = "param" value = "username">Username</button></td>
+            <td><button onclick="orderTable(sortedByLevel,'level')" name = "param" value = "level">Level</button></td>
+            <td><button onclick="orderTable(sortedByPoints,'points')" name = "param" value = "points">Points</button></td>
         
-
+        </tr>
     </table>
 
 </div>
    
+<script>orderTable(sortedByLevel);</script>
 
