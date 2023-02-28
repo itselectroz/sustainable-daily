@@ -7,7 +7,16 @@
     --background-main: #1e1e24;
     --background-second: #313132;
     --background-third: #e9e8e6;
-    --background-fourth: #dad9d8;
+    --background-fourth: #d3d3d3;
+    --main-green: #4CAF50;
+    --dark-green: #3e8a40;
+    --background-completed: rgb(165, 162, 162);
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .body{
@@ -29,11 +38,6 @@
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-main{
-    padding: 1rem;
-    background-color: var(--background-second);
-}
-
 .main > *:first-child {
     margin-top: 4rem;
 }
@@ -44,21 +48,48 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--background-third);
+    gap: 10px;
+    background-color: var(--background-fourth);
+}
+
+.welcome {
+    font-size: 2rem;
+    margin: 0 auto 20% auto;
 }
 
 .universal-goals{
-    width: 100%;
-    background-color: var(--background-fourth);
+    position: relative;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
+}
+
+.goal-image {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    background-image: url("../img/goal.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
 }
 
 .universal-goals-text{
     color: var(--background-main);
+    width: 100%;
+    margin-left: 90px;
+    margin-top: 10px;
     font-weight: 500;
+    display: flex;;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .universal-goals-text:first-child{
@@ -66,23 +97,44 @@ main{
 }
 
 .universal-goals-completed{
-    color: var(--second-color);
+    color: var(--background-main);
     font-weight: 700;
-    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .personal-goals{
-    width: 100%;
-    background-color: var(--background-fourth);
+    position: relative;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.personal-goal-image {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 20px;
+    width: 20px;
+    background-image: url("../img/tick.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+}
+
 .personal-goals-text{
     color: var(--background-main);
+    width: 100%;
+    margin-left: 90px;
+    margin-top: 10px;
     font-weight: 500;
+    display: flex;;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .personal-goals-text:first-child{
@@ -90,25 +142,27 @@ main{
 }
 
 .personal-goals-completed{
-    color: var(--second-color);
+    color: var(--background-main);
     font-weight: 700;
-    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .completed{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 .wrapper{
     width: 95%;
     max-width: 60.5rem;
     max-height: 14rem;
-    border: 1px solid var(--background-fourth);
-    margin: 0.8rem;
+    border-radius: 10px;
+    margin: 0.8rem, 0.8rem, 0.8rem, 0.4rem;
     display: flex;
     overflow-x: auto;
+    scrollbar-width: none;
 }
 
 .wrapper::-webkit-scrollbar{
@@ -125,18 +179,44 @@ main{
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-.wrapper .item{
+.wrapper .item {
+    position: relative;
     min-width: 8rem;
     height: 8rem;
-    line-height: 8rem;
     text-align: center;
-    border: 0.05rem solid var(--background-second);
-    background-color: var(--background-fourth);
+    border-radius: 10%;
+    border: 2px solid var(--background-completed);
     margin: 2rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: .1s;
 }
 
-.goal-text{
-    color: var(--main-color);
+.wrapper .item:after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: -60px;
+    top: -60px;
+    transform:rotate(45deg);
+    background-color: var(--background-completed);
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: top right;
+  }
+
+.line-test {
+    width: 70%;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-top: 5%;
+    margin-bottom: 5%;
+    height: 2px;
 }
+
