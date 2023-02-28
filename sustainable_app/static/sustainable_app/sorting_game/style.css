@@ -68,7 +68,7 @@ body {
   height: 20%;
 }
 
-@media screen and (min-width: 600px) {
+@media (min-width: 600px) {
   /* CSS styles to apply when screen width is at least 768px */
   .test {
     height: auto;
