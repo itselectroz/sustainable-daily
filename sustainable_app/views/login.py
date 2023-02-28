@@ -16,16 +16,21 @@ def authenticate_request(request):
         user_login(request, user)
         return redirect(reverse('home'))
     else:
-        return redirect(reverse('login') + '?error=1')
+        return render(request, 'sustainable_app/login.html', {
+            'error': True
+        })
 
 
 def login(request):
     if request.user.is_authenticated:
         return redirect(reverse('home'))
 
+    # if the login form was submitted
     if request.method == "POST" and request.POST is not None:
         response = authenticate_request(request)
         if response is not False:
             return response
 
-    return render(request, 'sustainable_app/login.html')
+    return render(request, 'sustainable_app/login.html', {
+        'error': False
+    })

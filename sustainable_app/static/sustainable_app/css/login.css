@@ -8,6 +8,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
         background-image: url("../img/login_background.jpg");
         background-repeat: no-repeat;
         background-size: cover;
@@ -29,6 +30,8 @@ body {
         align-items: center;
         background: #ffffff;
         padding: 77px 55px 33px;
+
+        margin-bottom: 3.5rem;
 }
 
 .loginForm {
@@ -66,6 +69,10 @@ body {
 
 }
 
+.error {
+        border-bottom-color: #cd2026;
+}
+
 .pass {
         margin-top: 30px;
 }
@@ -74,8 +81,13 @@ body {
 .title {
         font-weight: 700;
         margin-top: 0;
+        font-family: "Arial Rounded MT";
         margin-bottom: 75px;
+}
 
+.error-heading {
+        color: #cd2026;
+        margin-bottom: 1.5rem;
 }
 
 /* ------------ button ------------ */
@@ -121,5 +133,10 @@ body {
 
 .forgotPassLink {
         color: #555;
+        text-decoration: none;
+}
+
+.signup-link {
+        color: #fff;
         text-decoration: none;
 }

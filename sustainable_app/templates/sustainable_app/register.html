@@ -19,6 +19,13 @@
   
     <form class="form" action="{% url 'register' %}" method="post">
       <h1>Registration</h1>
+
+      {% if error %}
+      <p class="error-title">
+        {{ error_message }}
+      </p>
+      {% endif %}
+
       {% csrf_token %}
       <div class="registrationBit">
         <input type="text" class = "tInput" placeholder="First Name" id="first-name" name="first-name">

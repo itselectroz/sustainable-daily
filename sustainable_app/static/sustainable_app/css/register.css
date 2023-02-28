@@ -61,6 +61,11 @@ h1 {
   height: 100%;
 }
 
+.error-title {
+  color: #cd2026;
+  text-align: center;
+}
+
 .hat {
   display: block;
   margin: 0 auto;
