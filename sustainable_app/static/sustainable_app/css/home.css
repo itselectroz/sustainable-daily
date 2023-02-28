@@ -97,7 +97,7 @@ html, body {
 }
 
 .universal-goals-completed{
-    color: var(--main-green);
+    color: var(--background-main);
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
@@ -142,7 +142,7 @@ html, body {
 }
 
 .personal-goals-completed{
-    color: var(--main-green);
+    color: var(--background-main);
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
