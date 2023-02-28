@@ -1,4 +1,8 @@
+{% extends 'sustainable_app/navbar.html' %}
+
 {% load static %}
+
+{% block content %}
 
 {% include 'sustainable_app/base.html' %}
 
@@ -153,3 +157,5 @@
   profile_image.src="{% static "" %}sustainable_app/img/{{character}}{{accessory}}.png";
 
 </script>
+
+{% endblock %}
