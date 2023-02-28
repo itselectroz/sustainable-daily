@@ -1,3 +1,7 @@
+{% extends 'sustainable_app/navbar.html' %}
+
+{% block content %}
+
 {% load static %}
 
 {% include 'sustainable_app/base.html' %}
@@ -23,9 +27,9 @@
     <table id = "leaderboard-table" class = "styled-table"> 
         <tr>
             
-            <td><button onclick="orderTable(sortedByName,'username')" name = "param" value = "username">Username</button></td>
-            <td><button onclick="orderTable(sortedByLevel,'level')" name = "param" value = "level">Level</button></td>
-            <td><button onclick="orderTable(sortedByPoints,'points')" name = "param" value = "points">Points</button></td>
+            <td><button class="tableBtn" onclick="orderTable(sortedByName,'username')" name = "param" value = "username">Username</button></td>
+            <td><button class="tableBtn" onclick="orderTable(sortedByLevel,'level')" name = "param" value = "level">Level</button></td>
+            <td><button class="tableBtn" onclick="orderTable(sortedByPoints,'points')" name = "param" value = "points">Points</button></td>
         
         </tr>
     </table>
@@ -34,3 +38,4 @@
    
 <script>orderTable(sortedByLevel);</script>
 
+{% endblock %}
