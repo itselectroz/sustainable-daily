@@ -12,19 +12,22 @@
 </head>
 <div class = "body">
   
+  {% if error %}
+      <p class="error-title">
+        {{ error_message }}
+      </p>
+  {% endif %}
+
   <!--<img id="hat" class="hat" src="{% static 'sustainable_app/img/party.png' %}" alt="party hat">-->
   
   <div class = "outerContainer">
+
     
   
     <form class="form" action="{% url 'register' %}" method="post">
       <h1>Registration</h1>
 
-      {% if error %}
-      <p class="error-title">
-        {{ error_message }}
-      </p>
-      {% endif %}
+      
 
       {% csrf_token %}
       <div class="registrationBit">
@@ -76,7 +79,13 @@
 
     
 
+
   </div>
+
+  
+  
+  <a href="{% url 'login' %}" class="login-link"> <b>Login</b></a>
+  
 
   <script>
     let intervalId;
@@ -100,6 +109,15 @@
       clearInterval(intervalId);
     });
   </script>
+
+  
+    
+  
+  
+
   
 </div>
+
+
+
 
