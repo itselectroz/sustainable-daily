@@ -63,4 +63,4 @@ class LoginViewTests(TestCase):
         }, follow=True)
 
         self.assertFalse(auth.get_user(self.client).is_authenticated)
-        self.assertRedirects(response, reverse('login') + '?error=1')
+        self.assertTemplateUsed(response, "sustainable_app/login.html")
