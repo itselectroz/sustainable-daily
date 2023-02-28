@@ -20,7 +20,8 @@ menuText.innerText = "Catching Game";
 // Game over boolean
 let gameOver = false;
 let rubbishTimeout;
-let speedTimeout
+let speedTimeout;
+let fallInterval;
 let generateSpeed = 1000;
 
 // Score and lives
@@ -59,11 +60,12 @@ function updateFrame() {
  * Generate rubbish
  */
 function generateRubbish() {
-
+    console.log("Generating")
     // Create piece of rubbish
     let rubbish = document.createElement('div');
     let rubbishBottom = container.offsetHeight;
     let type = getRandomClass();
+    let isFalling = true;
     rubbish.setAttribute("class", "rubbish " + type.obj);
     rubbish.style.backgroundImage = 'url(/static/sustainable_app/img/' + type.obj + '.png)';
     rubbish_group.appendChild(rubbish);
@@ -76,10 +78,16 @@ function generateRubbish() {
      */
     function fallDown() {
 
+        if(!isFalling) {
+            return;
+        }
+
         if(rubbishBottom > playerBottom && rubbishBottom < (playerBottom + (player.offsetHeight / 2)) && rubbishLeft > (player.offsetLeft - (player.offsetWidth / 2)) &&
         rubbishLeft < (player.offsetLeft + (player.offsetWidth / 2))) {
+
             rubbish_group.removeChild(rubbish);
-            clearInterval(fallInterval);
+            isFalling = false;
+
 
             // Check which rubbish type
             if(type.type < 5) {
@@ -88,23 +96,28 @@ function generateRubbish() {
             else {
                 lostLife();
             }
+            
+            return;
         }
         if(rubbishBottom < playerBottom) {
-
+            rubbishBottom = 1000;
             // Check which rubbish type
             if(type.type < 5) {
                 lostLife();
             }
-            rubbish_group.removeChild(rubbish);
-            clearInterval(fallInterval);
 
             
+            rubbish_group.removeChild(rubbish);
+            isFalling = false;
+
+
+            return;
         }
         rubbishBottom -= 10;
         rubbish.style.bottom = rubbishBottom + 'px';
     }
 
-    let fallInterval = setInterval(fallDown, 20);
+    fallInterval = setInterval(fallDown, 20);
     
     rubbish.style.bottom = rubbishBottom + 'px';
     rubbish.style.left = rubbishLeft + 'px';
@@ -133,8 +146,8 @@ function lostLife() {
         livesElement.removeChild(livesElement.lastElementChild)
     }
     else {
-        livesElement.removeChild(livesElement.lastElementChild)
         gameState("end");
+        livesElement.removeChild(livesElement.lastElementChild)
     }
 }
 
@@ -170,7 +183,9 @@ function gameState(state) {
     }
     else {
         clearInterval(rubbishTimeout);
+        clearInterval(fallInterval);
         clearTimeout(speedTimeout);
+        removeRubbish();
         gameOver = true;
         generateSpeed = 1000;
         menuButton.textContent = "Play Again";
@@ -186,6 +201,11 @@ function increaseSpeed() {
     clearTimeout(speedTimeout);
     rubbishTimeout = setInterval(generateRubbish, generateSpeed);
     speedTimeout = setTimeout(increaseSpeed, 5000);
+}
+
+function removeRubbish() {
+    let group = document.getElementById('rubbish_group');
+    group.innerHTML = '';
 }
 
 /**
