@@ -5,6 +5,11 @@ const scoreLabel = document.getElementById("score")
 const bins = document.querySelectorAll(".bin")
 const touchLeft = document.getElementById("left-button")
 const touchRight = document.getElementById("right-button")
+const menuScreen = document.getElementById("menu");
+const menuText = document.getElementById("menuText");
+const menuButton = document.getElementById("btnMenu");
+
+menuText.innerText = "Catching Game";
 
 // Items
 const items = [
@@ -50,7 +55,7 @@ function binToCol(bin) {
  */
 function moveRubbish() {
     let top = parseInt(rubbish.style.top || '0')
-    top += 5;
+    top += 10;
     rubbish.style.top = top + 'px'
 }
 
@@ -132,10 +137,10 @@ function checkCollision() {
     let binRect = bin.getBoundingClientRect()
 
     // Check if in correct bin
-    if (rubbishRect.bottom > (binRect.top-50) && ((binNo == 0 && rubbish.classList.contains("left"))||(binNo == 1 && rubbish.classList.contains("center"))||(binNo == 2 && rubbish.classList.contains("right")))) {
+    if (rubbishRect.bottom > (binRect.top-100) && ((binNo == 0 && rubbish.classList.contains("left"))||(binNo == 1 && rubbish.classList.contains("center"))||(binNo == 2 && rubbish.classList.contains("right")))) {
         score += currentImage["points"]
         resetRubbish()
-    } else if (rubbishRect.bottom > (binRect.top-50)) {
+    } else if (rubbishRect.bottom > (binRect.top-100)) {
         score = Math.max(score - currentImage["points"], 0)
         resetRubbish()
     }
@@ -171,10 +176,28 @@ function update() {
 
     if (gameOver) {
         clearInterval(gameLoop)
-        alert("Game Over!\nYou scored " + score + " out of 12!\nHappy Sorting!")
+        menuButton.textContent = "Play Again";
+        menuText.innerText = "Game Over\nScore: " + score + " out of 12";
+        menuScreen.style.display = "flex";
+        container.style.display = "none";
     }
 }
 
-// Start gameloop
-resetRubbish()
-const gameLoop = setInterval(update, 50)
+/**
+ * Start the game
+ */
+function startGame() {
+    // Start gameloop
+    resetRubbish()
+    gameLoop = setInterval(update, 50)
+    menu.style.display = "none";
+    menuScreen.style.display = "none";
+    container.style.display = "flex";
+}
+
+/**
+ * Exit the game
+ */
+function exitGame() {
+    window.location.replace("/home");
+}
