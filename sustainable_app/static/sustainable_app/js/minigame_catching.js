@@ -60,8 +60,8 @@ function updateFrame() {
  * Generate rubbish
  */
 function generateRubbish() {
-    console.log("Generating")
     // Create piece of rubbish
+
     let rubbish = document.createElement('div');
     let rubbishBottom = container.offsetHeight;
     let type = getRandomClass();
