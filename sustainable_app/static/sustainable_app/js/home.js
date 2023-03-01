@@ -23,7 +23,7 @@ const p_goal4 = document.getElementById("p-four");
 const p_goal5 = document.getElementById("p-five");
 
 // Urls and types for universal goals
-let goals_urls = ["/minigame_catching", "#", "#", "#", "#"];
+let goals_urls = ["/minigame_catching", "/sorting", "#", "#", "#"];
 let u_goals_type = ["catching-game", "sorting-game", "qr", "quiz", "survey", "wordle"]; // TODO: Implement auto selected images
 
 
