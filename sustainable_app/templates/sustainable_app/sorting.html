@@ -4,13 +4,14 @@
 
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sorting Rubbish</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/sorting.css' %}">
     </head>
 
     <body>
-        <div class="score" id="score"></div>
         <div class="game_container" id="container">
+            <div class="score" id="score"></div>
             <div class="rubbish center" id="spawn"></div>
             <div class="bin left">
                 <img src="{% static 'sustainable_app/img/general_bin.png' %}" alt="Trash Can">

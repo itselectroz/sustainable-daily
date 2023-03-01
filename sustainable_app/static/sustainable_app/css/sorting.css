@@ -1,5 +1,5 @@
 body {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,14 +18,14 @@ body {
 .rubbish {
   position: absolute;
   top: 0;
-  width: calc(100% / 3);
+  width: calc(100vw / 3);
   height: auto;
 }
 
 .bin {
   position: absolute;
   bottom: 0;
-  width: calc(100% / 3); /* Divide the screen width into 3 equal parts for each bin */
+  width: calc(100vw / 3); /* Divide the screen width into 3 equal parts for each bin */
   height: auto; /* Adjust the height to fit your images */
 }
 
@@ -46,8 +46,7 @@ body {
   align-items: center;
   font-size: 24px;
   padding: 8px;
-  background-color: #f0f0f0;
-  width: 100%;
+  background-color: lightblue;
 }
 
 .button {
@@ -65,11 +64,11 @@ body {
 .test {
   display: flex;
   flex-direction: row;
-  height: 20%;
+  height: 20vh;
 }
 
 @media (min-width: 600px) {
-  /* CSS styles to apply when screen width is at least 768px */
+  /* CSS styles to apply when screen width is at least 600px */
   .test {
     height: auto;
     font-size: 24px;
