@@ -3,7 +3,7 @@ body {
   
 }
 
-h1 {
+.register-title {
   padding: 0;
   margin: 5px;
 }
@@ -22,12 +22,13 @@ h1 {
   width: 100%;
 }
 
-.outerContainer {
+.outer-container {
   display: flex;
+  flex-direction: column;
   border-radius: 10px;
   box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
   width: 50%;
-  height: 60%;
+  height: 70%;
   max-width: 300px;
   max-height: 550px;
   
@@ -35,6 +36,12 @@ h1 {
   align-items: center;
   background: #ffffff;
   padding: 77px 55px 33px;
+}
+
+@media only screen and (min-width: 600px) {
+  .outer-container {
+    height: 60%;
+  }
 }
 
 .tInput {
