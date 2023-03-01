@@ -5,6 +5,23 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from sustainable_app.models.user import User, Item
 
+# Dictionaries
+
+background_dict = {
+    "b_green": "#65d982",
+    "b_grey": "#858186",
+    "b_pink": "#dd69e7",
+    "b_blue": "#17a3c9",
+    "b_white": "#ffffff",
+}
+
+username_dict = {
+    "u_green": "#14820a",
+    "u_black": "#000000",
+    "u_purple": "#5f0b7b",
+    "u_blue": "#192e6c",
+    "u_orange": "#ed8114",
+}
 
 @login_required(login_url=reverse_lazy('login'))
 def profile(request):
@@ -12,11 +29,15 @@ def profile(request):
     template = loader.get_template("sustainable_app/profile.html")
 
     current_user = request.user
-    #current_user.equipped_items.(31)
+    
+    #current_user.equipped_items.add(1)
+    # current_user.equipped_items.add(10)
+    # current_user.equipped_items.add(20)
+    # current_user.equipped_items.add(30)
 
     # get user attributes
-    user_name_color = current_user.equipped_items.get(type="username_color")
-    background_color = current_user.equipped_items.get(type="background_color")
+    user_name_color = username_dict[str(current_user.equipped_items.get(type="username_color"))]
+    background_color = background_dict[str(current_user.equipped_items.get(type="background_color"))]
 
     # TODO: Caculate xp needed for next level
 

@@ -40,6 +40,12 @@ def register_user(request):
     user.first_name = first_name
     user.last_name = last_name
 
+    # Set default equipped items so it doesn't break
+    user.equipped_items.add(1)
+    user.equipped_items.add(10)
+    user.equipped_items.add(20)
+    user.equipped_items.add(30)
+
     # Commit user to database
     user.save()
 

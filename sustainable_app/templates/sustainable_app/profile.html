@@ -94,38 +94,38 @@
       <label id="name_color" for="name_color_tab"></label>
 
       <form class="tab" id="name_color">
-          <input type="radio" id="n_black" name="name_color_select" value="black"/>
-          <label class="tab_content" id="name_color_black" for="n_black"></label>
+          <input type="radio" id="u_black" name="name_color_select" value="u_black"/>
+          <label class="tab_content" id="name_color_black" for="u_black"></label>
 
-          <input type="radio" id="n_green" name="name_color_select" value="green" />
-          <label class="tab_content" id="name_color_green" for="n_green"></label>
+          <input type="radio" id="u_green" name="name_color_select" value="u_green" />
+          <label class="tab_content" id="name_color_green" for="u_green"></label>
 
-          <input type="radio" id="n_purple" name="name_color_select" value="purple"/>
-          <label class="tab_content" id="name_color_purple" for="n_purple"></label>
+          <input type="radio" id="u_purple" name="name_color_select" value="u_purple"/>
+          <label class="tab_content" id="name_color_purple" for="u_purple"></label>
 
-          <input type="radio" id="n_orange" name="name_color_select" value="orange"/>
-          <label class="tab_content" id="name_color_orange" for="n_orange"></label>
+          <input type="radio" id="u_orange" name="name_color_select" value="u_orange"/>
+          <label class="tab_content" id="name_color_orange" for="u_orange"></label>
 
-          <input type="radio" id="n_blue" name="name_color_select" value="blue"/>
-          <label class="tab_content" id="name_color_blue" for="n_blue"></label>
+          <input type="radio" id="u_blue" name="name_color_select" value="u_blue"/>
+          <label class="tab_content" id="name_color_blue" for="u_blue"></label>
       </form>
 
       <input type="radio" id="background_tab" name="tabs" />
       <label id="background" for="background_tab"></label>
       <form class="tab" id="background_color">
-        <input type="radio" id="b_white" name="background_select" value="white"/>
+        <input type="radio" id="b_white" name="background_select" value="b_white"/>
         <label class="tab_content" id="background_white" for="b_white"></label>
 
-        <input type="radio" id="b_blue" name="background_select" value="blue"/>
+        <input type="radio" id="b_blue" name="background_select" value="b_blue"/>
         <label class="tab_content" id="background_blue" for="b_blue"></label>
 
-        <input type="radio" id="b_pink" name="background_select" value="pink" />
+        <input type="radio" id="b_pink" name="background_select" value="b_pink" />
         <label class="tab_content" id="background_pink" for="b_pink"></label>
 
-        <input type="radio" id="b_grey" name="background_select" value="grey"/>
+        <input type="radio" id="b_grey" name="background_select" value="b_grey"/>
         <label class="tab_content" id="background_grey" for="b_grey"></label>
 
-        <input type="radio" id="b_green" name="background_select" value="green"/>
+        <input type="radio" id="b_green" name="background_select" value="b_green"/>
         <label class="tab_content" id="background_green" for="b_green"></label>
       </form>
     </div>
@@ -136,6 +136,8 @@
 <script src="{% static 'sustainable_app/js/profile.js' %}"></script>
 
 <script>
+
+  //TODO: Move into js file
 
   // Grab html elements
   const username = document.getElementById("display_name");
