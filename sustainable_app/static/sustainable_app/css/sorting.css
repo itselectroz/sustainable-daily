@@ -26,7 +26,7 @@ body {
   position: absolute;
   bottom: 0;
   width: calc(100vw / 3); /* Divide the screen width into 3 equal parts for each bin */
-  height: auto; /* Adjust the height to fit your images */
+  height: auto /* Adjust the height to fit your images */
 }
 
 .left {
@@ -34,7 +34,7 @@ body {
 }
 
 .center {
-  left: calc(100% / 3); /* Position the second bin after 1/3 of the screen width */
+  left: calc(100vw / 3); /* Position the second bin after 1/3 of the screen width */
 }
 
 .right {
@@ -75,5 +75,13 @@ body {
   }
   .button {
     display: none;
+  }
+  .rubbish {
+    width: calc(100vw / 6);
+    height: auto;
+  }
+  .bin {
+    width: calc(100vw / 6); /* Divide the screen width into 3 equal parts for each bin */
+    height: auto /* Adjust the height to fit your images */
   }
 }
