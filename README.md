@@ -59,6 +59,30 @@ To test the project:
 - Navigate to the project directory: ```cd ecm2434-gsep```
 - Run the tests: ```python manage.py test```
 
+We also have automated test suites setup using Github actions. The configuration files for this can be found in `.github/workflows`. This includes testing and linting.
+
+We test the project using django's built in tests.
+
+<br>
+
+---
+
+<br>
+
+## Contributing to the project
+
+This section outlines the guidelines we follow when contributing code to the repository.
+
+We have the project setup so that you are unable to commit directly to master, and instead must go through a pull request.
+
+All features should be implemented in a feature branch, such as `profile-tests` or `settings-page`. The branch should then be merged into the `master` branch using a pull-request.
+
+In order for a pull request to be merged it must have been reviewed by another group member, and all github action workflows must be passing - linting and tests.
+
+We lint the project using flake8, which tests against the PEP8 python format.
+
+To lint the project locally, ensure `flake8` is installed and simply run `flake8` from the command line whilst in the root directory.
+
 <br>
 
 ---
