@@ -1,0 +1,82 @@
+{% load static %}
+
+<tml lang="en">
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width">
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/nav_styles.css' %}">
+
+<div class = "nav-body">
+    <button id="openbtn" class="openbtn" onclick="openNav()">&#9776;</button>
+    <script>
+        function openNav() {
+            const nav = document.getElementById('topnav');
+            const open = document.getElementById('openbtn');
+            const max = window.matchMedia( "(max-width: 600px)" );
+            const min = window.matchMedia( "(min-width: 600px)" );
+            nav.classList.add('visible');
+            open.classList.add('invisible');
+            document.addEventListener('click', function(event) {
+                if (!nav.contains(event.target) && !open.contains(event.target) && max.matches) {
+                    nav.classList.remove('visible');
+                    open.classList.remove('invisible');
+                }
+            });
+        }
+    </script>
+    <nav id="topnav" class="topnav">
+        <div class="logo">
+            <div class="logo-icon">
+                <img src="{% static 'sustainable_app/img/point_symbol.png' %}" alt="logo">
+            </div>
+        </div>
+        <ul class="navbar">
+            <a href="{% url 'home' %}">
+            <li class="nav-item">
+                <div class="home-icon">
+                    <img src="{% static 'sustainable_app/img/home_icon.png' %}" alt="home icon image">
+                </div>
+            </li>
+            </a>
+            <a href="{% url 'leaderboard' %}">
+            <li class="nav-item">
+                <div class="leaderboard-icon">
+                    <img src="{% static 'sustainable_app/img/leaderboard_icon.png' %}" alt="leaderboard icon image">
+                </div>
+            </li>
+            </a>
+            <li class="nav-item" onclick="menuToggle();">
+                <div class="profile-icon">
+                    <img src="{% static 'sustainable_app/img/birdviking.png' %}" alt="profile icon image">
+                </div>
+                <div class="dropdown_container">
+                    <div class="action">
+                        <div class="menu">
+                            <h3>Username<br><span>Real name</span></h3>
+                            <ul>
+                                <li><img src="{% static 'sustainable_app/img/profile_icon.png' %}"><a href="{% url 'profile' %}">Profile</a></li>
+                                <li><img src="{% static 'sustainable_app/img/logout_icon.png' %}"><a href="{% url 'logout' %}">Logout</a></li>
+                                <li><img src="{% static 'sustainable_app/img/settings_icon.png' %}"><a href="#">Settings</a></li>
+                            </ul> 
+                        </div>
+                    </div>
+                    <script>
+                        function menuToggle() {
+                            const dropdownContainer = document.querySelector('.dropdown_container');
+                            const toggleMenu = document.querySelector('.menu');
+                            const toggleImg = document.querySelector('.profile');
+                            dropdownContainer.classList.toggle('active');
+                            toggleMenu.classList.toggle('active');
+                            toggleImg.classList.toggle('active');
+                        }
+                    </script>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+{% block content %}
+
+{% endblock %}
