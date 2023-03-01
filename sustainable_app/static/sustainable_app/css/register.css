@@ -202,7 +202,7 @@ input[type="submit"]:hover ~ .shaker {
 .login-link {
   color: #fff;
   text-decoration: none;
-  margin-top: 10px;
+  margin-top: 2rem;
   position: relative;
   
 }
