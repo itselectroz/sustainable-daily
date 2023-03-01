@@ -1,19 +1,5 @@
 # Sustainable Daily
 
-## Project setup
-
-All code for the app is contained in `sustainable_app` directory.
-
-Views are in the views directory, when creating a new file remember to add it to the `__init__.py` file.
-
-Urls are in `urls.py`
-
-Remember test driven development.
-
-<br>
-
----
-<br>
 
 ## About the project
 Sustainable Daily is designed to integrate sustinable activities into everyday life.
