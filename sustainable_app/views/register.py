@@ -2,7 +2,7 @@ from django.db import IntegrityError
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
 
-from ..models import User
+from ..models import User, Item
 
 
 def register_user(request):
@@ -41,10 +41,17 @@ def register_user(request):
     user.last_name = last_name
 
     # Set default equipped items so it doesn't break
-    user.equipped_items.add(1)
-    user.equipped_items.add(10)
-    user.equipped_items.add(20)
-    user.equipped_items.add(30)
+    default_items = ['cat', 'none', 'u_black', 'b_white']
+    for item_name in default_items:
+        try:
+            item = Item.objects.get(name=item_name)
+            user.equipped_items.add(item.id)
+        except Item.DoesNotExist:
+            return render(request, 'sustainable_app/register.html', {
+                'error': True,
+                'error_message': 'Something went wrong, please try again.',
+                'issues': []
+            })
 
     # Commit user to database
     user.save()
