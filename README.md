@@ -58,3 +58,28 @@ To test the project:
 - Open a terminal
 - Navigate to the project directory: ```cd ecm2434-gsep```
 - Run the tests: ```python manage.py test```
+
+<br>
+
+---
+
+<br>
+
+## Main Contributions
+
+These do not state precisely what was done by who, as everyone had more contributions than listed here. This is just a rough guideline of who wrote what code.
+
+The login page and logic was done by Joshua Cox and Harry Whittle.
+The registration page and logic was done by Joshua Hammond and Harry Whittle.
+The home page was made by Luke Buncle.
+The leaderboard page was made by Oscar Moores.
+The profile page was made by Dora Napier.
+
+The navbar was made by Luke Buncle.
+
+The sorting minigame was created by Joshua Hammond.
+The catching minigame was created by Joshua Cox.
+
+Everyone made significant contributions to all portions of the project, majority of which are not listed here. To see all contributions and code changes please view the [github](https://github.com/itselectroz/ecm2434-gsep).
+
+Matt Collinson has been added as a member of the repository.
