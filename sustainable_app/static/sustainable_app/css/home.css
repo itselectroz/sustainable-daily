@@ -9,7 +9,8 @@
     --background-third: #e9e8e6;
     --background-fourth: #d3d3d3;
     --main-green: #4CAF50;
-    --dark-green: #3e8a40;
+    --completion-green: #3e8a40;
+    --completion-grey: grey;
     --background-completed: rgb(165, 162, 162);
 }
 
@@ -79,6 +80,12 @@ html, body {
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center center;
+}
+
+.goal-text {
+   display: flex;
+   align-items: flex-end;
+   margin-bottom: 2.5px;
 }
 
 .universal-goals-text{
@@ -191,11 +198,16 @@ html, body {
     margin-bottom: 1rem;
     background-size: 100%;
     background-repeat: no-repeat;
+    background-position: center center;
     overflow: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
     transition-duration: .1s;
+}
+
+.wrapper .personal {
+    background-size: 75%;
+    background-position: center top;
 }
 
 .wrapper .item:after {
