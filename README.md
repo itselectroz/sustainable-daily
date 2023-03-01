@@ -52,6 +52,12 @@ The registration page allows users to create a new account.
 <br>
 
 ## Running the project
+To run the project:
+- Open a terminal
+- Navigate to the project directory: ```cd ecm2434-gsep```
+- Run the server: ```python manage.py runserver```
+- Open a browser
+- Navigate to ```127.0.0.1:8000```
 
 <br>
 
@@ -60,3 +66,7 @@ The registration page allows users to create a new account.
 <br>
 
 ## Testing the project
+To test the project:
+- Open a terminal
+- Navigate to the project directory: ```cd ecm2434-gsep```
+- Run the tests: ```python manage.py test```
