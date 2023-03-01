@@ -20,8 +20,6 @@ class LoginViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "sustainable_app/login.html")
 
-    # TODO: change these two tests to home when we change login
-
     def test_call_view_as_user(self):
         """
         checks the login page redirects to home when we are logged in

@@ -1,9 +1,9 @@
-from django.template import loader
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from sustainable_app.models.user import User, Item
+
+from sustainable_app.models.user import Item
 
 # Dictionaries
 
@@ -23,21 +23,17 @@ username_dict = {
     "u_orange": "#ed8114",
 }
 
+
 @login_required(login_url=reverse_lazy('login'))
 def profile(request):
 
-    template = loader.get_template("sustainable_app/profile.html")
-
     current_user = request.user
-    
-    #current_user.equipped_items.add(1)
-    # current_user.equipped_items.add(10)
-    # current_user.equipped_items.add(20)
-    # current_user.equipped_items.add(30)
 
     # get user attributes
-    user_name_color = username_dict[str(current_user.equipped_items.get(type="username_color"))]
-    background_color = background_dict[str(current_user.equipped_items.get(type="background_color"))]
+    user_name_color = username_dict[str(
+        current_user.equipped_items.get(type="username_color"))]
+    background_color = background_dict[str(
+        current_user.equipped_items.get(type="background_color"))]
 
     # TODO: Caculate xp needed for next level
 
@@ -51,7 +47,7 @@ def profile(request):
     context = {"user": current_user,
                "text_color": user_name_color,
                "background_color": background_color,
-               "user_level":user_level,
+               "user_level": user_level,
                "character": user_character,
                "accessory": user_accessory,
                }
@@ -59,6 +55,8 @@ def profile(request):
     return render(request, "sustainable_app/profile.html", context)
 
 # Equip request
+
+
 def equip(request):
 
     current_user = request.user
@@ -70,18 +68,21 @@ def equip(request):
     # Pass to function
     changeAccessory(type, name, current_user)
 
-    return redirect('/')
+    return HttpResponse(status=200)
 
 # Change accessory
+
+
 def changeAccessory(type, name, current_user):
-    
-    ## find item to remove and remove it
+    # TODO: check if the user owns the accessory
+    # we currently do not have "owned_items" implemented
+
+    # find item to remove and remove it
     for item_to_remove in current_user.equipped_items.all():
         if item_to_remove.type == type:
             current_user.equipped_items.remove(item_to_remove.id)
 
-    ## find item to add and add it
+    # find item to add and add it
     for item_to_add in Item.objects.all():
-        if item_to_add.type == type:
-            if item_to_add.name == str(name):
-                current_user.equipped_items.add(item_to_add.id)
+        if item_to_add.type == type and item_to_add.name == str(name):
+            current_user.equipped_items.add(item_to_add.id)

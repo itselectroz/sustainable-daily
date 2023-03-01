@@ -4,6 +4,8 @@
 ## About the project
 Sustainable Daily is designed to integrate sustinable activities into everyday life.
 
+We aim to gamify the process of building sustainable habits through daily goals which give you points and levels. These can be used to unlock fun characters and accessories to enhance your profile.
+
 <br>
 
 ### Home Page
