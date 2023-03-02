@@ -1,0 +1,70 @@
+
+:root {
+    --primary-grey: #d3d3d3;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ------------ Top section ------------ */
+
+.title-container {
+    position: fixed;
+    background: url("/static/sustainable_app/img/login_background.jpg");
+    background-size: contain;
+    background-color: #58aff6;
+    top: 0;
+    height: 400px;
+    width: 100vw;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.title-text {
+    position: absolute;
+    font-size: 5rem;
+    font-family: "helvetica";
+    margin: auto;
+    color: white;
+    margin: 30px;
+}
+
+/* ------------ Bottom section ------------ */
+
+.bottom-background {
+    position: absolute;
+    top: 0;
+    background-color: var(--primary-grey);
+    min-height: 500px;
+    margin: 210px 0px;
+    width: 100%;
+    height: 100%;
+    transform: skewY(5deg);
+    box-shadow: -2px -5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.bottom-container {
+    position: relative;
+    margin-top: 400px;
+    top: 0;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+}
+
+.locations-container, .survey-container{
+    background-color: white;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
+    border-radius: 10px;
+    min-height: 500px;
+    width: 40%;
+}
