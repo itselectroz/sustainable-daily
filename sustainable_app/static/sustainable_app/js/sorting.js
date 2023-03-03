@@ -5,9 +5,10 @@ const scoreLabel = document.getElementById("score")
 const bins = document.querySelectorAll(".bin")
 const touchLeft = document.getElementById("left-button")
 const touchRight = document.getElementById("right-button")
-const menuScreen = document.getElementById("menu");
-const menuText = document.getElementById("menuText");
-const menuButton = document.getElementById("btnMenu");
+const menuScreen = document.getElementById("menu")
+const menuText = document.getElementById("menuText")
+const menuButton = document.getElementById("btnMenu")
+const buttonContainer = document.querySelector(".test")
 
 menuText.innerText = "Catching Game";
 
@@ -176,10 +177,15 @@ function update() {
 
     if (gameOver) {
         clearInterval(gameLoop)
-        menuButton.textContent = "Play Again";
-        menuText.innerText = "Game Over\nScore: " + score + " out of 12";
-        menuScreen.style.display = "flex";
-        container.style.display = "none";
+        menuButton.textContent = "Play Again"
+        menuText.innerText = "Game Over\nScore: " + score + " out of 12"
+        menuScreen.style.display = "flex"
+        container.style.display = "none"
+        buttonContainer.style.display = "none"
+        score = 0
+        currentImagePos = -1
+        currentImageNode = -1
+        gameOver = false
     }
 }
 
@@ -190,9 +196,10 @@ function startGame() {
     // Start gameloop
     resetRubbish()
     gameLoop = setInterval(update, 50)
-    menu.style.display = "none";
-    menuScreen.style.display = "none";
-    container.style.display = "flex";
+    menu.style.display = "none"
+    menuScreen.style.display = "none"
+    container.style.display = "flex"
+    buttonContainer.style.display = "flex"
 }
 
 /**
