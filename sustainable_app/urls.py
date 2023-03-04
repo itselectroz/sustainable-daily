@@ -14,4 +14,5 @@ urlpatterns = [
     path('sorting/', views.sorting, name='sorting'),
     path('minigame_catching/', views.minigame_catching, name="minigame_catching"),
     path('game_keeper/', views.game_keeper, name="game_keeper"),
+    path('game_keeper_locations/', views.game_keeper_locations, name="game_keeper_locations"),
 ]

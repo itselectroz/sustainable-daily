@@ -1,15 +1,87 @@
 
+<title>Dashboard</title>
 {% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/game_keeper.css' %}">
-
 {% include 'sustainable_app/base.html' %}
 
-<div class="title-container">
-    <div class="title-text">Welcome Username</div>
-</div>
-<div class="bottom-background"></div>
-<div class="bottom-container">
-    <div class="locations-container"></div>
-    <div class="survey-container"></div>
+<!-- MATERIAL CDN -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
+<!-- STYLESHEET -->
+<link rel="stylesheet" href="{% static 'sustainable_app/css/game_keeper.css' %}">
+
+    <div class="container">
+        {% include 'sustainable_app/game_keeper_aside.html' %}
+        <main>
+            <h1>Dashboard</h1>
+
+            <div class="insights">
+                <div class="sales">
+                    <span class="material-symbols-sharp">water_bottle</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Plastic Bottles Saved</h3>
+                            <h1>1,034</h1>
+                        </div>
+
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>81%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Total</small>
+                </div>
+
+                <!---------- END OF SALES ---------->
+
+                <div class="expenses">
+                    <span class="material-symbols-sharp">water_bottle</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Plastic Bottles Saved</h3>
+                            <h1>126</h1>
+                        </div>
+
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>62%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">This Week</small>
+                </div>
+
+                <!---------- END OF EXPENSES ---------->
+
+                <div class="income">
+                    <span class="material-symbols-sharp">recycling</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Items Recycled</h3>
+                            <h1>5,168</h1>
+                        </div>
+
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>44%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Total</small>
+                </div>
+
+                <!---------- END OF INCOME ---------->
+
+            </div>
+            <!---------- END OF INSIGHTS ---------->
+        </main>
+    </div>
 </div>

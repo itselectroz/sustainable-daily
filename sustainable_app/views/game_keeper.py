@@ -4,3 +4,6 @@ from django.urls import reverse_lazy
 
 def game_keeper(request):
     return render(request, 'sustainable_app/game_keeper.html')
+
+def game_keeper_locations(request):
+    return render(request, 'sustainable_app/game_keeper_locations.html')
