@@ -6,10 +6,10 @@ from ..models import User
 
 
 def register_user(request):
+    
     issues = []
-    
-    
 
+    
     # Check all fields are present and note down those that aren't
     for name in ['username', 'password', 'first-name', 'last-name', 'email']:
         if not request.POST.get(name, ''):
@@ -28,6 +28,7 @@ def register_user(request):
     first_name = request.POST.get('first-name', '')
     last_name = request.POST.get('last-name', '')
     email = request.POST.get('email', '')
+    isAdmin = request.POST.get('admin', '')
 
     try:
         # Create user object
@@ -41,31 +42,50 @@ def register_user(request):
 
     user.first_name = first_name
     user.last_name = last_name
+    
+    if(isAdmin):
+        user.game_keeper = True
 
     # Commit user to database
     user.save()
 
     # Login the user to streamline process
-    login(request, user)
+    if(not isAdmin):
+        login(request, user)
 
-    return redirect(reverse('home'))
+    if(isAdmin):
+        return redirect(reverse('game_keeper'))
+    else:
+        return redirect(reverse('home'))
 
 
 def register(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and request.user.game_keeper == False:
         return redirect(reverse('home'))
+
 
     if request.method == "POST" and request.POST is not None:
         try:
             return register_user(request)
+            
         except Exception:
             return render(request, 'sustainable_app/register.html', {
                 'error': True,
                 'error_message': 'Something went wrong, please try again.',
                 'issues': []
             })
+            
+            
+    if(request.user.is_authenticated and request.user.game_keeper):
+        isAdmin = True
+    else:
+        isAdmin = False
 
+    
+    
     return render(request, 'sustainable_app/register.html', {
         'error': False,
-        'issues': []
+        'issues': [],
+        'isAdmin': isAdmin,
     })
+

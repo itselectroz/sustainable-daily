@@ -52,9 +52,18 @@
         <input type="password" class = "tInput" placeholder="Password" id="password" name="password">
       </div>
 
+      {% if isAdmin %}
+        <div class="registrationBit">
+          <input type="checkbox" name="admin" value="game_keeper">
+        </div>
+      {% endif %}
+
       <div class="registrationBit">
+
         <input type="submit" value="Register">
       </div>
+
+      
 
       <div class = "registrationBit">
         <img class="image shaker" src="{% static 'sustainable_app/img/catnone.png' %}" alt="cat">
