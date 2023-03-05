@@ -1,22 +1,8 @@
-
-
 /* ---------- MAIN ---------- */
+
 
 main {
     margin-top: 1.4rem;
-}
-
-main .date {
-    display: inline-block;
-    background: var(--color-light);
-    border-radius: var(--border-radius-1);
-    margin-top: 1rem;
-    padding: 0.5rem 1.6rem;
-}
-
-main .date input[type="date"] {
-    background: transparent;
-    color: var(--color-dark);
 }
 
 main .insights {
@@ -114,4 +100,71 @@ main .insights .progress .number {
 main .insights small {
     display: block;
     margin-top: 1.6rem;
+}
+
+/* ---------- RIGHT ---------- */
+
+.right .users {
+    margin-top: 2rem;
+}
+
+.right .users h2 {
+    margin-bottom: 0.8rem;
+}
+
+.right .users .item {
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+    padding: 1.4rem var(--card-padding);
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+.right .users .item:hover {
+    box-shadow: none;
+}
+
+.right .users .item .right {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin: 0;
+    width: 100%;
+}
+
+.right .users .item .icon {
+    padding: 0.6rem;
+    color: var(--color-white);
+    border-radius: 50%;
+    background: var(--color-primary);
+    display: flex;
+}
+
+.right .users .add-user {
+    background-color: transparent;
+    border: 2px dashed var(--color-primary);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    cursor: pointer;
+}
+
+.right .users .add-user:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.right .users .add-user div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.right .users .add-user div h3 {
+    font-weight: 600;
 }

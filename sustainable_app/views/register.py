@@ -7,6 +7,8 @@ from ..models import User
 
 def register_user(request):
     issues = []
+    
+    
 
     # Check all fields are present and note down those that aren't
     for name in ['username', 'password', 'first-name', 'last-name', 'email']:

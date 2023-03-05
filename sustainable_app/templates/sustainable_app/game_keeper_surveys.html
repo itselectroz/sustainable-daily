@@ -11,15 +11,14 @@
         {% include 'sustainable_app/game_keeper_aside.html' %}
         <main>
             <div class="locations">
-                <h2>Locations</h2>
+                <h2>Surveys</h2>
                 <div class="locations-table">
                     <table>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Clue</th>
-                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Options</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -29,27 +28,19 @@
                 </div>
             </div>
         </main>
+
         <div class="right">
             <div class="locations-list">
-                <h2>Add a Location</h2>
+                <h2>Add a Survey</h2>
                 <div class="add-location">
                     <form class="locationForm" action="" method="post">
                         <div class="fieldsContainer">
-                            <input class="tInput" type="text" placeholder="Name" name="name" required>
+                            <input class="tInput" type="text" placeholder="Title" name="title" required>
     
-                            <div class="radio-buttons">
-                                <input id="recycle" type="radio" name="type" value="recycle_bin">
-                                <label class="radioLabel" for="recycle">Recycling Bin</label><br>
-    
-                                <input id="water" type="radio" name="type" value="water_fountain">
-                                <label class="radioLabel" for="water">Water Fountain</label><br>
-                            </div>
-    
-                            <input class="tInput" type="text" placeholder="Clue" name="clue" required>
-    
-                            <input type="file" class="image" id="image" name="image" required>
-                            <label class="fileLabel" for="image">Select Image</label>
-    
+                            <input class="tInput" type="text" placeholder="Description" name="desc" required>
+                            
+                            <input class="tInput" type="text" placeholder="Options" name="options" required>
+
                             <button class="createButton" type="submit">Create</button>
                         </div>
                     </form> 
@@ -58,4 +49,4 @@
         </div>
     </div>
 
-    <script src="{% static 'sustainable_app/js/game_keeper_locations.js' %}"></script>
+    <script src="{% static 'sustainable_app/js/game_keeper_surveys.js' %}"></script>

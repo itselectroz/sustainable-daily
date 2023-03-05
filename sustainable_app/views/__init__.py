@@ -10,7 +10,9 @@ from .register import register
 from .leaderboard import leaderboard
 from .sorting import sorting
 from .minigame_catching import minigame_catching
-from .game_keeper import game_keeper, game_keeper_locations
+from .game_keeper import game_keeper, game_keeper_locations, game_keeper_surveys, game_keeper_events
 
 
-__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home', 'minigame_catching', 'sorting', 'equip', 'game_keeper', 'game_keeper_locations']
+__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home', 
+           'minigame_catching', 'sorting', 'equip', 'game_keeper', 
+           'game_keeper_locations', 'game_keeper_surveys', 'game_keeper_events']

@@ -11,15 +11,15 @@
         {% include 'sustainable_app/game_keeper_aside.html' %}
         <main>
             <div class="locations">
-                <h2>Locations</h2>
+                <h2>Events</h2>
                 <div class="locations-table">
                     <table>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Clue</th>
-                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Oragniser</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -29,27 +29,21 @@
                 </div>
             </div>
         </main>
+
         <div class="right">
             <div class="locations-list">
-                <h2>Add a Location</h2>
+                <h2>Add a Survey</h2>
                 <div class="add-location">
                     <form class="locationForm" action="" method="post">
                         <div class="fieldsContainer">
-                            <input class="tInput" type="text" placeholder="Name" name="name" required>
+                            <input class="tInput" type="text" placeholder="Title" name="title" required>
     
-                            <div class="radio-buttons">
-                                <input id="recycle" type="radio" name="type" value="recycle_bin">
-                                <label class="radioLabel" for="recycle">Recycling Bin</label><br>
-    
-                                <input id="water" type="radio" name="type" value="water_fountain">
-                                <label class="radioLabel" for="water">Water Fountain</label><br>
-                            </div>
-    
-                            <input class="tInput" type="text" placeholder="Clue" name="clue" required>
-    
-                            <input type="file" class="image" id="image" name="image" required>
-                            <label class="fileLabel" for="image">Select Image</label>
-    
+                            <input class="tInput" type="datetime-local" name="date" required>
+                            
+                            <input class="tInput" type="text" placeholder="Location" name="location" required>
+                            
+                            <input class="tInput" type="text" placeholder="Oragniser" name="oragniser" required>
+
                             <button class="createButton" type="submit">Create</button>
                         </div>
                     </form> 
@@ -58,4 +52,6 @@
         </div>
     </div>
 
-    <script src="{% static 'sustainable_app/js/game_keeper_locations.js' %}"></script>
+    </div>
+
+    <script src="{% static 'sustainable_app/js/game_keeper_events.js' %}"></script>
