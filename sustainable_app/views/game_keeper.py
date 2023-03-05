@@ -12,10 +12,28 @@ def game_keeper(request):
        return redirect(reverse('login'))
    
 def game_keeper_locations(request):
-    return render(request, 'sustainable_app/game_keeper_locations.html')
+    if(request.user.is_authenticated):
+        if(request.user.game_keeper):
+            return render(request, 'sustainable_app/game_keeper_locations.html')
+        else:
+            return redirect(reverse('home'))
+    else:
+       return redirect(reverse('login'))
 
 def game_keeper_surveys(request):
-    return render(request, 'sustainable_app/game_keeper_surveys.html')
+    if(request.user.is_authenticated):
+        if(request.user.game_keeper):
+            return render(request, 'sustainable_app/game_keeper_surveys.html')
+        else:
+            return redirect(reverse('home'))
+    else:
+       return redirect(reverse('login'))
 
 def game_keeper_events(request):
-    return render(request, 'sustainable_app/game_keeper_events.html')
+    if(request.user.is_authenticated):
+        if(request.user.game_keeper):
+            return render(request, 'sustainable_app/game_keeper_events.html')
+        else:
+            return redirect(reverse('home'))
+    else:
+       return redirect(reverse('login'))
