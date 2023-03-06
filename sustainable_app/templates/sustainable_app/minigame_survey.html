@@ -1,0 +1,36 @@
+
+
+{% load static %}
+
+{% include 'sustainable_app/base.html' %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/minigame_survey.css' %}">
+
+<div class = "body">
+    
+
+    <div class = "header">
+        <h1>Survey</h1>
+    </div>
+
+    <table class = "styled-table">
+
+        {% for question in questions %}
+            <tr>
+                
+                <div class = "radio-toolbar">
+                    <td>{{ question.question_text }}</td>
+                    {% for choice in question.choice_set.all %}
+                        <td><input class = "input-radio" type = "radio" name = "{{question.question_text}}" id = {{choice.choice_text}}></input><label class = "input-label" for = "{{choice.choice_text}}">{{ choice.choice_text }}</label></td>
+
+                    {% endfor %}
+                    
+                    <!-- Add code here to display the answer options for each question -->
+                </div>
+            </tr>
+
+        {% endfor %}
+    </table>
+</div>
+
+
