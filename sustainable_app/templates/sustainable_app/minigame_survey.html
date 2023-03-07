@@ -13,33 +13,36 @@
         <h1>Survey</h1>
     </div>
 
-    <table class = "styled-table">
-        <form method = "post" action = "% url 'sustainable_app:submit_choices' %">
-            {% csrf_token %}
+    <form class = "form" method = "post" action = "">
+        <table class = "styled-table">
+            
+                {% csrf_token %}
 
-            {% for question in questions %}
-                <tr>
-                    
-                    <div class = "radio-toolbar">
+                {% for question in questions %}
+                    <tr>
                         
-                        <td>{{ question.question_text }}</td>
-                        {% for choice in question.choice_set.all %}
-                            <td><input class = "input-radio" type = "radio" value = {{choice.id}} name = "{{question_id}}" id = {{choice.choice_text}}></input><label class = "input-label" for = "{{choice.choice_text}}">{{ choice.choice_text }}</label></td>
+                        <div class = "radio-toolbar">
+                            
+                            <td>{{ question.question_text }}</td>
+                            {% for choice in question.choice_set.all %}
+                                <td><input class = "input-radio" type = "radio" value = {{choice.id}} name = "{{question.id}}" id = {{choice.choice_text}}></input><label class = "input-label" for = "{{choice.choice_text}}">{{ choice.choice_text }}</label></td>
 
-                        {% endfor %}
-                        
-                        <!-- Add code here to display the answer options for each question -->
-                    </div>
-                </tr>
+                            {% endfor %}
+                            
+                            <!-- Add code here to display the answer options for each question -->
+                        </div>
+                    </tr>
 
-            {% endfor %}
+                {% endfor %}
+
+                
+                
 
             
-            
-        </form>
-    </table>
+        </table>
+        <input type = submit class = "survey-submit" value = "hello" name = "survey-submit">
+    </form>
 
-    <input type = submit class = "survey-submit" value = "submit" name = "survey-submit">
 </div>
 
 
