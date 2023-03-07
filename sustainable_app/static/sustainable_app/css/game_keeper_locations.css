@@ -1,18 +1,18 @@
 
 
-main {
+.main {
     display: flex;
     justify-content: center;
 }
 
-main > div {
+.main > div {
     padding: 4rem;
     margin-top: 1rem;
     width: 60%;
     height: 90%;
 }
 
-main .locations-table {
+.main .locations-table {
     max-height: 700px;
     background: var(--color-white);
     border-radius: var(--card-border-radius);
@@ -23,22 +23,22 @@ main .locations-table {
     
 }
 
-main .locations h2 {
+.main .locations h2 {
     margin-bottom: 0.8rem;
 }
 
-main .locations table {
+.main .locations table {
     table-layout: fixed;
     width: 100%;
     text-align: center;
     border-spacing: 20px 10px;
 }
 
-main .locations-table:hover {
+.main .locations-table:hover {
     box-shadow: none;
 }
 
-main .locations table tbody td {
+.main .locations table tbody td {
     height: 2.8rem;
     border-bottom: 1px solid var(--color-light);
     color: var(--color-dark-variant);
@@ -46,11 +46,11 @@ main .locations table tbody td {
     padding-bottom: 10px;
 }
 
-main .locations table tbody tr:last-child td {
+.main .locations table tbody tr:last-child td {
     border: none;
 }
 
-main .locations a {
+.main .locations a {
     text-align: center;
     display: block;
     margin: 1rem auto;

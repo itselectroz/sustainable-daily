@@ -43,7 +43,7 @@ def register_user(request):
     user.first_name = first_name
     user.last_name = last_name
     
-    if(isAdmin):
+    if(isAdmin and request.user.game_keeper):
         user.game_keeper = True
 
     # Commit user to database

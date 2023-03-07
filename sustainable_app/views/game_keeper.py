@@ -1,11 +1,15 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse
-from django.urls import reverse_lazy
+from sustainable_app.models.user import User
 
 def game_keeper(request):
     if(request.user.is_authenticated):
         if(request.user.game_keeper):
-            return render(request, 'sustainable_app/game_keeper.html')
+        
+            context = {
+                "game_keepers":  User.objects.filter(game_keeper=True)
+            }
+            
+            return render(request, 'sustainable_app/game_keeper.html', context)
         else:
             return redirect(reverse('home'))
     else:
@@ -37,3 +41,9 @@ def game_keeper_events(request):
             return redirect(reverse('home'))
     else:
        return redirect(reverse('login'))
+
+# Remove keeper request
+def remove_keeper(request):
+    username = request.POST.get('username', False)
+    User.objects.get(username=username).delete()
+    return redirect('/')
