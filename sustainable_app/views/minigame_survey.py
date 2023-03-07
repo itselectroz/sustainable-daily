@@ -15,3 +15,21 @@ def minigame_survey(request):
 
 
     return render(request, 'sustainable_app/minigame_survey.html', context)
+
+
+def temp(request):
+    if request.method == 'POST':
+
+        question_ids = [key for key in request.POST.keys() if key != 'csrfmiddlewaretoken']
+
+        #Gets choice entry and adds to votes
+        for question in question_ids:
+            #Gets the id of the choice that needs to be added to
+            choice_id_to_change = request.POST.get(question_ids[question])
+
+            choice = Choice.objects.get(choice_id = choice_id_to_change)
+
+            choice.votes +=1
+            choice.save()
+
+        return render("Hello")
