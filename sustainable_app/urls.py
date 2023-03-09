@@ -13,4 +13,5 @@ urlpatterns = [
     path('leaderboard/', views.leaderboard, name="leaderboard"),
     path('sorting/', views.sorting, name='sorting'),
     path('minigame_catching/', views.minigame_catching, name="minigame_catching"),
+    path('quizz/', views.quiz, name="quiz"),
 ]

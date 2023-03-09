@@ -1,0 +1,38 @@
+.game_container {
+    display: none;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.question-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .question-box {
+    margin-bottom: 20px;
+  }
+  
+  .answer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .answer-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+  }
+  
+  .confirm-button {
+    margin-top: 20px;
+  }
+  

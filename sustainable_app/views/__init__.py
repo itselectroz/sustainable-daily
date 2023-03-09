@@ -10,6 +10,7 @@ from .register import register
 from .leaderboard import leaderboard
 from .sorting import sorting
 from .minigame_catching import minigame_catching
+from .quiz import quiz
 
 
-__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home', 'minigame_catching', 'sorting', 'equip']
+__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home', 'minigame_catching', 'sorting', 'equip', 'quiz']

@@ -1,0 +1,38 @@
+{% load static %}
+
+{% include 'sustainable_app/base.html' %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/quiz.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/game_menu.css' %}">
+
+{% include "sustainable_app/game_menu.html" %}
+
+<body>
+    <div class="game_container" id="container">
+        <div class="question-container">
+            <div class="question-box">
+              <h2 id="question">What is the capital of France?</h2>
+            </div>
+            <div class="answer-grid">
+              <div class="answer-box">
+                <input type="radio" id="answer1" name="answer" value="paris">
+                <label for="answer1">Paris</label>
+              </div>
+              <div class="answer-box">
+                <input type="radio" id="answer2" name="answer" value="london">
+                <label for="answer2">London</label>
+              </div>
+              <div class="answer-box">
+                <input type="radio" id="answer3" name="answer" value="berlin">
+                <label for="answer3">Berlin</label>
+              </div>
+              <div class="answer-box">
+                <input type="radio" id="answer4" name="answer" value="rome">
+                <label for="answer4">Rome</label>
+              </div>
+            </div>
+            <button type="button" class="confirm-button">Confirm Choice</button>
+          </div>
+    </div>
+    <script src="{% static 'sustainable_app/js/quiz.js' %}"></script>
+</body>
