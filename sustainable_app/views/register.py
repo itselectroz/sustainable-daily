@@ -23,6 +23,7 @@ def register_user(request):
             'issues': issues
         })
 
+    # get user attributes from post request
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
     first_name = request.POST.get('first-name', '')
@@ -43,7 +44,9 @@ def register_user(request):
     user.first_name = first_name
     user.last_name = last_name
     
-    if(isAdmin and request.user.game_keeper):
+    # if user is authenticated, is a game keeper, and wants to create a game keeper
+    if(isAdmin and request.user.is_authenticated and request.user.game_keeper):
+        # set user game_keeper attribute to true
         user.game_keeper = True
 
     # Commit user to database
@@ -53,6 +56,7 @@ def register_user(request):
     if(not isAdmin):
         login(request, user)
 
+    # if game keeper then direct to game keeper page, else direct to home
     if(isAdmin):
         return redirect(reverse('game_keeper'))
     else:
