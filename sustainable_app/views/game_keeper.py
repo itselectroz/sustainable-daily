@@ -10,6 +10,9 @@ import qrcode
 # game keeper page
 def game_keeper(request):
     
+    if request.method == "POST" and request.POST is not None:
+        return locations_add(request)
+    
     # send all game keepers to template
     context = {
         "game_keepers":  User.objects.filter(game_keeper=True)
@@ -37,7 +40,14 @@ def remove_keeper(request):
     return redirect('/')
 
 # Remove keeper request
-def game_keeper_locations_add(request):
+def locations_add(request):
+    
+    # get location attributes from post request
+    name = request.POST.get('name', '')
+    category = request.POST.get('category', '')
+    clue = request.POST.get('clue', '')
+    image = request.POST.get('image', '')
+
     
     # Generate qr code
     qr = qrcode.QRCode(
@@ -46,6 +56,7 @@ def game_keeper_locations_add(request):
         box_size=10,
         border=4,
     )
+    
     #TODO: When deployed change data to url
     qr.add_data('127.0.0.1:8000/location_qr')
     qr.make(fit=True)
@@ -55,10 +66,10 @@ def game_keeper_locations_add(request):
     buffer = BytesIO()
     img.save(buffer, format='PNG')
     
-    new_location = Location(name="example_name", category=Location.RECYCLE, clue="example_clue")
-    # new_location.image = "path_to_image_hint"
-    new_location.qr.save(f"location_qr/qr_{new_location.id}.png", File(buffer))
+    new_location = Location(name=name, category=Location.RECYCLE, clue=clue)
     new_location.save()
+    new_location.image.save(f"location_img/img_{new_location.id}.png", File(buffer))
+    new_location.qr.save(f"location_qr/qr_{new_location.id}.png", File(buffer))
     
     
     # TODO: Redirect to view with qr code

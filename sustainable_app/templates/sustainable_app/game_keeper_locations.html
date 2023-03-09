@@ -9,6 +9,7 @@
 
     <div class="container">
         {% include 'sustainable_app/game_keeper_aside.html' %}
+        
         <main class="main">
             <div class="locations">
                 <h2 class="h2">Locations</h2>
@@ -33,15 +34,17 @@
             <div class="locations-list">
                 <h2 class="h2">Add a Location</h2>
                 <div class="add-location">
-                    <form class="locationForm" action="" method="post">
+                    <form class="locationForm" action="{% url 'game_keeper' %}" method="post">
+                        {% csrf_token %}
                         <div class="fieldsContainer">
+                            
                             <input class="tInput" type="text" placeholder="Name" name="name" required>
     
                             <div class="radio-buttons">
-                                <input id="recycle" type="radio" name="type" value="recycle_bin">
+                                <input id="recycle" type="radio" name="category" value="recycle_bin">
                                 <label class="radioLabel" for="recycle">Recycling Bin</label><br>
     
-                                <input id="water" type="radio" name="type" value="water_fountain">
+                                <input id="water" type="radio" name="category" value="water_fountain">
                                 <label class="radioLabel" for="water">Water Fountain</label><br>
                             </div>
     
@@ -49,8 +52,8 @@
     
                             <input type="file" class="image" id="image" name="image" required>
                             <label class="fileLabel" for="image">Select Image</label>
-    
-                            <button class="createButton" type="submit">Create</button>
+                            
+                            <input class="create-button" value="Create" type="submit"></input>
                         </div>
                     </form> 
                 </div>
@@ -58,4 +61,5 @@
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="{% static 'sustainable_app/js/game_keeper_locations.js' %}"></script>

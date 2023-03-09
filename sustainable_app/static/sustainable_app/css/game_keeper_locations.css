@@ -155,7 +155,7 @@
     accent-color: var(--color-primary);
 }
 
-.right .locations-list .add-location .locationForm .createButton {
+.right .locations-list .add-location .locationForm .create-button {
     padding: 8px 12px;
     background-color: #4CAF50;
     color: white;
@@ -168,18 +168,18 @@
     
 }
 
-.right .locations-list .add-location .locationForm .createButton:hover,
-.right .locations-list .add-location .locationForm .createButton:focus { 
+.right .locations-list .add-location .locationForm .create-button:hover,
+.right .locations-list .add-location .locationForm .create-button:focus { 
 background-color: #1f7e16;
 color: #ffffff;
 }
 
-.right .locations-list .add-location .locationForm .createButton:active {
+.right .locations-list .add-location .locationForm .create-button:active {
 background: #09223b;
 color: rgb(255, 255, 255, .7);
 }
 
-.right .locations-list .add-location .locationForm .createButton:disabled { 
+.right .locations-list .add-location .locationForm .create-button:disabled { 
 cursor: not-allowed;
 background: rgba(0, 0, 0, .08);
 color: rgba(0, 0, 0, .3);
