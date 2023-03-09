@@ -34,6 +34,12 @@ body {
         margin-bottom: 3.5rem;
 }
 
+@media only screen and (min-width: 600px) {
+        .outerContainer {
+                height: 40%;
+        }
+}
+
 .loginForm {
         display: flex;
         flex-direction: column;
@@ -81,12 +87,13 @@ body {
         font-weight: 700;
         margin-top: 0;
         font-family: "Arial Rounded MT";
-        margin-bottom: 75px;
+        margin-bottom: 2rem;
 }
 
 .error-heading {
         color: #cd2026;
         margin-bottom: 1.5rem;
+        text-align: center;
 }
 
 /* ------------ button ------------ */
@@ -126,7 +133,7 @@ body {
 
 /* ------------ forgot pass ------------  */
 .forgotPass {
-        margin-top: 30px;
+        margin-top: 1rem;
 
 }
 
@@ -138,4 +145,5 @@ body {
 .signup-link {
         color: #fff;
         text-decoration: none;
+        
 }

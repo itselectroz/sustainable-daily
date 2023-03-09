@@ -1,55 +1,75 @@
+{% load static %} {% include 'sustainable_app/base.html' %}
 
-{% load static %}
-
-{% include 'sustainable_app/base.html' %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/register.css' %}">
-
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'sustainable_app/css/register.css' %}"
+/>
 
 <head>
-  <meta name="viewport" content="width=device-width" initial-scale="1.0">
+  <meta name="viewport" content="width=device-width" initial-scale="1.0" />
   <title>Team Name Registration</title>
 </head>
-<div class = "body">
-  
+<div class="body">
   <!--<img id="hat" class="hat" src="{% static 'sustainable_app/img/party.png' %}" alt="party hat">-->
-  
-  <div class = "outerContainer">
-    
-  
+
+  <div class="outer-container">
+    <h1 class="register-title">Registration</h1>
+
+    {% if error %}
+    <p class="error-title">{{ error_message }}</p>
+    {% endif %}
+
     <form class="form" action="{% url 'register' %}" method="post">
-      <h1>Registration</h1>
-
-      {% if error %}
-      <p class="error-title">
-        {{ error_message }}
-      </p>
-      {% endif %}
-
       {% csrf_token %}
       <div class="registrationBit">
-        <input type="text" class = "tInput" placeholder="First Name" id="first-name" name="first-name">
-
+        <input
+          type="text"
+          class="tInput"
+          placeholder="First Name"
+          id="first-name"
+          name="first-name"
+        />
       </div>
 
       <div class="registrationBit">
-
-        <input type="text" class = "tInput" placeholder="Last Name" id="last-name" name="last-name">
+        <input
+          type="text"
+          class="tInput"
+          placeholder="Last Name"
+          id="last-name"
+          name="last-name"
+        />
       </div>
 
       <div class="registrationBit">
-
-        <input type="email" class = "tInput" placeholder="Email" id="email" name="email">
+        <input
+          type="email"
+          class="tInput"
+          placeholder="Email"
+          id="email"
+          name="email"
+        />
       </div>
 
       <div class="registrationBit">
-
-        <input type="text" class = "tInput" placeholder="Username" id="username" name="username">
+        <input
+          type="text"
+          class="tInput"
+          placeholder="Username"
+          id="username"
+          name="username"
+        />
       </div>
 
       <div class="registrationBit">
-
-        <input type="password" class = "tInput" placeholder="Password" id="password" name="password">
+        <input
+          type="password"
+          class="tInput"
+          placeholder="Password"
+          id="password"
+          name="password"
+        />
       </div>
 
       {% if isAdmin %}
@@ -59,56 +79,84 @@
       {% endif %}
 
       <div class="registrationBit">
-
-        <input type="submit" value="Register">
+        <input type="submit" value="Register" />
       </div>
 
-      
-
-      <div class = "registrationBit">
-        <img class="image shaker" src="{% static 'sustainable_app/img/catnone.png' %}" alt="cat">
-        <img class="image shaker" src="{% static 'sustainable_app/img/fishnone.png' %}" alt="fish">
-        <img class="image shaker" src="{% static 'sustainable_app/img/badgernone.png' %}" alt="badger">
-        <img class="image shaker" src="{% static 'sustainable_app/img/frognone.png' %}" alt="frog">
-
+      <div class="registrationBit">
+        <img
+          class="image shaker"
+          src="{% static 'sustainable_app/img/catnone.png' %}"
+          alt="cat"
+        />
+        <img
+          class="image shaker"
+          src="{% static 'sustainable_app/img/fishnone.png' %}"
+          alt="fish"
+        />
+        <img
+          class="image shaker"
+          src="{% static 'sustainable_app/img/badgernone.png' %}"
+          alt="badger"
+        />
+        <img
+          class="image shaker"
+          src="{% static 'sustainable_app/img/frognone.png' %}"
+          alt="frog"
+        />
       </div>
-
     </form>
 
     <div id="runningAnimals" class="runners hide">
-      <img class="runner" src="{% static 'sustainable_app/img/catnone.png' %}" alt="cat">
-      <img class="runner" src="{% static 'sustainable_app/img/fishnone.png' %}" alt="fish">
-      <img class="runner" src="{% static 'sustainable_app/img/badgernone.png' %}" alt="badger">
-      <img class="runner" src="{% static 'sustainable_app/img/frognone.png' %}" alt="frog">
-      <img class="runner" src="{% static 'sustainable_app/img/birdnone.png' %}" alt="bird">
+      <img
+        class="runner"
+        src="{% static 'sustainable_app/img/catnone.png' %}"
+        alt="cat"
+      />
+      <img
+        class="runner"
+        src="{% static 'sustainable_app/img/fishnone.png' %}"
+        alt="fish"
+      />
+      <img
+        class="runner"
+        src="{% static 'sustainable_app/img/badgernone.png' %}"
+        alt="badger"
+      />
+      <img
+        class="runner"
+        src="{% static 'sustainable_app/img/frognone.png' %}"
+        alt="frog"
+      />
+      <img
+        class="runner"
+        src="{% static 'sustainable_app/img/birdnone.png' %}"
+        alt="bird"
+      />
     </div>
-
-    
-
   </div>
+
+  <a href="{% url 'login' %}" class="login-link"> Already have an account? <b>Login</b></a>
 
   <script>
     let intervalId;
     const submit = document.querySelector('#form input[type="submit"]');
-    const hat = document.querySelector('#hat');
-    const runners = document.querySelector('#runningAnimals');
+    const hat = document.querySelector("#hat");
+    const runners = document.querySelector("#runningAnimals");
 
-    submit.addEventListener('mouseover', function() {
-      hat.classList.add('shown');
-      runners.classList.remove('hide');
-      runners.classList.add('running');
-      intervalId = setInterval(function() {
-        runners.classList.toggle('running');
+    submit.addEventListener("mouseover", function () {
+      hat.classList.add("shown");
+      runners.classList.remove("hide");
+      runners.classList.add("running");
+      intervalId = setInterval(function () {
+        runners.classList.toggle("running");
       }, 2000);
     });
 
-    submit.addEventListener('mouseout', function() {
-      hat.classList.remove('shown');
-      runners.classList.add('hide');
-      runners.classList.remove('running');
+    submit.addEventListener("mouseout", function () {
+      hat.classList.remove("shown");
+      runners.classList.add("hide");
+      runners.classList.remove("running");
       clearInterval(intervalId);
     });
   </script>
-  
 </div>
-

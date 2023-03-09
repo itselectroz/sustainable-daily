@@ -14,7 +14,6 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
             },
             success: function() {
-                alert("Equipped");
                 window.location.reload();
             }
         });
@@ -34,7 +33,6 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
             },
             success: function() {
-                alert("Equipped");
                 window.location.reload();
             }
         });
@@ -54,7 +52,6 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
             },
             success: function() {
-                alert("Equipped");
                 window.location.reload();
             }
         });
@@ -74,7 +71,6 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
             },
             success: function() {
-                alert("Equipped");
                 window.location.reload();
             }
         });

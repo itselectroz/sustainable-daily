@@ -5,6 +5,12 @@ const scoreLabel = document.getElementById("score")
 const bins = document.querySelectorAll(".bin")
 const touchLeft = document.getElementById("left-button")
 const touchRight = document.getElementById("right-button")
+const menuScreen = document.getElementById("menu")
+const menuText = document.getElementById("menuText")
+const menuButton = document.getElementById("btnMenu")
+const buttonContainer = document.querySelector(".test")
+
+menuText.innerText = "Catching Game";
 
 // Items
 const items = [
@@ -27,7 +33,11 @@ let currentImage
 let currentImageNode = -1
 let gameOver = false
 
-// Converts the bin type to column number
+/**
+ * Converts the bin type to column number
+ * @param {String} bin 
+ * @returns int representing the column the bin is in
+ */
 function binToCol(bin) {
     switch (bin) {
         case "recycle":
@@ -41,15 +51,19 @@ function binToCol(bin) {
     }
 }
 
-// Moves the rubbish down the screen
+/**
+ *  Moves the rubbish down the screen
+ */
 function moveRubbish() {
     let top = parseInt(rubbish.style.top || '0')
-    top += 5;
+    top += 10;
     rubbish.style.top = top + 'px'
 }
 
 
-// Moves the rubbish left by one column if able to
+/**
+ * Moves the rubbish left by one column if able to
+ */
 function moveLeft() {
     // if (rubbish.classList.contains("left")) { do nothing }
     if (rubbish.classList.contains("center")) {
@@ -61,7 +75,9 @@ function moveLeft() {
     }
 }
 
-// Moves the rubbish right by one column if able to
+/**
+ * Moves the rubbish right by one column if able to
+ */
 function moveRight() {
     // if (rubbish.classList.contains("right")) { do nothing }
     if (rubbish.classList.contains("center")) {
@@ -73,7 +89,10 @@ function moveRight() {
     }
 }
 
-// Moves the rubbish back to starting position and creates next piece
+/**
+ * Moves the rubbish back to starting position and creates next piece
+ * @returns if the game is over
+ */
 function resetRubbish() {
     // Remove old rubbish piece
     if (currentImageNode != -1) {
@@ -94,6 +113,7 @@ function resetRubbish() {
     let newImg = document.createElement('img')
     newImg.src = "../static/sustainable_app/img/" + currentImage["image"]
     newImg.alt = currentImage["alt"]
+    newImg.classList.add("rubbish")
     currentImageNode = newImg
     rubbish.appendChild(newImg)
 
@@ -108,7 +128,9 @@ function resetRubbish() {
     // else if (rubbish.classList.contains("center")) { do nothing }
 }
 
-// Check if rubbish has reached the bins
+/**
+ * Check if rubbish has reached the bins
+ */
 function checkCollision() {
     let binNo = binToCol(currentImage["bin"])
     let bin = bins[binNo]
@@ -116,14 +138,12 @@ function checkCollision() {
     let binRect = bin.getBoundingClientRect()
 
     // Check if in correct bin
-    if (rubbishRect.bottom > (binRect.top+100) && ((binNo == 0 && rubbish.classList.contains("left"))||(binNo == 1 && rubbish.classList.contains("center"))||(binNo == 2 && rubbish.classList.contains("right")))) {
+    if (rubbishRect.bottom > (binRect.top-100) && ((binNo == 0 && rubbish.classList.contains("left"))||(binNo == 1 && rubbish.classList.contains("center"))||(binNo == 2 && rubbish.classList.contains("right")))) {
         score += currentImage["points"]
         resetRubbish()
-        return
-    } else if (rubbishRect.bottom > (binRect.top+100)) {
+    } else if (rubbishRect.bottom > (binRect.top-100)) {
         score = Math.max(score - currentImage["points"], 0)
         resetRubbish()
-        return
     }
 }
 
@@ -144,7 +164,9 @@ touchRight.addEventListener("click", function () {
     moveRight()
 })
 
-// Gameloop
+/**
+ * Gameloop
+ */
 function update() {
     if (!gameOver) {
         moveRubbish()
@@ -155,10 +177,34 @@ function update() {
 
     if (gameOver) {
         clearInterval(gameLoop)
-        alert("Game Over!\nYou scored " + score + " out of 12!\nHappy Sorting!")
+        menuButton.textContent = "Play Again"
+        menuText.innerText = "Game Over\nScore: " + score + " out of 12"
+        menuScreen.style.display = "flex"
+        container.style.display = "none"
+        buttonContainer.style.display = "none"
+        score = 0
+        currentImagePos = -1
+        currentImageNode = -1
+        gameOver = false
     }
 }
 
-// Start gameloop
-resetRubbish()
-const gameLoop = setInterval(update, 50)
+/**
+ * Start the game
+ */
+function startGame() {
+    // Start gameloop
+    resetRubbish()
+    gameLoop = setInterval(update, 50)
+    menu.style.display = "none"
+    menuScreen.style.display = "none"
+    container.style.display = "flex"
+    buttonContainer.style.display = "flex"
+}
+
+/**
+ * Exit the game
+ */
+function exitGame() {
+    window.location.replace("/home");
+}
