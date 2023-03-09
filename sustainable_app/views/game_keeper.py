@@ -1,5 +1,11 @@
 from django.shortcuts import render, redirect, reverse
+from django.core.files import File
+
+from io import BytesIO
+
 from sustainable_app.models.user import User
+from sustainable_app.models.location import Location
+import qrcode
 
 # game keeper page
 def game_keeper(request):
@@ -29,6 +35,34 @@ def remove_keeper(request):
     User.objects.get(username=username).delete()
     # refresh the page
     return redirect('/')
+
+# Remove keeper request
+def game_keeper_locations_add(request):
+    
+    # Generate qr code
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    #TODO: When deployed change data to url
+    qr.add_data('127.0.0.1:8000/location_qr')
+    qr.make(fit=True)
+
+    img = qr.make_image(fill_color="black", back_color="white")
+    
+    buffer = BytesIO()
+    img.save(buffer, format='PNG')
+    
+    new_location = Location.objects.create(name="example_name", category=Location.RECYCLE, clue="example_clue")
+    # new_location.image = "path_to_image_hint"
+    new_location.qr.save(f"location_qr/qr_{new_location.id}.png", File(buffer))
+    new_location.save()
+    
+    
+    # TODO: Redirect to view with qr code
+    return redirect('/location_qr')
 
 # direct user to correct page
 def direct_user(page, request, context):

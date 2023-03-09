@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sustainable_app', '0002_goal_item_user_equipped_items_user_owned_items'),
+        ('sustainable_app', '0003_create_items'),
     ]
 
     operations = [
