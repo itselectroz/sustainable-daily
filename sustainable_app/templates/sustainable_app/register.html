@@ -72,6 +72,12 @@
         />
       </div>
 
+      {% if isAdmin %}
+        <div class="registrationBit">
+          <input type="checkbox" name="admin" value="game_keeper">
+        </div>
+      {% endif %}
+
       <div class="registrationBit">
         <input type="submit" value="Register" />
       </div>

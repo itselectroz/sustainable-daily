@@ -10,6 +10,7 @@ class User(AbstractUser):
     # Account stuff
     xp = models.IntegerField(default=0)
     points = models.IntegerField(default=0)
+    game_keeper = models.BooleanField(default=False)
 
     weekly_xp = models.IntegerField(default=0)  # gets reset every monday
 

@@ -62,6 +62,7 @@ def equip(request):
     current_user = request.user
 
     # Get the type and name of item
+    # TODO: Change type to diff variable name
     type = request.POST.get('type', False)
     name = request.POST.get('name', False)
 
