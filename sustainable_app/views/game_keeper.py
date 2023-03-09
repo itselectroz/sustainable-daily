@@ -55,7 +55,7 @@ def game_keeper_locations_add(request):
     buffer = BytesIO()
     img.save(buffer, format='PNG')
     
-    new_location = Location.objects.create(name="example_name", category=Location.RECYCLE, clue="example_clue")
+    new_location = Location(name="example_name", category=Location.RECYCLE, clue="example_clue")
     # new_location.image = "path_to_image_hint"
     new_location.qr.save(f"location_qr/qr_{new_location.id}.png", File(buffer))
     new_location.save()
