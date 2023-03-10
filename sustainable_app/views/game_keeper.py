@@ -22,7 +22,12 @@ def game_keeper(request):
    
 # game keeper locations page
 def game_keeper_locations(request):
-    return direct_user("_locations", request, {})
+    
+    # send all locations to template
+    context = {
+        "locations":  Location.objects.all()
+    }
+    return direct_user("_locations", request, context)
 
 def game_keeper_surveys(request):
     return direct_user("_surveys", request, {})
@@ -39,41 +44,52 @@ def remove_keeper(request):
     # refresh the page
     return redirect('/')
 
-# Remove keeper request
+# add a location
 def locations_add(request):
     
-    # get location attributes from post request
-    name = request.POST.get('name', '')
-    category = request.POST.get('category', '')
-    clue = request.POST.get('clue', '')
-    image = request.POST.get('image', '')
+    # if there is a post request
+    if request.method == 'POST':
+        # get location attributes from post request
+        name = request.POST.get('name', '')
+        category = request.POST.get('category', '')
+        clue = request.POST.get('clue', '')
+        image = request.POST.get('image', '')
+        
+        # create location object
+        new_location = Location(name=name, category=category, clue=clue)
+        new_location.save()
+        
+        # generate qr code
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        
+        #TODO: When deployed change data to url
+        qr.add_data('127.0.0.1:8000/location_qr/' + str(new_location.id))
+        qr.make(fit=True)
 
+        img = qr.make_image(fill_color="black", back_color="white")
+        
+        buffer = BytesIO()
+        img.save(buffer, format='PNG')
+        
+        # set attributes
+        new_location.image = request.FILES['image']
+        new_location.qr.save(f"qr_{new_location.id}.png", File(buffer))
     
-    # Generate qr code
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    
-    #TODO: When deployed change data to url
-    qr.add_data('127.0.0.1:8000/location_qr')
-    qr.make(fit=True)
+        return redirect(reverse('game_keeper_locations'))
 
-    img = qr.make_image(fill_color="black", back_color="white")
-    
-    buffer = BytesIO()
-    img.save(buffer, format='PNG')
-    
-    new_location = Location(name=name, category=Location.RECYCLE, clue=clue)
-    new_location.save()
-    new_location.image.save(f"location_img/img_{new_location.id}.png", File(buffer))
-    new_location.qr.save(f"location_qr/qr_{new_location.id}.png", File(buffer))
-    
-    
-    # TODO: Redirect to view with qr code
-    return redirect('/location_qr')
+# remove a location
+def locations_remove(request):
+    # get location id from post request
+    location_id = request.POST.get('location_id', False)
+    # delete user with given username
+    Location.objects.get(id=location_id).delete()
+    # refresh the page
+    return redirect(reverse('game_keeper_locations'))
 
 # direct user to correct page
 def direct_user(page, request, context):
@@ -89,3 +105,5 @@ def direct_user(page, request, context):
     else:
         # render login
         return redirect(reverse('login'))
+    
+

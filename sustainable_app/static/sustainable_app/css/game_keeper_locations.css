@@ -8,7 +8,7 @@
 .main > div {
     padding: 4rem;
     margin-top: 1rem;
-    width: 60%;
+    width: 100%;
     height: 90%;
 }
 
@@ -55,6 +55,45 @@
     display: block;
     margin: 1rem auto;
     color: var(--color-danger);
+}
+
+.remove-location {
+    color: var(--color-danger);
+    cursor: pointer;
+}
+
+.expanded-view {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.expanded-container {
+    position: absolute;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-white);
+}
+
+.expanded-view img {
+    position: relative;
+    width: 100%;
+}
+
+.expanded-view .close-expanded {
+    position: absolute;
+    cursor: pointer;
+    top: 50px;
+    right: 50px;
+}
+
+.td-image {
+    cursor: pointer;
 }
 
 /* ---------- RIGHT ---------- */

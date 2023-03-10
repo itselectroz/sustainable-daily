@@ -11,6 +11,14 @@
         {% include 'sustainable_app/game_keeper_aside.html' %}
         
         <main class="main">
+            <div class="expanded-view">
+                <div class="expanded-container">
+                    <img id="expanded-image" src=""></img>
+                    <div class="close-expanded" onclick="close_expanded()">
+                        <span class="material-symbols-sharp">close</span>
+                    </div>
+                </div>
+            </div>
             <div class="locations">
                 <h2 class="h2">Locations</h2>
                 <div class="locations-table">
@@ -18,13 +26,24 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Type</th>
+                                <th>Category</th>
                                 <th>Clue</th>
                                 <th>Image</th>
+                                <th>QR</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% for location in locations %}
+                            <tr>
+                                <td>{{location.name}}</td>
+                                <td>{{location.category}}</td>
+                                <td>{{location.clue}}</td>
+                                <td><img class="td-image" onclick="expand(src)" style="width: 75px;" src='{% get_media_prefix %}{{location.image}}'></img></td>
+                                <td><img class="td-image" onclick="expand(src)" style="width: 75px;" src='{% get_media_prefix %}{{location.qr}}'></img></td>
+                                <td><span class="material-symbols-sharp remove-location" value={{location.id}}>cancel</span></td>
+                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -34,7 +53,7 @@
             <div class="locations-list">
                 <h2 class="h2">Add a Location</h2>
                 <div class="add-location">
-                    <form class="locationForm" action="{% url 'game_keeper' %}" method="post">
+                    <form class="locationForm" action="{% url 'game_keeper' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="fieldsContainer">
                             
