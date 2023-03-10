@@ -5,5 +5,6 @@
 from .goal import Goal
 from .item import Item
 from .user import User
+from .question import Question
 
-__all__ = ['User', 'Item', 'Goal']
+__all__ = ['User', 'Item', 'Goal', Question]
