@@ -77,11 +77,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-3);
     background: var(--color-white);
 }
 
 .expanded-view img {
     position: relative;
+    border-radius: var(--border-radius-3);
     width: 100%;
 }
 
