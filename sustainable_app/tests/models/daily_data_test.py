@@ -2,14 +2,16 @@ from django.test import TestCase
 
 from datetime import datetime, date
 
-from ...models import DailyData, DailyGoalStatus, Goal
+from ...models import DailyData, DailyGoalStatus, Goal, User
 
 
 class DailyDataModelTests(TestCase):
     def setUp(self):
         # Create a user with daily goals
+        self.user = User.objects.create()
+
         date = datetime(2010, 3, 11, 12, 0, 0)
-        self.user_data = DailyData.objects.create(date=date)
+        self.user_data = DailyData.objects.create(user=self.user, date=date)
 
         # Create goals
         self.goal1 = Goal.objects.create(
@@ -137,25 +139,25 @@ class DailyDataModelTests(TestCase):
         Check complete_goal creates daily data
         """
         try:
-            DailyData.objects.get(date=date.today())
+            DailyData.objects.get(user=self.user, date=date.today())
             self.fail("Expected daily data to not exist")
         except DailyData.DoesNotExist:
             pass
 
-        DailyData.complete_goal(self.goal1)
+        DailyData.complete_goal(self.user, self.goal1)
 
-        self.assertIsNotNone(DailyData.objects.get(date=date.today()))
+        self.assertIsNotNone(DailyData.objects.get(user=self.user, date=date.today()))
 
     def test_complete_goal_with_daily_data(self):
         """
         Check complete_goal uses existing daily data
         and completes daily goal
         """
-        daily_data = DailyData.objects.create(date=date.today())
+        daily_data = DailyData.objects.create(user=self.user, date=date.today())
 
         self.assertIs(daily_data.daily_goals.all().count(), 0)
 
-        DailyData.complete_goal(self.goal1)
+        DailyData.complete_goal(self.user, self.goal1)
 
         self.assertIs(daily_data.daily_goals.all().count(), 1)
 
@@ -164,34 +166,36 @@ class DailyDataModelTests(TestCase):
         Check complete_personal_goal creates daily data
         """
         try:
-            DailyData.objects.get(date=date.today())
+            DailyData.objects.get(user=self.user, date=date.today())
             self.fail("Expected daily data to not exist")
         except DailyData.DoesNotExist:
             pass
 
-        DailyData.complete_personal_goal(self.goal1)
+        DailyData.complete_personal_goal(self.user, self.goal1)
 
-        self.assertIsNotNone(DailyData.objects.get(date=date.today()))
+        self.assertIsNotNone(DailyData.objects.get(user=self.user, date=date.today()))
 
     def test_complete_personal_goal_with_daily_data(self):
         """
         Check complete_personanl_goal uses existing daily data
         and completes personal goal
         """
-        daily_data = DailyData.objects.create(date=date.today())
+        daily_data = DailyData.objects.create(user=self.user, date=date.today())
 
         self.assertIs(daily_data.personal_goals.all().count(), 0)
 
-        DailyData.complete_personal_goal(self.goal1)
+        DailyData.complete_personal_goal(self.user, self.goal1)
 
         self.assertIs(daily_data.personal_goals.all().count(), 1)
 
 
 class DailyGoalStatusModelTests(TestCase):
     def setUp(self):
-        # Create a user data
+        # Create a user & user data
+        self.user = User.objects.create()
+
         date = datetime(2023, 3, 11, 12, 0, 0)
-        self.user_data = DailyData.objects.create(date=date)
+        self.user_data = DailyData.objects.create(user=self.user, date=date)
 
         # Create goal
         self.goal = Goal.objects.create(

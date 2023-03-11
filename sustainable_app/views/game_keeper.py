@@ -157,7 +157,7 @@ def qr_callback(request, id):
         return HttpResponse('Object not found', status=404)
     
     
-    DailyData.complete_goal(goal)
+    DailyData.complete_goal(request.user, goal)
     
     # TODO: Success page
     return HttpResponse('Goal completed successfully', status=418)

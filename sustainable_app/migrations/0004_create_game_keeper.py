@@ -11,6 +11,15 @@ def make_game_keeper(apps, schema_editor):
     user.game_keeper = True
     user.save()
 
+def undo_make_game_keeper(apps, schema_editor):
+    User = apps.get_model('sustainable_app', 'User')
+    try:
+        user = User.objects.get(username="root")
+        user.delete()
+    except User.DoesNotExist:
+        pass
+
+
 
 class Migration(migrations.Migration):
 
@@ -19,5 +28,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(make_game_keeper)
+        migrations.RunPython(make_game_keeper, undo_make_game_keeper)
     ]

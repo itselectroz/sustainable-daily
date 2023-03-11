@@ -2,10 +2,11 @@ from django.db import models
 
 import datetime
 
-from . import Goal
+from . import Goal, User
 
 
 class DailyData(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(primary_key=True, default=datetime.date.today)
 
     # Completions
@@ -46,17 +47,20 @@ class DailyData(models.Model):
         return f"{self.date.strftime('%Y-%m-%d')}"
 
     @staticmethod
-    def complete_goal(goal):
+    def complete_goal(user, goal):
         """
-        Adds a goal to the completed daily goals for today's date.
+        Adds a goal to a user's completed daily goals for today's date.
 
         If there is no `DailyData` instance for today's date, a new one is created.
 
+        :param user: The `User` instance to complete the goal for.
+        :type user: `User`
         :param goal: A `Goal` instance to be added to today's daily goals.
         :type goal: `Goal`
         """
         # Get daily data
         daily_data, _ = DailyData.objects.get_or_create(
+            user=user,
             date=datetime.date.today()
         )
 
@@ -71,17 +75,20 @@ class DailyData(models.Model):
         daily_status.save()
 
     @staticmethod
-    def complete_personal_goal(goal):
+    def complete_personal_goal(user, goal):
         """
-        Adds a goal to the completed personal goals for today's date.
+        Adds a goal to a user's completed personal goals for today's date.
 
         If there is no `DailyData` instance for today's date, a new one is created.
 
+        :param user: The `User` instance to complete the goal for.
+        :type user: `User`
         :param goal: A `Goal` instance to be added to today's personal goals.
         :type goal: `Goal`
         """
         # Get daily data
         daily_data, _ = DailyData.objects.get_or_create(
+            user=user,
             date=datetime.date.today()
         )
 
