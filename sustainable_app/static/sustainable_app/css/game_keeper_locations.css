@@ -8,7 +8,7 @@
 .main > div {
     padding: 4rem;
     margin-top: 1rem;
-    width: 60%;
+    width: 100%;
     height: 90%;
 }
 
@@ -55,6 +55,48 @@
     display: block;
     margin: 1rem auto;
     color: var(--color-danger);
+}
+
+.remove-location {
+    color: var(--color-danger);
+    cursor: pointer;
+}
+
+.expanded-view {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.expanded-container {
+    position: absolute;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-3);
+    background: var(--color-white);
+}
+
+.expanded-view img {
+    position: relative;
+    border-radius: var(--border-radius-3);
+    width: 100%;
+}
+
+.expanded-view .close-expanded {
+    position: absolute;
+    cursor: pointer;
+    top: 50px;
+    right: 50px;
+}
+
+.td-image {
+    cursor: pointer;
 }
 
 /* ---------- RIGHT ---------- */
@@ -155,7 +197,7 @@
     accent-color: var(--color-primary);
 }
 
-.right .locations-list .add-location .locationForm .createButton {
+.right .locations-list .add-location .locationForm .create-button {
     padding: 8px 12px;
     background-color: #4CAF50;
     color: white;
@@ -168,18 +210,18 @@
     
 }
 
-.right .locations-list .add-location .locationForm .createButton:hover,
-.right .locations-list .add-location .locationForm .createButton:focus { 
+.right .locations-list .add-location .locationForm .create-button:hover,
+.right .locations-list .add-location .locationForm .create-button:focus { 
 background-color: #1f7e16;
 color: #ffffff;
 }
 
-.right .locations-list .add-location .locationForm .createButton:active {
+.right .locations-list .add-location .locationForm .create-button:active {
 background: #09223b;
 color: rgb(255, 255, 255, .7);
 }
 
-.right .locations-list .add-location .locationForm .createButton:disabled { 
+.right .locations-list .add-location .locationForm .create-button:disabled { 
 cursor: not-allowed;
 background: rgba(0, 0, 0, .08);
 color: rgba(0, 0, 0, .3);

@@ -7,7 +7,7 @@ addUser.addEventListener("click", () => {
 
 $(document).ready(function() {
 
-    // Request for character
+    // Request to remove game keeper
     $('.remove-keeper').on('click', function() {
 
         $username = this.getAttribute('value');

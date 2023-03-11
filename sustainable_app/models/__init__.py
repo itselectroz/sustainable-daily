@@ -5,6 +5,7 @@
 from .goal import Goal
 from .item import Item
 from .user import User
+from .location import Location
 from .daily_data import DailyData, DailyGoalStatus
 
-__all__ = ['User', 'Item', 'Goal', 'DailyData', 'DailyGoalStatus']
+__all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData', 'DailyGoalStatus']
