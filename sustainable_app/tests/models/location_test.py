@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
-import os
 
 from ...models import Location
 
