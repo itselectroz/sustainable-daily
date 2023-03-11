@@ -2,7 +2,6 @@
 # e.g. from .test import *
 # add all names to __all__ array
 
-from .models import UserModelTests
-from .models import LocationModelTests
+from . import models, views
 
-__all__ = ['UserModelTests', 'LocationModelTests']
+__all__ = ['models', 'views']
