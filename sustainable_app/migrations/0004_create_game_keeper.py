@@ -2,7 +2,7 @@
 
 from django.db import migrations
 
-def make_game_keeper_items(apps, schema_editor):
+def make_game_keeper(apps, schema_editor):
     User = apps.get_model('sustainable_app', 'User')
     
     user = User.objects.create_user("root", "root@example.com", "admin")
@@ -19,6 +19,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(make_game_keeper_items
-    )
+        migrations.RunPython(make_game_keeper)
     ]

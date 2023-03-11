@@ -5,4 +5,4 @@ from .daily_data_test import DailyDataModelTests, DailyGoalStatusModelTests
 
 __all__ = ['UserModelTests', 'GoalModelTests',
            'ItemModelTests', 'DailyDataModelTests',
-           'DailyGoalStatusModelTests']
+           'DailyGoalStatusModelTests', 'LocationModelTests']
