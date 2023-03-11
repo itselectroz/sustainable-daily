@@ -20,4 +20,6 @@ urlpatterns = [
     path('game_keeper_locations/', views.game_keeper_locations, name="game_keeper_locations"),
     path('game_keeper_surveys/', views.game_keeper_surveys, name="game_keeper_surveys"),
     path('game_keeper_events/', views.game_keeper_events, name="game_keeper_events"),
+    path('location_qr/<int:id>/', views.qr_callback, name="qr_callback"),
+
 ]

@@ -1,4 +1,5 @@
 from django.db import models
+from sustainable_app.models import Goal
 from django.utils.html import mark_safe
 import os
 
@@ -7,6 +8,8 @@ class Location(models.Model):
     
     # attributes
     id = models.AutoField(primary_key=True)
+    goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
+    
     name = models.CharField(max_length=200)
 
     RECYCLE = "recycle"

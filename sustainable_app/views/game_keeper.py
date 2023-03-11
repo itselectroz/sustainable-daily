@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, reverse
 from django.core.files import File
 from django.http import HttpResponse
 
+
 from io import BytesIO
 
-from sustainable_app.models.user import User
-from sustainable_app.models.location import Location
+from sustainable_app.models import User, Location, Goal, DailyData
 import qrcode
 
 # game keeper page
@@ -64,13 +64,18 @@ def locations_add(request):
         # redirect to home if it's not a post request
         return redirect(reverse('home'))
 
+
     # get location attributes from post request
     name = request.POST.get('name', '')
     category = request.POST.get('category', '')
     clue = request.POST.get('clue', '')
 
+    # create a goal
+    new_goal = Goal.objects.create(name=name, description="",  type=Goal.LOCATION, point_reward=100, xp_reward=100)
+    
     # create location object
     new_location = Location(name=name, category=category, clue=clue)
+    new_location.goal = new_goal
     new_location.save()
 
     # generate qr code
@@ -82,7 +87,7 @@ def locations_add(request):
     )
 
     # TODO: When deployed change data to url
-    qr.add_data('127.0.0.1:8000/location_qr/' + str(new_location.id))
+    qr.add_data('127.0.0.1:8000/location_qr/' + str(new_goal.id))
     qr.make(fit=True)
 
     img = qr.make_image(fill_color="black", back_color="white")
@@ -105,8 +110,21 @@ def locations_remove(request):
 
     # get location id from post request
     location_id = request.POST.get('location_id', False)
-    # delete user with given username
-    Location.objects.get(id=location_id).delete()
+    # delete location image and qr
+    remove_location = Location.objects.get(id=location_id)
+    remove_goal = remove_location.goal
+    try:
+        remove_location.image.delete()
+        remove_location.qr.delete()
+    except Exception:
+        pass
+    
+    # delete location with given id
+    remove_location.delete()
+    
+    # delete the goal linked to the location
+    remove_goal.delete()
+    
     # refresh the page
     return redirect(reverse('game_keeper_locations'))
 
@@ -128,3 +146,18 @@ def direct_user(page, request, context):
 
     # render game keeper locations page
     return render(request, 'sustainable_app/game_keeper' + page + '.html', context)
+
+def qr_callback(request, id):
+    if(not request.user.is_authenticated):
+        return HttpResponse('Forbidden', status=403)
+    
+    try:
+        goal = Goal.objects.get(id=id)
+    except Goal.DoesNotExist:
+        return HttpResponse('Object not found', status=404)
+    
+    
+    DailyData.complete_goal(goal)
+    
+    # TODO: Success page
+    return HttpResponse('Goal completed successfully', status=418)
