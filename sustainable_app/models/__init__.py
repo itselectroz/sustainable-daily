@@ -5,5 +5,6 @@
 from .goal import Goal
 from .item import Item
 from .user import User
+from .daily_data import DailyData, DailyGoalStatus
 
-__all__ = ['User', 'Item', 'Goal']
+__all__ = ['User', 'Item', 'Goal', 'DailyData', 'DailyGoalStatus']
