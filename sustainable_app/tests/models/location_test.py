@@ -18,4 +18,4 @@ class LocationModelTests(TestCase):
         """
         location = Location(name="test-name")
         
-        self.assertIs(location.image_url.url == "location/img_" + str(location.id))
+        self.assertIs(location.image == "location/img_" + str(location.id))
