@@ -1,8 +1,9 @@
 .game_container {
     display: none;
-    height: 100vh;
     justify-content: center;
     align-items: center;
+    margin: 20px;
+    padding: 20px;
 }
 
 .question-container {
@@ -10,13 +11,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
+    text-align: center;
   }
   
   .question-box {
     margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .question {
+    text-align: center;
   }
   
   .answer-grid {
@@ -35,4 +40,19 @@
   .confirm-button {
     margin-top: 20px;
   }
-  
+
+.results {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-text {
+  font-weight: bolder;
+  text-align: center;
+}
+
+.next-button {
+  margin-top: 30vh;
+}

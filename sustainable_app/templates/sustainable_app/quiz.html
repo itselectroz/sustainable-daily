@@ -7,11 +7,12 @@
 
 {% include "sustainable_app/game_menu.html" %}
 
+{% block content %}
 <body>
     <div class="game_container" id="container">
         <div class="question-container">
             <div class="question-box">
-              <h2 id="question">What is the capital of France?</h2>
+              <h2 id="question" class="question">What is the capital of France?</h2>
             </div>
             <div class="answer-grid">
               <div class="answer-box">
@@ -31,8 +32,18 @@
                 <label for="answer4">Rome</label>
               </div>
             </div>
-            <button type="button" class="confirm-button">Confirm Choice</button>
+            <button type="button" class="confirm-button" onclick="checkAns()">Confirm Choice</button>
           </div>
+        <div class="results">
+          <h1 class="result-text">Your smart aren't ye</h1>
+          <button type="button" class="next-button" onclick="nextQuestion()">Next</button>
+        </div>
     </div>
+
+    <script>
+      const questions = JSON.parse('{{ questions|safe }}')
+    </script>
+    
     <script src="{% static 'sustainable_app/js/quiz.js' %}"></script>
 </body>
+{% endblock %}
