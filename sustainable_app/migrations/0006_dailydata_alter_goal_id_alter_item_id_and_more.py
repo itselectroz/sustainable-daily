@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='DailyData',
             fields=[
-                ('date', models.DateField(default=datetime.date.today, primary_key=True, serialize=False)),
+                ('date', models.DateField(default=datetime.date.today, serialize=False)),
             ],
         ),
         migrations.AlterField(
