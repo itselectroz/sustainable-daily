@@ -34,7 +34,10 @@ EXPOSE ${PORT}
 RUN python manage.py migrate
 
 # Setup cron
-RUN echo "0 0 * * * root cd ${DockerHOME} && python manage.py ${CRONTAB_TASK} >> /var/log/cron.log 2>&1" >> /etc/crontab
+RUN echo "* * * * * root ${DockerHOME}/scripts/dailytasks.sh\n" >> /etc/cron.d/dailytasks
+RUN chmod +x ${DockerHOME}/scripts/dailytasks.sh
+RUN chmod +x /etc/cron.d/dailytasks
+RUN crontab /etc/cron.d/dailytasks
 
 # Start cron and runserver
 CMD ["sh", "-c", "service cron start && python manage.py runserver 0.0.0.0:${PORT}"]
