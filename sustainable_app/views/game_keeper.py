@@ -14,10 +14,12 @@ import qrcode
 def game_keeper(request):
     if request.method == "POST" and request.POST is not None:
         return locations_add(request)
+    
 
     # send all game keepers to template
     context = {
-        "game_keepers":  User.objects.filter(game_keeper=True)
+        "game_keepers":  User.objects.filter(game_keeper=True),
+        "current_keeper_id": request.user.id,
     }
 
     return direct_user("", request, context)

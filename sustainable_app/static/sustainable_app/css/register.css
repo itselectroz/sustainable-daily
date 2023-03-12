@@ -154,6 +154,15 @@ input[type="submit"]:hover ~ .shaker {
   animation-iteration-count: infinite;
 }
 
+.make-keeper {
+  filter: hue-rotate(270deg);
+}
+
+.make-keeper-label {
+  font-family: Helvetica, sans-serif;
+  color: #555;
+}
+
 .image {
   height: 50px;
   padding-bottom: 10px;
