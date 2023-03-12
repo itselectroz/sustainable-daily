@@ -21,5 +21,7 @@ urlpatterns = [
     path('game_keeper_surveys/', views.game_keeper_surveys, name="game_keeper_surveys"),
     path('game_keeper_events/', views.game_keeper_events, name="game_keeper_events"),
     path('location_qr/<int:id>/', views.qr_callback, name="qr_callback"),
+    path('password_reset/', views.password_reset, name="password_reset"),
+    path('forgot_password/', views.forgot_password, name="forgot_password"),
 
 ]
