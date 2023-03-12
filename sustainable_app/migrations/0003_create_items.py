@@ -55,6 +55,18 @@ def make_items(apps, schema_editor):
             item.save()
 
 
+def undo_make_items(apps, schema_editor):
+    Item = apps.get_model('sustainable_app', 'Item')
+    for (type, values) in items:
+        for [name, cost, on_sale] in values:
+            try:
+                item = Item.objects.get(
+                    type=type, name=name, cost=cost, on_sale=on_sale)
+                item.delete()
+            except Item.DoesNotExist:
+                pass
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -62,5 +74,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(make_items)
+        migrations.RunPython(make_items, undo_make_items)
     ]
