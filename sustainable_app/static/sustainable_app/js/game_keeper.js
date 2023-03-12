@@ -2,7 +2,7 @@
 const addUser = document.getElementById('add');
 
 addUser.addEventListener("click", () => {
-    window.location.replace('/register');
+    window.location.replace('/register/');
 });
 
 $(document).ready(function() {
