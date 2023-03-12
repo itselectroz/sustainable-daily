@@ -9,7 +9,7 @@ import sustainable_app.models.location
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sustainable_app', '0006_alter_location_id'),
+        ('sustainable_app', '0005_location'),
     ]
 
     operations = [

@@ -2,6 +2,8 @@
 
 from django.db import migrations, models
 
+import django.db.models.deletion
+
 
 class Migration(migrations.Migration):
 
@@ -13,7 +15,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Location',
             fields=[
-                ('id', models.IntegerField(primary_key=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('goal', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sustainable_app.goal')),
                 ('name', models.CharField(max_length=200)),
                 ('category', models.CharField(choices=[('recycle', 'Recycling Bin'), ('water', 'Water Fountain')], max_length=7)),
                 ('clue', models.CharField(max_length=200)),

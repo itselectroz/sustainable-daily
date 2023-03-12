@@ -93,9 +93,11 @@
                                 <small class="text-muted small">{{ game_keeper.first_name }} {{ game_keeper.last_name}}</small>
                             </div>
                         </div>
+                        {% if current_keeper_id !=  game_keeper.id%}
                         <div class="remove">
                             <span class="material-symbols-sharp remove-keeper" value={{ game_keeper.username }}>cancel</span>
                         </div>
+                        {% endif %}
                     </div>
                 {% endfor %}
 
