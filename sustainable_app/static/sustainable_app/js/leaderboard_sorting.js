@@ -18,17 +18,16 @@ function delete_table() {
  */
 function createTable(dictionary) {
 
-    
     //Getting table element from html
     let table = document.getElementById("leaderboard-table");
     
 
     let topRow = table.insertRow();
 
-    var topCell1 = topRow.insertCell();
-    var topCell2 = topRow.insertCell();
-    var topCell3 = topRow.insertCell();
-    var topCell4 = topRow.insertCell();
+    let topCell1 = topRow.insertCell();
+    let topCell2 = topRow.insertCell();
+    let topCell3 = topRow.insertCell();
+    let topCell4 = topRow.insertCell();
 
     topCell1.innerHTML = "User";
     topCell2.innerHTML = "";
@@ -44,10 +43,10 @@ function createTable(dictionary) {
         let newRow = table.insertRow();
 
         //Creates new cells for user
-        var cell1 = newRow.insertCell();
-        var cell2 = newRow.insertCell();
-        var cell3 = newRow.insertCell();
-        var cell4 = newRow.insertCell();
+        let cell1 = newRow.insertCell();
+        let cell2 = newRow.insertCell();
+        let cell3 = newRow.insertCell();
+        let cell4 = newRow.insertCell();
 
         //Profile picture
         let accessory = dictionary[user]["accessory"];
@@ -90,14 +89,13 @@ function orderTable(dictionary, changeToState) {
         lastAction = "";
 
         //Blank array that will hold reverse of dictionary
-        newDictionary = [];
+        let newDictionary = [];
         
-        lastIndex = dictionary.length - 1;
+        let lastIndex = dictionary.length - 1;
 
         //Reverses dictionary
         for (user in dictionary) {
             newDictionary.push(dictionary[lastIndex - user]);
-
         }
 
         //Will create table using new revered dictionary
