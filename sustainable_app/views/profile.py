@@ -25,6 +25,8 @@ def profile(request):
     # user_background_color = current_user.equipped_items.get(type="background_color")
     user_accessory = current_user.equipped_items.get(type="accessory")
     user_character = current_user.equipped_items.get(type="character")
+    
+    all_characters = Item.objects.filter(type="character")
 
     # pass user attributes to template
     context = {"user": current_user,
@@ -33,6 +35,7 @@ def profile(request):
                "user_level": user_level,
                "character": user_character,
                "accessory": user_accessory,
+               "all_characters": all_characters,
                }
 
     return render(request, "sustainable_app/profile.html", context)

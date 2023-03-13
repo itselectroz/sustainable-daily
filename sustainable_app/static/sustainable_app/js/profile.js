@@ -1,31 +1,14 @@
-// grabbing all characters
-let character_frog = document.getElementById("character_frog");
-let character_cat = document.getElementById("character_cat");
-let character_fish = document.getElementById("character_fish");
-let character_bird = document.getElementById("character_bird");
-let character_fox = document.getElementById("character_fox");
+
 
 
 // Setting unlockables to be locked if necessary
-
-// set unlock character levels
-let character_array = {
-    3: character_frog, 
-    5: character_cat,
-    7: character_fish, 
-    9: character_bird, 
-    11: character_fox};
-
-// loop through and set locked items
-for(let i = user_level; i < 12; i++) {
-    try {
-        character_array[i].style.backgroundImage = "url(/static/sustainable_app/img/xp_symbol.png)";
-        character_array[i].firstElementChild.innerText = (parseInt(i) + 2).toString();
-        character_array[i].setAttribute("level", parseInt(i) + 2);
+for(let level in character_array) {
+    if(parseInt(level) > user_level) {
+        // console.log("Level: " + level + " User: " + user_level)
+        character_array[level].style.backgroundImage = "url(/static/sustainable_app/img/xp_symbol.png)";
+        character_array[level].firstElementChild.innerText = (level).toString();
+        character_array[level].setAttribute("level", level);
     }
-    catch(e) {
-    }
-
 }
 
 

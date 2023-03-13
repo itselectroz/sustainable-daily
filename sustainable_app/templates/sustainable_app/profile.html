@@ -172,6 +172,14 @@
    profile_image.src="{% static "" %}sustainable_app/img/{{character}}{{accessory}}.png";
   //profile_image.src="{% static 'sustainable_app/img/'|add:character|add:accessory|add:'.png' %}";
 
+// set unlock character levels
+let character_array = {};
+
+// populate array with items
+{% for item in all_characters %}
+  character_array[parseInt({{ item.unlock_level }})] = (document.getElementById(("character_" + {{ item.name }}.id).toString()));
+{% endfor %}
+
 </script>
 
 <script src="{% static 'sustainable_app/js/profile.js' %}"></script>

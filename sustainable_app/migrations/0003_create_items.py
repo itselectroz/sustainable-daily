@@ -6,40 +6,41 @@ items = [
     (
         "character",
         [
-            ("cat", 0, True),
-            ("fish", 200, True),
-            ("frog", 400, True),
-            ("bird", 600, True),
-            ("badger", 800, True),
+            ("cat", 0, True, 3),
+            ("fish", 200, True, 7),
+            ("frog", 400, True, 5),
+            ("bird", 600, True, 9),
+            ("badger", 800, True, 0),
+            ("fox", 800, True, 11),
         ],
     ),
     (
         "accessory",
         [
-            ("none", 0, False),
-            ("viking", 100, True),
-            ("party", 400, True),
-            ("crown", 600, True),
+            ("none", 0, False, 0),
+            ("viking", 100, True, 0),
+            ("party", 400, True, 0),
+            ("crown", 600, True, 0),
         ],
     ),
     (
         "username_color",
         [
-            ("u_black", 200, True),
-            ("u_green", 200, True),
-            ("u_purple", 200, True),
-            ("u_orange", 200, True),
-            ("u_blue", 200, True),
+            ("u_black", 200, True, 0),
+            ("u_green", 200, True, 0),
+            ("u_purple", 200, True, 0),
+            ("u_orange", 200, True, 0),
+            ("u_blue", 200, True, 0),
         ],
     ),
     (
         "background_color",
         [
-            ("b_white", 200, True),
-            ("b_blue", 200, True),
-            ("b_pink", 200, True),
-            ("b_grey", 200, True),
-            ("b_green", 200, True),
+            ("b_white", 200, True, 0),
+            ("b_blue", 200, True, 0),
+            ("b_pink", 200, True, 0),
+            ("b_grey", 200, True, 0),
+            ("b_green", 200, True, 0),
         ],
     ),
 ]
@@ -50,18 +51,18 @@ def make_items(apps, schema_editor):
 
     # Add all items to database
     for (type, values) in items:
-        for [name, cost, on_sale] in values:
-            item = Item(type=type, name=name, cost=cost, on_sale=on_sale)
+        for [name, cost, on_sale, unlock_level] in values:
+            item = Item(type=type, name=name, cost=cost, on_sale=on_sale, unlock_level=unlock_level)
             item.save()
 
 
 def undo_make_items(apps, schema_editor):
     Item = apps.get_model('sustainable_app', 'Item')
     for (type, values) in items:
-        for [name, cost, on_sale] in values:
+        for [name, cost, on_sale, unlock_level] in values:
             try:
                 item = Item.objects.get(
-                    type=type, name=name, cost=cost, on_sale=on_sale)
+                    type=type, name=name, cost=cost, on_sale=on_sale, unlock_level=unlock_level)
                 item.delete()
             except Item.DoesNotExist:
                 pass
