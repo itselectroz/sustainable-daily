@@ -91,8 +91,24 @@
 .expanded-view .close-expanded {
     position: absolute;
     cursor: pointer;
-    top: 50px;
-    right: 50px;
+    top: 30px;
+    right: 30px;
+}
+
+.expanded-view .close-expanded span {
+    color: var(--color-dark-variant);
+}
+
+.expanded-view .download-expanded {
+    position: absolute;
+    cursor: pointer;
+    top: 30px;
+    left: 30px;
+}
+
+.expanded-view .download-expanded a {
+    text-decoration: none;
+    color: var(--color-dark-variant);
 }
 
 .td-image {
