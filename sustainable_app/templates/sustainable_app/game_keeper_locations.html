@@ -17,6 +17,9 @@
                     <div class="close-expanded" onclick="close_expanded()">
                         <span class="material-symbols-sharp">close</span>
                     </div>
+                    <div class="download-expanded">
+                        <a id="download-image" class="button" href="#"><span class="material-symbols-sharp">download</span></a>
+                    </div>
                 </div>
             </div>
             <div class="locations">
@@ -39,8 +42,8 @@
                                 <td>{{location.name}}</td>
                                 <td>{{location.category}}</td>
                                 <td>{{location.clue}}</td>
-                                <td><img class="td-image" onclick="expand(src)" style="width: 75px;" src='{% get_media_prefix %}{{location.image}}'></img></td>
-                                <td><img class="td-image" onclick="expand(src)" style="width: 75px;" src='{% get_media_prefix %}{{location.qr}}'></img></td>
+                                <td><img class="td-image" onclick="expand(src, {{location.id}})" style="width: 75px;" src='{% get_media_prefix %}{{location.image}}'></img></td>
+                                <td><img class="td-image" onclick="expand(src, {{location.id}})" style="width: 75px;" src='{% get_media_prefix %}{{location.qr}}'></img></td>
                                 <td><span class="material-symbols-sharp remove-location" value={{location.id}}>cancel</span></td>
                             </tr>
                             {% endfor %}

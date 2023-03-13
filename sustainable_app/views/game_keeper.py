@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.core.files import File
-from django.http import HttpResponse
+from django.http import FileResponse, HttpResponse
 
 
 from io import BytesIO
@@ -162,4 +162,20 @@ def qr_callback(request, id):
     DailyData.complete_goal(request.user, goal)
     
     # TODO: Success page
-    return HttpResponse('Goal completed successfully', status=418)
+    return HttpResponse('Goal completed successfully', status=200)
+
+
+def open_file(request, goal_id):
+    """
+    User may download the qr code as a png file, to then print and put somewhere on campus
+    """
+    
+    try:
+        goal = Goal.objects.get(id=goal_id)
+        location = Location.objects.get(goal=goal)
+    except Goal.DoesNotExist:
+        return HttpResponse('Object not found', status=404)
+    
+    filename = "qrcode_" + location.name + ".png"
+    
+    return FileResponse(location.qr.open(), as_attachment=True, filename=filename)
