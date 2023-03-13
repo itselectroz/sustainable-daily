@@ -14,7 +14,7 @@ def home(request):
     current_user = request.user
 
     # pass goals to template
-    personal_goals = Goal.objects.all()
+    personal_goals = Goal.objects.filter(type=Goal.PERSONAL)
     context = {
         "goals": personal_goals,
     }
@@ -45,4 +45,4 @@ def getTodayCompleted(user):
         return completed_goals
         
     except DailyData.DoesNotExist:
-        pass
+        return []
