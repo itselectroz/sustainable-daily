@@ -1,11 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.db.models import Prefetch
-from django.http import HttpResponse
+from django.shortcuts import redirect
 
 from sustainable_app.models.survey import Question,Choice
 
-#@login_required(login_url='/login')
+@login_required(login_url='/login')
 def minigame_survey(request):
 
     questions = Question.objects.order_by("pub_date")
@@ -29,7 +29,7 @@ def minigame_survey(request):
             choice.votes +=1
             choice.save()
 
-        return HttpResponse("Hello")
+        return redirect('home')
 
 
     return render(request, 'sustainable_app/minigame_survey.html', context)
