@@ -12,18 +12,18 @@ def make_goals(apps, schema_editor):
 
     # Add all items to database
     for values in goals:
-        for [name, xp, points] in values:
-            goal = Goal(type=Goal.PERSONAL, name=name, point_reward=points, xp_reward=xp)
+        for [name, desc, xp, points] in values:
+            goal = Goal(type=Goal.PERSONAL, name=name, description=desc, point_reward=points, xp_reward=xp)
             goal.save()
 
 
 def undo_make_goals(apps, schema_editor):
     Goal = apps.get_model('sustainable_app', 'Goal')
     for values in goals:
-        for [name, xp, points] in values:
+        for [name, desc, xp, points] in values:
             try:
                 goal = Goal.objects.get(
-                    type=Goal.PERSONAL, name=name, point_reward=points, xp_reward=xp)
+                    type=Goal.PERSONAL, name=name, description=desc, point_reward=points, xp_reward=xp)
                 goal.delete()
             except Goal.DoesNotExist:
                 pass
