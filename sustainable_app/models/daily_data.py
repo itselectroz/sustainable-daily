@@ -7,7 +7,7 @@ from . import Goal, User
 
 class DailyData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(primary_key=True, default=datetime.date.today)
+    date = models.DateField(default=datetime.date.today)
 
     # Completions
     personal_goals = models.ManyToManyField(
