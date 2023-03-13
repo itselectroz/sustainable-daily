@@ -22,9 +22,11 @@ $(document).ready(function() {
 
 const expanded_view = document.querySelector('.expanded-view');
 const image_view = document.getElementById('expanded-image');
+const download_image = document.getElementById('download-image');
 
-function expand(src) {
+function expand(src, location_id) {
     image_view.src = src;
+    download_image.setAttribute("href", ("/game_keeper/open/" + location_id + "/"));
     expanded_view.style.visibility = 'visible';
 }
 
