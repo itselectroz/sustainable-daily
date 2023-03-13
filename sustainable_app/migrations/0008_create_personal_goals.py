@@ -11,19 +11,17 @@ def make_goals(apps, schema_editor):
     Goal = apps.get_model('sustainable_app', 'Goal')
 
     # Add all items to database
-    for values in goals:
-        for [name, desc, xp, points] in values:
-            goal = Goal(type=Goal.PERSONAL, name=name, description=desc, point_reward=points, xp_reward=xp)
-            goal.save()
+    for [name, desc, xp, points] in goals:
+        goal = Goal(type="personal", name=name, description=desc, point_reward=points, xp_reward=xp)
+        goal.save()
 
 
 def undo_make_goals(apps, schema_editor):
     Goal = apps.get_model('sustainable_app', 'Goal')
-    for values in goals:
-        for [name, desc, xp, points] in values:
+    for [name, desc, xp, points] in goals:
             try:
                 goal = Goal.objects.get(
-                    type=Goal.PERSONAL, name=name, description=desc, point_reward=points, xp_reward=xp)
+                    type="personal", name=name, description=desc, point_reward=points, xp_reward=xp)
                 goal.delete()
             except Goal.DoesNotExist:
                 pass
@@ -32,7 +30,7 @@ def undo_make_goals(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sustainable_app', '0006_dailydata_alter_goal_id_alter_item_id_and_more copy'),
+        ('sustainable_app', '0007_merge_20230313_1353 copy'),
     ]
 
     operations = [
