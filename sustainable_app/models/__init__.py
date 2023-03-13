@@ -7,6 +7,6 @@ from .item import Item
 from .user import User
 from .location import Location
 from .daily_data import DailyData, DailyGoalStatus
-from .question import Question
+from .quiz_question import QuizQuestion
 
-__all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData', 'DailyGoalStatus', 'Question']
+__all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData', 'DailyGoalStatus', 'QuizQuestion']

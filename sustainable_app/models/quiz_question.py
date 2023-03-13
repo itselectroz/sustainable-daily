@@ -1,6 +1,6 @@
 from django.db import models
 
-class Question(models.Model):
+class QuizQuestion(models.Model):
     id = models.IntegerField(primary_key=True)
     question = models.TextField()
     a1 = models.CharField(max_length=255)
