@@ -100,6 +100,52 @@ To lint the project locally, ensure `flake8` is installed and simply run `flake8
 
 <br>
 
+## Useful Information
+
+This section contains information that is not categorised but can be considered useful during project setup and development.
+
+### Default game keeper account
+
+There is a migration script setup to automatically create a gamekeeper account for the client. The default username for this account is `root` and the password is `admin`.
+
+Please **delete this account as soon as possible**, the email, username and password configurations are **not secure**.
+
+### Default item migrations
+
+As items are stored in a database there are migration scripts setup to create default items needed in a new project.
+
+This migration script is located in `sustainable_app/migrations/0003_create_items.py` should you want to add more items.
+
+If you modify this file, please remigrate your database (see [custom commands](#custom-commands) section)
+
+### Custom Commands
+
+There are a variety of custom commands setup in this project to help with develpment.
+
+The most useful one is `remigrate`.
+
+```bash
+python manage.py remigrate
+```
+
+This command rolls back all migrations, and reruns them. This is incredibly useful when modifying the items migration.
+
+> Please note this **deletes and recreates** the default gamekeeper account and all items.
+
+We also have the `dailytasks` command.
+
+```bash
+python manage.py dailytasks
+```
+
+This command is what is used internally to run daily tasks, which are scheduled to run automatically at midnight (00:00) each day.
+
+<br>
+
+---
+
+<br>
+
 ## Main Contributions
 
 These do not state precisely what was done by who, as everyone had more contributions than listed here. This is just a rough guideline of who wrote what code.
