@@ -156,7 +156,8 @@
   user_background.style.background = "{{ background_color }}";
 
 
-  profile_image.src="{% static "" %}sustainable_app/img/{{character}}{{accessory}}.png";
+   profile_image.src="{% static "" %}sustainable_app/img/{{character}}{{accessory}}.png";
+  //profile_image.src="{% static 'sustainable_app/img/'|add:character|add:accessory|add:'.png' %}";
 
 </script>
 

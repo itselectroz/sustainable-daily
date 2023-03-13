@@ -1,0 +1,87 @@
+<title>Locations</title>
+{% load static %}
+{% include 'sustainable_app/base.html' %}
+
+<!-- MATERIAL CDN -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
+<!-- STYLESHEET -->
+<link rel="stylesheet" href="{% static 'sustainable_app/css/game_keeper_locations.css' %}">
+
+    <div class="container">
+        {% include 'sustainable_app/game_keeper_aside.html' %}
+        
+        <main class="main">
+            <div class="expanded-view">
+                <div class="expanded-container">
+                    <img id="expanded-image" src=""></img>
+                    <div class="close-expanded" onclick="close_expanded()">
+                        <span class="material-symbols-sharp">close</span>
+                    </div>
+                    <div class="download-expanded">
+                        <a id="download-image" class="button" href="#"><span class="material-symbols-sharp">download</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="locations">
+                <h2 class="h2">Locations</h2>
+                <div class="locations-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Clue</th>
+                                <th>Image</th>
+                                <th>QR</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for location in locations %}
+                            <tr>
+                                <td>{{location.name}}</td>
+                                <td>{{location.category}}</td>
+                                <td>{{location.clue}}</td>
+                                <td><img class="td-image" onclick="expand(src, {{location.id}})" style="width: 75px;" src='{% get_media_prefix %}{{location.image}}'></img></td>
+                                <td><img class="td-image" onclick="expand(src, {{location.id}})" style="width: 75px;" src='{% get_media_prefix %}{{location.qr}}'></img></td>
+                                <td><span class="material-symbols-sharp remove-location" value={{location.id}}>cancel</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <div class="right">
+            <div class="locations-list">
+                <h2 class="h2">Add a Location</h2>
+                <div class="add-location">
+                    <form class="locationForm" action="{% url 'game_keeper' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="fieldsContainer">
+                            
+                            <input class="tInput" type="text" placeholder="Name" name="name" required>
+    
+                            <div class="radio-buttons">
+                                <input id="recycle" type="radio" name="category" value="recycle_bin">
+                                <label class="radioLabel" for="recycle">Recycling Bin</label><br>
+    
+                                <input id="water" type="radio" name="category" value="water_fountain">
+                                <label class="radioLabel" for="water">Water Fountain</label><br>
+                            </div>
+    
+                            <input class="tInput" type="text" placeholder="Clue" name="clue" required>
+    
+                            <input type="file" class="image" id="image" name="image" required>
+                            <label class="fileLabel" for="image">Select Image</label>
+                            
+                            <input class="create-button" value="Create" type="submit"></input>
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{% static 'sustainable_app/js/game_keeper_locations.js' %}"></script>

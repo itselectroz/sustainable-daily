@@ -11,6 +11,11 @@ from .leaderboard import leaderboard
 from .sorting import sorting
 from .minigame_catching import minigame_catching
 from .quiz import quiz
+from .password_reset import password_reset,forgot_password
+from .game_keeper import game_keeper, game_keeper_locations, game_keeper_surveys, game_keeper_events, remove_keeper, locations_add, locations_remove, qr_callback, open_file
 
 
-__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home', 'minigame_catching', 'sorting', 'equip', 'quiz']
+__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home', 
+           'minigame_catching', 'sorting', 'equip', 'game_keeper', 'quiz',
+           'game_keeper_locations', 'game_keeper_surveys', 'game_keeper_events', 'remove_keeper'
+           'locations_add', 'locations_remove', 'qr_callback', 'password_reset', 'forgot_password', 'open_file']
