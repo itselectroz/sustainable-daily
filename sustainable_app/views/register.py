@@ -50,11 +50,12 @@ def register_user(request):
         user.game_keeper = True
 
     # Set default equipped items so it doesn't break
-    default_items = ['cat', 'none', 'u_black', 'b_white']
+    default_items = ['badger', 'none', 'u_black', 'b_white']
     for item_name in default_items:
         try:
             item = Item.objects.get(name=item_name)
             user.equipped_items.add(item.id)
+            user.owned_items.add(item.id)
         except Item.DoesNotExist:
             return render(request, 'sustainable_app/register.html', {
                 'error': True,

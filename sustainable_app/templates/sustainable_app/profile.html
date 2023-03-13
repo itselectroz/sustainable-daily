@@ -51,23 +51,34 @@
       <label id="character" for="character_tab"></label>
       <form class="tab" id="character">
         <input type="radio" id="badger" name="character_select" value="badger"/>
-        <label class="tab_content" id="character_badger" for="badger"></label>
+        <label class="tab_content" id="character_badger" for="badger">
+          <p></p>
+        </label>
 
         <input type="radio" id="frog" name="character_select" value="frog"/>
-        <label class="tab_content" id="character_frog" for="frog"></label>
+        <label class="tab_content" id="character_frog" for="frog" level="">
+          <p></p>
+        </label>
+        
 
         <input type="radio" id="cat" name="character_select" value="cat"/>
-        <label class="tab_content" id="character_cat" for="cat"></label>
+        <label class="tab_content" id="character_cat" for="cat" level="">
+          <p></p>
+        </label>
 
         <input type="radio" id="fish" name="character_select" value="fish"/>
-        <label class="tab_content" id="character_fish" for="fish"></label>
+        <label class="tab_content" id="character_fish" for="fish" level="">
+          <p></p>
+        </label>
 
         <input type="radio" id="bird" name="character_select" value="bird"/>
-        <label class="tab_content" id="character_bird" for="bird"></label>
+        <label class="tab_content" id="character_bird" for="bird" level="">
+          <p></p>
+        </label>
 
         <input type="radio" id="fox" name="character_select" value="fox"/>
-        <label class="tab_content" id="character_fox" for="fox">
-          <p>6</p>
+        <label class="tab_content" id="character_fox" for="fox" level="">
+          <p></p>
         </label>
       </form>
 
@@ -133,7 +144,7 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="{% static 'sustainable_app/js/profile.js' %}"></script>
+
 
 <script>
 
@@ -147,10 +158,12 @@
   const user_background = document.getElementById("pfp");
   const profile_image = document.getElementById("profile_image");
 
+  user_level = "{{user_level}}";
+
   // Set attributes of elements
   xp_bar.setAttribute("data-label", "{{ user.xp }}");
   point_bar.setAttribute("data-label", "{{ user.points }}");
-  level_num.innerText = "{{ user_level }}";
+  level_num.innerText = user_level;
   username.innerText = "{{ user.username }}";
   username.style.color = "{{ text_color }}";
   user_background.style.background = "{{ background_color }}";
@@ -160,5 +173,7 @@
   //profile_image.src="{% static 'sustainable_app/img/'|add:character|add:accessory|add:'.png' %}";
 
 </script>
+
+<script src="{% static 'sustainable_app/js/profile.js' %}"></script>
 
 {% endblock %}

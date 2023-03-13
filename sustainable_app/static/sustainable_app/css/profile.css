@@ -2,10 +2,7 @@ body {
     font-family: Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url("../img/login_background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    
+    overflow: hidden;
 }
 
 .page {
@@ -30,9 +27,9 @@ body {
 }
 
 .bars {
-    width: 100%;
     display: flex;
     flex-direction: column;
+    width: 200px;
 }
 
 /* styling of the content at the bottom of the view (profile selection) */
@@ -282,7 +279,6 @@ label#background{
 }
 
 label.tab_content {
-    display: flex;
     border-radius: 25%;
     padding: 20px;
     margin: 5px;
@@ -299,10 +295,14 @@ label#character_badger{
 }
 
 label#character_fox{
-    background-image: url("../img/xp_symbol.png");
+    background-image: url("../img/foxnone.png");
 }
 
-label#character_fox p{
+#character_cat p, 
+#character_frog p, 
+#character_bird p, 
+#character_fish p, 
+#character_fox p {
     margin: auto;
     color: white;
     font-weight: bold;

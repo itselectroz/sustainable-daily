@@ -1,23 +1,68 @@
+// grabbing all characters
+let character_frog = document.getElementById("character_frog");
+let character_cat = document.getElementById("character_cat");
+let character_fish = document.getElementById("character_fish");
+let character_bird = document.getElementById("character_bird");
+let character_fox = document.getElementById("character_fox");
+
+
+// Setting unlockables to be locked if necessary
+
+// set unlock character levels
+let character_array = {
+    3: character_frog, 
+    5: character_cat,
+    7: character_fish, 
+    9: character_bird, 
+    11: character_fox};
+
+// loop through and set locked items
+for(let i = user_level; i < 12; i++) {
+    try {
+        character_array[i].style.backgroundImage = "url(/static/sustainable_app/img/xp_symbol.png)";
+        character_array[i].firstElementChild.innerText = (parseInt(i) + 2).toString();
+        character_array[i].setAttribute("level", parseInt(i) + 2);
+    }
+    catch(e) {
+    }
+
+}
+
+
+// Ajax requests to change items
+
 $(document).ready(function() {
 
     // Request for character
     $('#character input').on('change', function() {
 
-        $character = $('input[name="character_select"]:checked').val();
+        $character_clicked = $('input[name="character_select"]:checked').attr("id");
+        $level_needed = $('label[for=' + $character_clicked.toString() + ']').attr('level');
 
-        $.ajax({
-            type: "POST",
-            url: "equip/",
-            data: {
-                type: "character",
-                name: $character,
-                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-            },
-            success: function() {
-                window.location.reload();
-            }
-        });
+        if(user_level < $level_needed) {
+            alert("Not high enough level");
+        }
+
+        else {
+            $character = $('input[name="character_select"]:checked').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "equip/",
+                    data: {
+                        type: "character",
+                        name: $character,
+                        csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                    },
+                    success: function() {
+                        window.location.reload();
+                    }
+                });
+        }
+
+        
     });
+        
 
     // Request for accessory
     $('#accessory input').on('change', function() {

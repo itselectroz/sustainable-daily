@@ -61,12 +61,24 @@ def changeAccessory(type, name, current_user):
     # TODO: check if the user owns the accessory
     # we currently do not have "owned_items" implemented
 
+    
+
+    # check if item is owned
+    exists = False
+    for item_to_add in current_user.owned_items.all():
+        if item_to_add.type == type and item_to_add.name == str(name):
+            exists = True
+
+    if(exists == False):
+        return Item.DoesNotExist
+    
     # find item to remove and remove it
     for item_to_remove in current_user.equipped_items.all():
         if item_to_remove.type == type:
             current_user.equipped_items.remove(item_to_remove.id)
-
+            
     # find item to add and add it
-    for item_to_add in Item.objects.all():
+    for item_to_add in current_user.owned_items.all():
         if item_to_add.type == type and item_to_add.name == str(name):
             current_user.equipped_items.add(item_to_add.id)
+    
