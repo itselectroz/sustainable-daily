@@ -7,7 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('sustainable_app', '0004_question'),
-        ('sustainable_app', '0006_dailydata_alter_goal_id_alter_item_id_and_more copy'),
+        ('sustainable_app', '0006_dailydata_alter_goal_id_alter_item_id_and_more'),
     ]
 
     operations = [
