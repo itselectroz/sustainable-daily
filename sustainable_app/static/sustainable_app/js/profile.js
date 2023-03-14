@@ -25,22 +25,21 @@ $(document).ready(function() {
         if(user_level < $level_needed) {
             alert("Not high enough level");
         }
-
         else {
+            alert("Request sent")
             $character = $('input[name="character_select"]:checked').val();
-
-                $.ajax({
-                    type: "POST",
-                    url: "equip/",
-                    data: {
-                        type: "character",
-                        name: $character,
-                        csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-                    },
-                    success: function() {
-                        window.location.reload();
-                    }
-                });
+            $.ajax({
+                type: "POST",
+                url: "equip/",
+                data: {
+                    type: "character",
+                    name: $character,
+                    csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                },
+                success: function() {
+                    window.location.reload();
+                }
+            });
         }
 
         

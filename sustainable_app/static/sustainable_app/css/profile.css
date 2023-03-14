@@ -1,387 +1,468 @@
-body {
-    font-family: Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+    body {
+        font-family: Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .page {
+        display: flex;
+        flex-direction: column;
+        background-color:lightgray;
+        width: 100%;
+        height: 100%;
+    }
+
+.item_to_buy_container{
+    border-radius: 20px;
 }
 
-.page {
-    display: flex;
-    flex-direction: column;
-    background-color:lightgray;
-    width: 100%;
-    height: 100%;
+.item_to_buy{
+    width: 80%;
 }
 
-/* styling of the content at the top of the view (profile points and xp) */
+    .button_container{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
 
-.top_layer {
-    width: 100%;
-    display: flex;
-}
 
-.profile {
-    width: 50%;
-    display: flex;
-    justify-content: flex-start;
-}
+    .item_cost{
+        color: #14820a;
+    }
 
-.bars {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-}
+    .buy {
+        transition-duration: 0.4s;
+        color:white;
+        background: #14820a;
+        border-radius: 20px;
+        width: 30%;
+        border: none;
+        padding: 10px;
+        box-shadow: 0 2rem 3rem rgba(132, 139, 200, .18);
+        margin: 5px;
+    }
 
-/* styling of the content at the bottom of the view (profile selection) */
+    .buy:hover {
+        background-color: #117315; /* Green */
+    }
 
-.bottom_layer{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    display: flex;
-    height: 100%;
+
+    .cancel:hover {
+        background-color:rgb(198, 10, 10);
+        
+    }
+
+    .cancel{
+        background: rgb(224, 30, 30);
+        color: white;
+        border-radius: 20px;
+        width: 30%;
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        box-shadow: 0 2rem 3rem rgba(132, 139, 200, .18);
+    }
+
+    .purchase_pop-up{
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        /* visibility: hidden; */
+    }
+
+    .purchase-container{
+        background: white;
+        position: absolute;
+        width: fit-content;
+        height: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2rem 3rem rgba(132, 139, 200, .18);
+        border-radius: 20px;
+        text-align: center;
+        padding: 20px;
+    }
+
+
+    /* styling of the content at the top of the view (profile points and xp) */
+
+    .top_layer {
+        width: 100%;
+        display: flex;
+    }
+
+    .profile {
+        width: 50%;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .bars {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+    }
+
+    /* styling of the content at the bottom of the view (profile selection) */
+
+    .bottom_layer{
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        display: flex;
+        height: 100%;
+        
+        
+    }
+
+    /*styling of the div diplaying the amount of points a player has*/
+    .point_container{
+        margin-top: .5rem;
+        margin-right: .5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .point_bar{
+        position: relative;
+        width: clamp(150px, 150px + 5vw, 500px);
+        height: clamp(1.5em, 1em + 2vw, 2em);
+        background-color: white;
+        border-radius: 1.5rem;
+    }
+
+    .point_bar::before {
+        content: attr(data-label);
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: .2rem;
+        top: .2rem;
+        bottom: .2rem;
+        min-width: .2rem;
+        max-width: calc(92%);
+        width: 100%;
+        background-color: #14820a;
+        color: white;
+        border-radius: 1rem;
+        font-size: clamp(.8rem, 2vw, 1.2rem);
+        padding-left: .5em;
+    }
+
+    /*styling of the icon displaying current level*/
+    .points{
+
+        width: clamp(3.5rem, 2rem + 4vw, 6rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .points img {
+        width: 75%;
+    }
+
+
+    /*styling of the div diplaying the amount of xp a player has*/
+    .xp_container{
+        margin-top: .5rem;
+        margin-right: .5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .xp_bar{
+        position: relative;
+        width: clamp(150px, 150px + 5vw, 500px);
+        height: clamp(1.5em, 1em + 2vw, 2em);
+        background-color: white;
+        border-radius: 1.5rem;
+
+    }
+
+    .xp_bar::before {
+        content: attr(data-label);
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: .2rem;
+        top: .2rem;
+        bottom: .2rem;
+        min-width: .2rem;
+        max-width: calc(92%);
+        color: white;
+        width: 100%;
+        background-color: #17a3c9;
+        border-radius: 1rem;
+        font-size: clamp(.8rem, 2vw, 1.2rem);
+        padding-left: .5em;
+    }
+
+    .writing_xp{
+        position: absolute;
+        text-align: center;
+        width: 8rem;
+        font-size: clamp(.05rem, .75rem + .5vw, 2rem);
+
+    }
+
+    /*styling of the icon displaying current level*/
+    .level{
+
+        width: clamp(3.5rem, 2rem + 4vw, 6rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+
+    .level img {
+        width: 75%;
+    }
+
+
+    .level label {
+        position: absolute;
+        text-align: center;
+        color: white;
+        width: 8rem;
+        font-size: clamp(.05rem, .75rem + .5vw, 2rem);
+    }
+
+
+    /*styling of the div diplaying the players chosen profile picture and username*/
+
+    .profile_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 1rem;
+        max-width: 7rem;
+    }
+
+    .pfp {
+        width: 100%;
+        background-color: #17a3c9;
+        border-radius: .5rem;
+        border: .2rem solid black;
+    }
+
+    .pfp_img {
+        padding: 0;
+        width: 100%;
+        
+    }
+
+    .username {
+        min-width: 50%;
+    }
+
+    .username p {
+        font-weight: bold;
+        font-size: clamp(.1rem, 1rem + .1vw, 5rem)
+    }
+
+
+    /*styling of the div diplaying the profile customization menu*/
+
+    .tabs{
+        display: flex;
+        flex-wrap: wrap;
+        min-width: 17rem;
+        align-content: center;
+        margin: 2rem;
+
+    }
+
+    /*hides radio button for the tabs class*/
+    .tabs input[type="radio"]{
+        display: none;
+    }
     
-    
-}
+    .tabs input[type="radio"]:checked + label + .tab {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-/*styling of the div diplaying the amount of points a player has*/
-.point_container{
-    margin-top: .5rem;
-    margin-right: .5rem;
-    display: flex;
-    align-items: center;
-}
+    /*styling of checked labels*/
+    .tabs input[type="radio"]:checked + label{
+        background-color:rgb(255, 255, 255) ;
+        border-color: #14820a;
+    }
+    /*stlying of unchecked labels*/
+    .tabs label{
+        border-radius: 20px 20px 0px 0px ;
+        padding: 25px;
+        background-color:rgb(184, 182, 180);
+    }
+    /*stlying of the content */
+    .tab{
+        border-radius: 0px 20px 20px 20px ;
+        width: 100%;
+        padding: 25px;
+        background-color:rgb(255, 255, 255) ;
+        order: 1;
+        display: none;
+        min-height: 100px;
+        justify-content: flex-start;
+    }
 
-.point_bar{
-    position: relative;
-    width: clamp(150px, 150px + 5vw, 500px);
-    height: clamp(1.5em, 1em + 2vw, 2em);
-    background-color: white;
-    border-radius: 1.5rem;
-}
+    /*stlying of the character tab icon */
+    label#character{
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-image: url("../img/cat.png");
+        background-position: center;
+        
+    }
 
-.point_bar::before {
-    content: attr(data-label);
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: .2rem;
-    top: .2rem;
-    bottom: .2rem;
-    min-width: .2rem;
-    max-width: calc(92%);
-    width: 100%;
-    background-color: #14820a;
-    color: white;
-    border-radius: 1rem;
-    font-size: clamp(.8rem, 2vw, 1.2rem);
-    padding-left: .5em;
-}
+    /*stlying of the accessory tab icon */
+    label.accessory{
 
-/*styling of the icon displaying current level*/
-.points{
+        background-repeat: no-repeat;
+        background-size: 75%;
+        background-image: url("../img/hat.png");
+        background-position: center;
+        
+    }
 
-    width: clamp(3.5rem, 2rem + 4vw, 6rem);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-}
+    /*stlying of the name color tab icon */
+    label#name_color{
 
-.points img {
-    width: 75%;
-}
+        background-repeat: no-repeat;
+        background-size: 70%;
+        background-image: url("../img/abc.png");
+        background-position: center;
+        
+    }
 
+    /*stlying of the background tab icon */
+    label#background{
 
-/*styling of the div diplaying the amount of xp a player has*/
-.xp_container{
-    margin-top: .5rem;
-    margin-right: .5rem;
-    display: flex;
-    align-items: center;
-}
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-image: url("../img/background.png");
+        background-position: center;
+        
+    }
 
-.xp_bar{
-    position: relative;
-    width: clamp(150px, 150px + 5vw, 500px);
-    height: clamp(1.5em, 1em + 2vw, 2em);
-    background-color: white;
-    border-radius: 1.5rem;
+    label.tab_content {
+        border-radius: 25%;
+        padding: 20px;
+        margin: 5px;
+        border: 2px solid #000000;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: center;
+        width:9%;
+        aspect-ratio: 1/1;
+    }
 
-}
+    label#character_badger{
+        background-image: url("../img/badgernone.png");
+    }
 
-.xp_bar::before {
-    content: attr(data-label);
-    display: flex;
-    align-items: center;
-    position: absolute;
-    left: .2rem;
-    top: .2rem;
-    bottom: .2rem;
-    min-width: .2rem;
-    max-width: calc(92%);
-    color: white;
-    width: 100%;
-    background-color: #17a3c9;
-    border-radius: 1rem;
-    font-size: clamp(.8rem, 2vw, 1.2rem);
-    padding-left: .5em;
-}
+    label#character_fox{
+        background-image: url("../img/foxnone.png");
+    }
 
-.writing_xp{
-    position: absolute;
-    text-align: center;
-    width: 8rem;
-    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
+    #character_cat p, 
+    #character_frog p, 
+    #character_bird p, 
+    #character_fish p, 
+    #character_fox p {
+        margin: auto;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
 
-}
+    label#character_frog{
+        background-image: url("../img/frognone.png");  
+    }
 
-/*styling of the icon displaying current level*/
-.level{
+    label#character_cat{
+        background-image: url("../img/catnone.png");
+    }
 
-    width: clamp(3.5rem, 2rem + 4vw, 6rem);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-}
+    label#character_fish{
+        background-image: url("../img/fishnone.png");
+    }
 
-.level img {
-    width: 75%;
-}
+    label#character_bird{
+        background-image: url("../img/birdnone.png"); 
+    }
 
+    label#accessory_none{
+        background-image: url("../img/none.png");  
+    }
 
-.level label {
-    position: absolute;
-    text-align: center;
-    color: white;
-    width: 8rem;
-    font-size: clamp(.05rem, .75rem + .5vw, 2rem);
-}
+    label#accessory_crown{
+        background-image: url("../img/crown.png");    
+    }
 
+    label#accessory_party{
+        background-image: url("../img/party.png");    
+    }
 
-/*styling of the div diplaying the players chosen profile picture and username*/
+    label#accessory_viking{
+        background-image: url("../img/viking.png"); 
+    }
 
-.profile_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    margin: 1rem;
-    max-width: 7rem;
-}
+    label#accessory_locked{
+        background-image: url("../img/locked.png"); 
+    }
 
-.pfp {
-    width: 100%;
-    background-color: #17a3c9;
-    border-radius: .5rem;
-    border: .2rem solid black;
-}
+    label#name_color_black{
+        background-color: #000000;
+    }
 
-.pfp_img {
-    padding: 0;
-    width: 100%;
-    
-}
+    label#name_color_blue{
+        background-color: #192e6c;
+        background-image: url("../img/locked.png");
+    }
 
-.username {
-    min-width: 50%;
-}
+    label#name_color_green{
+        background-color: #14820a;
+    }
 
-.username p {
-    font-weight: bold;
-    font-size: clamp(.1rem, 1rem + .1vw, 5rem)
-}
+    label#name_color_purple{
+        background-color: #5f0b7b;
+    }
 
+    label#name_color_orange{
+        background-color: #ed8114;
+    }
 
-/*styling of the div diplaying the profile customization menu*/
+    label#background_white{
+        background-color: #ffffff;
+    }
 
-.tabs{
-    display: flex;
-    flex-wrap: wrap;
-    min-width: 17rem;
-    align-content: center;
-    margin: 2rem;
+    label#background_blue{
+        background-color: #17a3c9;
+    }
 
-}
+    label#background_pink{
+        background-color: #dd69e7;
+    }
 
-/*hides radio button for the tabs class*/
-.tabs input[type="radio"]{
-    display: none;
-}
- 
-.tabs input[type="radio"]:checked + label + .tab {
-    display: flex;
-    flex-wrap: wrap;
-}
+    label#background_grey{
+        background-color: #858186;
+    }
 
-/*styling of checked labels*/
-.tabs input[type="radio"]:checked + label{
-    background-color:rgb(255, 255, 255) ;
-    border-color: #14820a;
-}
-/*stlying of unchecked labels*/
-.tabs label{
-    border-radius: 20px 20px 0px 0px ;
-    padding: 25px;
-    background-color:rgb(184, 182, 180);
-}
-/*stlying of the content */
-.tab{
-    border-radius: 0px 20px 20px 20px ;
-    width: 100%;
-    padding: 25px;
-    background-color:rgb(255, 255, 255) ;
-    order: 1;
-    display: none;
-    min-height: 100px;
-    justify-content: flex-start;
-}
-
-/*stlying of the character tab icon */
-label#character{
-    background-repeat: no-repeat;
-    background-size: 90%;
-    background-image: url("../img/cat.png");
-    background-position: center;
-    
-}
-
-/*stlying of the accessory tab icon */
-label.accessory{
-
-    background-repeat: no-repeat;
-    background-size: 75%;
-    background-image: url("../img/hat.png");
-    background-position: center;
-    
-}
-
-/*stlying of the name color tab icon */
-label#name_color{
-
-    background-repeat: no-repeat;
-    background-size: 70%;
-    background-image: url("../img/abc.png");
-    background-position: center;
-    
-}
-
-/*stlying of the background tab icon */
-label#background{
-
-    background-repeat: no-repeat;
-    background-size: 90%;
-    background-image: url("../img/background.png");
-    background-position: center;
-    
-}
-
-label.tab_content {
-    border-radius: 25%;
-    padding: 20px;
-    margin: 5px;
-    border: 2px solid #000000;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center;
-    width:9%;
-    aspect-ratio: 1/1;
-}
-
-label#character_badger{
-    background-image: url("../img/badgernone.png");
-}
-
-label#character_fox{
-    background-image: url("../img/foxnone.png");
-}
-
-#character_cat p, 
-#character_frog p, 
-#character_bird p, 
-#character_fish p, 
-#character_fox p {
-    margin: auto;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-}
-
-label#character_frog{
-    background-image: url("../img/frognone.png");  
-}
-
-label#character_cat{
-    background-image: url("../img/catnone.png");
-}
-
-label#character_fish{
-    background-image: url("../img/fishnone.png");
-}
-
-label#character_bird{
-    background-image: url("../img/birdnone.png"); 
-}
-
-label#accessory_none{
-    background-image: url("../img/none.png");  
-}
-
-label#accessory_crown{
-    background-image: url("../img/crown.png");    
-}
-
-label#accessory_party{
-    background-image: url("../img/party.png");    
-}
-
-label#accessory_viking{
-    background-image: url("../img/viking.png"); 
-}
-
-label#accessory_locked{
-    background-image: url("../img/locked.png"); 
-}
-
-label#name_color_black{
-    background-color: #000000;
-}
-
-label#name_color_blue{
-    background-color: #192e6c;
-    background-image: url("../img/locked.png");
-}
-
-label#name_color_green{
-    background-color: #14820a;
-}
-
-label#name_color_purple{
-    background-color: #5f0b7b;
-}
-
-label#name_color_orange{
-    background-color: #ed8114;
-}
-
-label#background_white{
-    background-color: #ffffff;
-}
-
-label#background_blue{
-    background-color: #17a3c9;
-}
-
-label#background_pink{
-    background-color: #dd69e7;
-}
-
-label#background_grey{
-    background-color: #858186;
-}
-
-label#background_green{
-    background-color: #65d982;
-}
+    label#background_green{
+        background-color: #65d982;
+    }

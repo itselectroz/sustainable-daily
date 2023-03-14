@@ -14,7 +14,21 @@
 
 {% csrf_token %}
 
+<div class="purchase_pop-up">
+  <div class="purchase-container">
+    <div class="item_to_buy_container">   
+       <img class="item_to_buy" src="{% static 'sustainable_app/img/viking.png' %}" >
+    </div>
+    <p class="question">Purchase this item for<span class ="item_cost"> 100 </span>points?</p>
+    <div class ="button_container">
+      <button class="cancel" type="button">cancel</button>
+      <button class="buy" type="button">buy</button>
+    </div>
+  </div>
+</div>
 <div class="page">
+
+
   <div class="top_layer">
     <div class="profile">
       <div class="profile_container">
@@ -158,7 +172,7 @@
   const user_background = document.getElementById("pfp");
   const profile_image = document.getElementById("profile_image");
 
-  user_level = "{{user_level}}";
+  user_level = parseInt("{{user_level}}");
 
   // Set attributes of elements
   xp_bar.setAttribute("data-label", "{{ user.xp }}");
