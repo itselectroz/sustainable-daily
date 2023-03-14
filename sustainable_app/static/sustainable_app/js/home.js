@@ -5,6 +5,7 @@ const GOALS_TEXT_SUFFIX = "/5";
 
 // Define main html elements
 const goal_items = document.querySelectorAll(".item");
+const personal_goals = document.querySelectorAll(".personal");
 const u_goals_text = document.getElementById("universal-text");
 const p_goals_text = document.getElementById("personal-text");
 
@@ -15,17 +16,12 @@ const u_goal3 = document.getElementById("u-three");
 const u_goal4 = document.getElementById("u-four");
 const u_goal5 = document.getElementById("u-five");
 
-// Individual personal goals
-const p_goal1 = document.getElementById("p-one");
-const p_goal2 = document.getElementById("p-two");
-const p_goal3 = document.getElementById("p-three");
-const p_goal4 = document.getElementById("p-four");
-const p_goal5 = document.getElementById("p-five");
-
 // Urls and types for universal goals
-let goals_urls = ["/minigame_catching", "/sorting", "#", "#", "#"];
+let goals_urls = ["/minigame_catching/", "/sorting/", "#", "#", "#"];
 let u_goals_type = ["catching-game", "sorting-game", "qr", "quiz", "survey", "wordle"]; // TODO: Implement auto selected images
 
+// Images array
+let personal_images = ["workout.png", "plastic_bottle.png", "cat_recycle.png", "paper.png", "watermelon.png"]
 
 // Set backgrounds for universal goals (hardcoded temporarily)
 u_goal1.style.backgroundImage = "url(/static/sustainable_app/img/catching_game.jpg)";
@@ -34,13 +30,12 @@ u_goal3.style.backgroundImage = "url(/static/sustainable_app/img/qr.png)";
 u_goal4.style.backgroundImage = "url(/static/sustainable_app/img/qr.png)";
 u_goal5.style.backgroundImage = "url(/static/sustainable_app/img/qr.png)";
 
-// Set background for personal goals (hardcoded temporarily)
-p_goal1.style.backgroundImage = "url(/static/sustainable_app/img/workout.png)";
-p_goal2.style.backgroundImage = "url(/static/sustainable_app/img/plastic_bottle.png)";
-p_goal3.style.backgroundImage = "url(/static/sustainable_app/img/cat_recycle.png)";
-p_goal4.style.backgroundImage = "url(/static/sustainable_app/img/paper.png)";
-p_goal5.style.backgroundImage = "url(/static/sustainable_app/img/watermelon.png)";
 
+function setImages() {
+    for(let i = 0; i < personal_goals.length; i++) {
+        personal_goals[i].style.backgroundImage = "url(/static/sustainable_app/img/" + personal_images[i] + ")";
+    }
+}
 
 function setGoalText() {
     let u_num = 0;
@@ -75,7 +70,7 @@ function setRedirects() {
         goal_items[i].addEventListener("click", () => {
 
             if(goal_items[i].getAttribute("name") == "personal") {
-                goal_items[i].setAttribute("value", "var(--completion-green)");
+
                 loadColors();
                 setGoalText();
             }
@@ -110,7 +105,30 @@ function loadColors() {
 }
 
 // Initialize screen
-setRedirects();
 setClickEffects();
 loadColors();
 setGoalText();
+setRedirects();
+setImages();
+
+// request to complete a goal
+$(document).ready(function() {
+
+    // Request for character
+    $('.personal').on('click', function() {
+
+        $goal_id = this.getAttribute("id")
+
+        $.ajax({
+            type: "POST",
+            url: "complete_personal/",
+            data: {
+                goal_id: $goal_id,
+                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+            },
+            success: function() {
+                window.location.reload();
+            }
+        });
+    });
+});

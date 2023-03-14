@@ -18,14 +18,23 @@ function delete_table() {
  */
 function createTable(dictionary) {
 
-    
     //Getting table element from html
     let table = document.getElementById("leaderboard-table");
     
 
-    
+    let topRow = table.insertRow();
 
-    
+    let topCell1 = topRow.insertCell();
+    let topCell2 = topRow.insertCell();
+    let topCell3 = topRow.insertCell();
+    let topCell4 = topRow.insertCell();
+
+    topCell1.innerHTML = "User";
+    topCell2.innerHTML = "";
+    topCell3.innerHTML = "Level";
+    topCell4.innerHTML = "Points";
+
+    topRow.setAttribute("id", "generated");
 
     //For every user in the leaderboard creating new row in table with their name, xp and level
     for (user in dictionary) {
@@ -34,14 +43,31 @@ function createTable(dictionary) {
         let newRow = table.insertRow();
 
         //Creates new cells for user
-        var cell1 = newRow.insertCell();
-        var cell2 = newRow.insertCell();
-        var cell3 = newRow.insertCell();
+        let cell1 = newRow.insertCell();
+        let cell2 = newRow.insertCell();
+        let cell3 = newRow.insertCell();
+        let cell4 = newRow.insertCell();
+
+        //Profile picture
+        let accessory = dictionary[user]["accessory"];
+        let character = dictionary[user]["character"];
+        let background_color = dictionary[user]["background_color"];
+
+        //Username
+        let username = dictionary[user]["username"];
+        let username_color = dictionary[user]["username_color"];
 
         //Adds relevent information to cells 
-        cell1.innerHTML = dictionary[user]["username"];
-        cell2.innerHTML = dictionary[user]["level"];
-        cell3.innerHTML = dictionary[user]["points"];
+        cell1.innerHTML = `
+        <div class="pfp_container">
+            <div class="pfp" id="pfp" style="background-color:${background_color}">
+                <img class="pfp_image" id="pfp_image" src="../static/sustainable_app/img/${character}${accessory}.png">
+            </div>
+        </div>
+        `;
+        cell2.innerHTML = `<p style="color:${username_color}">${username}</p>`;
+        cell3.innerHTML = dictionary[user]["level"];
+        cell4.innerHTML = dictionary[user]["points"];
 
         //Gives new row an id of "generated" so if the leaderboard is re-ordered it will delete the old rows
         newRow.setAttribute("id", "generated");
@@ -63,14 +89,13 @@ function orderTable(dictionary, changeToState) {
         lastAction = "";
 
         //Blank array that will hold reverse of dictionary
-        newDictionary = [];
+        let newDictionary = [];
         
-        lastIndex = dictionary.length - 1;
+        let lastIndex = dictionary.length - 1;
 
         //Reverses dictionary
         for (user in dictionary) {
             newDictionary.push(dictionary[lastIndex - user]);
-
         }
 
         //Will create table using new revered dictionary
