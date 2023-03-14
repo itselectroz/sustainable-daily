@@ -3,15 +3,15 @@ from django.shortcuts import render
 from django.db.models import Prefetch
 from django.shortcuts import redirect
 
-from sustainable_app.models.survey import Question,Choice
+from sustainable_app.models.survey import SurveyQuestion,SurveyChoice, Survey
 
 @login_required(login_url='/login')
 def minigame_survey(request):
 
-    questions = Question.objects.order_by("pub_date")
-    questions = Question.objects.prefetch_related(Prefetch('choice_set', queryset=Choice.objects.order_by('choice_text')))
-    choices = Choice.objects.all()
-    context = {'questions': questions, 'choices' : choices}
+    active_survey = Survey.objects.filter(currentlyActive=True).first()    
+    questions = SurveyQuestion.objects.filter(Survey=active_survey)
+    choices = SurveyChoice.objects.filter(question__in=questions)
+    context = {'questions': questions, 'choices': choices}
 
     if request.method == 'POST':
 
@@ -24,7 +24,7 @@ def minigame_survey(request):
             #Gets the id of the choice that needs to be added to
             choice_id_to_change = request.POST.get(q_id)
 
-            choice = Choice.objects.get(id = choice_id_to_change)
+            choice = SurveyChoice.objects.get(id = choice_id_to_change)
 
             choice.votes +=1
             choice.save()
