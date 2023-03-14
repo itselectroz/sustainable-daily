@@ -16,7 +16,6 @@ DailyData.complete_goal(user, goal) """
 @login_required(login_url=reverse_lazy('login'))
 def home(request):
 
-    randomize_daily_goals()
 
     # get current user
     current_user = request.user
@@ -67,23 +66,7 @@ def getTodayCompleted(user):
     except DailyData.DoesNotExist:
         return []
     
-def randomize_daily_goals() :
-    #Set 5 random daily goals to active
-    u_goals = Goal.objects.exclude(type=Goal.PERSONAL)
 
-    #Setting all goals to inactive 
-    for goal in u_goals:
-        goal.active = False
-        goal.save()
-    
-    #Setting 5 random goals to active
-    all_goals = u_goals.order_by('?')[:2]
-
-    print(all_goals)
-
-    for goal in all_goals:
-        goal.active = True
-        goal.save()
 
     
 

@@ -1,8 +1,10 @@
 from django.core.management.base import BaseCommand
 
-from ...models import DailyGoalStatus
+from ...models import DailyGoalStatus, Goal
 
 import datetime
+
+
 
 
 class Command(BaseCommand):
@@ -43,3 +45,21 @@ class Command(BaseCommand):
             self.stdout.write(str(e))
             self.stdout.write(self.style.ERROR(
                 "[calculate_minigame_points] Something went wrong."))
+
+def randomize_daily_goals() :
+    #Set 5 random daily goals to active
+    u_goals = Goal.objects.exclude(type=Goal.PERSONAL)
+
+    #Setting all goals to inactive 
+    for goal in u_goals:
+        goal.active = False
+        goal.save()
+    
+    #Setting 5 random goals to active, needs to have 5 for it to work
+    all_goals = u_goals.order_by('?')[:2]
+
+    print(all_goals)
+
+    for goal in all_goals:
+        goal.active = True
+        goal.save()
