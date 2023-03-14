@@ -24,10 +24,17 @@ const expanded_view = document.querySelector('.expanded-view');
 const image_view = document.getElementById('expanded-image');
 const download_image = document.getElementById('download-image');
 
-function expand(src, location_id) {
+function expand(src, location_id, type) {
     image_view.src = src;
-    download_image.setAttribute("href", ("/game_keeper/open/" + location_id + "/"));
     expanded_view.style.visibility = 'visible';
+
+    if(type == 'qr') {
+        download_image.setAttribute("href", ("/game_keeper/open/" + location_id + "/"));
+        download_image.style.visibility = 'visible';
+    }
+    else {
+        download_image.style.visibility = 'hidden';
+    }
 }
 
 function close_expanded() {
