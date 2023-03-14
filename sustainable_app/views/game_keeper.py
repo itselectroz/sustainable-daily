@@ -6,7 +6,6 @@ from django.http import FileResponse, HttpResponse
 from io import BytesIO
 
 from sustainable_app.models import User, Location, Goal, DailyData
-import qrcode
 
 # game keeper page
 

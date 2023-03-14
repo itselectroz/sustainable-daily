@@ -9,12 +9,6 @@ const personal_goals = document.querySelectorAll(".personal");
 const u_goals_text = document.getElementById("universal-text");
 const p_goals_text = document.getElementById("personal-text");
 
-// Individual universal goals
-const u_goal1 = document.getElementById("u-one");
-const u_goal2 = document.getElementById("u-two");
-const u_goal3 = document.getElementById("u-three");
-const u_goal4 = document.getElementById("u-four");
-const u_goal5 = document.getElementById("u-five");
 
 // Urls and types for universal goals
 let goals_urls = ["/minigame_catching/", "/sorting/", "#", "#", "#"];
@@ -22,13 +16,6 @@ let u_goals_type = ["catching-game", "sorting-game", "qr", "quiz", "survey", "wo
 
 // Images array
 let personal_images = ["workout.png", "plastic_bottle.png", "cat_recycle.png", "paper.png", "watermelon.png"]
-
-// Set backgrounds for universal goals (hardcoded temporarily)
-u_goal1.style.backgroundImage = "url(/static/sustainable_app/img/catching_game.jpg)";
-u_goal2.style.backgroundImage = "url(/static/sustainable_app/img/sorting_game.png)";
-u_goal3.style.backgroundImage = "url(/static/sustainable_app/img/qr.png)";
-u_goal4.style.backgroundImage = "url(/static/sustainable_app/img/qr.png)";
-u_goal5.style.backgroundImage = "url(/static/sustainable_app/img/qr.png)";
 
 
 function setImages() {
