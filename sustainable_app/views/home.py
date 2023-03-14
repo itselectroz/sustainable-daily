@@ -7,7 +7,11 @@ from sustainable_app.models import Goal, DailyData, DailyGoalStatus
 import random
 
 
-
+"""To make a new goal create it with the same name as the page it is being created for. Give it the url to the page and the image for the daily goal. Go to the view being added
+and add code to make it so the user gets a completed daily data whenever they play the game or do whatever e.g.
+user = request.user
+goal = Goal.objects.get(name = "minigame_catching")
+DailyData.complete_goal(user, goal) """
 
 @login_required(login_url=reverse_lazy('login'))
 def home(request):
