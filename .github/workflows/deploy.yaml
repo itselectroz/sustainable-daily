@@ -46,4 +46,5 @@ jobs:
       - name: Deploy
         run: |-
           gcloud compute instances update-container "$GCE_INSTANCE" \
+            --zone us-central1-a \
             --container-image "us-west1-docker.pkg.dev/$PROJECT_ID/sustainable-daily-master/sustainable-daily-image:latest"
