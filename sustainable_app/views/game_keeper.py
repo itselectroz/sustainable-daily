@@ -5,8 +5,9 @@ from django.http import FileResponse, HttpResponse
 
 from io import BytesIO
 
-from sustainable_app.models import User, Location, Goal, DailyData, QuizQuestion
+from sustainable_app.models import User, Location, Goal, DailyData, QuizQuestion, Survey, SurveyQuestion, SurveyChoice
 import qrcode
+import datetime
 
 # game keeper page
 
@@ -34,7 +35,21 @@ def game_keeper_locations(request):
 
 
 def game_keeper_surveys(request):
-    return direct_user("_surveys", request, {})
+    # request to add survey
+    if request.method == "POST" and request.POST is not None:
+        if 'survey' in request.POST:
+            return surveys_question_add(request)
+        elif 'question' in request.POST:
+            return surveys_add(request)
+    
+    # send all locations to template
+    context = {
+        "surveys":  Survey.objects.all(),
+        "questions": SurveyQuestion.objects.all(),
+        "choices": SurveyChoice.objects.all(),
+    }
+    
+    return direct_user("_surveys", request, context)
 
 
 def game_keeper_questions(request):
@@ -136,6 +151,61 @@ def locations_remove(request):
     # refresh the page
     return redirect(reverse('game_keeper_locations'))
 
+# add a survey
+def surveys_add(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
+
+    if (request.method != 'POST'):
+        # redirect to home if it's not a post request
+        return redirect(reverse('home'))
+
+
+    # get survey attributes from post request
+    survey_text = request.POST.get('name', '')
+    
+    # create survey object
+    new_survey = Survey(survey_text=survey_text)
+    new_survey.save()
+
+    return redirect(reverse('game_keeper_surveys'))
+
+# add a survey question
+def surveys_question_add(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
+
+    if (request.method != 'POST'):
+        # redirect to home if it's not a post request
+        return redirect(reverse('home'))
+
+
+    # get question attributes from post request
+    question_text = request.POST.get('name', '')
+    o1 = request.POST.get('o1', '')
+    o2 = request.POST.get('o2', '')
+    o3 = request.POST.get('o3', '')
+    o4 = request.POST.get('o4', '')
+    survey = request.POST.get('survey_selection', '')
+    
+    # create question object
+    new_survey_question= SurveyQuestion(Survey=survey, question_text=question_text, pub_date=datetime.now())
+    new_survey_question.save()
+    
+    # create choices objects
+    choices = [o1, o2, o3, o4]
+    count = 0
+    
+    for choice in choices:
+        if choice != '':
+            count += 1
+    
+    for i in range(count):
+        new_choice = SurveyChoice(question=new_survey_question, choice_text=choices[i])
+        new_choice.save()
+
+    return redirect(reverse('game_keeper_surveys'))
+
 # add a question
 def questions_add(request):
     if (not request.user.is_authenticated or not request.user.game_keeper):
@@ -146,7 +216,7 @@ def questions_add(request):
         return redirect(reverse('home'))
 
 
-    # get location attributes from post request
+    # get question attributes from post request
     question = request.POST.get('question', '')
     a1 = request.POST.get('a1', '')
     a2 = request.POST.get('a2', '')
@@ -171,7 +241,7 @@ def questions_remove(request):
     # delete question
     remove_question = QuizQuestion.objects.get(id=question_id)
     
-    # delete location with given id
+    # delete question with given id
     remove_question.delete()
     
     # refresh the page
