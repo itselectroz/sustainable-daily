@@ -15,12 +15,18 @@
             const open = document.getElementById('openbtn');
             const max = window.matchMedia( "(max-width: 600px)" );
             const min = window.matchMedia( "(min-width: 600px)" );
+            const dropdownContainer = document.querySelector('.dropdown_container');
+            const toggleMenu = document.querySelector('.menu');
+            const toggleImg = document.querySelector('.profile');
             nav.classList.add('visible');
             open.classList.add('invisible');
             document.addEventListener('click', function(event) {
                 if (!nav.contains(event.target) && !open.contains(event.target) && max.matches) {
                     nav.classList.remove('visible');
                     open.classList.remove('invisible');
+                    dropdownContainer.classList.remove('active');
+                    toggleMenu.classList.remove('active');
+                    toggleImg.classList.remove('active');
                 }
             });
         }
