@@ -15,8 +15,7 @@ RUN mkdir -p $DockerHOME
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get -y install cron \
-    apt-get -y install apt-utils
+    apt-get -y install cron
 
 # Set working directory and permissions
 WORKDIR $DockerHOME
