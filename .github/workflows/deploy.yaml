@@ -32,7 +32,10 @@ jobs:
 
       - name: Configure GCloud Docker
         run: |-
-          gcloud --quiet auth configure-docker
+          gcloud --quiet auth configure-docker us-west1-docker.pkg.dev
+
+      - name: Debug
+        run: gcloud info
 
       - name: Build container
         run: |-
