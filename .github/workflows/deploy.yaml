@@ -11,7 +11,6 @@ on: [push]
 env:
   PROJECT_ID: sustainable-daily
   GCE_INSTANCE: instance-1
-  GCE_ZONE: us-west1
 
 jobs:
   build-deploy:
@@ -34,9 +33,6 @@ jobs:
         run: |-
           gcloud --quiet auth configure-docker us-west1-docker.pkg.dev
 
-      - name: Debug
-        run: gcloud info
-
       - name: Build container
         run: |-
           docker build \
@@ -50,5 +46,4 @@ jobs:
       - name: Deploy
         run: |-
           gcloud compute instances update-container "$GCE_INSTANCE" \
-            --zone "$GCE_ZONE" \
             --container-image "us-west1-docker.pkg.dev/$PROJECT_ID/sustainable-daily-master/sustainable-daily-image:latest"
