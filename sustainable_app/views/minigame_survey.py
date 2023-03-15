@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from sustainable_app.models.survey import SurveyQuestion, SurveyChoice, Survey
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/login/')
 def minigame_survey(request):
 
     active_survey = Survey.objects.filter(currentlyActive=True).first()

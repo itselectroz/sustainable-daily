@@ -5,17 +5,13 @@ from django.http import FileResponse, HttpResponse
 
 from io import BytesIO
 
-from sustainable_app.models import User, Location, Goal, DailyData
+from sustainable_app.models import User, Location, Goal, DailyData, QuizQuestion
 import qrcode
 
 # game keeper page
 
 
 def game_keeper(request):
-    if request.method == "POST" and request.POST is not None:
-        return locations_add(request)
-    
-
     # send all game keepers to template
     context = {
         "game_keepers":  User.objects.filter(game_keeper=True),
@@ -26,6 +22,10 @@ def game_keeper(request):
 
 
 def game_keeper_locations(request):
+    # request to add location
+    if request.method == "POST" and request.POST is not None:
+        return locations_add(request)
+    
     # send all locations to template
     context = {
         "locations":  Location.objects.all()
@@ -37,8 +37,18 @@ def game_keeper_surveys(request):
     return direct_user("_surveys", request, {})
 
 
-def game_keeper_events(request):
-    return direct_user("_events", request, {})
+def game_keeper_questions(request):
+    # request to add question
+    if request.method == "POST" and request.POST is not None:
+        return questions_add(request)
+    
+    # send all locations to template
+    context = {
+        "questions":  QuizQuestion.objects.all()
+    }
+    
+    # questions template
+    return direct_user("_questions", request, context)
 
 
 def remove_keeper(request):
@@ -56,8 +66,6 @@ def remove_keeper(request):
     return redirect('/')
 
 # add a location
-
-
 def locations_add(request):
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
@@ -104,8 +112,6 @@ def locations_add(request):
     return redirect(reverse('game_keeper_locations'))
 
 # remove a location
-
-
 def locations_remove(request):
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
@@ -130,7 +136,48 @@ def locations_remove(request):
     # refresh the page
     return redirect(reverse('game_keeper_locations'))
 
+# add a question
+def questions_add(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
 
+    if (request.method != 'POST'):
+        # redirect to home if it's not a post request
+        return redirect(reverse('home'))
+
+
+    # get location attributes from post request
+    question = request.POST.get('question', '')
+    a1 = request.POST.get('a1', '')
+    a2 = request.POST.get('a2', '')
+    a3 = request.POST.get('a3', '')
+    a4 = request.POST.get('a4', '')
+    correct_answer = int(request.POST.get('correct_select', ''))
+    
+    # create question object
+    new_question = QuizQuestion(question=question, a1=a1, a2=a2, a3=a3, a4=a4, correct_answer=correct_answer)
+    new_question.save()
+
+    return redirect(reverse('game_keeper_questions'))
+
+# remove a question
+def questions_remove(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
+
+    # get question id from post request
+    question_id = request.POST.get('question_id', False)
+    
+    # delete question
+    remove_question = QuizQuestion.objects.get(id=question_id)
+    
+    # delete location with given id
+    remove_question.delete()
+    
+    # refresh the page
+    return redirect(reverse('game_keeper_questions'))
+
+# direct user to correct page
 def direct_user(page, request, context):
     """
     Function for directing user to correct page

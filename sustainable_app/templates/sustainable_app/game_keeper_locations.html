@@ -56,7 +56,7 @@
             <div class="locations-list">
                 <h2 class="h2">Add a Location</h2>
                 <div class="add-location">
-                    <form class="locationForm" action="{% url 'game_keeper' %}" method="post" enctype="multipart/form-data">
+                    <form class="locationForm" action="{% url 'game_keeper_locations' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="fieldsContainer">
                             
@@ -82,6 +82,4 @@
             </div>
         </div>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="{% static 'sustainable_app/js/game_keeper_locations.js' %}"></script>

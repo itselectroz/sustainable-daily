@@ -14,4 +14,5 @@ class QuizQuestion(models.Model):
         (3, 'a3'),
         (4, 'a4')
     ]
+    
     correct_answer = models.IntegerField(choices=CORRECT_CHOICES)

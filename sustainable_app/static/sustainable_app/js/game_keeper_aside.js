@@ -4,14 +4,14 @@ const sideMenu = document.querySelector("aside");
 const btnDash = document.getElementById("btn-dash");
 const btnLoc = document.getElementById('btn-loc');
 const btnSur = document.getElementById('btn-sur');
-const btnEve = document.getElementById('btn-eve');
+const btnQue = document.getElementById('btn-que');
 
 
 
 const selected_page = {"/game_keeper/": btnDash,
  "/game_keeper_locations/": btnLoc,
 "/game_keeper_surveys/": btnSur,
-"/game_keeper_events/": btnEve};
+"/game_keeper_questions/": btnQue};
 
 
 

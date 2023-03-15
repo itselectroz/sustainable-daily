@@ -1,0 +1,93 @@
+<title>Questions</title>
+{% load static %}
+{% include 'sustainable_app/base.html' %}
+
+<!-- MATERIAL CDN -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
+<!-- STYLESHEET -->
+<link rel="stylesheet" href="{% static 'sustainable_app/css/game_keeper_locations.css' %}">
+
+    <div class="container">
+        {% include 'sustainable_app/game_keeper_aside.html' %}
+        <main class="main">
+            <div class="locations">
+                <h2 class="h2">Questions</h2>
+                <div class="locations-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Answer 1</th>
+                                <th>Answer 2</th>
+                                <th>Answer 3</th>
+                                <th>Answer 4</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for question in questions %}
+                            <tr>
+                                <td>{{question.question}}</td>
+                                <td>{{question.a1}}</td>
+                                <td>{{question.a2}}</td>
+                                <td>{{question.a3}}</td>
+                                <td>{{question.a4}}</td>
+                                <td><span class="material-symbols-sharp remove-question" value={{question.id}}>cancel</span></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <div class="right">
+            <div class="locations-list">
+                <h2 class="h2">Add a Question</h2>
+                <div class="add-location">
+                    <form class="locationForm" action="{% url 'game_keeper_questions' %}" method="post">
+                        {% csrf_token %}
+                        <div class="fieldsContainer">
+                            <input class="tInput" type="text" placeholder="Question" name="question" required>
+
+                            <div class="answerField">
+                                <input class="tInput" type="text" placeholder="Answer 1" name="a1" required>
+                                <input class="radioInput" type="radio" name="correct_select" value=1 required>
+                            </div>
+                            
+                            <div class="answerField">
+                                <input class="tInput" type="text" placeholder="Answer 2" name="a2" required>
+                                <input class="radioInput" type="radio" name="correct_select" value=2 required>
+                            </div>
+
+                            <div class="answerField">
+                                <input class="tInput" type="text" placeholder="Answer 3" name="a3" required>
+                                <input class="radioInput" type="radio" name="correct_select" value=3 required>
+                            </div>
+
+                            <div class="answerField">
+                                <input class="tInput" type="text" placeholder="Answer 4" name="a4" required>
+                                <input class="radioInput" type="radio" name="correct_select" value=4 required>
+                            </div>
+
+                            <button class="create-button" type="submit">Create</button>
+                        </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        // correct answer obj
+        let correct_answers = {};
+
+        {% for question in questions %}
+            
+        {% endfor %}
+
+    </script>
+
+    <script src="{% static 'sustainable_app/js/game_keeper_questions.js' %}"></script>
