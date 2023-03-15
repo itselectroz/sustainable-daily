@@ -125,3 +125,23 @@ class DailyGoalStatus(models.Model):
 
     def point_reward(self):
         return self.goal.point_reward or 0
+
+    def set_score(self, score):
+        self.score = score
+
+def update_daily_goal_status(request):
+    if request.method == 'POST' and request.is_ajax():
+        # Get the current user and the score value from the POST request
+        current_user = request.user
+        score = request.POST.get('score')
+
+        # Update the corresponding DailyGoalStatus object
+        dgs = DailyGoalStatus.objects.get(user_data__user=current_user)
+        dgs.score = score
+        dgs.save()
+
+        # Return a JSON response to indicate success
+        print("Successfully updated daily goal")
+    else:
+        # Return an error response if the request is not valid
+        print("Error updating daily goal")

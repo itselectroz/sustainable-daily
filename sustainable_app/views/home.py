@@ -2,7 +2,7 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from sustainable_app.models import Goal, DailyData, DailyGoalStatus
 import random
 
@@ -67,6 +67,27 @@ def getTodayCompleted(user):
         return []
     
 
+"""Updates daily goal"""
+def update_daily_goal_status(request):    
+    if request.method == 'POST':
+        # Get the current user and the score value from the POST request
+        current_user = request.user
+        score = request.POST.get('score')
+        goal = request.POST.get('goal')
 
-    
 
+        # Update the corresponding DailyGoalStatus object
+        current_goal = Goal.objects.get(name = goal)
+        dgs = DailyGoalStatus.objects.filter(user_data__user=current_user, goal=current_goal).first()
+
+        #Makes sure doesnt overwrite a bigger score
+        if (int(dgs.score) < int(score)):
+            dgs.score = 5
+
+        dgs.save()
+
+        # Return a JSON response to indicate success
+        return JsonResponse({'success': True})
+    else:
+        # Return an error response if the request is not valid
+        return JsonResponse({'success': False, 'error': 'Invalid request'})
