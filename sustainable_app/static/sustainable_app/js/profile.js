@@ -1,19 +1,145 @@
 
-
-
-// Setting unlockables to be locked if necessary
-for(let level in character_array) {
-    if(parseInt(level) > user_level) {
-        // console.log("Level: " + level + " User: " + user_level)
-        character_array[level].style.backgroundImage = "url(/static/sustainable_app/img/xp_symbol.png)";
-        character_array[level].firstElementChild.innerText = (level).toString();
-        character_array[level].setAttribute("level", level);
+/**
+ * set all non-owned items to locked
+ */
+function setupUnlockables() {
+    // Setting unlockables to be locked if necessary
+    for(let level in character_array) {
+        if(parseInt(level) > user_level) {
+            // console.log("Level: " + level + " User: " + user_level)
+            character_array[level].style.backgroundImage = "url(/static/sustainable_app/img/xp_symbol.png)";
+            character_array[level].firstElementChild.innerText = (level).toString();
+            character_array[level].setAttribute("level", level);
+        }
     }
 }
 
+// pop up for buying with points
+popup_menu = document.querySelector(".purchase-pop-up");
+popup_text_start = document.querySelector(".question").childNodes[0];
+popup_text_end = document.querySelector(".question").childNodes[2];
+item_cost = document.querySelector(".item_cost");
+item_img = document.querySelector(".item_to_buy");
+item_container = document.querySelector(".item_to_buy_container")
 
-// Ajax requests to change items
+/**
+ * set click events for all non-owned items
+ */
+function setupPurchasables() {
+    let temp;
+    for(let item in item_array) {
+        document.getElementById(item).addEventListener("click", (e) => {
+            // pass in points and image
+            popup(item_array[item], "/static/sustainable_app/img/" + item.toString() + ".png", e.target.parentNode.id);
+        })
 
+        document.querySelector('[for=' + item + ']').style.backgroundImage = "url(/static/sustainable_app/img/locked.png)";
+    }
+}
+
+/**
+ * set click events for all owned items
+ */
+function setEquipables() {
+    for(let item in owned_array) {
+        document.getElementById(item).addEventListener("click", () => {
+            equipItem(owned_array[item]);
+        })
+    }
+}
+
+/**
+ * pops up a confirmation menu to buy an item
+ * @param {item cost} points 
+ * @param {url for item image} img_url 
+ */
+function popup(points, img_url, type) {
+    popup_menu.style.visibility = "visible";
+    popup_text_start.textContent = "Purchase this item for ";
+    popup_text_end.textContent = " points?";
+    item_cost.innerText = (" " + points.toString() + " ");
+
+
+    if(type=="accessory") {
+        item_container.style.visibility = "visible";
+        item_container.style.height = 'fit-content';
+        item_img.src = img_url;
+    }
+    else {
+        item_container.style.visibility = "hidden";
+        item_container.style.height = '0px';
+    }
+
+
+    if(user_points >= points) {
+        document.querySelector(".buy").addEventListener("click", () => {
+            // purchase the item
+            purchaseItem(type);
+            popdown();
+        })
+    }
+    else {
+        document.querySelector(".buy").addEventListener("click", () => {
+            // not enough points
+            popup_text_start.textContent = "You need ";
+            popup_text_end.textContent = " more points!";
+            item_cost.innerText = (" " + (points - user_points) + " ");
+        })
+    }
+}
+
+/**
+ * collapses the confirmation menu
+ */
+function popdown() {
+    popup_menu.style.visibility = "hidden";
+    item_container.style.visibility = "hidden";
+}
+
+/**
+* sends ajax request to equip an item
+*/
+function equipItem(type) {
+
+    $item = $('input[name="' + type + '_select"]:checked').val();
+
+    $.ajax({
+        type: "POST",
+        url: "equip/",
+        data: {
+            type: type,
+            name: $item,
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+        },
+        success: function() {
+            window.location.reload();
+        }
+    });
+}
+
+/**
+ * sends ajax request to purchase an item
+ */
+function purchaseItem(type) {
+
+    $item = $('input[name="' + type + '_select"]:checked').val();
+
+    $.ajax({
+        type: "POST",
+        url: "purchase/",
+        data: {
+            type: type,
+            name: $item,
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+        },
+        success: function() {
+            window.location.reload();
+        }
+    });
+}
+
+
+// Ajax requests to change characters
 $(document).ready(function() {
 
     // Request for character
@@ -26,7 +152,6 @@ $(document).ready(function() {
             alert("Not high enough level");
         }
         else {
-            alert("Request sent")
             $character = $('input[name="character_select"]:checked').val();
             $.ajax({
                 type: "POST",
@@ -44,62 +169,8 @@ $(document).ready(function() {
 
         
     });
-        
-
-    // Request for accessory
-    $('#accessory input').on('change', function() {
-
-        $accessory = $('input[name="accessory_select"]:checked').val();
-
-        $.ajax({
-            type: "POST",
-            url: "equip/",
-            data: {
-                type: "accessory",
-                name: $accessory,
-                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-            },
-            success: function() {
-                window.location.reload();
-            }
-        });
-    });
-
-    // Request for name color
-    $('#name_color input').on('change', function() {
-
-        $name_color = $('input[name="name_color_select"]:checked').val();
-
-        $.ajax({
-            type: "POST",
-            url: "equip/",
-            data: {
-                type: "username_color",
-                name: $name_color,
-                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-            },
-            success: function() {
-                window.location.reload();
-            }
-        });
-    });
-
-    // Request for background color
-    $('#background_color input').on('change', function() {
-
-        $background_color = $('input[name="background_select"]:checked').val();
-
-        $.ajax({
-            type: "POST",
-            url: "equip/",
-            data: {
-                type: "background_color",
-                name: $background_color,
-                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-            },
-            success: function() {
-                window.location.reload();
-            }
-        });
-    });
 });
+
+setupPurchasables();
+setupUnlockables();
+setEquipables();

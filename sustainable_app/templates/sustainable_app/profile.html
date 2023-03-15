@@ -14,21 +14,20 @@
 
 {% csrf_token %}
 
-<div class="purchase_pop-up">
+<div class="purchase-pop-up" style="visibility: hidden;">
   <div class="purchase-container">
     <div class="item_to_buy_container">   
        <img class="item_to_buy" src="{% static 'sustainable_app/img/viking.png' %}" >
     </div>
     <p class="question">Purchase this item for<span class ="item_cost"> 100 </span>points?</p>
     <div class ="button_container">
-      <button class="cancel" type="button">cancel</button>
+      <button class="cancel" type="button" onclick="popdown()">cancel</button>
       <button class="buy" type="button">buy</button>
     </div>
   </div>
 </div>
+
 <div class="page">
-
-
   <div class="top_layer">
     <div class="profile">
       <div class="profile_container">
@@ -99,58 +98,58 @@
       <input type="radio" id="accessory_tab" name="tabs" />
       <label class="accessory" for="accessory_tab"></label>
       <form class="tab" id="accessory">
-        <input type="radio" id="none" name="accessory_select" value="none"/>
+        <input class="purchasable" type="radio" id="none" name="accessory_select" value="none"/>
         <label class="tab_content" id="accessory_none" for="none"></label>
 
-        <input type="radio" id="party" name="accessory_select" value="party"/>
+        <input class="purchasable" type="radio" id="party" name="accessory_select" value="party"/>
         <label class="tab_content" id="accessory_party" for="party"></label>
 
-        <input type="radio" id="viking" name="accessory_select" value="viking"/>
+        <input class="purchasable" type="radio" id="viking" name="accessory_select" value="viking"/>
         <label class="tab_content" id="accessory_viking" for="viking"></label>
 
-        <input type="radio" id="crown" name="accessory_select" value="crown"/>
+        <input class="purchasable" type="radio" id="crown" name="accessory_select" value="crown"/>
         <label class="tab_content" id="accessory_crown" for="crown"></label>
 
-        <input type="radio" id="locked" name="accessory_select" value="locked"/>
-        <label class="tab_content" id="accessory_locked" for="locked"></label>
+        {% comment %} <input class="purchasable" type="radio" id="locked" name="accessory_select" value="locked"/>
+        <label class="tab_content" id="accessory_locked" for="locked"></label> {% endcomment %}
       </form>
 
       <input type="radio" id="name_color_tab" name="tabs" />
-      <label id="name_color" for="name_color_tab"></label>
+      <label id="username_color" for="name_color_tab"></label>
 
-      <form class="tab" id="name_color">
-          <input type="radio" id="u_black" name="name_color_select" value="u_black"/>
+      <form class="tab" id="username_color">
+          <input class="purchasable" type="radio" id="u_black" name="username_color_select" value="u_black"/>
           <label class="tab_content" id="name_color_black" for="u_black"></label>
 
-          <input type="radio" id="u_green" name="name_color_select" value="u_green" />
+          <input class="purchasable" type="radio" id="u_green" name="username_color_select" value="u_green" />
           <label class="tab_content" id="name_color_green" for="u_green"></label>
 
-          <input type="radio" id="u_purple" name="name_color_select" value="u_purple"/>
+          <input class="purchasable" type="radio" id="u_purple" name="username_color_select" value="u_purple"/>
           <label class="tab_content" id="name_color_purple" for="u_purple"></label>
 
-          <input type="radio" id="u_orange" name="name_color_select" value="u_orange"/>
+          <input class="purchasable" type="radio" id="u_orange" name="username_color_select" value="u_orange"/>
           <label class="tab_content" id="name_color_orange" for="u_orange"></label>
 
-          <input type="radio" id="u_blue" name="name_color_select" value="u_blue"/>
+          <input class="purchasable" type="radio" id="u_blue" name="username_color_select" value="u_blue"/>
           <label class="tab_content" id="name_color_blue" for="u_blue"></label>
       </form>
 
       <input type="radio" id="background_tab" name="tabs" />
       <label id="background" for="background_tab"></label>
       <form class="tab" id="background_color">
-        <input type="radio" id="b_white" name="background_select" value="b_white"/>
+        <input class="purchasable" type="radio" id="b_white" name="background_color_select" value="b_white"/>
         <label class="tab_content" id="background_white" for="b_white"></label>
 
-        <input type="radio" id="b_blue" name="background_select" value="b_blue"/>
+        <input class="purchasable" type="radio" id="b_blue" name="background_color_select" value="b_blue"/>
         <label class="tab_content" id="background_blue" for="b_blue"></label>
 
-        <input type="radio" id="b_pink" name="background_select" value="b_pink" />
+        <input class="purchasable" type="radio" id="b_pink" name="background_color_select" value="b_pink" />
         <label class="tab_content" id="background_pink" for="b_pink"></label>
 
-        <input type="radio" id="b_grey" name="background_select" value="b_grey"/>
+        <input class="purchasable" type="radio" id="b_grey" name="background_color_select" value="b_grey"/>
         <label class="tab_content" id="background_grey" for="b_grey"></label>
 
-        <input type="radio" id="b_green" name="background_select" value="b_green"/>
+        <input class="purchasable" type="radio" id="b_green" name="background_color_select" value="b_green"/>
         <label class="tab_content" id="background_green" for="b_green"></label>
       </form>
     </div>
@@ -173,25 +172,42 @@
   const profile_image = document.getElementById("profile_image");
 
   user_level = parseInt("{{user_level}}");
+  user_points = parseInt("{{user.points}}");
 
   // Set attributes of elements
   xp_bar.setAttribute("data-label", "{{ user.xp }}");
-  point_bar.setAttribute("data-label", "{{ user.points }}");
+  point_bar.setAttribute("data-label", user_points);
   level_num.innerText = user_level;
   username.innerText = "{{ user.username }}";
   username.style.color = "{{ text_color }}";
   user_background.style.background = "{{ background_color }}";
 
 
-   profile_image.src="{% static "" %}sustainable_app/img/{{character}}{{accessory}}.png";
+  profile_image.src="{% static "" %}sustainable_app/img/{{character}}{{accessory}}.png";
   //profile_image.src="{% static 'sustainable_app/img/'|add:character|add:accessory|add:'.png' %}";
 
 // set unlock character levels
 let character_array = {};
 
 // populate array with items
-{% for item in all_characters %}
-  character_array[parseInt({{ item.unlock_level }})] = (document.getElementById(("character_" + {{ item.name }}.id).toString()));
+{% for character in all_characters %}
+  character_array[parseInt({{ character.unlock_level }})] = (document.getElementById(("character_" + {{ character.name }}.id).toString()));
+{% endfor %}
+
+// set point unlock items values
+let item_array = {};
+
+// populate array with items
+{% for item in purchasable_items %}
+  item_array[{{ item.name }}.id] = parseInt({{ item.cost }});
+{% endfor %}
+
+// set all owned items
+let owned_array = {};
+
+// populate array with items
+{% for owned in owned_items %}
+  owned_array[{{ owned.name }}.id] = {{owned.type}}.id;
 {% endfor %}
 
 </script>

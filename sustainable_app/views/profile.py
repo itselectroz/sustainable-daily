@@ -18,15 +18,22 @@ def profile(request):
     background_color = background_dict[str(
         current_user.equipped_items.get(type="background_color"))]
 
-    # TODO: Caculate xp needed for next level
+    user_level = current_user.level()
 
-    user_level = current_user.level
-
-    # user_background_color = current_user.equipped_items.get(type="background_color")
     user_accessory = current_user.equipped_items.get(type="accessory")
     user_character = current_user.equipped_items.get(type="character")
     
+    
+    # for dislaying point shop correctly
     all_characters = Item.objects.filter(type="character")
+    all_items = Item.objects.filter(type="accessory") | Item.objects.filter(type="username_color") | Item.objects.filter(type="background_color")
+    owned_items = current_user.owned_items.filter(type="accessory") | current_user.owned_items.filter(type="username_color") | current_user.owned_items.filter(type="background_color")
+    purchasable_items = set(all_items).difference(set(owned_items))
+    
+    # setting owned characters
+    for character in all_characters:
+        if character.unlock_level <= user_level:
+            current_user.owned_items.add(character.id)
 
     # pass user attributes to template
     context = {"user": current_user,
@@ -36,6 +43,8 @@ def profile(request):
                "character": user_character,
                "accessory": user_accessory,
                "all_characters": all_characters,
+               "purchasable_items": purchasable_items,
+               "owned_items": owned_items,
                }
 
     return render(request, "sustainable_app/profile.html", context)
@@ -48,7 +57,6 @@ def equip(request):
     current_user = request.user
 
     # Get the type and name of item
-    # TODO: Change type to diff variable name
     type = request.POST.get('type', False)
     name = request.POST.get('name', False)
 
@@ -63,8 +71,6 @@ def equip(request):
 def changeAccessory(type, name, current_user):
     # TODO: check if the user owns the accessory
     # we currently do not have "owned_items" implemented
-
-    
 
     # check if item is owned
     exists = False
@@ -85,3 +91,23 @@ def changeAccessory(type, name, current_user):
         if item_to_add.type == type and item_to_add.name == str(name):
             current_user.equipped_items.add(item_to_add.id)
     
+def purchase(request):
+    current_user = request.user
+    
+    # Get the type and name of item
+    type = request.POST.get('type', False)
+    name = request.POST.get('name', False)
+    
+    try:
+        purchased_item = Item.objects.get(type=type, name=name)
+        current_user.owned_items.add(purchased_item.id)
+        current_user.points -= purchased_item.cost
+        current_user.save()
+        return HttpResponse(status=200)
+        
+    except Item.DoesNotExist:
+        return HttpResponse('Object not found', status=404)
+    
+    
+        
+        
