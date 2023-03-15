@@ -7,10 +7,7 @@
 
 name: Deploy
 
-on:
-  push:
-    tags:
-      - *
+on: [push]
 
 env:
   PROJECT_ID: ${{ secrets.GPROJECT_ID }}
