@@ -1,0 +1,3 @@
+docker build -t us-west1-docker.pkg.dev/sustainable-daily/sustainable-daily-master/sustainable-daily-image:latest --platform linux/amd64 .
+docker -- push us-west1-docker.pkg.dev/sustainable-daily/sustainable-daily-master/sustainable-daily-image:latest
+gcloud compute instances update-container instance-1 --container-image=us-west1-docker.pkg.dev/sustainable-daily/sustainable-daily-master/sustainable-daily-image:latest

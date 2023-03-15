@@ -1,0 +1,52 @@
+# Heavily based on
+# https://stackoverflow.com/questions/66516113/github-action-for-updating-a-docker-container-on-gce
+
+# Secrets required:
+#   GPROJECT_ID: google cloud project id
+#   G_SACCOUNT_KEY: google cloud service account key
+
+name: Deploy
+
+on:
+  push:
+    tags:
+      - *
+
+env:
+  PROJECT_ID: ${{ secrets.GPROJECT_ID }}
+  GCE_INSTANCE: instance-1
+  GCE_ZONE: us-west1
+
+jobs:
+  build-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.G_SACCOUNT_KEY }}
+          project_id: ${{ secrets.GPROJECT_ID }}
+      
+      - name: Configure GCloud Docker
+        run:  |-
+          gcloud --quiet auth configure-docker
+      
+      - name: Build container
+        run:  |-
+          docker build \
+            --tag "-docker.pkg.dev/$PROJECT_ID/sustainable-daily-master/sustainable-daily-image:latest" \
+            --platform linux/amd64 .
+      
+      - name: Publish to Artifact Registry
+        run:  |-
+          docker -- push "us-west1-docker.pkg.dev/$PROJECT_ID/sustainable-daily-master/sustainable-daily-image:latest"
+        
+      - name: Deploy
+        run:  |-
+          gcloud compute instances update-container "$GCE_INSTANCE" \
+            --zone "$GCE_ZONE" \
+            --container-image "us-west1-docker.pkg.dev/$PROJECT_ID/sustainable-daily-master/sustainable-daily-image:latest"
