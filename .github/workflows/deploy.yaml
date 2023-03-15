@@ -37,7 +37,7 @@ jobs:
       - name: Build container
         run: |-
           docker build \
-            --tag "-docker.pkg.dev/$PROJECT_ID/sustainable-daily-master/sustainable-daily-image:latest" \
+            --tag "us-west1-docker.pkg.dev/$PROJECT_ID/sustainable-daily-master/sustainable-daily-image:latest" \
             --platform linux/amd64 .
 
       - name: Publish to Artifact Registry
