@@ -153,7 +153,6 @@ def locations_remove(request):
 
 # add a survey
 def surveys_add(request):
-    print("SURVEY")
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -280,7 +279,10 @@ def questions_remove(request):
     question_id = request.POST.get('question_id', False)
     
     # delete question
-    remove_question = QuizQuestion.objects.get(id=question_id)
+    try:
+        remove_question = QuizQuestion.objects.get(id=question_id)
+    except QuizQuestion.DoesNotExist:
+        return HttpResponse('Object not found', status=404)
     
     # delete question with given id
     remove_question.delete()
