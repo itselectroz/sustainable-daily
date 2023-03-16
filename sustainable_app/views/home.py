@@ -4,8 +4,6 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse
 from sustainable_app.models import Goal, DailyData, DailyGoalStatus
-from sustainable_app.management.commands.dailytasks import Command
-import random
 
 
 """To make a new goal create it with the same name as the page it is being created for. Give it the url to the page and the image for the daily goal. Go to the view being added
