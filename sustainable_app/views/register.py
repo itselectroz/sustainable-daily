@@ -54,8 +54,8 @@ def register_user(request):
     for item_name in default_items:
         try:
             item = Item.objects.get(name=item_name)
-            user.equipped_items.add(item.id)
             user.owned_items.add(item.id)
+            user.equipped_items.add(item.id)
         except Item.DoesNotExist:
             return render(request, 'sustainable_app/register.html', {
                 'error': True,
