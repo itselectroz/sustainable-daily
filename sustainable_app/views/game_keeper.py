@@ -38,9 +38,9 @@ def game_keeper_surveys(request):
     # request to add survey
     if request.method == "POST" and request.POST is not None:
         if 'survey' in request.POST:
-            return surveys_question_add(request)
-        elif 'question' in request.POST:
             return surveys_add(request)
+        elif 'question' in request.POST:
+            return surveys_question_add(request)
     
     # send all locations to template
     context = {
@@ -153,6 +153,7 @@ def locations_remove(request):
 
 # add a survey
 def surveys_add(request):
+    print("SURVEY")
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -168,6 +169,36 @@ def surveys_add(request):
     new_survey = Survey(survey_text=survey_text)
     new_survey.save()
 
+    return redirect(reverse('game_keeper_surveys'))
+
+# remove a survey
+def surveys_remove(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
+
+    # get survey id from post request
+    survey_id = request.POST.get('survey_id', False)
+    
+    
+    remove_survey = Survey.objects.get(id=survey_id)
+    
+    # for all questions
+    for question in SurveyQuestion.objects.all():
+        # if question is part of survey
+        if question.Survey == remove_survey:
+            # for all choices
+            for choice in SurveyChoice.objects.all():
+                # if choice is part of question
+                if choice.question == question:
+                    # delete choice
+                    choice.delete()
+            # delete question
+            question.delete()
+    
+    # delete survey
+    remove_survey.delete()
+    
+    # refresh the page
     return redirect(reverse('game_keeper_surveys'))
 
 # add a survey question
@@ -186,10 +217,16 @@ def surveys_question_add(request):
     o2 = request.POST.get('o2', '')
     o3 = request.POST.get('o3', '')
     o4 = request.POST.get('o4', '')
-    survey = request.POST.get('survey_selection', '')
+    survey_id = request.POST.get('survey_selection', '')
+
+    try:
+        survey = Survey.objects.get(id=survey_id)
+    except Survey.DoesNotExist:
+        return HttpResponse('Object not found', status=404)
+
     
     # create question object
-    new_survey_question= SurveyQuestion(Survey=survey, question_text=question_text, pub_date=datetime.now())
+    new_survey_question= SurveyQuestion(Survey=survey, question_text=question_text, pub_date=datetime.datetime.now())
     new_survey_question.save()
     
     # create choices objects

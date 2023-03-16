@@ -32,7 +32,7 @@
                                     {% endif %}
                                 {% endfor %}
                             </td>
-                            <td><span class="material-symbols-sharp remove-question" value={{survey.id}}>cancel</span></td>
+                            <td><span class="material-symbols-sharp remove-survey" value={{survey.id}}>cancel</span></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -71,9 +71,14 @@
 
                         <input class="tInput" type="text" placeholder="Option" name="o4">
 
-                        <select class="survey_select" name="survey_selection">
+                        <div class="select_div">
+                            <label>
+                                <select class="survey_select" name="survey_selection">
 
-                        </select>
+                                </select>
+                            </label>
+                        </div>
+                       
                         
                         <button class="create-button" type="submit" name="question">Add to Survey</button>
                     </div>

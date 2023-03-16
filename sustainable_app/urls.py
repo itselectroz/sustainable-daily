@@ -18,6 +18,7 @@ urlpatterns = [
     path('game_keeper/remove_keeper/', views.remove_keeper, name="remove_keeper"),
     path('game_keeper/locations_remove/', views.locations_remove, name="locations_remove"),
     path('game_keeper/questions_remove/', views.questions_remove, name="questions_remove"),
+    path('game_keeper/surveys_remove/', views.surveys_remove, name="surveys_remove"),
     path('game_keeper/open/<int:location_id>/', views.open_file, name='open-file'),
     path('game_keeper_locations/', views.game_keeper_locations, name="game_keeper_locations"),
     path('game_keeper_surveys/', views.game_keeper_surveys, name="game_keeper_surveys"),
