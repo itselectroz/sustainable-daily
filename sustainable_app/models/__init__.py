@@ -8,5 +8,6 @@ from .user import User
 from .location import Location
 from .daily_data import DailyData, DailyGoalStatus
 from .quiz_question import QuizQuestion
+from .statistics import Statistics
 
-__all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData', 'DailyGoalStatus', 'QuizQuestion']
+__all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData', 'DailyGoalStatus', 'QuizQuestion', 'Statistics']
