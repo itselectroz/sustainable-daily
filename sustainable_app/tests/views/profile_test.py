@@ -11,10 +11,11 @@ class ProfileViewTests(TestCase):
         self.user = User.objects.create_user(
             username=self.username, password=self.password)
 
-        default_items = ['cat', 'none', 'u_black', 'b_white']
+        default_items = ['badger', 'none', 'u_black', 'b_white']
         for item_name in default_items:
             item = Item.objects.get(name=item_name)
             self.user.equipped_items.add(item.id)
+            self.user.owned_items.add(item.id)
 
     def test_call_view_as_anonymous(self):
         """
@@ -38,14 +39,16 @@ class ProfileViewTests(TestCase):
         """
         self.client.login(username=self.username, password=self.password)
 
-        initial_item = Item.objects.get(name='cat')
-        new_item = Item.objects.get(name='badger')
+        initial_item = Item.objects.get(name='badger')
+        new_item = Item.objects.get(name='cat')
+        
+        self.user.owned_items.add(new_item)
 
         self.assertTrue(self.user.equipped_items.contains(initial_item))
 
         response = self.client.post(reverse('equip'), {
             "type": "character",
-            "name": "badger"
+            "name": "cat"
         })
 
         self.assertEqual(response.status_code, 200)

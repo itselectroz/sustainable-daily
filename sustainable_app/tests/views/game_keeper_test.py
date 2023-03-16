@@ -30,8 +30,8 @@ class GameKeeperViewTests(TestCase):
         response = self.client.get(reverse('game_keeper_surveys'))
         self.assertRedirects(response, reverse('login'))
         
-        # game keeper events page
-        response = self.client.get(reverse('game_keeper_events'))
+        # game keeper questions page
+        response = self.client.get(reverse('game_keeper_questions'))
         self.assertRedirects(response, reverse('login'))
         
     def test_call_view_as_user(self):
@@ -53,8 +53,8 @@ class GameKeeperViewTests(TestCase):
         response = self.client.get(reverse('game_keeper_surveys'), follow=True)
         self.assertRedirects(response, reverse('home'))
         
-        # game keeper events page
-        response = self.client.get(reverse('game_keeper_events'), follow=True)
+        # game keeper questions page
+        response = self.client.get(reverse('game_keeper_questions'), follow=True)
         self.assertRedirects(response, reverse('home'))
         
     def test_call_view_as_game_keeper(self):
@@ -80,10 +80,10 @@ class GameKeeperViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "sustainable_app/game_keeper_surveys.html")
         
-        # game keeper events page
-        response = self.client.get(reverse('game_keeper_events'), follow=True)
+        # game keeper questions page
+        response = self.client.get(reverse('game_keeper_questions'), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "sustainable_app/game_keeper_events.html")
+        self.assertTemplateUsed(response, "sustainable_app/game_keeper_questions.html")
             
     def test_post_view_locations_add_and_remove(self):
         """
@@ -105,7 +105,7 @@ class GameKeeperViewTests(TestCase):
         test_image = SimpleUploadedFile('small.gif', small_gif, content_type='image/gif')
         
         # post request for adding location
-        self.client.post(reverse('locations_add'), {
+        self.client.post(reverse('game_keeper_locations'), {
             'name': 'test-name',
             'category': 'test-category',
             'clue': 'test-clue',
