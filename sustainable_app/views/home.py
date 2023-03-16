@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from sustainable_app.models import Goal, DailyData
+from sustainable_app.models import Goal, DailyData, Statistics
 
 
 
@@ -46,3 +46,11 @@ def getTodayCompleted(user):
         
     except DailyData.DoesNotExist:
         return []
+
+def update_water(request):
+    Statistics.increment_quantity("water")
+    return HttpResponse(status=200)
+
+def update_recycling(request):
+    Statistics.increment_quantity("plastic")
+    return HttpResponse(status=200)

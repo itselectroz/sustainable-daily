@@ -2,7 +2,7 @@
 # add all names to __all__ array
 
 from .index import index
-from .home import home, complete_personal
+from .home import home, complete_personal, update_water, update_recycling
 from .login import login
 from .logout import logout
 from .profile import profile, equip
@@ -20,4 +20,5 @@ __all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'ho
            'minigame_catching', 'sorting', 'equip', 'game_keeper',
            'game_keeper_locations', 'game_keeper_surveys', 'game_keeper_events', 'remove_keeper',
            'locations_add', 'locations_remove', 'qr_callback', 'password_reset', 'forgot_password',
-           'open_file', 'complete_personal', 'quiz', 'minigame_survey']
+           'open_file', 'complete_personal', 'quiz', 'minigame_survey',
+           'update_water', 'update_recycling']

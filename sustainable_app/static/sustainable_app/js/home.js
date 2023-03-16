@@ -119,6 +119,13 @@ $(document).ready(function() {
 
         $goal_id = this.getAttribute("id")
 
+        // check if water
+        $goal_name = this.getAttribute("goal-name")
+        console.log($goal_name)
+        if ($goal_name == "Drink Water") {
+            waterDrunked()
+        }
+
         $.ajax({
             type: "POST",
             url: "complete_personal/",
@@ -132,3 +139,14 @@ $(document).ready(function() {
         });
     });
 });
+
+// Increase statistic
+function waterDrunked() {
+    $.ajax({
+        type: 'POST',
+        url: 'update_water/',
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+        }
+    })
+}
