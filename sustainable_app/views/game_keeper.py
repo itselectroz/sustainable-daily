@@ -165,8 +165,12 @@ def surveys_add(request):
     # get survey attributes from post request
     survey_text = request.POST.get('name', '')
     
+    # create a goal
+    new_goal = Goal.objects.create(name=survey_text, description="",  type=Goal.MINIGAME, point_reward=100, xp_reward=100)
+    new_goal.save()
+    
     # create survey object
-    new_survey = Survey(survey_text=survey_text)
+    new_survey = Survey(survey_text=survey_text, goal=new_goal)
     new_survey.save()
 
     return redirect(reverse('game_keeper_surveys'))
