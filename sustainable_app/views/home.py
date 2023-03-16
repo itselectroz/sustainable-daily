@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse
 from sustainable_app.models import Goal, DailyData, DailyGoalStatus
+from sustainable_app.management.commands.dailytasks import Command
 import random
 
 
@@ -16,24 +17,18 @@ DailyData.complete_goal(user, goal) """
 @login_required(login_url=reverse_lazy('login'))
 def home(request):
 
-
     # get current user
     current_user = request.user
 
     # pass goals to template
     personal_goals = Goal.objects.filter(type=Goal.PERSONAL)
-    u_goals = Goal.objects.filter(active = True)
     user_daily_completed_DGS = DailyGoalStatus.objects.filter(goal__active = True).filter(user_data__user = request.user).filter(completed = True)
     goal_ids = user_daily_completed_DGS.values_list('goal__id', flat=True)
     user_daily_completed = Goal.objects.filter(active=True, id__in=goal_ids)
     user_daily_notcompleted = Goal.objects.filter(active=True).exclude(dailygoalstatus__in=user_daily_completed_DGS)
 
-    print("ugoals:", u_goals, " completed: ",user_daily_completed , "########")
-
-
     context = {
         "goals": personal_goals,
-        "u_goals": u_goals,
         "user_daily_completed" : user_daily_completed,
         "user_daily_notcompleted" : user_daily_notcompleted
     }
@@ -68,6 +63,7 @@ def getTodayCompleted(user):
     
 
 """Updates daily goal"""
+@login_required(login_url=reverse_lazy('login'))
 def update_daily_goal_status(request):    
     if request.method == 'POST':
         # Get the current user and the score value from the POST request
@@ -77,7 +73,12 @@ def update_daily_goal_status(request):
 
 
         # Update the corresponding DailyGoalStatus object
-        current_goal = Goal.objects.get(name = goal)
+        try:
+            current_goal = Goal.objects.get(name = goal)
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': e})
+
+
         dgs = DailyGoalStatus.objects.filter(user_data__user=current_user, goal=current_goal).first()
 
         #Makes sure doesnt overwrite a bigger score
