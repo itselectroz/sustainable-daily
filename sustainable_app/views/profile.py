@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 
 from sustainable_app.models.user import Item
@@ -79,7 +79,7 @@ def changeAccessory(type, name, current_user):
             exists = True
 
     if(exists == False):
-        return Item.DoesNotExist
+        return HttpResponse('Object not found', status=404)
     
     # find item to remove and remove it
     for item_to_remove in current_user.equipped_items.all():
@@ -93,6 +93,9 @@ def changeAccessory(type, name, current_user):
     
 def purchase(request):
     current_user = request.user
+    
+    if not request.user.is_authenticated:
+        return redirect(reverse('login'))
     
     # Get the type and name of item
     type = request.POST.get('type', False)
