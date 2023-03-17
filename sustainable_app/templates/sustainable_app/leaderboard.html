@@ -6,9 +6,6 @@
 
 {% include 'sustainable_app/base.html' %}
 
-<!-- MATERIAL CDN -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
-<!-- STYLESHEET -->
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/leaderboard.css' %}">
 <script src="{% static 'sustainable_app/js/leaderboard_sorting.js'%}"></script>
 <script>
@@ -19,11 +16,13 @@
 
 <div class = "body">
     <div class="stats">
-        <h3 class="h3">Plastic Bottles Saved</h3>
-        <h1>{{ water }}</h1>
+        <div class="stat">
+            <h3>Plastic Bottles Saved: {{ water.quantity }}</h3>
+        </div>
 
-        <h3 class="h3">Items Recycled</h3>
-        <h1>{{ plastic }}</h1>
+        <div class="stat">
+            <h3>Items Recycled: {{ plastic.quantity }}</h3>
+        </div>
     </div>
 
     <div class = "header">
