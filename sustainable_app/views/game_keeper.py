@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.core.files import File
 from django.http import FileResponse, HttpResponse
 
 
 from io import BytesIO
 
-from sustainable_app.models import User, Location, Goal, DailyData
+from sustainable_app.models import User, Location, Goal, DailyData, Statistics
 import qrcode
 
 # game keeper page
@@ -15,11 +15,18 @@ def game_keeper(request):
     if request.method == "POST" and request.POST is not None:
         return locations_add(request)
     
+    # get statistics
+    stats = Statistics.objects.all()
+    plastic_stat = stats.get(name='plastic')
+    recycle_stat = stats.get(name='water')
+
 
     # send all game keepers to template
     context = {
         "game_keepers":  User.objects.filter(game_keeper=True),
         "current_keeper_id": request.user.id,
+        "plastic": plastic_stat,
+        "water": recycle_stat,
     }
 
     return direct_user("", request, context)
@@ -153,13 +160,16 @@ def qr_callback(request, id):
     if(not request.user.is_authenticated):
         return HttpResponse('Forbidden', status=403)
     
-    try:
-        goal = Goal.objects.get(id=id)
-    except Goal.DoesNotExist:
-        return HttpResponse('Object not found', status=404)
-    
+    goal = get_object_or_404(Goal, id=id)    
     
     DailyData.complete_goal(request.user, goal)
+
+    location = get_object_or_404(Location, goal=goal)
+    if location.category == location.RECYCLE:
+        Statistics.increment_quantity("plastic")
+    if location.category == location.WATER:
+        Statistics.increment_quantity("water")
+            
     
     # TODO: Success page
     return HttpResponse('Goal completed successfully', status=200)
