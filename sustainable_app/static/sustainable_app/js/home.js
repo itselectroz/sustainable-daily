@@ -119,10 +119,10 @@ $(document).ready(function() {
 
         $goal_id = this.getAttribute("id")
 
-        // check if water
+        // check if water and unchecked
         $goal_name = this.getAttribute("goal-name")
-        console.log($goal_name)
-        if ($goal_name == "Drink Water") {
+        $value = this.getAttribute("value")
+        if ($goal_name == "Drink Water" && $value == "grey") {
             waterDrunked()
         }
 
