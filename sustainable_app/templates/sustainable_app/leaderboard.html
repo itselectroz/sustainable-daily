@@ -6,17 +6,16 @@
 
 {% include 'sustainable_app/base.html' %}
 
+<!-- MATERIAL CDN -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,1,0" />
+<!-- STYLESHEET -->
 <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/leaderboard.css' %}">
 <script src="{% static 'sustainable_app/js/leaderboard_sorting.js'%}"></script>
 <script>
     let sortedByName = '{{name|safe}}';
     let sortedByPoints = '{{points|safe}}';
     let sortedByLevel = '{{level|safe}}';
-
-    
-
 </script>
-
 
 <div class = "body">
     <div class="stats">
@@ -30,7 +29,6 @@
     <div class = "header">
         <h1>Leaderboard</h1>
     </div>
-
 
     <table id = "leaderboard-table" class = "styled-table"> 
         <tr>
