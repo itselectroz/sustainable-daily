@@ -5,6 +5,8 @@ import datetime
 from . import Goal, User
 
 
+
+
 class DailyData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
@@ -73,6 +75,13 @@ class DailyData(models.Model):
         # Mark as completed
         daily_status.completed = True
         daily_status.save()
+
+        print("stuff")
+
+        if (user.date_last_task_completed < datetime.date.today()):
+            print("adding to streak")
+            user.streak_length += 1 
+
 
     @staticmethod
     def complete_personal_goal(user, goal):
