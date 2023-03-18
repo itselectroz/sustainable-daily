@@ -161,8 +161,8 @@ def qr_callback(request, id):
     
     DailyData.complete_goal(request.user, goal)
     
-    # TODO: Success page
-    return HttpResponse('Goal completed successfully', status=200)
+    #uccess page
+    return render(request, 'sustainable_app/qr_complete.html')
 
 
 def open_file(request, goal_id):
