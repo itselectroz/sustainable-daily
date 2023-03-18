@@ -96,7 +96,7 @@ def locations_add(request):
     )
 
     # TODO: When deployed change data to url
-    qr.add_data('127.0.0.1:8000/location_qr/' + str(new_goal.id))
+    qr.add_data('127.0.0.1:8000/location_qr/' + str(new_goal.id) + '/')
     qr.make(fit=True)
 
     img = qr.make_image(fill_color="black", back_color="white")

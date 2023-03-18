@@ -16,5 +16,7 @@ class Statistics(models.Model):
         except Statistics.DoesNotExist:
             statistic = Statistics(name=name)
             
+        print(statistic.quantity)
         statistic.quantity += 1
+        print(statistic.quantity)
         statistic.save()
