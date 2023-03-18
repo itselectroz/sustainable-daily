@@ -165,9 +165,10 @@ def qr_callback(request, id):
     DailyData.complete_goal(request.user, goal)
 
     location = get_object_or_404(Location, goal=goal)
-    if location.category == location.RECYCLE:
+    print(location.category, location.WATER)
+    if location.category == "recycle_bin": # location.RECYCLE don't work
         Statistics.increment_quantity("plastic")
-    if location.category == location.WATER:
+    if location.category == "water_fountain": # location.WATER don't work
         Statistics.increment_quantity("water")
             
     
