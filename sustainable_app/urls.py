@@ -19,7 +19,7 @@ urlpatterns = [
     path('game_keeper/remove_keeper/', views.remove_keeper, name="remove_keeper"),
     path('game_keeper/locations_add/', views.locations_add, name="locations_add"),
     path('game_keeper/locations_remove/', views.locations_remove, name="locations_remove"),
-    path('game_keeper/open/<int:goal_id>/', views.open_file, name='open-file'),
+    path('game_keeper/open/<int:location_id>/', views.open_file, name='open-file'),
     path('game_keeper_locations/', views.game_keeper_locations, name="game_keeper_locations"),
     path('game_keeper_surveys/', views.game_keeper_surveys, name="game_keeper_surveys"),
     path('game_keeper_events/', views.game_keeper_events, name="game_keeper_events"),
@@ -27,4 +27,5 @@ urlpatterns = [
     path('password_reset/', views.password_reset, name="password_reset"),
     path('forgot_password/', views.forgot_password, name="forgot_password"),
     path('quiz/', views.quiz, name="quiz"),
+    path('minigame_survey/', views.minigame_survey, name="minigame_survey"),
 ]

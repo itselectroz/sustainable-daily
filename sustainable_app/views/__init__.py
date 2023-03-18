@@ -13,10 +13,11 @@ from .minigame_catching import minigame_catching
 from .password_reset import password_reset, forgot_password
 from .game_keeper import game_keeper, game_keeper_locations, game_keeper_surveys, game_keeper_events, remove_keeper, locations_add, locations_remove, qr_callback, open_file
 from .quiz import quiz
+from .minigame_survey import minigame_survey
 
 
 __all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home',
            'minigame_catching', 'sorting', 'equip', 'game_keeper',
            'game_keeper_locations', 'game_keeper_surveys', 'game_keeper_events', 'remove_keeper',
            'locations_add', 'locations_remove', 'qr_callback', 'password_reset', 'forgot_password',
-           'open_file', 'complete_personal', 'quiz', 'update_daily_goal_status']
+           'open_file', 'complete_personal', 'quiz', 'minigame_survey', 'update_daily_goal_status']

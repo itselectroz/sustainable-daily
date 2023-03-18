@@ -164,15 +164,14 @@ def qr_callback(request, id):
     return HttpResponse('Goal completed successfully', status=200)
 
 
-def open_file(request, goal_id):
+def open_file(request, location_id):
     """
     User may download the qr code as a png file, to then print and put somewhere on campus
     """
     
     try:
-        goal = Goal.objects.get(id=goal_id)
-        location = Location.objects.get(goal=goal)
-    except Goal.DoesNotExist:
+        location = Location.objects.get(id=location_id)
+    except Location.DoesNotExist:
         return HttpResponse('Object not found', status=404)
     
     filename = "qrcode_" + location.name + ".png"
