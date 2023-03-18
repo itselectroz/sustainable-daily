@@ -77,6 +77,23 @@ class DailyData(models.Model):
         daily_status.save()
 
 
+        current_user = user
+
+        #Finding if need to add streak and adding or resetting 
+        daily_goals = DailyGoalStatus.objects.filter(user_data__user=current_user, completed = True)
+
+        #If havent added streak today and have complted at least one goal
+        if (datetime.date.today() - datetime.timedelta(days=1) > current_user.date_last_task_completed):
+            current_user.streak_length = 0
+            current_user.date_last_task_completed = datetime.date.today()
+            current_user.save()
+        elif ((current_user.date_last_task_completed < datetime.date.today()) & len(daily_goals) > 0):
+            current_user.streak_length += 1 
+            current_user.date_last_task_completed = datetime.date.today()
+            current_user.save()
+
+
+
         
 
 
