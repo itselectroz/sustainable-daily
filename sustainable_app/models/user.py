@@ -26,9 +26,3 @@ class User(AbstractUser):
 
     def xp_for_level(self, level):
         return math.floor((level / 0.07) ** 2)
-
-    def add_xp(self, xp):
-        self.xp += xp
-
-    def add_points(self, points):
-        self.points += points
