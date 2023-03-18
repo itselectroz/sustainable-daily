@@ -45,12 +45,12 @@
         <div class="locations-list">
             <h2 class="h2">Create a Survey</h2>
             <div class="add-location">
-                <form class="locationForm" action="" method="post">
+                <form class="locationForm" action="" method="post" id="create-survey">
                     {% csrf_token %}
                     <div class="fieldsContainer">
                         <input class="tInput" type="text" placeholder="Name" name="name" required>
 
-                        <button class="create-button" type="submit" name="survey">Create</button>
+                        <button class="create-button" type="submit" name="form-type" value="create-survey">Create</button>
                     </div>
                 </form>
             </div>
@@ -58,7 +58,7 @@
         <div class="locations-list">
             <h2 class="h2">Add a Survey Question</h2>
             <div class="add-location">
-                <form class="locationForm" action="" method="post">
+                <form class="locationForm" action="" method="post" id="create-question">
                     {% csrf_token %}
                     <div class="fieldsContainer">
                         <input class="tInput" type="text" placeholder="Question" name="name" required>
@@ -79,8 +79,7 @@
                             </label>
                         </div>
                        
-                        
-                        <button class="create-button" type="submit" name="question">Add to Survey</button>
+                        <button class="create-button" type="submit" name="form-type" value="create-question">Add to Survey</button>
                     </div>
                 </form>
             </div>

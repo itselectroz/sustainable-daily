@@ -37,9 +37,9 @@ def game_keeper_locations(request):
 def game_keeper_surveys(request):
     # request to add survey
     if request.method == "POST" and request.POST is not None:
-        if 'survey' in request.POST:
+        if request.POST.get("form-type") == "create-survey":
             return surveys_add(request)
-        elif 'question' in request.POST:
+        if request.POST.get("form-type") == "create-question":
             return surveys_question_add(request)
     
     # send all locations to template
@@ -220,7 +220,7 @@ def surveys_question_add(request):
     o2 = request.POST.get('o2', '')
     o3 = request.POST.get('o3', '')
     o4 = request.POST.get('o4', '')
-    survey_id = request.POST.get('survey_selection', '')
+    survey_id = int(request.POST.get('survey_selection', ''))
 
     try:
         survey = Survey.objects.get(id=survey_id)
