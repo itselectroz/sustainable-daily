@@ -7,12 +7,13 @@ class Goal(models.Model):
     description = models.CharField(max_length=400)
     active = models.BooleanField(default=False)
 
-    #URL of minigame and image for home page
+    # URL of minigame and image for home page
     url = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
 
     MINIGAME = "minigame"
     LOCATION = "location"
+    QUIZ = "quiz"
     POLL = "poll"
     PERSONAL = "personal"
 
@@ -21,6 +22,7 @@ class Goal(models.Model):
         choices=[
             (MINIGAME, "Minigame"),
             (LOCATION, "Location"),
+            (QUIZ, "Quiz"),
             (POLL, "Poll"),
             (PERSONAL, "Personal"),
         ]

@@ -19,19 +19,14 @@ def home(request):
     current_user = request.user
 
     # pass goals to template
+    daily_goals = Goal.objects.exclude(type=Goal.PERSONAL).filter(active=True)
     personal_goals = Goal.objects.filter(type=Goal.PERSONAL)
-    user_daily_completed_DGS = DailyGoalStatus.objects.filter(goal__active = True).filter(user_data__user = request.user).filter(completed = True)
-    goal_ids = user_daily_completed_DGS.values_list('goal__id', flat=True)
-    user_daily_completed = Goal.objects.filter(active=True, id__in=goal_ids)
-    user_daily_notcompleted = Goal.objects.filter(active=True).exclude(dailygoalstatus__in=user_daily_completed_DGS)
 
     context = {
-        "goals": personal_goals,
-        "user_daily_completed" : user_daily_completed,
-        "user_daily_notcompleted" : user_daily_notcompleted
+        "daily_goals": daily_goals,
+        "personal_goals": personal_goals,
+        "completed": getTodayCompleted(current_user)
     }
-
-    context["completed"] = getTodayCompleted(current_user)
     
     #TODO: Use randomly picked goals, not all goals
     return render(request, 'sustainable_app/home.html', context)
@@ -78,6 +73,8 @@ def update_daily_goal_status(request):
 
 
         dgs = DailyGoalStatus.objects.filter(user_data__user=current_user, goal=current_goal).first()
+
+        dgs.completed = True
 
         #Makes sure doesnt overwrite a bigger score
         if (int(dgs.score) < int(score)):
