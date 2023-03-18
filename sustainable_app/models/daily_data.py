@@ -76,11 +76,8 @@ class DailyData(models.Model):
         daily_status.completed = True
         daily_status.save()
 
-        print("stuff")
 
-        if (user.date_last_task_completed < datetime.date.today()):
-            print("adding to streak")
-            user.streak_length += 1 
+        
 
 
     @staticmethod
