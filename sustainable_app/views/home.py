@@ -50,7 +50,3 @@ def getTodayCompleted(user):
 def update_water(request):
     Statistics.increment_quantity("water")
     return HttpResponse(status=200)
-
-def update_recycling(request):
-    Statistics.increment_quantity("plastic")
-    return HttpResponse(status=200)
