@@ -9,7 +9,9 @@ class Statistics(models.Model):
 
     @staticmethod
     def increment_quantity(name):
-        #TODO propper comment stuffs
+        """
+        Increments the given statistic
+        """
 
         try:
             statistic = Statistics.objects.get(name=name)
