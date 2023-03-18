@@ -37,8 +37,9 @@ function createTable(dictionary) {
     topRow.setAttribute("id", "generated");
 
     //For every user in the leaderboard creating new row in table with their name, xp and level
-    for (user in dictionary) {
-        
+    for (let i = 0; i < Math.min(Object.keys(dictionary).length, 5); i++) {
+        let user = Object.keys(dictionary)[i];
+
         //Create new row for user
         let newRow = table.insertRow();
 
