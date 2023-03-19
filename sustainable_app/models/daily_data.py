@@ -79,14 +79,24 @@ class DailyData(models.Model):
         # If havent added streak today and have complted at least one goal
         today = datetime.datetime.combine(
             datetime.date.today(),
-            datetime.datetime.min.time()
+            datetime.time(0, 0)
         )
 
-        if (today - datetime.timedelta(days=1) > user.date_last_task_completed):
+        # Django treats DateFields weirdly
+        # Occasionally it returns a date object instead of datetime
+        # This handles that edge case
+        last_completed = user.date_last_task_completed
+        if isinstance(last_completed, datetime.date):
+            last_completed = datetime.datetime.combine(
+                last_completed,
+                datetime.time(0, 0)
+            )
+
+        if (today - datetime.timedelta(days=1) > last_completed):
             user.streak_length = 0
             user.date_last_task_completed = today
             user.save()
-        elif ((user.date_last_task_completed < today) and len(daily_goals) > 0):
+        elif ((last_completed < today) and len(daily_goals) > 0):
             user.streak_length += 1
             user.date_last_task_completed = today
             user.save()

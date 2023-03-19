@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='user',
             name='date_last_task_completed',
-            field=models.DateField(default=datetime.date(2023, 3, 18)),
+            field=models.DateTimeField(default=datetime.date.today),
         ),
         migrations.AddField(
             model_name='user',
