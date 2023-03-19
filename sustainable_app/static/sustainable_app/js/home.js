@@ -59,7 +59,7 @@ function setRedirects() {
         goal_items[i].addEventListener("click", () => {
 
             if(goal_items[i].getAttribute("name") == "personal") {
-
+                goal_items[i].setAttribute("value", "var(--completion-green)");
                 loadColors();
                 setGoalText();
             }
