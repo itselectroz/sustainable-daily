@@ -15,12 +15,18 @@
             const open = document.getElementById('openbtn');
             const max = window.matchMedia( "(max-width: 600px)" );
             const min = window.matchMedia( "(min-width: 600px)" );
+            const dropdownContainer = document.querySelector('.dropdown_container');
+            const toggleMenu = document.querySelector('.menu');
+            const toggleImg = document.querySelector('.profile');
             nav.classList.add('visible');
             open.classList.add('invisible');
             document.addEventListener('click', function(event) {
                 if (!nav.contains(event.target) && !open.contains(event.target) && max.matches) {
                     nav.classList.remove('visible');
                     open.classList.remove('invisible');
+                    dropdownContainer.classList.remove('active');
+                    toggleMenu.classList.remove('active');
+                    toggleImg.classList.remove('active');
                 }
             });
         }
@@ -48,16 +54,15 @@
             </a>
             <li class="nav-item" onclick="menuToggle();">
                 <div class="profile-icon">
-                    <img src="{% static 'sustainable_app/img/birdviking.png' %}" alt="profile icon image">
+                    <img src="{% static 'sustainable_app/img/navbar_profile_icon.png' %}" alt="profile icon image">
                 </div>
                 <div class="dropdown_container">
                     <div class="action">
                         <div class="menu">
-                            <h3>Dor_arrr<br><span>Dora Napier</span></h3>
                             <ul>
                                 <li><img src="{% static 'sustainable_app/img/profile_icon.png' %}"><a href="{% url 'profile' %}">Profile</a></li>
+                                <li><img src="{% static 'sustainable_app/img/change_password_icon.png' %}"><a href="{% url 'password_reset' %}">Change Password</a></li>
                                 <li><img src="{% static 'sustainable_app/img/logout_icon.png' %}"><a href="{% url 'logout' %}">Logout</a></li>
-                                <li><img src="{% static 'sustainable_app/img/settings_icon.png' %}"><a href="#">Settings</a></li>
                             </ul> 
                         </div>
                     </div>

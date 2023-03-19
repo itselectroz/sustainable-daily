@@ -37,8 +37,9 @@ function createTable(dictionary) {
     topRow.setAttribute("id", "generated");
 
     //For every user in the leaderboard creating new row in table with their name, xp and level
-    for (user in dictionary) {
-        
+    for (let i = 0; i < Math.min(Object.keys(dictionary).length, 5); i++) {
+        let user = Object.keys(dictionary)[i];
+
         //Create new row for user
         let newRow = table.insertRow();
 
@@ -57,12 +58,18 @@ function createTable(dictionary) {
         let username = dictionary[user]["username"];
         let username_color = dictionary[user]["username_color"];
 
-        //Adds relevent information to cells 
-        cell1.innerHTML = `
+        //Position
+        let position = dictionary[user]["position"];
+
+        //Adds relevent information to cells
+        cell1.innerHTML =`
+        <div class="cell1_container">
+        <div class="user_position">${position}&nbsp;</div>
         <div class="pfp_container">
             <div class="pfp" id="pfp" style="background-color:${background_color}">
                 <img class="pfp_image" id="pfp_image" src="../static/sustainable_app/img/${character}${accessory}.png">
             </div>
+        </div>
         </div>
         `;
         cell2.innerHTML = `<p style="color:${username_color}">${username}</p>`;
@@ -79,26 +86,38 @@ function createTable(dictionary) {
 /**
  * Delete all rows in table apart from top and creates new table using dictionary parameter
  */
-function orderTable(dictionary, changeToState) {
+function orderTable(dictionary, changeToState, currentUser) {
 
     dictionary = JSON.parse(dictionary);
 
-    //If the user is clicks the button to order the leaderboard the same way it is currently ordered, reverses the leaderboard so lowest values at top
+    for (let i = 0; i < dictionary.length; i++) {
+        dictionary[i].position = i + 1;
+    }
+
+    //If the user is clicks the button to order the leaderboard the same way it is currently ordered, gets the user's stats and the stats of those ranked around them
     if (changeToState == lastAction) {
         //Sets lastaction to "" so leaderboard will be ordered normally if same button clicked
         lastAction = "";
 
         //Blank array that will hold reverse of dictionary
         let newDictionary = [];
-        
-        let lastIndex = dictionary.length - 1;
 
-        //Reverses dictionary
-        for (user in dictionary) {
-            newDictionary.push(dictionary[lastIndex - user]);
+        //Finds index of current user
+        for (let i = 0; i < dictionary.length; i++) {
+            if (dictionary[i].id.toString() === currentUser) {
+                userIndex = i;
+                break;
+              }
         }
 
-        //Will create table using new revered dictionary
+        //Finds users ranked 2 above and 2 below the current user
+        for (let i = userIndex - 2; i < userIndex + 3; i++) {
+            if (i >= 0 && i < dictionary.length) {
+                newDictionary.push(dictionary[i]);
+            }
+        }
+
+        //Sets dictionary to newDictionary
         dictionary = newDictionary
     } else {
         lastAction = changeToState

@@ -1,7 +1,7 @@
 from django.db import models
 
-class Question(models.Model):
-    id = models.IntegerField(primary_key=True)
+class QuizQuestion(models.Model):
+    id = models.AutoField(primary_key=True)
     question = models.TextField()
     a1 = models.CharField(max_length=255)
     a2 = models.CharField(max_length=255)

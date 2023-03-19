@@ -6,10 +6,8 @@ from ..models import User, Item
 
 
 def register_user(request):
-    
     issues = []
 
-    
     # Check all fields are present and note down those that aren't
     for name in ['username', 'password', 'first-name', 'last-name', 'email']:
         if not request.POST.get(name, ''):
@@ -43,9 +41,9 @@ def register_user(request):
 
     user.first_name = first_name
     user.last_name = last_name
-    
+
     # if user is authenticated, is a game keeper, and wants to create a game keeper
-    if(isAdmin and request.user.is_authenticated and request.user.game_keeper):
+    if (isAdmin and request.user.is_authenticated and request.user.game_keeper):
         # set user game_keeper attribute to true
         user.game_keeper = True
 
@@ -67,11 +65,11 @@ def register_user(request):
     user.save()
 
     # Login the user to streamline process
-    if(not isAdmin):
+    if (not isAdmin):
         login(request, user)
 
     # if game keeper then direct to game keeper page, else direct to home
-    if(isAdmin):
+    if (isAdmin):
         return redirect(reverse('game_keeper'))
     else:
         return redirect(reverse('home'))
@@ -81,29 +79,31 @@ def register(request):
     if request.user.is_authenticated and request.user.game_keeper == False:
         return redirect(reverse('home'))
 
-
     if request.method == "POST" and request.POST is not None:
         try:
             return register_user(request)
-            
+
         except Exception:
             return render(request, 'sustainable_app/register.html', {
                 'error': True,
                 'error_message': 'Something went wrong, please try again.',
                 'issues': []
             })
-            
-            
-    if(request.user.is_authenticated and request.user.game_keeper):
+
+    if (request.user.is_authenticated and request.user.game_keeper):
         isAdmin = True
     else:
         isAdmin = False
 
-    
-    
     return render(request, 'sustainable_app/register.html', {
         'error': False,
         'issues': [],
         'isAdmin': isAdmin,
     })
 
+
+def privacy_policy(request):
+    # No authentication checks on this page
+    # It's fine for an authenticated user to see the privacy policy.
+
+    return render(request, 'sustainable_app/privacy_policy.html', {})
