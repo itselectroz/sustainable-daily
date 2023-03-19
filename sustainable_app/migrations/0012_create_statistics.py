@@ -9,6 +9,16 @@ def create(apps, schema_editor):
     water.save()
     plastic.save()
 
+def undo_create(apps, schema_aditor):
+    stat = apps.get_model('sustainable_app', 'Statistics')
+    try:
+        water = stat.objects.get(name="water")
+        plastic = stat.objects.get(name="plastic")
+        water.delete()
+        plastic.delete()
+    except stat.DoesNotExist:
+        pass
+
 class Migration(migrations.Migration):
 
     dependencies = [
