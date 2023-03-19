@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sustainable_app', '0007_merge_20230313_1353'),
+        ('sustainable_app', '0008_create_personal_goals'),
     ]
 
     operations = [

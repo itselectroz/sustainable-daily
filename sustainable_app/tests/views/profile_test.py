@@ -38,6 +38,7 @@ class ProfileViewTests(TestCase):
         checks the profile/equip endpoint equips an item
         """
         self.client.login(username=self.username, password=self.password)
+        
 
         initial_item = Item.objects.get(name='badger')
         new_item = Item.objects.get(name='cat')

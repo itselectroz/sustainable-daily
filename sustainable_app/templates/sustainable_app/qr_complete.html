@@ -1,0 +1,21 @@
+
+ {% load static %}
+ 
+ {% include 'sustainable_app/base.html' %}
+
+ <link rel="stylesheet" type="text/css" href="{% static 'sustainable_app/css/login.css' %}">
+
+<!-- TODO: detect login error -->
+
+ <div class="body">
+    <div class="outerContainer">
+      <form class="loginForm" action="" method="post">
+  
+          <h1 class="title">Goal completed successfully</h1>
+
+          <div class="fieldsContainer">
+            <button class="loginButton"><a class="home-link" href="/home/">Home</a></button>
+          </div>
+      </form> 
+    </div>
+  </div>

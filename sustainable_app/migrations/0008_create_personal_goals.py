@@ -30,7 +30,7 @@ def undo_make_goals(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sustainable_app', '0007_merge_20230313_1353'),
+        ('sustainable_app', '0007_dailydata_item_unlock_level_alter_goal_id_and_more'),
     ]
 
     operations = [
