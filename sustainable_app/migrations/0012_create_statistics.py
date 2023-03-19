@@ -26,5 +26,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(create),
+        migrations.RunPython(create, undo_create),
     ]

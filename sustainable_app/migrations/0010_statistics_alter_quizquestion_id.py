@@ -18,9 +18,4 @@ class Migration(migrations.Migration):
                 ('quantity', models.IntegerField()),
             ],
         ),
-        migrations.AlterField(
-            model_name='quizquestion',
-            name='id',
-            field=models.AutoField(primary_key=True, serialize=False),
-        ),
     ]
