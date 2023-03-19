@@ -19,7 +19,11 @@
             <div class="welcome">Home</div>
             <div class="universal-goals">
                 <div class="goal-image"></div>
-                <div class="universal-goals-text">Daily Goals - {{streak}} Day Streak</div>
+                {% if streak > 1 %}
+                    <div class="universal-goals-text">Daily Goals - {{streak}} Day Streak</div>
+                {% else %}
+                    <div class="universal-goals-text">Daily Goals</div>
+                {% endif %}
                 <div class="wrapper">
                     <div class="item" id="u-one" value="var(--completion-green)" name="universal"></div>
                     <div class="item" id="u-two" value="var(--completion-green)" name="universal"></div>

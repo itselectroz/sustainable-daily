@@ -5,8 +5,6 @@ import datetime
 from . import Goal, User
 
 
-
-
 class DailyData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
@@ -76,26 +74,24 @@ class DailyData(models.Model):
         daily_status.completed = True
         daily_status.save()
 
+        # Finding if need to add streak and adding or resetting
+        daily_goals = DailyGoalStatus.objects.filter(
+            user_data__user=user, completed=True)
 
-        current_user = user
+        # If havent added streak today and have complted at least one goal
+        today = datetime.datetime.combine(
+            datetime.date.today(),
+            datetime.datetime.min.time()
+        )
 
-        #Finding if need to add streak and adding or resetting 
-        daily_goals = DailyGoalStatus.objects.filter(user_data__user=current_user, completed = True)
-
-        #If havent added streak today and have complted at least one goal
-        if (datetime.date.today() - datetime.timedelta(days=1) > current_user.date_last_task_completed):
-            current_user.streak_length = 0
-            current_user.date_last_task_completed = datetime.date.today()
-            current_user.save()
-        elif ((current_user.date_last_task_completed < datetime.date.today()) & len(daily_goals) > 0):
-            current_user.streak_length += 1 
-            current_user.date_last_task_completed = datetime.date.today()
-            current_user.save()
-
-
-
-        
-
+        if (today - datetime.timedelta(days=1) > user.date_last_task_completed):
+            user.streak_length = 0
+            user.date_last_task_completed = today
+            user.save()
+        elif ((user.date_last_task_completed < today) & len(daily_goals) > 0):
+            user.streak_length += 1
+            user.date_last_task_completed = today
+            user.save()
 
     @staticmethod
     def complete_personal_goal(user, goal):

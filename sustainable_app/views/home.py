@@ -6,7 +6,6 @@ from django.http import HttpResponse
 from sustainable_app.models import Goal, DailyData, User, DailyGoalStatus
 
 
-
 @login_required(login_url=reverse_lazy('login'))
 def home(request):
 
@@ -21,13 +20,11 @@ def home(request):
 
     }
 
-    
-    
-
     context["completed"] = getTodayCompleted(current_user)
-    
-    #TODO: Use randomly picked goals, not all goals
+
+    # TODO: Use randomly picked goals, not all goals
     return render(request, 'sustainable_app/home.html', context)
+
 
 def complete_personal(request):
 
@@ -39,15 +36,16 @@ def complete_personal(request):
         DailyData.complete_goal(request.user, goal)
 
         return HttpResponse(status=200)
-    
+
 
 def getTodayCompleted(user):
-# get user's completed goals
+    # get user's completed goals
     today = datetime.date.today()
     try:
         daily_data = DailyData.objects.get(date=today, user=user)
-        completed_goals = daily_data.daily_goals.filter(dailygoalstatus__completed=True)
+        completed_goals = daily_data.daily_goals.filter(
+            dailygoalstatus__completed=True)
         return completed_goals
-        
+
     except DailyData.DoesNotExist:
         return []
