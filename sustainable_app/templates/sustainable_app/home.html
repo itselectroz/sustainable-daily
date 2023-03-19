@@ -22,24 +22,16 @@
                 <div class="universal-goals-text">Daily Goals</div>
                 <div class="wrapper">
 
-                    {% for goal in user_daily_notcompleted %}
+                    {% for goal in daily_goals %}
                         <a href="{{ goal.url }}">
-                            <div class="item" style="background-image: url('{{ goal.image }}')" value="var(--completion-grey)" name="universal"></div>
+                            <!--If the users daily goal status for each minigame is true the background will be green, if its not it will be grey-->
+                            {% if goal in completed %}
+                                <div class="item" style="background-image: url('{% static '' %}{{goal.image}}')" value="var(--completion-green" name="universal"></div>
+                            {% else %}
+                                <div class="item" style="background-image: url('{% static '' %}{{goal.image}}')" value="var(--completion-grey" name="universal"></div>
+                            {% endif %}
                         </a>
                     {% endfor %}
-
-
-                    {% for goal in user_daily_completed %}
-                        <a href="{{ goal.url }}">
-                            <div class="item" style="background-image: url('{{ goal.image }}')" value="var(--completion-green)" name="universal"></div>
-                        </a>
-                    {% endfor %}
-                        <!--If the users daily goal status for each minigame is true the background will be green, if its not it will be grey-->
-                       
-                        
-                                 
-                       
-                   
                 </div>
                 <div class="completed">
                     <span class="universal-goals-completed" id="universal-text"></span>
@@ -51,7 +43,7 @@
                 <div class="personal-goals-text">Personal Goals</div>
                 <div class="wrapper">
                     {% csrf_token %}
-                    {% for goal in goals %}
+                    {% for goal in personal_goals %}
                         {% if goal in completed %}
                         <div class="item personal" id={{goal.id}} value="var(--completion-green)" name="personal"><span class="goal-text">{{ goal.name }}</span></div>
                         {% else %}

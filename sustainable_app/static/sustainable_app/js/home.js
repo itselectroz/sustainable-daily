@@ -9,14 +9,16 @@ const personal_goals = document.querySelectorAll(".personal");
 const u_goals_text = document.getElementById("universal-text");
 const p_goals_text = document.getElementById("personal-text");
 
-
-// Urls and types for universal goals
-let goals_urls = ["/minigame_catching/", "/sorting/", "#", "#", "#"];
-let u_goals_type = ["catching-game", "sorting-game", "qr", "quiz", "survey", "wordle"]; // TODO: Implement auto selected images
-
 // Images array
 let personal_images = ["workout.png", "plastic_bottle.png", "cat_recycle.png", "paper.png", "watermelon.png"]
 
+// Callbacks
+
+function onGoalClick(goal) {
+    console.log(goal, daily_goals);
+}
+
+// Utility functions
 
 function setImages() {
     for(let i = 0; i < personal_goals.length; i++) {
@@ -60,9 +62,6 @@ function setRedirects() {
 
                 loadColors();
                 setGoalText();
-            }
-            else {
-                window.location.replace(goals_urls[i]);
             }
         });
     };

@@ -13,7 +13,7 @@ def quiz(request):
 
     # Completing this goal for user
     user = request.user
-    goal = Goal.objects.get(name="quiz")
+    goal = Goal.objects.get(type=Goal.QUIZ)
     DailyData.complete_goal(user, goal)
 
     questions = serializers.serialize('json', questions)
