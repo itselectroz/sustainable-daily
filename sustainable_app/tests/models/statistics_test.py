@@ -8,7 +8,7 @@ class StatisticsModelTests(TestCase):
         Checks the increment_quantity function increments the quantity attribute once
         """
 
-        Statistics(name="test", quantity=0)
+        Statistics.object.create(name="test", quantity=0)
 
         Statistics.increment_quantity("test")
 
@@ -20,7 +20,7 @@ class StatisticsModelTests(TestCase):
         Checks the increment_quantity function increments the quantity attribute for many runs
         """
 
-        Statistics(name="test", quantity=0)
+        Statistics.object.create(name="test", quantity=0)
 
         for i in range(100):
             Statistics.increment_quantity("test")

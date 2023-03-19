@@ -124,7 +124,6 @@ $(document).ready(function() {
         $value = this.getAttribute("value")
 
         if ($goal_name.toLowerCase().includes("drink") && $value == "grey") {
-            console.log("logging water")
             waterDrunked()
         }
 
