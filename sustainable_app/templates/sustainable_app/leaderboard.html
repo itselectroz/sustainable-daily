@@ -12,6 +12,7 @@
     let sortedByName = '{{name|safe}}';
     let sortedByPoints = '{{points|safe}}';
     let sortedByLevel = '{{level|safe}}';
+    let currentUser = '{{currentUser|safe}}';
 
     
 
@@ -27,9 +28,9 @@
     <table id = "leaderboard-table" class = "styled-table"> 
         <tr>
             <td>Rank by:</td>
-            <td><button class="tableBtn" onclick="orderTable(sortedByName,'username')" name = "param" value = "username">Username</button></td>
-            <td><button class="tableBtn" onclick="orderTable(sortedByLevel,'level')" name = "param" value = "level">Level</button></td>
-            <td><button class="tableBtn" onclick="orderTable(sortedByPoints,'points')" name = "param" value = "points">Points</button></td>
+            <td><button class="tableBtn" onclick="orderTable(sortedByName,'username',currentUser)" name = "param" value = "username">Username</button></td>
+            <td><button class="tableBtn" onclick="orderTable(sortedByLevel,'level',currentUser)" name = "param" value = "level">Level</button></td>
+            <td><button class="tableBtn" onclick="orderTable(sortedByPoints,'points',currentUser)" name = "param" value = "points">Points</button></td>
         
         </tr>
     </table>
