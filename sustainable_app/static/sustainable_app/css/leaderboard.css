@@ -87,6 +87,18 @@ html, body {
     width: 100%;
 }
 
+/* Style for user position */
+
+.cell1_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_position{
+    text-align: center;
+}
+
 /* Style for profile pictures */
 
 .pfp_container {

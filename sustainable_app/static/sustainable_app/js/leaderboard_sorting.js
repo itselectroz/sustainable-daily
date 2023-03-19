@@ -58,12 +58,18 @@ function createTable(dictionary) {
         let username = dictionary[user]["username"];
         let username_color = dictionary[user]["username_color"];
 
-        //Adds relevent information to cells 
-        cell1.innerHTML = `
+        //Position
+        let position = dictionary[user]["position"];
+
+        //Adds relevent information to cells
+        cell1.innerHTML =`
+        <div class="cell1_container">
+        <div class="user_position">${position}&nbsp;</div>
         <div class="pfp_container">
             <div class="pfp" id="pfp" style="background-color:${background_color}">
                 <img class="pfp_image" id="pfp_image" src="../static/sustainable_app/img/${character}${accessory}.png">
             </div>
+        </div>
         </div>
         `;
         cell2.innerHTML = `<p style="color:${username_color}">${username}</p>`;
@@ -83,6 +89,10 @@ function createTable(dictionary) {
 function orderTable(dictionary, changeToState, currentUser) {
 
     dictionary = JSON.parse(dictionary);
+
+    for (let i = 0; i < dictionary.length; i++) {
+        dictionary[i].position = i + 1;
+    }
 
     //If the user is clicks the button to order the leaderboard the same way it is currently ordered, gets the user's stats and the stats of those ranked around them
     if (changeToState == lastAction) {
