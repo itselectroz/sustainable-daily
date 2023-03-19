@@ -80,3 +80,9 @@ class DailyGoalStatus(models.Model):
     completed = models.BooleanField(default=False)
 
     score = models.IntegerField(default=0)
+
+    def xp_reward(self):
+        return self.goal.xp_reward or 0
+
+    def point_reward(self):
+        return self.goal.point_reward or 0

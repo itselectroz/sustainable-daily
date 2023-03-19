@@ -146,16 +146,14 @@ class DailyDataModelTests(TestCase):
 
         DailyData.complete_goal(self.user, self.goal1)
 
-        self.assertIsNotNone(DailyData.objects.get(
-            user=self.user, date=date.today()))
+        self.assertIsNotNone(DailyData.objects.get(user=self.user, date=date.today()))
 
     def test_complete_goal_with_daily_data(self):
         """
         Check complete_goal uses existing daily data
         and completes daily goal
         """
-        daily_data = DailyData.objects.create(
-            user=self.user, date=date.today())
+        daily_data = DailyData.objects.create(user=self.user, date=date.today())
 
         self.assertIs(daily_data.daily_goals.all().count(), 0)
 
@@ -185,3 +183,16 @@ class DailyGoalStatusModelTests(TestCase):
             goal=self.goal,
             completed=True
         )
+
+    def test_xp_reward(self):
+        """
+        Tests xp_reward returns the goal's xp_reward value
+        """
+        self.assertEqual(self.daily_goal.xp_reward(), self.goal.xp_reward)
+
+    def test_point_reward(self):
+        """
+        Tests point_reward returns the goal's point_reward value
+        """
+        self.assertEqual(self.daily_goal.point_reward(),
+                         self.goal.point_reward)
