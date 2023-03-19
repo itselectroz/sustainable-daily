@@ -22,7 +22,9 @@
 </div>
 
 
-
+{% csrf_token %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'sustainable_app/js/ajax_function.js' %}"></script>
 <script src="{% static 'sustainable_app/js/minigame_catching.js' %}"></script>
 <script src="{% static 'sustainable_app/js/input_handler_catching.js' %}"></script>
 

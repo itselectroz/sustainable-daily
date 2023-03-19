@@ -1,8 +1,10 @@
 from django.db import models
+from . import Goal
 
 
 class Survey(models.Model):
     id = models.AutoField(primary_key=True)
+    goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
     currentlyActive = models.BooleanField(default=False)
     survey_text = models.CharField(max_length=200)
 

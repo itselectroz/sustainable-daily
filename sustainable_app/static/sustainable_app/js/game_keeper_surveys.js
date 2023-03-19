@@ -1,32 +1,33 @@
-const Surveys = [
-{
-    surveyTitle: "Best Building",
-    surveyDesc: "What is the best building on campus?",
-    surveOptions: "Henderson, Forum, Amory, Northcott Theatre",
-},
-{
-    surveyTitle: "Best Building",
-    surveyDesc: "What is the best building on campus?",
-    surveOptions: "Henderson, Forum, Amory, Northcott Theatre",
-},
-{
-    surveyTitle: "Best Building",
-    surveyDesc: "What is the best building on campus?",
-    surveOptions: "Henderson, Forum, Amory, Northcott Theatre",
-},
+$(document).ready(function() {
 
-]
+    // Request to add location
+    $('.remove-survey').on('click', function() {
 
-// fill in locations table
-Surveys.forEach(survey => {
-    const tr = document.createElement("tr");
-    const trContent = `
-        <td>${survey.surveyTitle}</td>
-        <td>${survey.surveyDesc}</td>
-        <td>${survey.surveOptions}</td>
-        <td><a href="#"><span class="material-symbols-sharp">cancel</span></a></td>
-    `
+        $survey_id = this.getAttribute('value');
 
-    tr.innerHTML = trContent;
-    document.querySelector('table tbody').appendChild(tr);
+        $.ajax({
+            type: "POST",
+            url: "/game_keeper/surveys_remove/",
+            data: {
+                survey_id: $survey_id,
+                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+            },
+            success: function() {
+                window.location.reload();
+            }
+        });
+    });
 });
+
+// get survey select box
+const select = document.querySelector(".survey_select");
+
+// wiping the survey select box
+$(".survey_select").empty();
+
+// populating survey select box
+let newOption;
+for(let id in survey_options) {
+    newOption = new Option(survey_options[id], id);
+    select.add(newOption, undefined);
+}

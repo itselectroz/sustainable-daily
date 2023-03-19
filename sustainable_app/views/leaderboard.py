@@ -15,17 +15,17 @@ def leaderboard(request):
 
 
     #Gets leaderboard info ordered by username, level and points
-    users = list(User.objects.order_by("username").values('username', 'xp', 'points'))
+    users = list(User.objects.order_by("username").values('id','username', 'xp', 'points'))
     users = add_users_level(users)
     equipped_items_by_username = User.objects.order_by("username").prefetch_related('equipped_items')
     users = add_equipped_items(users,equipped_items_by_username)
 
-    level = list(User.objects.order_by("-xp").values('username', 'xp', 'points'))
+    level = list(User.objects.order_by("-xp").values('id','username', 'xp', 'points'))
     level = add_users_level(level)
     equipped_items_by_level = User.objects.order_by("-xp").prefetch_related('equipped_items')
     level = add_equipped_items(level,equipped_items_by_level)
     
-    points = list(User.objects.order_by("-points").values('username', 'xp', 'points'))
+    points = list(User.objects.order_by("-points").values('id','username', 'xp', 'points'))
     points = add_users_level(points)
     equipped_items_by_points = User.objects.order_by("-points").prefetch_related('equipped_items')
     points = add_equipped_items(points,equipped_items_by_points)
@@ -42,6 +42,7 @@ def leaderboard(request):
         'points':json.dumps(points),
         'plastic': plastic_stat,
         'water': recycle_stat,
+        'currentUser':request.user.id,
         }
 
    
