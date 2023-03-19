@@ -20,5 +20,11 @@
         <button class="buttons" id="left-button">Left</button>
         <button class="buttons" id="right-button">Right</button>
     </div>
+
+    {% csrf_token %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'sustainable_app/js/ajax_function.js' %}"></script>
     <script src="{% static 'sustainable_app/js/sorting.js' %}"></script>
+
+
 </body>

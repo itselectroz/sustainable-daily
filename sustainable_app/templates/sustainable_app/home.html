@@ -25,11 +25,17 @@
                     <div class="universal-goals-text">Daily Goals</div>
                 {% endif %}
                 <div class="wrapper">
-                    <div class="item" id="u-one" value="var(--completion-green)" name="universal"></div>
-                    <div class="item" id="u-two" value="var(--completion-green)" name="universal"></div>
-                    <div class="item" id="u-three" value="grey" name="universal"></div>
-                    <div class="item" id="u-four" value="grey" name="universal"></div>
-                    <div class="item" id="u-five" value="grey" name="universal"></div>
+
+                    {% for goal in daily_goals %}
+                        <a href="{{ goal.url }}">
+                            <!--If the users daily goal status for each minigame is true the background will be green, if its not it will be grey-->
+                            {% if goal in completed %}
+                                <div class="item" style="background-image: url('{% static '' %}{{goal.image}}')" value="var(--completion-green" name="universal"></div>
+                            {% else %}
+                                <div class="item" style="background-image: url('{% static '' %}{{goal.image}}')" value="var(--completion-grey" name="universal"></div>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
                 </div>
                 <div class="completed">
                     <span class="universal-goals-completed" id="universal-text"></span>
@@ -41,7 +47,7 @@
                 <div class="personal-goals-text">Personal Goals</div>
                 <div class="wrapper">
                     {% csrf_token %}
-                    {% for goal in goals %}
+                    {% for goal in personal_goals %}
                         {% if goal in completed %}
                         <div class="item personal" id={{goal.id}} value="var(--completion-green)" name="personal"><span class="goal-text">{{ goal.name }}</span></div>
                         {% else %}

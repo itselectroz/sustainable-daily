@@ -10,8 +10,6 @@ class DailyData(models.Model):
     date = models.DateField(default=datetime.date.today)
 
     # Completions
-    personal_goals = models.ManyToManyField(
-        Goal, through='PersonalGoalStatus', related_name='personal_goals')
     daily_goals = models.ManyToManyField(
         Goal, through='DailyGoalStatus', related_name='daily_goals')
 
@@ -88,7 +86,7 @@ class DailyData(models.Model):
             user.streak_length = 0
             user.date_last_task_completed = today
             user.save()
-        elif ((user.date_last_task_completed < today) & len(daily_goals) > 0):
+        elif ((user.date_last_task_completed < today) and len(daily_goals) > 0):
             user.streak_length += 1
             user.date_last_task_completed = today
             user.save()

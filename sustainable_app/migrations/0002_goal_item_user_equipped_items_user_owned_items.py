@@ -41,4 +41,9 @@ class Migration(migrations.Migration):
             name='owned_items',
             field=models.ManyToManyField(related_name='owned_by', to='sustainable_app.item'),
         ),
+        migrations.AddField(
+            model_name='item',
+            name='unlock_level',
+            field=models.IntegerField(default=0),
+        ),
     ]

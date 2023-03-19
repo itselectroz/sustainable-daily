@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sustainable_app', '0007_merge_20230313_1353'),
+        ('sustainable_app', '0008_create_personal_goals'),
     ]
 
     operations = [
@@ -46,5 +46,10 @@ class Migration(migrations.Migration):
                 ('votes', models.IntegerField(default=0)),
                 ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sustainable_app.surveyquestion')),
             ],
+        ),
+        migrations.AddField(
+            model_name='survey',
+            name='goal',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sustainable_app.goal'),
         ),
     ]

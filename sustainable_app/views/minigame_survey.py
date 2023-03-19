@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseBadRequest
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 from sustainable_app.models.survey import SurveyQuestion, SurveyChoice, Survey
 
 
-@login_required(login_url='/login')
+@login_required(login_url=reverse_lazy('login'))
 def minigame_survey(request):
 
     active_survey = Survey.objects.filter(currentlyActive=True).first()

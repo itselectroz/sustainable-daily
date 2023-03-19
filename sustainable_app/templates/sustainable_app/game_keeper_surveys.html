@@ -1,4 +1,4 @@
-<title>Locations</title>
+<title>Surveys</title>
 {% load static %}
 {% include 'sustainable_app/base.html' %}
 
@@ -7,46 +7,92 @@
 <!-- STYLESHEET -->
 <link rel="stylesheet" href="{% static 'sustainable_app/css/game_keeper_locations.css' %}">
 
-    <div class="container">
-        {% include 'sustainable_app/game_keeper_aside.html' %}
-        <main class="main">
-            <div class="locations">
-                <h2 class="h2">Surveys</h2>
-                <div class="locations-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Options</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+<div class="container">
+    {% include 'sustainable_app/game_keeper_aside.html' %}
+    <main class="main">
+        <div class="locations">
+            <h2 class="h2">Surveys</h2>
+            <div class="locations-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Questions</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for survey in surveys %}
+                        <tr id="{{survey.id}}">
+                            <td>{{survey.survey_text}}</td>
+                            <td>
+                                {% for question in questions %}
+                                    {% if question.Survey == survey%}
+                                    {{question.question_text|linebreaks}}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td><span class="material-symbols-sharp remove-survey" value={{survey.id}}>cancel</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        </main>
+        </div>
+    </main>
 
-        <div class="right">
-            <div class="locations-list">
-                <h2 class="h2">Add a Survey</h2>
-                <div class="add-location">
-                    <form class="locationForm" action="" method="post">
-                        <div class="fieldsContainer">
-                            <input class="tInput" type="text" placeholder="Title" name="title" required>
-    
-                            <input class="tInput" type="text" placeholder="Description" name="desc" required>
-                            
-                            <input class="tInput" type="text" placeholder="Options" name="options" required>
+    <div class="right">
+        <div class="locations-list">
+            <h2 class="h2">Create a Survey</h2>
+            <div class="add-location">
+                <form class="locationForm" action="" method="post" id="create-survey">
+                    {% csrf_token %}
+                    <div class="fieldsContainer">
+                        <input class="tInput" type="text" placeholder="Name" name="name" required>
 
-                            <button class="createButton" type="submit">Create</button>
+                        <button class="create-button" type="submit" name="form-type" value="create-survey">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="locations-list">
+            <h2 class="h2">Add a Survey Question</h2>
+            <div class="add-location">
+                <form class="locationForm" action="" method="post" id="create-question">
+                    {% csrf_token %}
+                    <div class="fieldsContainer">
+                        <input class="tInput" type="text" placeholder="Question" name="name" required>
+
+                        <input class="tInput" type="text" placeholder="Option" name="o1" required>
+
+                        <input class="tInput" type="text" placeholder="Option" name="o2" required>
+
+                        <input class="tInput" type="text" placeholder="Option" name="o3">
+
+                        <input class="tInput" type="text" placeholder="Option" name="o4">
+
+                        <div class="select_div">
+                            <label>
+                                <select class="survey_select" name="survey_selection">
+
+                                </select>
+                            </label>
                         </div>
-                    </form> 
-                </div>
+                       
+                        <button class="create-button" type="submit" name="form-type" value="create-question">Add to Survey</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="{% static 'sustainable_app/js/game_keeper_surveys.js' %}"></script>
+<script>
+// survey options obj
+let survey_options = {};
+
+{% for survey in surveys %}
+survey_options[{{survey.id}}] = "{{survey.survey_text}}"
+{% endfor %}
+</script>
+<script src="{% static 'sustainable_app/js/game_keeper_surveys.js' %}"></script>

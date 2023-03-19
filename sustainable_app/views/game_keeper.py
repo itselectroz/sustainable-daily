@@ -5,17 +5,14 @@ from django.http import FileResponse, HttpResponse
 
 from io import BytesIO
 
-from sustainable_app.models import User, Location, Goal, DailyData
+from sustainable_app.models import User, Location, Goal, DailyData, QuizQuestion, Survey, SurveyQuestion, SurveyChoice
 import qrcode
+import datetime
 
 # game keeper page
 
 
 def game_keeper(request):
-    if request.method == "POST" and request.POST is not None:
-        return locations_add(request)
-    
-
     # send all game keepers to template
     context = {
         "game_keepers":  User.objects.filter(game_keeper=True),
@@ -26,6 +23,10 @@ def game_keeper(request):
 
 
 def game_keeper_locations(request):
+    # request to add location
+    if request.method == "POST" and request.POST is not None:
+        return locations_add(request)
+    
     # send all locations to template
     context = {
         "locations":  Location.objects.all()
@@ -34,11 +35,35 @@ def game_keeper_locations(request):
 
 
 def game_keeper_surveys(request):
-    return direct_user("_surveys", request, {})
+    # request to add survey
+    if request.method == "POST" and request.POST is not None:
+        if request.POST.get("form-type") == "create-survey":
+            return surveys_add(request)
+        if request.POST.get("form-type") == "create-question":
+            return surveys_question_add(request)
+    
+    # send all locations to template
+    context = {
+        "surveys":  Survey.objects.all(),
+        "questions": SurveyQuestion.objects.all(),
+        "choices": SurveyChoice.objects.all(),
+    }
+    
+    return direct_user("_surveys", request, context)
 
 
-def game_keeper_events(request):
-    return direct_user("_events", request, {})
+def game_keeper_questions(request):
+    # request to add question
+    if request.method == "POST" and request.POST is not None:
+        return questions_add(request)
+    
+    # send all locations to template
+    context = {
+        "questions":  QuizQuestion.objects.all()
+    }
+    
+    # questions template
+    return direct_user("_questions", request, context)
 
 
 def remove_keeper(request):
@@ -56,8 +81,6 @@ def remove_keeper(request):
     return redirect('/')
 
 # add a location
-
-
 def locations_add(request):
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
@@ -73,7 +96,17 @@ def locations_add(request):
     clue = request.POST.get('clue', '')
 
     # create a goal
-    new_goal = Goal.objects.create(name=name, description="",  type=Goal.LOCATION, point_reward=100, xp_reward=100)
+    new_goal = Goal.objects.create(
+        name=name,
+        description="",
+        type=Goal.LOCATION,
+        point_reward=100,
+        xp_reward=100,
+        image=f"sustainable_app/img/location_{category}.png",
+    )
+
+    new_goal.url = f"/view_location/{new_goal.id}/"
+    new_goal.save()
     
     # create location object
     new_location = Location(name=name, category=category, clue=clue)
@@ -88,8 +121,7 @@ def locations_add(request):
         border=4,
     )
 
-    # TODO: When deployed change data to url
-    qr.add_data('127.0.0.1:8000/location_qr/' + str(new_goal.id))
+    qr.add_data(request.build_absolute_uri('/location_qr/' + str(new_goal.id)))
     qr.make(fit=True)
 
     img = qr.make_image(fill_color="black", back_color="white")
@@ -104,8 +136,6 @@ def locations_add(request):
     return redirect(reverse('game_keeper_locations'))
 
 # remove a location
-
-
 def locations_remove(request):
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
@@ -130,7 +160,146 @@ def locations_remove(request):
     # refresh the page
     return redirect(reverse('game_keeper_locations'))
 
+# add a survey
+def surveys_add(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
 
+    if (request.method != 'POST'):
+        # redirect to home if it's not a post request
+        return redirect(reverse('home'))
+
+
+    # get survey attributes from post request
+    survey_text = request.POST.get('name', '')
+    
+    # create a goal
+    new_goal = Goal.objects.create(name=survey_text, description="",  type=Goal.MINIGAME, point_reward=100, xp_reward=100)
+    new_goal.save()
+    
+    # create survey object
+    new_survey = Survey(survey_text=survey_text, goal=new_goal)
+    new_survey.save()
+
+    return redirect(reverse('game_keeper_surveys'))
+
+# remove a survey
+def surveys_remove(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
+
+    # get survey id from post request
+    survey_id = request.POST.get('survey_id', False)
+    
+    
+    remove_survey = Survey.objects.get(id=survey_id)
+    
+    # for all questions
+    for question in SurveyQuestion.objects.all():
+        # if question is part of survey
+        if question.Survey == remove_survey:
+            # for all choices
+            for choice in SurveyChoice.objects.all():
+                # if choice is part of question
+                if choice.question == question:
+                    # delete choice
+                    choice.delete()
+            # delete question
+            question.delete()
+    
+    # delete survey
+    remove_survey.delete()
+    
+    # refresh the page
+    return redirect(reverse('game_keeper_surveys'))
+
+# add a survey question
+def surveys_question_add(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
+
+    if (request.method != 'POST'):
+        # redirect to home if it's not a post request
+        return redirect(reverse('home'))
+
+
+    # get question attributes from post request
+    question_text = request.POST.get('name', '')
+    o1 = request.POST.get('o1', '')
+    o2 = request.POST.get('o2', '')
+    o3 = request.POST.get('o3', '')
+    o4 = request.POST.get('o4', '')
+    survey_id = int(request.POST.get('survey_selection', ''))
+
+    try:
+        survey = Survey.objects.get(id=survey_id)
+    except Survey.DoesNotExist:
+        return HttpResponse('Object not found', status=404)
+
+    
+    # create question object
+    new_survey_question= SurveyQuestion(Survey=survey, question_text=question_text, pub_date=datetime.datetime.now())
+    new_survey_question.save()
+    
+    # create choices objects
+    choices = [o1, o2, o3, o4]
+    count = 0
+    
+    for choice in choices:
+        if choice != '':
+            count += 1
+    
+    for i in range(count):
+        new_choice = SurveyChoice(question=new_survey_question, choice_text=choices[i])
+        new_choice.save()
+
+    return redirect(reverse('game_keeper_surveys'))
+
+# add a question
+def questions_add(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
+
+    if (request.method != 'POST'):
+        # redirect to home if it's not a post request
+        return redirect(reverse('home'))
+
+
+    # get question attributes from post request
+    question = request.POST.get('question', '')
+    a1 = request.POST.get('a1', '')
+    a2 = request.POST.get('a2', '')
+    a3 = request.POST.get('a3', '')
+    a4 = request.POST.get('a4', '')
+    correct_answer = int(request.POST.get('correct_select', ''))
+    
+    # create question object
+    new_question = QuizQuestion(question=question, a1=a1, a2=a2, a3=a3, a4=a4, correct_answer=correct_answer)
+    new_question.save()
+
+    return redirect(reverse('game_keeper_questions'))
+
+# remove a question
+def questions_remove(request):
+    if (not request.user.is_authenticated or not request.user.game_keeper):
+        return HttpResponse('Unauthorized', status=401)
+
+    # get question id from post request
+    question_id = request.POST.get('question_id', False)
+    
+    # delete question
+    try:
+        remove_question = QuizQuestion.objects.get(id=question_id)
+    except QuizQuestion.DoesNotExist:
+        return HttpResponse('Object not found', status=404)
+    
+    # delete question with given id
+    remove_question.delete()
+    
+    # refresh the page
+    return redirect(reverse('game_keeper_questions'))
+
+# direct user to correct page
 def direct_user(page, request, context):
     """
     Function for directing user to correct page
@@ -161,8 +330,8 @@ def qr_callback(request, id):
     
     DailyData.complete_goal(request.user, goal)
     
-    # TODO: Success page
-    return HttpResponse('Goal completed successfully', status=200)
+    #uccess page
+    return render(request, 'sustainable_app/qr_complete.html')
 
 
 def open_file(request, location_id):
