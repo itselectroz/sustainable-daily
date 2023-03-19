@@ -21,7 +21,7 @@ class User(AbstractUser):
 
     #Streak stuff, incremented in daily data when task is complete
     streak_length = models.IntegerField(default=0)
-    date_last_task_completed = models.DateField(default=date.today)
+    date_last_task_completed = models.DateTimeField(default=date.today)
 
     # Personal goals is a relation that will be in goal maybe?
 

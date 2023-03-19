@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse
-from sustainable_app.models import Goal, DailyData, Statistics, DailyGoalStatus
+from sustainable_app.models import Goal, DailyData, Statistics
 
 
 """To make a new goal create it with the same name as the page it is being created for. Give it the url to the page and the image for the daily goal. Go to the view being added
@@ -71,23 +71,18 @@ def update_daily_goal_status(request):
         score = request.POST.get('score')
         goal = request.POST.get('goal')
 
-
-        # Update the corresponding DailyGoalStatus object
+        # Get the corresponding goal object
         try:
             current_goal = Goal.objects.get(name = goal)
         except Exception as e:
             return JsonResponse({'success': False, 'error': e})
 
+        daily_status = DailyData.complete_goal(current_user, current_goal)
 
-        dgs = DailyGoalStatus.objects.filter(user_data__user=current_user, goal=current_goal).first()
-
-        dgs.completed = True
-
-        #Makes sure doesnt overwrite a bigger score
-        if (int(dgs.score) < int(score)):
-            dgs.score = 5
-
-        dgs.save()
+        # Update the score if needed
+        if (int(daily_status.score) < int(score)):
+            daily_status.score = score
+            daily_status.save()
 
         # Return a JSON response to indicate success
         return JsonResponse({'success': True})

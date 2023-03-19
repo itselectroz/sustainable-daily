@@ -100,6 +100,8 @@ class DailyData(models.Model):
             user.streak_length += 1
             user.date_last_task_completed = today
             user.save()
+        
+        return daily_status
 
 class DailyGoalStatus(models.Model):
     user_data = models.ForeignKey(DailyData, on_delete=models.CASCADE)

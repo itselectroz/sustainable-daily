@@ -3,11 +3,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('home/', views.home, name="home"),
-    path('home/complete_personal/', views.complete_personal, name="complete_personal"),
-    path('home/update_water/', views.update_water, name='update_water'),
-    path('home/update_daily_goal_status/',views.update_daily_goal_status, name='update_daily_goal_status'),
+    path('', views.home, name="home"),
+    path('complete_personal/', views.complete_personal, name="complete_personal"),
+    path('update_water/', views.update_water, name='update_water'),
+    path('update_daily_goal_status/',views.update_daily_goal_status, name='update_daily_goal_status'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('profile/', views.profile, name="profile"),
@@ -30,7 +29,7 @@ urlpatterns = [
     path('password_reset/', views.password_reset, name="password_reset"),
     path('forgot_password/', views.forgot_password, name="forgot_password"),
     path('quiz/', views.quiz, name="quiz"),
-    path('minigame_survey/', views.minigame_survey, name="minigame_survey"),
+    path('minigame_survey/<int:id>/', views.minigame_survey, name="minigame_survey"),
     path('view_location/<int:id>/', views.view_location, name="view_location"),
     path('privacy_policy/', views.privacy_policy, name="privacy_policy"),
 ]
