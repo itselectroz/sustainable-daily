@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sustainable_app', '0009_merge_migrations'),
+        ('sustainable_app', '0011_create_goals'),
     ]
 
     operations = [
