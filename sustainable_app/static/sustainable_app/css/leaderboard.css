@@ -65,7 +65,12 @@ html, body {
     transition: all 0.3s ease-in-out;
 }
 
-
+.stats {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+}
 
   
 /* Hover effect for all buttons */

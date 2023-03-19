@@ -105,6 +105,14 @@ $(document).ready(function() {
 
         $goal_id = this.getAttribute("id")
 
+        // check if water and unchecked
+        $goal_name = this.getAttribute("goal-name") // Drink water not mose like re-use bottle especially with pic of plastif bottle?
+        $value = this.getAttribute("value")
+
+        if ($goal_name.toLowerCase().includes("drink") && $value == "grey") {
+            waterDrunked()
+        }
+
         $.ajax({
             type: "POST",
             url: "complete_personal/",
@@ -118,3 +126,14 @@ $(document).ready(function() {
         });
     });
 });
+
+// Increase statistic
+function waterDrunked() {
+    $.ajax({
+        type: 'POST',
+        url: 'update_water/',
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+        }
+    })
+}

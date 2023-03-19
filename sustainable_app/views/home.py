@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse
-from sustainable_app.models import Goal, DailyData, DailyGoalStatus
+from sustainable_app.models import Goal, DailyData, Statistics, DailyGoalStatus
 
 
 """To make a new goal create it with the same name as the page it is being created for. Give it the url to the page and the image for the daily goal. Go to the view being added
@@ -56,6 +56,10 @@ def getTodayCompleted(user):
 
     except DailyData.DoesNotExist:
         return []
+
+def update_water(request):
+    Statistics.increment_quantity("water")
+    return HttpResponse(status=200)
     
 
 """Updates daily goal"""

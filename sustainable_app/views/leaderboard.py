@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 
-from sustainable_app.models.user import User
+from sustainable_app.models import User, Statistics
 from sustainable_app.util import username_dict, background_dict
 
 import json
@@ -30,9 +30,20 @@ def leaderboard(request):
     equipped_items_by_points = User.objects.order_by("-points").prefetch_related('equipped_items')
     points = add_equipped_items(points,equipped_items_by_points)
 
-
+    # get statistics
+    stats = Statistics.objects.all()
+    plastic_stat = stats.get(name='plastic')
+    recycle_stat = stats.get(name='water')
+    
     #Will send leaderboard info to html page for use by javascript
-    context = {'name':json.dumps(users),'level': json.dumps(level),'points':json.dumps(points),'currentUser':request.user.id}
+    context = {
+        'name':json.dumps(users),
+        'level': json.dumps(level),
+        'points':json.dumps(points),
+        'plastic': plastic_stat,
+        'water': recycle_stat,
+        'currentUser':request.user.id,
+        }
 
    
     return render(request, "sustainable_app/leaderboard.html", context)

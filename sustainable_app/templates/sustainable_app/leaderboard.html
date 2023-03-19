@@ -13,17 +13,22 @@
     let sortedByPoints = '{{points|safe}}';
     let sortedByLevel = '{{level|safe}}';
     let currentUser = '{{currentUser|safe}}';
-
-    
-
 </script>
 
-
 <div class = "body">
+    <div class="stats">
+        <div class="stat">
+            <h3>Plastic Bottles Saved: {{ water.quantity }}</h3>
+        </div>
+
+        <div class="stat">
+            <h3>Items Recycled: {{ plastic.quantity }}</h3>
+        </div>
+    </div>
+
     <div class = "header">
         <h1>Leaderboard</h1>
     </div>
-
 
     <table id = "leaderboard-table" class = "styled-table"> 
         <tr>

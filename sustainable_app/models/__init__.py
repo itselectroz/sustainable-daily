@@ -8,7 +8,8 @@ from .user import User
 from .location import Location
 from .daily_data import DailyData, DailyGoalStatus
 from .quiz_question import QuizQuestion
+from .statistics import Statistics
 from .survey import Survey, SurveyChoice, SurveyQuestion
 
 __all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData', 'DailyGoalStatus',
-           'QuizQuestion', 'Survey', 'SurveyChoice', 'SurveyQuestion']
+           'QuizQuestion', 'Survey', 'SurveyChoice', 'SurveyQuestion', 'Statistics']

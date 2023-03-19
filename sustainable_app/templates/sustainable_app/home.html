@@ -49,9 +49,9 @@
                     {% csrf_token %}
                     {% for goal in personal_goals %}
                         {% if goal in completed %}
-                        <div class="item personal" id={{goal.id}} value="var(--completion-green)" name="personal"><span class="goal-text">{{ goal.name }}</span></div>
+                        <div class="item personal" id={{goal.id}} value="var(--completion-green)" name="personal" goal-name="{{ goal.name }}"><span class="goal-text">{{goal.name}}</span></div>
                         {% else %}
-                        <div class="item personal" id={{goal.id}} value="grey" name="personal"><span class="goal-text">{{ goal.name }}</span></div>
+                        <div class="item personal" id={{goal.id}} value="grey" name="personal" goal-name="{{ goal.name }}"><span class="goal-text">{{goal.name}}</span></div>
                         {% endif %}
                     {% endfor %}
                 </div>
