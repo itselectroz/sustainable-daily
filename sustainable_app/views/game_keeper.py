@@ -20,6 +20,16 @@ def game_keeper(request):
     plastic_stat = stats.get(name='plastic')
     recycle_stat = stats.get(name='water')
 
+    # serialise gamekeepers
+    game_keepers = []
+    for user in User.objects.filter(game_keeper=True):
+        game_keepers.append({
+            "id": user.id,
+            "username": user.username,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+        })
+
     # send all game keepers to template
     context = {
         "game_keepers":  User.objects.filter(game_keeper=True),

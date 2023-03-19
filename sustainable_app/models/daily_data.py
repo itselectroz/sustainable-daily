@@ -79,7 +79,7 @@ class DailyData(models.Model):
         # If havent added streak today and have complted at least one goal
         today = datetime.datetime.combine(
             datetime.date.today(),
-            datetime.datetime.min.time()
+            datetime.time(0, 0)
         )
 
         if (today - datetime.timedelta(days=1) > user.date_last_task_completed):
