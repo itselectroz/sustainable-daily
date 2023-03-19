@@ -186,6 +186,9 @@ function gameState(state) {
         clearInterval(fallInterval);
         clearTimeout(speedTimeout);
         removeRubbish();
+
+        add_score(score,"minigame_catching");
+
         gameOver = true;
         generateSpeed = 1000;
         menuButton.textContent = "Play Again";

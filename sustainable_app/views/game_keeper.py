@@ -7,7 +7,6 @@ from io import BytesIO
 
 from sustainable_app.models import User, Location, Goal, DailyData
 import qrcode
-
 # game keeper page
 
 
@@ -73,7 +72,17 @@ def locations_add(request):
     clue = request.POST.get('clue', '')
 
     # create a goal
-    new_goal = Goal.objects.create(name=name, description="",  type=Goal.LOCATION, point_reward=100, xp_reward=100)
+    new_goal = Goal.objects.create(
+        name=name,
+        description="",
+        type=Goal.LOCATION,
+        point_reward=100,
+        xp_reward=100,
+        image=f"sustainable_app/img/location_{category}.png",
+    )
+
+    new_goal.url = f"/view_location/{new_goal.id}/"
+    new_goal.save()
     
     # create location object
     new_location = Location(name=name, category=category, clue=clue)
@@ -88,8 +97,7 @@ def locations_add(request):
         border=4,
     )
 
-    # TODO: When deployed change data to url
-    qr.add_data('127.0.0.1:8000/location_qr/' + str(new_goal.id))
+    qr.add_data(request.build_absolute_uri('/location_qr/' + str(new_goal.id)))
     qr.make(fit=True)
 
     img = qr.make_image(fill_color="black", back_color="white")
