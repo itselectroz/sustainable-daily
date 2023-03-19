@@ -88,6 +88,7 @@ body {
         margin-top: 0;
         font-family: "Arial Rounded MT";
         margin-bottom: 2rem;
+        text-align: center;
 }
 
 .error-heading {
@@ -128,6 +129,11 @@ body {
   cursor: not-allowed;
   background: rgba(0, 0, 0, .08);
   color: rgba(0, 0, 0, .3);
+}
+
+.home-link {
+        text-decoration: none;
+        color: white;
 }
 
 
