@@ -140,6 +140,8 @@ function getRandomClass() {
  */
 function lostLife() {
 
+    console.log("LOST LIFE");
+
     // Check if out of lives
     if(lives > 0) {
         lives -= 1;
