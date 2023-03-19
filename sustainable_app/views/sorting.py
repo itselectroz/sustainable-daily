@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 
+
 @login_required(login_url=reverse_lazy('login'))
-def sorting(request):
+def sorting(request):    
     return render(request, 'sustainable_app/sorting.html')
