@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.shortcuts import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from sustainable_app.models import User, Location
+from sustainable_app.models import User, Location, QuizQuestion, Survey, SurveyQuestion, SurveyChoice
 
 
 class GameKeeperViewTests(TestCase):
@@ -30,8 +30,8 @@ class GameKeeperViewTests(TestCase):
         response = self.client.get(reverse('game_keeper_surveys'))
         self.assertRedirects(response, reverse('login'))
         
-        # game keeper events page
-        response = self.client.get(reverse('game_keeper_events'))
+        # game keeper questions page
+        response = self.client.get(reverse('game_keeper_questions'))
         self.assertRedirects(response, reverse('login'))
         
     def test_call_view_as_user(self):
@@ -53,8 +53,8 @@ class GameKeeperViewTests(TestCase):
         response = self.client.get(reverse('game_keeper_surveys'), follow=True)
         self.assertRedirects(response, reverse('home'))
         
-        # game keeper events page
-        response = self.client.get(reverse('game_keeper_events'), follow=True)
+        # game keeper questions page
+        response = self.client.get(reverse('game_keeper_questions'), follow=True)
         self.assertRedirects(response, reverse('home'))
         
     def test_call_view_as_game_keeper(self):
@@ -80,10 +80,10 @@ class GameKeeperViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "sustainable_app/game_keeper_surveys.html")
         
-        # game keeper events page
-        response = self.client.get(reverse('game_keeper_events'), follow=True)
+        # game keeper questions page
+        response = self.client.get(reverse('game_keeper_questions'), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "sustainable_app/game_keeper_events.html")
+        self.assertTemplateUsed(response, "sustainable_app/game_keeper_questions.html")
             
     def test_post_view_locations_add_and_remove(self):
         """
@@ -105,7 +105,7 @@ class GameKeeperViewTests(TestCase):
         test_image = SimpleUploadedFile('small.gif', small_gif, content_type='image/gif')
         
         # post request for adding location
-        self.client.post(reverse('locations_add'), {
+        self.client.post(reverse('game_keeper_locations'), {
             'name': 'test-name',
             'category': 'test-category',
             'clue': 'test-clue',
@@ -152,3 +152,81 @@ class GameKeeperViewTests(TestCase):
         self.assertTrue(User.objects.filter(username='test-username').exists() == False)
         
         
+    def test_post_view_questions_add_and_remove(self):
+        """
+        check the question is successfully added and removed
+        """
+        
+        self.user.game_keeper = True
+        self.user.save()
+        self.client.login(username=self.username, password=self.password)
+        
+        #----- add question -----
+        
+        # post request for adding question
+        self.client.post(reverse('game_keeper_questions'), {
+            'question': 'test-question',
+            'a1': 'test-a1',
+            'a2': 'test-a2',
+            'a3': 'test-a3',
+            'a4': 'test-a4',
+            'correct_select': '2',
+        }, follow=True)
+        
+        self.assertTrue(QuizQuestion.objects.get(question='test-question'))
+        
+        #----- remove question -----
+        
+        # post request for removing question
+        self.client.post(reverse('questions_remove'), {
+            'question_id': QuizQuestion.objects.get(question='test-question').id,
+        }, follow=True)
+        
+        self.assertTrue(QuizQuestion.objects.filter(question='test-question').exists() == False)
+        
+        
+    def test_post_view_surveys_add_and_remove(self):
+        """
+        check the survey is successfully added and removed
+        """
+        
+        self.user.game_keeper = True
+        self.user.save()
+        self.client.login(username=self.username, password=self.password)
+        
+        #----- add survey -----
+        
+        # post request for adding survey
+        self.client.post(reverse('game_keeper_surveys'), {
+            'name': 'test-survey',
+            'form-type': 'create-survey'
+        }, follow=True)
+        
+        self.assertTrue(Survey.objects.get(survey_text='test-survey'))
+        
+        #----- add survey question -----
+        
+        # post request for adding survey question
+        self.client.post(reverse('game_keeper_surveys'), {
+            'name': 'test-question',
+            'o1': 'test-o1',
+            'o2': 'test-o2',
+            'o3': 'test-o3',
+            'o4': 'test-o4',
+            'survey_selection': Survey.objects.get(survey_text='test-survey').id,
+            'form-type': 'create-question'
+        }, follow=True)
+        
+        self.assertTrue(SurveyQuestion.objects.get(question_text='test-question'))
+        self.assertTrue(SurveyChoice.objects.get(choice_text='test-o1', question=SurveyQuestion.objects.get(question_text='test-question')))
+        
+        #----- remove survey -----
+        
+        # post request for removing survey
+        self.client.post(reverse('surveys_remove'), {
+            'survey_id': Survey.objects.get(survey_text='test-survey').id,
+        }, follow=True)
+        
+        self.assertTrue(Survey.objects.filter(survey_text='test-survey').exists() == False)
+        self.assertTrue(SurveyQuestion.objects.filter(question_text='test-question').exists() == False)
+        self.assertTrue(SurveyChoice.objects.filter(choice_text='test-o1').exists() == False)
