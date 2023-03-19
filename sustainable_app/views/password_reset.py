@@ -1,14 +1,5 @@
 
 from django.shortcuts import redirect, render, reverse
-from django.utils.http import urlsafe_base64_encode
-from django.http import HttpResponse
-from django.utils.encoding import force_bytes
-from django.contrib.auth.tokens import default_token_generator
-from django.template.loader import render_to_string
-from django.core.mail import send_mail, BadHeaderError
-
-from sustainable_app.models import User
-
 
 
 def password_reset(request):

@@ -10,8 +10,6 @@ class DailyData(models.Model):
     date = models.DateField(default=datetime.date.today)
 
     # Completions
-    personal_goals = models.ManyToManyField(
-        Goal, through='PersonalGoalStatus', related_name='personal_goals')
     daily_goals = models.ManyToManyField(
         Goal, through='DailyGoalStatus', related_name='daily_goals')
 
@@ -73,41 +71,6 @@ class DailyData(models.Model):
         # Mark as completed
         daily_status.completed = True
         daily_status.save()
-
-    @staticmethod
-    def complete_personal_goal(user, goal):
-        """
-        Adds a goal to a user's completed personal goals for today's date.
-
-        If there is no `DailyData` instance for today's date, a new one is created.
-
-        :param user: The `User` instance to complete the goal for.
-        :type user: `User`
-        :param goal: A `Goal` instance to be added to today's personal goals.
-        :type goal: `Goal`
-        """
-        # Get daily data
-        daily_data, _ = DailyData.objects.get_or_create(
-            user=user,
-            date=datetime.date.today()
-        )
-
-        # Get goal status
-        personal_goal_status, _ = PersonalGoalStatus.objects.get_or_create(
-            goal=goal,
-            user_data=daily_data,
-        )
-
-        # Mark as completed
-        personal_goal_status.completed = True
-        personal_goal_status.save()
-
-
-class PersonalGoalStatus(models.Model):
-    user_data = models.ForeignKey(DailyData, on_delete=models.CASCADE)
-    goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
-
-    completed = models.BooleanField(default=False)
 
 
 class DailyGoalStatus(models.Model):

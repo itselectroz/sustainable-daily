@@ -182,6 +182,10 @@ function update() {
         menuScreen.style.display = "flex"
         container.style.display = "none"
         buttonContainer.style.display = "none"
+
+        add_score(score,"sorting")
+
+
         score = 0
         currentImagePos = -1
         currentImageNode = -1
