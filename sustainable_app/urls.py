@@ -27,4 +27,5 @@ urlpatterns = [
     path('forgot_password/', views.forgot_password, name="forgot_password"),
     path('quiz/', views.quiz, name="quiz"),
     path('minigame_survey/', views.minigame_survey, name="minigame_survey"),
+    path('privacy_policy/', views.privacy_policy, name="privacy_policy"),
 ]

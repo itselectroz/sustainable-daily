@@ -216,7 +216,13 @@ input[type="submit"]:hover ~ .shaker {
   
 }
 
-
+.privacy-policy {
+  text-align: center;
+  color: grey;
+  font-size: 12px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
 
 
