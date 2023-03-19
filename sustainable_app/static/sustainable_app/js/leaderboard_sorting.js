@@ -80,26 +80,34 @@ function createTable(dictionary) {
 /**
  * Delete all rows in table apart from top and creates new table using dictionary parameter
  */
-function orderTable(dictionary, changeToState) {
+function orderTable(dictionary, changeToState, currentUser) {
 
     dictionary = JSON.parse(dictionary);
 
-    //If the user is clicks the button to order the leaderboard the same way it is currently ordered, reverses the leaderboard so lowest values at top
+    //If the user is clicks the button to order the leaderboard the same way it is currently ordered, gets the user's stats and the stats of those ranked around them
     if (changeToState == lastAction) {
         //Sets lastaction to "" so leaderboard will be ordered normally if same button clicked
         lastAction = "";
 
         //Blank array that will hold reverse of dictionary
         let newDictionary = [];
-        
-        let lastIndex = dictionary.length - 1;
 
-        //Reverses dictionary
-        for (user in dictionary) {
-            newDictionary.push(dictionary[lastIndex - user]);
+        //Finds index of current user
+        for (let i = 0; i < dictionary.length; i++) {
+            if (dictionary[i].id.toString() === currentUser) {
+                userIndex = i;
+                break;
+              }
         }
 
-        //Will create table using new revered dictionary
+        //Finds users ranked 2 above and 2 below the current user
+        for (let i = userIndex - 2; i < userIndex + 3; i++) {
+            if (i >= 0 && i < dictionary.length) {
+                newDictionary.push(dictionary[i]);
+            }
+        }
+
+        //Sets dictionary to newDictionary
         dictionary = newDictionary
     } else {
         lastAction = changeToState
