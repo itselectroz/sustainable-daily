@@ -10,7 +10,7 @@ const u_goals_text = document.getElementById("universal-text");
 const p_goals_text = document.getElementById("personal-text");
 
 // Images array
-let personal_images = ["workout.png", "plastic_bottle.png", "cat_recycle.png", "paper.png", "watermelon.png"]
+let personal_images = ["workout.png", "plastic_bottle.png", "cat_recycle.png", "paper.png", "watermelon.png"];
 
 
 /**
@@ -47,8 +47,8 @@ function setGoalText() {
     });
 
     // Display numbers
-    u_goals_text.innerText = GOALS_TEXT_PREFIX + u_num + GOALS_TEXT_SUFFIX
-    p_goals_text.innerText = GOALS_TEXT_PREFIX + p_num + GOALS_TEXT_SUFFIX
+    u_goals_text.innerText = GOALS_TEXT_PREFIX + u_num + GOALS_TEXT_SUFFIX;
+    p_goals_text.innerText = GOALS_TEXT_PREFIX + p_num + GOALS_TEXT_SUFFIX;
 }
 
 /**
@@ -110,11 +110,11 @@ $(document).ready(function() {
         $goal_id = this.getAttribute("id")
 
         // check if water and unchecked
-        $goal_name = this.getAttribute("goal-name") // Drink water not mose like re-use bottle especially with pic of plastif bottle?
-        $value = this.getAttribute("value")
+        $goal_name = this.getAttribute("goal-name"); // Drink water not mose like re-use bottle especially with pic of plastif bottle?
+        $value = this.getAttribute("value");
 
         if ($goal_name.toLowerCase().includes("drink") && $value == "grey") {
-            waterDrunked()
+            waterDrunked();
         }
 
         $.ajax({
@@ -141,5 +141,5 @@ function waterDrunked() {
         data: {
             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
         }
-    })
+    });
 }

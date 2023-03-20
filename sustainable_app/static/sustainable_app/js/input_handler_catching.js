@@ -6,10 +6,10 @@
  */
 addEventListener("keydown", function(e) {
     if(e.code == "KeyD") {
-       moveRight()
+       moveRight();
     }
     if(e.code == "KeyA") {
-        moveLeft()
+        moveLeft();
     }
 })
 
@@ -18,7 +18,7 @@ addEventListener("keydown", function(e) {
  */
 addEventListener("keyup", function(e) {
     if(e.code == "KeyD") {
-        stopRight()
+        stopRight();
     }
     if(e.code == "KeyA") {
        stopLeft();

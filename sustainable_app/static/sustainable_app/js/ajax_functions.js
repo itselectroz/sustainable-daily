@@ -21,5 +21,5 @@ function add_score(score,goal) {
             console.log("Success!");
         } 
  
-    })
+    });
 }

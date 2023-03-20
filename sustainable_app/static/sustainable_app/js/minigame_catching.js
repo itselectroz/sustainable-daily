@@ -141,11 +141,11 @@ function lostLife() {
     // Check if out of lives
     if(lives > 0) {
         lives -= 1;
-        livesElement.removeChild(livesElement.lastElementChild)
+        livesElement.removeChild(livesElement.lastElementChild);
     }
     else {
         gameState("end");
-        livesElement.removeChild(livesElement.lastElementChild)
+        livesElement.removeChild(livesElement.lastElementChild);
     }
 }
 

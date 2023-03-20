@@ -20,7 +20,7 @@ popup_text_start = document.querySelector(".question").childNodes[0];
 popup_text_end = document.querySelector(".question").childNodes[2];
 item_cost = document.querySelector(".item_cost");
 item_img = document.querySelector(".item_to_buy");
-item_container = document.querySelector(".item_to_buy_container")
+item_container = document.querySelector(".item_to_buy_container");
 
 /**
  * Set click events for all non-owned items
