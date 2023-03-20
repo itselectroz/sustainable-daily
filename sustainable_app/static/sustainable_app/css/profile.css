@@ -140,7 +140,7 @@ body {
     position: relative;
     width: clamp(150px, 150px + 5vw, 500px);
     height: clamp(1.5em, 1em + 2vw, 2em);
-    background-color: white;
+    background-color: rgb(47, 94, 44);
     border-radius: 1.5rem;
 }
 
@@ -189,12 +189,12 @@ body {
     position: relative;
     width: clamp(150px, 150px + 5vw, 500px);
     height: clamp(1.5em, 1em + 2vw, 2em);
-    background-color: white;
+    background-color: rgb(35, 88, 100);
     border-radius: 1.5rem;
 
 }
 
-.xp_bar::before {
+.xp_bar::after {
     content: attr(data-label);
     display: flex;
     align-items: center;
@@ -203,9 +203,23 @@ body {
     top: .2rem;
     bottom: .2rem;
     min-width: .2rem;
-    max-width: calc(92%);
+    max-width: 8.2rem;
     color: white;
-    width: 100%;
+    font-size: clamp(.8rem, 2vw, 1.2rem);
+    padding-left: .5em;
+}
+
+.xp_bar::before {
+    content: "";
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: .2rem;
+    top: .2rem;
+    bottom: .2rem;
+    min-width: .2rem;
+    max-width: 8.2rem;
+    width: var(--xp_amount, 0);
     background-color: #17a3c9;
     border-radius: 1rem;
     font-size: clamp(.8rem, 2vw, 1.2rem);

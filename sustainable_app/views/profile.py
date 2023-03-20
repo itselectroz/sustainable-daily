@@ -19,6 +19,7 @@ def profile(request):
         current_user.equipped_items.get(type="background_color"))]
 
     user_level = current_user.level()
+    xp_to_level = current_user.xp_for_level(user_level + 1)
 
     user_accessory = current_user.equipped_items.get(type="accessory")
     user_character = current_user.equipped_items.get(type="character")
@@ -45,6 +46,7 @@ def profile(request):
                "all_characters": all_characters,
                "purchasable_items": purchasable_items,
                "owned_items": owned_items,
+               "xp_to_level": xp_to_level,
                }
 
     return render(request, "sustainable_app/profile.html", context)
