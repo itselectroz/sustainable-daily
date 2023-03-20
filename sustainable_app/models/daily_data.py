@@ -72,6 +72,10 @@ class DailyData(models.Model):
         daily_status.completed = True
         daily_status.save()
 
+        # Add xp and point reward to user
+        user.xp += goal.xp_reward
+        user.points += goal.point_reward
+
         # Finding if need to add streak and adding or resetting
         daily_goals = DailyGoalStatus.objects.filter(
             user_data__user=user, completed=True)
