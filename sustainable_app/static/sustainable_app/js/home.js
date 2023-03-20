@@ -109,12 +109,15 @@ $(document).ready(function() {
 
         $goal_id = this.getAttribute("id")
 
-        // check if water and unchecked
+        // check if water/recycle and unchecked
         $goal_name = this.getAttribute("goal-name"); // Drink water not mose like re-use bottle especially with pic of plastif bottle?
         $value = this.getAttribute("value");
 
-        if ($goal_name.toLowerCase().includes("drink") && $value == "grey") {
+        if ($goal_name.toLowerCase().includes("water") && $value == "grey") {
             waterDrunked();
+        }
+        if ($goal_name.toLowerCase().includes("recycle") && $value == "grey") {
+            plasticSaved();
         }
 
         $.ajax({
@@ -138,6 +141,19 @@ function waterDrunked() {
     $.ajax({
         type: 'POST',
         url: 'update_water/',
+        data: {
+            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+        }
+    });
+}
+
+/**
+ * Increments the plastic bottles saved statistic
+ */
+function plasticSaved() {
+    $.ajax({
+        type: 'POST',
+        url: 'update_recycle/',
         data: {
             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
         }

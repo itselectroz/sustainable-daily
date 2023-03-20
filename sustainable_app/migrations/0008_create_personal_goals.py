@@ -2,7 +2,7 @@
 
 from django.db import migrations
 
-goals = [("Workout", "", 0, 0), ("Drink Water", "", 0, 0),
+goals = [("Workout", "", 0, 0), ("Re-use Water Bottle", "", 0, 0),
          ("Recycle Something", "", 0, 0), ("Do Some Work", "", 0, 0),
          ("Eat Something Healthy", "", 0, 0)]
 
