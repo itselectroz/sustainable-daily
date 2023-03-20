@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 
 from sustainable_app.models import Goal, Location
 
+# Location type dictionay
 location_types = {
     'recycle': 'Recycling Bin',
     'water': 'Water Fountain'
@@ -11,6 +12,9 @@ location_types = {
 
 @login_required(login_url=reverse_lazy('login'))
 def view_location(request, id):
+    """
+    Renders location goal
+    """
     goal = get_object_or_404(Goal, id=id)
     location = get_object_or_404(Location, goal=goal)
 

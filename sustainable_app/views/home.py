@@ -14,6 +14,9 @@ DailyData.complete_goal(user, goal) """
 
 @login_required(login_url=reverse_lazy('login'))
 def home(request):
+    """
+    Sends goals and current user's streak to template
+    """
 
     # get current user
     current_user = request.user
@@ -34,6 +37,9 @@ def home(request):
 
 
 def complete_personal(request):
+    """
+    Updates personal goal to completed
+    """
 
     goal_id = request.POST.get('goal_id', False)
     goal = Goal.objects.get(id=goal_id)
@@ -46,6 +52,9 @@ def complete_personal(request):
 
 
 def getTodayCompleted(user):
+    """
+    Get goals completed by the user on that day
+    """
     # get user's completed goals
     today = datetime.date.today()
     try:
@@ -62,9 +71,11 @@ def update_water(request):
     return HttpResponse(status=200)
     
 
-"""Updates daily goal"""
 @login_required(login_url=reverse_lazy('login'))
-def update_daily_goal_status(request):    
+def update_daily_goal_status(request):
+    """
+    Updates daily goals
+    """    
     if request.method == 'POST':
         # Get the current user and the score value from the POST request
         current_user = request.user
