@@ -1,16 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseBadRequest
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 
-from sustainable_app.models.survey import SurveyQuestion, SurveyChoice, Survey
+from sustainable_app.models import SurveyQuestion, SurveyChoice, Survey, Goal, DailyData
 
 
 @login_required(login_url=reverse_lazy('login'))
-def minigame_survey(request):
-
-    active_survey = Survey.objects.filter(currentlyActive=True).first()
-    questions = SurveyQuestion.objects.filter(Survey=active_survey)
+def minigame_survey(request, id):
+    goal = get_object_or_404(Goal, id=id)
+    active_survey = get_object_or_404(Survey, goal=goal)
+    questions = SurveyQuestion.objects.filter(survey=active_survey)
     choices = SurveyChoice.objects.filter(question__in=questions)
     context = {'questions': questions, 'choices': choices}
 
@@ -33,6 +33,9 @@ def minigame_survey(request):
                 choice.save()
             except SurveyChoice.DoesNotExist:
                 return HttpResponseBadRequest()
+
+        # Complete goal
+        DailyData.complete_goal(request.user, goal)
 
         return redirect('home')
 

@@ -27,7 +27,7 @@
                             <td>{{survey.survey_text}}</td>
                             <td>
                                 {% for question in questions %}
-                                    {% if question.Survey == survey%}
+                                    {% if question.survey == survey%}
                                     {{question.question_text|linebreaks}}
                                     {% endif %}
                                 {% endfor %}
