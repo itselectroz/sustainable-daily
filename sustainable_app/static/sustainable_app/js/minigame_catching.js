@@ -1,6 +1,3 @@
-
-
-
 // Define html elements
 const player = document.getElementById("player");
 const rubbish_group = document.querySelector(".rubbish_group");
@@ -125,6 +122,7 @@ function generateRubbish() {
 
 /**
  * Randomly picks rubbish
+ * 
  * @returns The name and type of rubbish
  */
 function getRandomClass() {
@@ -153,6 +151,7 @@ function lostLife() {
 
 /**
  * Create a new life div element
+ * 
  * @returns life div element
  */
 function createLives(num) {
@@ -166,6 +165,7 @@ function createLives(num) {
 
 /**
  * Set game to certain state
+ * 
  * @param {String} state 
  */
 function gameState(state) {
@@ -197,6 +197,9 @@ function gameState(state) {
     }
 }
 
+/**
+ * Increases the speed of the rubbish falling
+ */
 function increaseSpeed() {
     generateSpeed -= 50;
     clearInterval(rubbishTimeout);
@@ -205,6 +208,9 @@ function increaseSpeed() {
     speedTimeout = setTimeout(increaseSpeed, 5000);
 }
 
+/**
+ * Remove all rubbish
+ */
 function removeRubbish() {
     let group = document.getElementById('rubbish_group');
     group.innerHTML = '';

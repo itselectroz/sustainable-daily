@@ -1,6 +1,9 @@
 
 // Movemnet with WASD
 
+/**
+ * Listen for relevant keydown events
+ */
 addEventListener("keydown", function(e) {
     if(e.code == "KeyD") {
        moveRight()
@@ -10,6 +13,9 @@ addEventListener("keydown", function(e) {
     }
 })
 
+/**
+ * Listen for relevant keyup events
+ */
 addEventListener("keyup", function(e) {
     if(e.code == "KeyD") {
         stopRight()
@@ -19,18 +25,30 @@ addEventListener("keyup", function(e) {
     }
 })
 
+/**
+ * Set the players right velocity
+ */
 function moveRight() {
     vxr = container.offsetWidth / 128;
 }
 
+/**
+ * Set the players left velocity
+ */
 function moveLeft() {
     vxl = -(container.offsetWidth / 128);
 }
 
+/**
+ * Remove the players right velocity
+ */
 function stopRight() {
     vxr = 0;
 }
 
+/**
+ * Remove the players left velocity
+ */
 function stopLeft() {
     vxl = 0;
 }

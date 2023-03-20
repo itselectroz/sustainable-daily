@@ -88,6 +88,10 @@ function correctAnswer(answer) {
     results.style.display = "flex"
 }
 
+/**
+ * Handle when the player gets a question wrong
+ * @param {String} correctAnswer 
+ */
 function wrongAnswer(correctAnswer) {
     resultText.style.color = "red"
     resultText.textContent = "Incorrect - the corret answer is actually " + correctAnswer + "!"

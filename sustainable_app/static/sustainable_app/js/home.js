@@ -12,20 +12,19 @@ const p_goals_text = document.getElementById("personal-text");
 // Images array
 let personal_images = ["workout.png", "plastic_bottle.png", "cat_recycle.png", "paper.png", "watermelon.png"]
 
-// Callbacks
 
-function onGoalClick(goal) {
-    console.log(goal, daily_goals);
-}
-
-// Utility functions
-
+/**
+ * Set the images for the personal goals
+ */
 function setImages() {
     for(let i = 0; i < personal_goals.length; i++) {
         personal_goals[i].style.backgroundImage = "url(/static/sustainable_app/img/" + personal_images[i] + ")";
     }
 }
 
+/**
+ * Sets the text for each of the goals
+ */
 function setGoalText() {
     let u_num = 0;
     let p_num = 0;
@@ -52,7 +51,9 @@ function setGoalText() {
     p_goals_text.innerText = GOALS_TEXT_PREFIX + p_num + GOALS_TEXT_SUFFIX
 }
 
-
+/**
+ * Adds redirects to each of the goals
+ */
 function setRedirects() {
     // redirects
     for(let i = 0; i < goal_items.length; i++) {
@@ -67,7 +68,9 @@ function setRedirects() {
     };
 }
 
-
+/**
+ * Adds touch effects to buttons
+ */
 function setClickEffects() {
     // button click effect
     for(let i = 0; i < goal_items.length; i++) {
@@ -82,9 +85,10 @@ function setClickEffects() {
     };
 }
 
-
+/**
+ * Sets completed colours
+ */
 function loadColors() {
-    // setting completed color
     goal_items.forEach(item => {
         item.style.setProperty("--background-completed", item.getAttribute("value"));
     });
@@ -127,7 +131,9 @@ $(document).ready(function() {
     });
 });
 
-// Increase statistic
+/**
+ * Increments the plastic bottles saved statistic
+ */
 function waterDrunked() {
     $.ajax({
         type: 'POST',
