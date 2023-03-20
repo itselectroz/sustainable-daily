@@ -1,6 +1,9 @@
 from django.db import models
 
 class QuizQuestion(models.Model):
+    """
+    Represents a question in a quiz and must have 4 answers
+    """
     id = models.AutoField(primary_key=True)
     question = models.TextField()
     a1 = models.CharField(max_length=255)

@@ -47,6 +47,9 @@ items = [
 
 
 def make_items(apps, schema_editor):
+    """
+    Adds items to database 
+    """
     Item = apps.get_model('sustainable_app', 'Item')
 
     # Add all items to database
@@ -57,6 +60,9 @@ def make_items(apps, schema_editor):
 
 
 def undo_make_items(apps, schema_editor):
+    """
+    Reverse function for undoing migration, removes all items from database
+    """
     Item = apps.get_model('sustainable_app', 'Item')
     for (type, values) in items:
         for [name, cost, on_sale, unlock_level] in values:
