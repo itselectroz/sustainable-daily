@@ -240,11 +240,13 @@ class Command(BaseCommand):
         """
         delete all existing qr codes and images
         """
-        shutil.rmtree('media/location_qr')
-        shutil.rmtree('media/location_img')
+        if os.path.exists('media/location_qr'):
+            shutil.rmtree('media/location_qr')
+        if os.path.exists('media/location_images'):
+            shutil.rmtree('media/location_images')
         
         os.mkdir('media/location_qr')
-        os.mkdir('media/location_img')
+        os.mkdir('media/location_images')
         
     def create_surveys(self):
         """
@@ -262,7 +264,7 @@ class Command(BaseCommand):
             point_reward=100,
             xp_reward=100,
         )
-        goal1.url = reverse('minigame_survey', kwargs={'id': goal1.id})
+        goal1.url = reverse('survey', kwargs={'id': goal1.id})
         goal1.save()
         
         # survey 1
