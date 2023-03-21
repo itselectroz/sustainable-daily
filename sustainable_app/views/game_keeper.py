@@ -212,7 +212,7 @@ def surveys_add(request):
         image="sustainable_app/img/survey_image.png",
     )
 
-    new_goal.url = reverse('minigame_survey', kwargs={'id': new_goal.id})
+    new_goal.url = reverse('survey', kwargs={'id': new_goal.id})
     new_goal.save()
 
     # create survey object
