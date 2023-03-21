@@ -2,7 +2,7 @@ from django.db import models
 
 import datetime
 
-from . import Goal, User
+from . import Goal, User, Statistics
 
 
 class DailyData(models.Model):
@@ -96,6 +96,12 @@ class DailyData(models.Model):
             datetime.date.today(),
             datetime.time(0, 0)
         )
+
+        # Check for specific personal goal
+        if goal.type == Goal.PERSONAL and "Water" in goal.name:
+            Statistics.increment_quantity("water")
+        if goal.type == Goal.PERSONAL and "Recycle" in goal.name:
+            Statistics.increment_quantity("plastic")
 
         # Django treats DateFields weirdly
         # Occasionally it returns a date object instead of datetime

@@ -6,10 +6,10 @@ from .goal import Goal
 from .item import Item
 from .user import User
 from .location import Location
-from .daily_data import DailyData, DailyGoalStatus
 from .quiz import QuizQuestion
 from .statistics import Statistics
 from .survey import Survey, SurveyChoice, SurveyQuestion
+from .daily_data import DailyData, DailyGoalStatus
 
 __all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData', 'DailyGoalStatus',
            'QuizQuestion', 'Survey', 'SurveyChoice', 'SurveyQuestion', 'Statistics']

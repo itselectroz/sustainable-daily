@@ -113,13 +113,6 @@ $(document).ready(function() {
         $goal_name = this.getAttribute("goal-name"); // Drink water not mose like re-use bottle especially with pic of plastif bottle?
         $value = this.getAttribute("value");
 
-        if ($goal_name.toLowerCase().includes("water") && $value == "grey") {
-            updateWater();
-        }
-        if ($goal_name.toLowerCase().includes("recycle") && $value == "grey") {
-            plasticSaved();
-        }
-
         $.ajax({
             type: "POST",
             url: "complete_personal/",
@@ -133,29 +126,3 @@ $(document).ready(function() {
         });
     });
 });
-
-/**
- * Increments the plastic bottles saved statistic
- */
-function updateWater() {
-    $.ajax({
-        type: 'POST',
-        url: '/update_water/',
-        data: {
-            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-        }
-    });
-}
-
-/**
- * Increments the plastic bottles saved statistic
- */
-function plasticSaved() {
-    $.ajax({
-        type: 'POST',
-        url: '/update_recycle/',
-        data: {
-            csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
-        }
-    });
-}
