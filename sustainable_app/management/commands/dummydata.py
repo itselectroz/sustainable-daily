@@ -182,7 +182,7 @@ class Command(BaseCommand):
             border=4,
         )
 
-        qr.add_data(f"http://127.0.0.1:8000/location_qr/{goal1.id}/")
+        qr.add_data(f"http://www.sustainable-daily.live/location_qr/{goal1.id}/")
 
         qr.make(fit=True)
 
@@ -223,7 +223,7 @@ class Command(BaseCommand):
             border=4,
         )
 
-        qr.add_data(f"http://127.0.0.1:8000/location_qr/{goal2.id}/")
+        qr.add_data(f"http://www.sustainable-daily.live/location_qr/{goal2.id}/")
 
         qr.make(fit=True)
 
