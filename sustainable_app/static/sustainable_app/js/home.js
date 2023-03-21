@@ -140,7 +140,7 @@ $(document).ready(function() {
 function waterDrunked() {
     $.ajax({
         type: 'POST',
-        url: 'update_water/',
+        url: '/update_water/',
         data: {
             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
         }
@@ -153,7 +153,7 @@ function waterDrunked() {
 function plasticSaved() {
     $.ajax({
         type: 'POST',
-        url: 'update_recycle/',
+        url: '/update_recycle/',
         data: {
             csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
         }
