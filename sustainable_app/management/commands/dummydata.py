@@ -179,7 +179,7 @@ class Command(BaseCommand):
         
         # create goal1
         goal1 = Goal.objects.create(
-            name="Harrison",
+            name="INTO",
             description="",
             image="sustainable_app/img/location_recycle.png",
             type=Goal.LOCATION,
@@ -193,7 +193,7 @@ class Command(BaseCommand):
         # create location1
         location1 = Location.objects.create(
             goal=goal1,
-            name="Harrison",
+            name="INTO",
             category=Location.RECYCLE,
             clue="Near a car park",
         )
@@ -221,7 +221,7 @@ class Command(BaseCommand):
         
         # create goal2
         goal2 = Goal.objects.create(
-            name="Amory",
+            name="Harrison",
             description="",
             image="sustainable_app/img/location_water.png",
             type=Goal.LOCATION,
@@ -235,9 +235,9 @@ class Command(BaseCommand):
         # create location2
         location2 = Location.objects.create(
             goal=goal2,
-            name="Amory",
+            name="Harrison",
             category=Location.WATER,
-            clue="In a cafe",
+            clue="Next to a fire exit",
         )
         
         # generate qr code
