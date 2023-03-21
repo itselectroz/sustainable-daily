@@ -30,9 +30,9 @@
                         <a href="{{ goal.url }}">
                             <!--If the users daily goal status for each minigame is true the background will be green, if its not it will be grey-->
                             {% if goal in completed %}
-                                <div class="item" style="background-image: url('{{goal.image}}')" value="var(--completion-green)" name="universal"></div>
+                                <div class="item" style="background-image: url('{% static '' %}{{goal.image}}')" value="var(--completion-green)" name="universal"></div>
                             {% else %}
-                                <div class="item" style="background-image: url('{{goal.image}}')" value="grey" name="universal"></div>
+                                <div class="item" style="background-image: url('{% static '' %}{{goal.image}}')" value="grey" name="universal"></div>
                             {% endif %}
                         </a>
                     {% endfor %}
