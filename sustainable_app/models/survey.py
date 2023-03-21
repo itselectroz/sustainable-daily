@@ -13,7 +13,7 @@ class Survey(models.Model):
 
 class SurveyQuestion(models.Model):
     """
-    Represents a question in a survey that can have up to 4 options (otherwise can cause formatting issues on smaller screens) 
+    Represents a question in a survey that can have up to 4 options 
     """
     id = models.AutoField(primary_key=True)
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE)
