@@ -110,7 +110,7 @@ $(document).ready(function() {
         $value = this.getAttribute("value")
 
         if ($goal_name.toLowerCase().includes("drink") && $value == "grey") {
-            waterDrunked()
+            updateWater()
         }
 
         $.ajax({
@@ -128,7 +128,7 @@ $(document).ready(function() {
 });
 
 // Increase statistic
-function waterDrunked() {
+function updateWater() {
     $.ajax({
         type: 'POST',
         url: 'update_water/',

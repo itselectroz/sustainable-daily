@@ -366,24 +366,6 @@ def direct_user(page, request, context):
     return render(request, 'sustainable_app/game_keeper' + page + '.html', context)
 
 
-def qr_callback(request, id):
-    if (not request.user.is_authenticated):
-        return HttpResponse('Forbidden', status=403)
-
-    goal = get_object_or_404(Goal, id=id)
-
-    DailyData.complete_goal(request.user, goal)
-
-    location = get_object_or_404(Location, goal=goal)
-    if location.category == location.RECYCLE:
-        Statistics.increment_quantity("plastic")
-    if location.category == location.WATER:
-        Statistics.increment_quantity("water")
-
-    # uccess page
-    return render(request, 'sustainable_app/qr_complete.html')
-
-
 def open_file(request, location_id):
     """
     User may download the qr code as a png file, to then print and put somewhere on campus

@@ -27,7 +27,7 @@ def register_user(request):
     first_name = request.POST.get('first-name', '')
     last_name = request.POST.get('last-name', '')
     email = request.POST.get('email', '')
-    isAdmin = request.POST.get('admin', '')
+    is_admin = request.POST.get('admin', '')
 
     try:
         # Create user object
@@ -43,7 +43,7 @@ def register_user(request):
     user.last_name = last_name
 
     # if user is authenticated, is a game keeper, and wants to create a game keeper
-    if (isAdmin and request.user.is_authenticated and request.user.game_keeper):
+    if (is_admin and request.user.is_authenticated and request.user.game_keeper):
         # set user game_keeper attribute to true
         user.game_keeper = True
 
@@ -65,15 +65,14 @@ def register_user(request):
     user.save()
 
     # Login the user to streamline process
-    if (not isAdmin):
+    if (not is_admin):
         login(request, user)
 
     # if game keeper then direct to game keeper page, else direct to home
-    if (isAdmin):
+    if (is_admin):
         return redirect(reverse('game_keeper'))
     else:
         return redirect(reverse('home'))
-
 
 def register(request):
     if request.user.is_authenticated and request.user.game_keeper == False:
@@ -90,20 +89,17 @@ def register(request):
                 'issues': []
             })
 
-    if (request.user.is_authenticated and request.user.game_keeper):
-        isAdmin = True
-    else:
-        isAdmin = False
+    is_admin = request.user.is_authenticated and request.user.game_keeper
 
     return render(request, 'sustainable_app/register.html', {
         'error': False,
         'issues': [],
-        'isAdmin': isAdmin,
+        'isAdmin': is_admin,
     })
-
 
 def privacy_policy(request):
     # No authentication checks on this page
     # It's fine for an authenticated user to see the privacy policy.
 
     return render(request, 'sustainable_app/privacy_policy.html', {})
+
