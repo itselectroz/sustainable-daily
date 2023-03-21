@@ -34,7 +34,7 @@ EXPOSE ${PORT}
 RUN python manage.py migrate
 
 # Setup cron
-RUN echo "0 0 * * * root ${DockerHOME}/scripts/dailytasks.sh\n" >> /etc/cron.d/dailytasks
+RUN echo "55 23 * * * root ${DockerHOME}/scripts/dailytasks.sh\n" >> /etc/cron.d/dailytasks
 RUN chmod +x ${DockerHOME}/scripts/dailytasks.sh
 RUN chmod +x /etc/cron.d/dailytasks
 RUN crontab /etc/cron.d/dailytasks

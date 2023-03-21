@@ -8,6 +8,9 @@ from sustainable_app.models import QuizQuestion, DailyData, Goal
 
 @login_required(login_url=reverse_lazy('login'))
 def quiz(request):
+    """
+    Gets quiz questions and renders the quiz
+    """
     # Get up to 5 random questions
     questions = QuizQuestion.objects.order_by('?')[:5]
 

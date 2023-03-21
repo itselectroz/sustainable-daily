@@ -1,3 +1,4 @@
+
 /**
  * To add a score to a DailyGoalStatus add scripts
  * 
@@ -9,7 +10,7 @@
 function add_score(score,goal) {
     $.ajax({
         type: 'POST',
-        url: '/home/update_daily_goal_status/',
+        url: '/update_daily_goal_status/',
     
         data: {
             "csrfmiddlewaretoken" : document.querySelector('input[name="csrfmiddlewaretoken"]').value,

@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from ...models import DailyGoalStatus, Goal, QuizQuestion
+from ...models import DailyGoalStatus, Goal, QuizQuestion, User
 
 import datetime
 
@@ -9,14 +9,8 @@ class Command(BaseCommand):
     help = 'Run all daily tasks.'
 
     def handle(self, *args, **options):
-        # This code will run sometime around midnight,
-        # but not necessarily before or after.
-        # To account for this, we need to calculate the correct day.
-        now = datetime.datetime.now()
-        if now.hour < 12:
-            self.today = datetime.date.today() - datetime.timedelta(days=1)
-        else:
-            self.today = datetime.date.today()
+        # Runs at 11:55 every day
+        self.today = datetime.date.today()
 
         self.stdout.write(
             f"Starting daily tasks for {self.today.strftime('%Y-%m-%d')}.")
@@ -25,14 +19,15 @@ class Command(BaseCommand):
 
         self.randomize_daily_goals()
 
+        self.reset_streaks()
+
     # Task functions
 
     def calculate_minigame_points(self):
         try:
-            today = datetime.date.today()
 
             daily_goals = DailyGoalStatus.objects.filter(
-                user_data__date=today, completed=True, score__gt=0)
+                user_data__date=self.today, completed=True, score__gt=0)
 
             for daily_goal in daily_goals:
                 user = daily_goal.user_data.user
@@ -94,7 +89,8 @@ class Command(BaseCommand):
                 self.stdout.write(
                     "[randomize_daily_goals] Cannot find location task")
 
-            new_goals = Goal.objects.exclude(id__in=id_array).exclude(type=Goal.PERSONAL)
+            new_goals = Goal.objects.exclude(
+                id__in=id_array).exclude(type=Goal.PERSONAL)
 
             if QuizQuestion.objects.count() == 0:
                 new_goals = new_goals.exclude(type=Goal.QUIZ)
@@ -112,3 +108,20 @@ class Command(BaseCommand):
             self.stdout.write(str(e))
             self.stdout.write(self.style.ERROR(
                 "[randomize_daily_goals] Something went wrong."))
+
+    def reset_streaks(self):
+        try:
+            users = User.objects.filter(
+                date_last_task_completed__lt=self.today)
+
+            for user in users:
+                user.streak_length = 0
+                user.save()
+            
+            self.stdout.write(self.style.SUCCESS(
+                "[reset_streaks] Task completed successfully."))
+
+        except Exception as e:
+            self.stdout.write(str(e))
+            self.stdout.write(self.style.ERROR(
+                "[reset_streaks] Something went wrong."))

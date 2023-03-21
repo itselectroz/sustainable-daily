@@ -16,9 +16,4 @@ class Migration(migrations.Migration):
             name='type',
             field=models.CharField(choices=[('minigame', 'Minigame'), ('location', 'Location'), ('quiz', 'Quiz'), ('poll', 'Poll'), ('personal', 'Personal')], max_length=8),
         ),
-        migrations.AlterField(
-            model_name='user',
-            name='date_last_task_completed',
-            field=models.DateField(default=datetime.datetime(2023, 3, 18, 11, 41, 5, 85092)),
-        ),
     ]

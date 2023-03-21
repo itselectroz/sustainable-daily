@@ -4,6 +4,9 @@ from django.shortcuts import redirect, render, reverse
 
 
 def authenticate_request(request):
+    """
+    Redirects user based on type upon login
+    """
     username = request.POST.get('username', '')
     password = request.POST.get('password', '')
 
@@ -25,6 +28,9 @@ def authenticate_request(request):
 
 
 def login(request):
+    """
+    Handles login request
+    """
     if request.user.is_authenticated and request.user.game_keeper == False:
         return redirect(reverse('home'))
     elif request.user.is_authenticated and request.user.game_keeper:

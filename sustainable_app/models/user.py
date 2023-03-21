@@ -3,7 +3,7 @@ import math
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from datetime import datetime, timedelta
+from datetime import date
 
 from .item import Item
 
@@ -21,7 +21,7 @@ class User(AbstractUser):
 
     #Streak stuff, incremented in daily data when task is complete
     streak_length = models.IntegerField(default=0)
-    date_last_task_completed = models.DateField(default=datetime.today() - timedelta(days=1))
+    date_last_task_completed = models.DateTimeField(default=date.today)
 
     # Personal goals is a relation that will be in goal maybe?
 

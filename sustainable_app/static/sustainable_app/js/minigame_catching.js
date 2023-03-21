@@ -227,5 +227,5 @@ function startGame() {
  * Exit the game
  */
 function exitGame() {
-    window.location.replace("/home/");
+    window.location.replace("/");
 }

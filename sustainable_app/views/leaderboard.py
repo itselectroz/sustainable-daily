@@ -9,25 +9,27 @@ from sustainable_app.util import username_dict, background_dict
 import json
 
 
-# Sends view user data sorted by name, level and points
 @login_required(login_url=reverse_lazy('login'))
 def leaderboard(request):
+    """
+    Renders leaderboard with stats and sorted leaderboard data
+    """
 
 
     #Gets leaderboard info ordered by username, level and points
-    users = list(User.objects.order_by("username").values('id','username', 'xp', 'points'))
+    users = list(User.objects.exclude(game_keeper=True).order_by("username").values('id','username', 'xp', 'points'))
     users = add_users_level(users)
-    equipped_items_by_username = User.objects.order_by("username").prefetch_related('equipped_items')
+    equipped_items_by_username = User.objects.exclude(game_keeper=True).order_by("username").prefetch_related('equipped_items')
     users = add_equipped_items(users,equipped_items_by_username)
 
-    level = list(User.objects.order_by("-xp").values('id','username', 'xp', 'points'))
+    level = list(User.objects.exclude(game_keeper=True).order_by("-xp").values('id','username', 'xp', 'points'))
     level = add_users_level(level)
-    equipped_items_by_level = User.objects.order_by("-xp").prefetch_related('equipped_items')
+    equipped_items_by_level = User.objects.exclude(game_keeper=True).order_by("-xp").prefetch_related('equipped_items')
     level = add_equipped_items(level,equipped_items_by_level)
     
-    points = list(User.objects.order_by("-points").values('id','username', 'xp', 'points'))
+    points = list(User.objects.exclude(game_keeper=True).order_by("-points").values('id','username', 'xp', 'points'))
     points = add_users_level(points)
-    equipped_items_by_points = User.objects.order_by("-points").prefetch_related('equipped_items')
+    equipped_items_by_points = User.objects.exclude(game_keeper=True).order_by("-points").prefetch_related('equipped_items')
     points = add_equipped_items(points,equipped_items_by_points)
 
     # get statistics
@@ -49,15 +51,21 @@ def leaderboard(request):
     return render(request, "sustainable_app/leaderboard.html", context)
    
 
-#Returns a dictionary that is the same as the one passed to it but the level of each user has been added to it
+
 def add_users_level(user_dict):
+    """
+    Adds the level for each user
+    """
     for user in user_dict:
         user['level'] = User.objects.get(username = user["username"]).level()
 
     return user_dict
 
-#Returns a dictionary that is the same as the one passed to it but the equipped items of each user has been added to it
+
 def add_equipped_items(users,user_equipped_items):
+    """
+    Adds the equipped items for each user
+    """
     for i, user in enumerate(users):
         equipped_items = list(user_equipped_items[i].equipped_items.values_list('type', 'name'))
         #Sets default

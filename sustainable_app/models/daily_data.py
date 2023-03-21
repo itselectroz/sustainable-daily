@@ -68,9 +68,19 @@ class DailyData(models.Model):
             user_data=daily_data,
         )
 
+        if daily_status.completed:
+            # Exit out early, don't give rewards for an already completed task
+            return daily_status
+
         # Mark as completed
         daily_status.completed = True
         daily_status.save()
+
+        # Add xp and point reward to user
+        user.xp += goal.xp_reward
+        user.points += goal.point_reward
+
+        user.save()
 
         # Finding if need to add streak and adding or resetting
         daily_goals = DailyGoalStatus.objects.filter(
@@ -79,17 +89,29 @@ class DailyData(models.Model):
         # If havent added streak today and have complted at least one goal
         today = datetime.datetime.combine(
             datetime.date.today(),
-            datetime.datetime.min.time()
+            datetime.time(0, 0)
         )
 
-        if (today - datetime.timedelta(days=1) > user.date_last_task_completed):
+        # Django treats DateFields weirdly
+        # Occasionally it returns a date object instead of datetime
+        # This handles that edge case
+        last_completed = user.date_last_task_completed
+        if isinstance(last_completed, datetime.date):
+            last_completed = datetime.datetime.combine(
+                last_completed,
+                datetime.time(0, 0)
+            )
+
+        if (today - datetime.timedelta(days=1) > last_completed):
             user.streak_length = 0
             user.date_last_task_completed = today
             user.save()
-        elif ((user.date_last_task_completed < today) and len(daily_goals) > 0):
+        elif ((last_completed < today) and len(daily_goals) > 0):
             user.streak_length += 1
             user.date_last_task_completed = today
             user.save()
+        
+        return daily_status
 
 class DailyGoalStatus(models.Model):
     user_data = models.ForeignKey(DailyData, on_delete=models.CASCADE)
