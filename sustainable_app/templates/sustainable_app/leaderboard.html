@@ -18,11 +18,21 @@
 <div class = "body">
     <div class="stats">
         <div class="stat">
-            <h3>Plastic Bottles Saved: {{ water.quantity }}</h3>
+            <div class="bottle_stat">
+                <div class = "plastic_bottle">
+                    <img  src="{% static 'sustainable_app/img/plastic_bottle.png' %}"/>
+                </div>
+                <h3>Plastic Bottles Saved: {{ water.quantity }}</h3>
+            </div>
         </div>
 
         <div class="stat">
-            <h3>Items Recycled: {{ plastic.quantity }}</h3>
+            <div class="recycle_stat">
+                <div class = "cat_recyle">
+                    <img  src="{% static 'sustainable_app/img/cat_recycle.png' %}"/>
+                </div>
+                <h3>Items Recycled: {{ plastic.quantity }}</h3>
+            </div>
         </div>
     </div>
 

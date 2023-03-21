@@ -17,7 +17,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    background-color: var(--background-fourth);
 }
 
 .body{
@@ -40,7 +40,7 @@ html, body {
 }
 
 .main > *:first-child {
-    margin-top: 4rem;
+    margin-top: 0rem;
 }
 
 .container{

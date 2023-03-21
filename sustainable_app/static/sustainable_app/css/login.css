@@ -25,6 +25,7 @@ body {
         height: 60%;
         max-width: 300px;
         max-height: 550px;
+        min-height: 300px;
         
         justify-content: center;
         align-items: center;
@@ -32,12 +33,6 @@ body {
         padding: 77px 55px 33px;
 
         margin-bottom: 3.5rem;
-}
-
-@media only screen and (min-width: 600px) {
-        .outerContainer {
-                height: 40%;
-        }
 }
 
 .loginForm {
