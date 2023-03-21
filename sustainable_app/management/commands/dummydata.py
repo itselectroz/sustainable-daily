@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from django.core.files import File
-from ...models import User, Item, Goal, Location, Survey, SurveyQuestion, SurveyChoice, QuizQuestion
+from ...models import User, Item, Goal, Location, Survey, SurveyQuestion, SurveyChoice, QuizQuestion, Statistics
 from django.shortcuts import reverse
 import qrcode
 import shutil
@@ -42,7 +42,10 @@ class Command(BaseCommand):
             self.create_questions()
             self.stdout.write(self.style.SUCCESS('Successfully created dummy quiz questions.'))
             
-            call_command('dailytasks')
+            self.stdout.write("Setting dummy Statistics...")
+            self.set_stats()
+            self.stdout.write(self.style.SUCCESS('Successfully set dummy statistics.'))
+            
         except Exception as e:
             self.stdout.write(self.style.ERROR('Something went wrong:'))
             self.stderr.write(str(e))
@@ -147,6 +150,26 @@ class Command(BaseCommand):
         user4.equipped_items.add(Item.objects.get(name="u_green").id)
         user4.equipped_items.add(Item.objects.get(name="b_blue").id)
         user4.save()
+        
+        # create game_keeper
+        game_keeper = User.objects.create_user("GameKeeper", "keeper@example.com", "admin")
+        game_keeper.xp=200
+        game_keeper.points=700
+        game_keeper.first_name="Game"
+        game_keeper.last_name="Keeper"
+        game_keeper.game_keeper=True
+
+        # default items for all users
+        game_keeper.owned_items.add(Item.objects.get(name="badger").id)
+        game_keeper.owned_items.add(Item.objects.get(name="none").id)
+        game_keeper.owned_items.add(Item.objects.get(name="u_black").id)
+        game_keeper.owned_items.add(Item.objects.get(name="b_white").id)
+        # equipped items
+        game_keeper.equipped_items.add(Item.objects.get(name="badger").id)
+        game_keeper.equipped_items.add(Item.objects.get(name="none").id)
+        game_keeper.equipped_items.add(Item.objects.get(name="u_black").id)
+        game_keeper.equipped_items.add(Item.objects.get(name="b_white").id)
+        game_keeper.save()
 
 
     def create_locations(self):
@@ -156,12 +179,13 @@ class Command(BaseCommand):
         
         # create goal1
         goal1 = Goal.objects.create(
-            name="Harrison",
+            name="INTO",
             description="",
             image="sustainable_app/img/location_recycle.png",
             type=Goal.LOCATION,
             point_reward=100,
             xp_reward=100,
+            active=True,
         )
         goal1.url = reverse('view_location', kwargs={'id': goal1.id})
         goal1.save()
@@ -169,7 +193,7 @@ class Command(BaseCommand):
         # create location1
         location1 = Location.objects.create(
             goal=goal1,
-            name="Harrison",
+            name="INTO",
             category=Location.RECYCLE,
             clue="Near a car park",
         )
@@ -197,12 +221,13 @@ class Command(BaseCommand):
         
         # create goal2
         goal2 = Goal.objects.create(
-            name="Amory",
+            name="Harrison",
             description="",
             image="sustainable_app/img/location_water.png",
             type=Goal.LOCATION,
             point_reward=100,
             xp_reward=100,
+            active=True,
         )
         goal2.url = reverse('view_location', kwargs={'id': goal2.id})
         goal2.save()
@@ -210,9 +235,9 @@ class Command(BaseCommand):
         # create location2
         location2 = Location.objects.create(
             goal=goal2,
-            name="Amory",
+            name="Harrison",
             category=Location.WATER,
-            clue="In a cafe",
+            clue="Next to a fire exit",
         )
         
         # generate qr code
@@ -257,8 +282,6 @@ class Command(BaseCommand):
         creates multiple dummy surveys and survey questions (for demonstration purposes)
         """
         
-        # ------------------ first survey ------------------
-        
         # create goal1
         goal1 = Goal.objects.create(
             name="test survey1",
@@ -267,6 +290,7 @@ class Command(BaseCommand):
             type=Goal.POLL,
             point_reward=100,
             xp_reward=100,
+            active=True,
         )
         goal1.url = reverse('survey', kwargs={'id': goal1.id})
         goal1.save()
@@ -357,3 +381,14 @@ class Command(BaseCommand):
             correct_answer=1,
         )
         question3.save()
+
+    def set_stats(self):
+        try:
+            temp = Statistics.objects.get(name="water")
+            temp.quantity = 237
+            temp.save()
+            temp = Statistics.objects.get(name="plastic")
+            temp.quantity = 1054
+            temp.save()
+        except Statistics.DoesNotExist:
+            self.stdout.write("ERROR: 'Statistics' NOT FOUND.")
