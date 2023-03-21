@@ -240,6 +240,10 @@ class Command(BaseCommand):
         """
         delete all existing qr codes and images
         """
+
+        if not os.path.exists('media'):
+            os.mkdir('media')
+
         if os.path.exists('media/location_qr'):
             shutil.rmtree('media/location_qr')
         if os.path.exists('media/location_images'):
