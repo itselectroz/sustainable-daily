@@ -46,4 +46,5 @@ function expand(src, location_id, type) {
 
 function close_expanded() {
     expanded_view.style.visibility = 'hidden';
+    download_image.style.visibility = 'hidden';
 }
