@@ -192,7 +192,7 @@ class Command(BaseCommand):
         img.save(buffer, format='PNG')
 
         # set attributes
-        location1.image = "dummy_img/img_1.png"
+        location1.image = "dummy_images/img_1.png"
         location1.qr.save(f"qr_{location1.id}.png", File(buffer))
         
         # create goal2
@@ -233,7 +233,7 @@ class Command(BaseCommand):
         img.save(buffer, format='PNG')
 
         # set attributes
-        location2.image = "dummy_img/img_2.png"
+        location2.image = "dummy_images/img_2.png"
         location2.qr.save(f"qr_{location2.id}.png", File(buffer))
         
     def delete_images(self):

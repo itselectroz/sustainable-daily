@@ -32,6 +32,13 @@ def register_user(request):
     email = request.POST.get('email', '')
     is_admin = request.POST.get('admin', '')
 
+    if len(password) < 6:
+        return render(request, 'sustainable_app/register.html', {
+            'error': True,
+            'error_message': 'Password must be at least 6 characters long.',
+            'issues': []
+        })
+
     try:
         # Create user object
         user = User.objects.create_user(username, email, password)
@@ -77,6 +84,7 @@ def register_user(request):
     else:
         return redirect(reverse('home'))
 
+
 def register(request):
     """
     Handles registration request
@@ -103,6 +111,7 @@ def register(request):
         'isAdmin': is_admin,
     })
 
+
 def privacy_policy(request):
     """
     Renders privacy policy
@@ -111,4 +120,3 @@ def privacy_policy(request):
     # It's fine for an authenticated user to see the privacy policy.
 
     return render(request, 'sustainable_app/privacy_policy.html', {})
-
