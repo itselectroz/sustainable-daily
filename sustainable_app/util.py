@@ -1,4 +1,4 @@
-# Dictionaries
+# Dictionaries for hex colour codes
 
 background_dict = {
     "b_green": "#65d982",

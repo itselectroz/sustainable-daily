@@ -8,6 +8,9 @@ from sustainable_app.models import SurveyQuestion, SurveyChoice, Survey, Goal, D
 
 @login_required(login_url=reverse_lazy('login'))
 def minigame_survey(request, id):
+    """
+    Renders survey
+    """
     goal = get_object_or_404(Goal, id=id)
     active_survey = get_object_or_404(Survey, goal=goal)
     questions = SurveyQuestion.objects.filter(survey=active_survey)

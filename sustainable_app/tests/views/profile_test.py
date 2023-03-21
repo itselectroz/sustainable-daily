@@ -6,11 +6,15 @@ from sustainable_app.models import User, Item
 
 class ProfileViewTests(TestCase):
     def setUp(self):
+        """
+        creates a user for testing
+        """
         self.username = 'test_user'
         self.password = 'password123'
         self.user = User.objects.create_user(
             username=self.username, password=self.password)
 
+        # equips default items
         default_items = ['badger', 'none', 'u_black', 'b_white']
         for item_name in default_items:
             item = Item.objects.get(name=item_name)

@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+# List of URLs for navigating the app
 urlpatterns = [
     path('', views.home, name="home"),
     path('complete_personal/', views.complete_personal, name="complete_personal"),
