@@ -1,4 +1,4 @@
-
+// Get user
 const addUser = document.getElementById('add');
 
 addUser.addEventListener("click", () => {

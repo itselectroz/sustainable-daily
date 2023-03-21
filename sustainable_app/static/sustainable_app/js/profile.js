@@ -1,6 +1,6 @@
 
 /**
- * set all non-owned items to locked
+ * Set all non-owned items to locked
  */
 function setupUnlockables() {
     // Setting unlockables to be locked if necessary
@@ -20,10 +20,10 @@ popup_text_start = document.querySelector(".question").childNodes[0];
 popup_text_end = document.querySelector(".question").childNodes[2];
 item_cost = document.querySelector(".item_cost");
 item_img = document.querySelector(".item_to_buy");
-item_container = document.querySelector(".item_to_buy_container")
+item_container = document.querySelector(".item_to_buy_container");
 
 /**
- * set click events for all non-owned items
+ * Set click events for all non-owned items
  */
 function setupPurchasables() {
     let temp;
@@ -38,7 +38,7 @@ function setupPurchasables() {
 }
 
 /**
- * set click events for all owned items
+ * Set click events for all owned items
  */
 function setEquipables() {
     for(let item in owned_array) {
@@ -49,9 +49,9 @@ function setEquipables() {
 }
 
 /**
- * pops up a confirmation menu to buy an item
- * @param {item cost} points 
- * @param {url for item image} img_url 
+ * Pops up a confirmation menu to buy an item
+ * @param {Number} points 
+ * @param {URL} img_url 
  */
 function popup(points, img_url, type) {
     popup_menu.style.visibility = "visible";
@@ -89,7 +89,7 @@ function popup(points, img_url, type) {
 }
 
 /**
- * collapses the confirmation menu
+ * Collapses the confirmation menu
  */
 function popdown() {
     popup_menu.style.visibility = "hidden";
@@ -97,8 +97,8 @@ function popdown() {
 }
 
 /**
-* sends ajax request to equip an item
-*/
+ * Sends ajax request to equip an item
+ */
 function equipItem(type) {
 
     $item = $('input[name="' + type + '_select"]:checked').val();
@@ -118,7 +118,7 @@ function equipItem(type) {
 }
 
 /**
- * sends ajax request to purchase an item
+ * Sends ajax request to purchase an item
  */
 function purchaseItem(type) {
 
@@ -171,6 +171,7 @@ $(document).ready(function() {
     });
 });
 
+// Complete the setup
 setupPurchasables();
 setupUnlockables();
 setEquipables();

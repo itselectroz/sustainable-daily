@@ -17,6 +17,6 @@ class Statistics(models.Model):
             statistic = Statistics.objects.get(name=name)
         except Statistics.DoesNotExist:
             statistic = Statistics(name=name)
-            
+        
         statistic.quantity += 1
         statistic.save()
