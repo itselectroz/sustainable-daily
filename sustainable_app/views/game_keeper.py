@@ -230,7 +230,7 @@ def surveys_add(request):
         image="sustainable_app/img/survey_image.png",
     )
 
-    new_goal.url = reverse('minigame_survey', kwargs={'id': new_goal.id})
+    new_goal.url = reverse('survey', kwargs={'id': new_goal.id})
     new_goal.save()
 
     # create survey object
@@ -389,27 +389,6 @@ def direct_user(page, request, context):
 
     # render game keeper locations page
     return render(request, 'sustainable_app/game_keeper' + page + '.html', context)
-
-
-def qr_callback(request, id):
-    """
-    Increments statistics based on goal
-    """
-    if (not request.user.is_authenticated):
-        return HttpResponse('Forbidden', status=403)
-
-    goal = get_object_or_404(Goal, id=id)
-
-    DailyData.complete_goal(request.user, goal)
-
-    location = get_object_or_404(Location, goal=goal)
-    if location.category == location.RECYCLE:
-        Statistics.increment_quantity("plastic")
-    if location.category == location.WATER:
-        Statistics.increment_quantity("water")
-
-    # access page
-    return render(request, 'sustainable_app/qr_complete.html')
 
 
 def open_file(request, location_id):

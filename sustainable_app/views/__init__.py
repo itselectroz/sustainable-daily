@@ -1,25 +1,27 @@
 # Add view exports to this file
 # add all names to __all__ array
 
-from .index import index
-from .home import home, complete_personal, update_water, update_daily_goal_status, update_recycle
 from .login import login
-from .logout import logout
-from .profile import profile, equip, purchase
 from .register import register, privacy_policy
-from .leaderboard import leaderboard
-from .sorting import sorting
-from .minigame_catching import minigame_catching
+from .logout import logout
 from .password_reset import password_reset, forgot_password
-from .game_keeper import game_keeper, game_keeper_locations, game_keeper_surveys, game_keeper_questions, remove_keeper, locations_remove, questions_remove, surveys_remove, qr_callback, open_file
-from .quiz import quiz
-from .minigame_survey import minigame_survey
-from .view_location import view_location
+
+from .home import home, complete_personal, update_water, update_daily_goal_status, update_recycle
+from .leaderboard import leaderboard
+from .profile import profile, equip, purchase
+
+from .goals import quiz, survey, minigame_catching, minigame_sorting
+from .location import qr_callback, view_location
+
+from .game_keeper import game_keeper, game_keeper_locations, game_keeper_surveys, game_keeper_questions, remove_keeper, locations_remove, questions_remove, surveys_remove, open_file
 
 
-__all__ = ['index', 'login', 'logout', 'profile', 'register', 'leaderboard', 'home',
-           'minigame_catching', 'sorting', 'equip', 'game_keeper',
-           'game_keeper_locations', 'game_keeper_surveys', 'remove_keeper',
-           'locations_remove', 'qr_callback', 'password_reset', 'forgot_password',
-           'open_file', 'complete_personal', 'quiz', 'purchase', 'minigame_survey', 'privacy_policy',
-           'update_daily_goal_status', 'view_location', 'game_keeper_questions', 'update_water', 'update_recycle']
+__all__ = [
+    'login', 'register', 'privacy_policy', 'logout', 'password_reset', 'forgot_password',
+    'home', 'complete_personal', 'update_water', 'update_recycle', 'update_daily_goal_status',
+    'leaderboard', 'profile', 'equip', 'purchase',
+    'quiz', 'survey', 'qr_callback', 'view_location',
+    'game_keeper', 'game_keeper_locations', 'game_keeper_surveys', 'game_keeper_questions',
+    'remove_keeper', 'locations_remove', 'questions_remove', 'surveys_remove', 'open_file',
+    'minigame_catching', 'minigame_sorting'
+]

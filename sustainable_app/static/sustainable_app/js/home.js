@@ -114,7 +114,7 @@ $(document).ready(function() {
         $value = this.getAttribute("value");
 
         if ($goal_name.toLowerCase().includes("water") && $value == "grey") {
-            waterDrunked();
+            updateWater();
         }
         if ($goal_name.toLowerCase().includes("recycle") && $value == "grey") {
             plasticSaved();
@@ -137,7 +137,7 @@ $(document).ready(function() {
 /**
  * Increments the plastic bottles saved statistic
  */
-function waterDrunked() {
+function updateWater() {
     $.ajax({
         type: 'POST',
         url: '/update_water/',
