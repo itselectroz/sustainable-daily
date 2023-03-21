@@ -73,6 +73,8 @@ Deployment is achieved automatically through GitHub actions.
 
 For more details please refer to [Hosting](#hosting), [Docker](#docker), and [GitHub Actions](#github-actions)
 
+<br>
+
 ---
 
 <br>
@@ -231,7 +233,7 @@ The network configuration for the project is currently incredibly simple due to 
 
 The instance has a static public IP address with the ports 80 and 443 exposed. We then have our DNS records setup with an A record pointing to the compute instance's IP address.
 
-The domain (sustainable-daily) is registered through [Namecheap](http://www.namecheap.com).
+The domain (sustainable-daily.live) is registered through [Namecheap](http://www.namecheap.com).
 
 ### GitHub Actions
 
