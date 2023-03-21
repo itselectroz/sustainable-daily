@@ -5,7 +5,11 @@ import os
 
 
 class Location(models.Model):
-    
+    """
+    Represents a location for a location task. Is related to a specific goal and 
+    holds the qr code for use in the location task. 
+    """
+
     # attributes
     id = models.AutoField(primary_key=True)
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
@@ -25,6 +29,9 @@ class Location(models.Model):
     
     # rename image file from user
     def path_and_rename(instance, filename):
+        """
+        When you upload an image for a location renames the image making sure the name is unique and puts it in the right place for the program to find
+        """
         upload_to = 'location_images'
         # set filename to img_[id].png
         filename = ('img_' + str(instance.id) + '.png')

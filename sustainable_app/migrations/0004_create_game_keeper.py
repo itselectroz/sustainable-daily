@@ -3,6 +3,9 @@
 from django.db import migrations
 
 def make_game_keeper(apps, schema_editor):
+    """
+    Creates a gamekeeper called root for admin use
+    """
     User = apps.get_model('sustainable_app', 'User')
     
     user = User.objects.create_user("root", "root@example.com", "admin")
@@ -12,6 +15,9 @@ def make_game_keeper(apps, schema_editor):
     user.save()
 
 def undo_make_game_keeper(apps, schema_editor):
+    """
+    Reverse function for undoing migration, deletes root user
+    """
     User = apps.get_model('sustainable_app', 'User')
     try:
         user = User.objects.get(username="root")

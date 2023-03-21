@@ -6,9 +6,17 @@ import datetime
 
 
 class Command(BaseCommand):
+    """
+    A class for handling daily tasks (used by django, has to be called Command)
+    """
     help = 'Run all daily tasks.'
 
+
     def handle(self, *args, **options):
+        """
+        Function run when command is called
+        """
+
         # Runs at 11:55 every day
         self.today = datetime.date.today()
 
@@ -24,6 +32,9 @@ class Command(BaseCommand):
     # Task functions
 
     def calculate_minigame_points(self):
+        """
+        Calculates the points that a user gets from all of the goals they have completed and adds it to the users points
+        """
         try:
 
             daily_goals = DailyGoalStatus.objects.filter(
@@ -42,6 +53,11 @@ class Command(BaseCommand):
                 "[calculate_minigame_points] Something went wrong."))
 
     def randomize_daily_goals(self):
+        """
+        Sets 5 random daily goals that will appear on the home page of users for the next day
+        
+        Will be at least one minigame and one location task then 3 random tasks
+        """
         # Set 5 random daily goals to active
         u_goals = Goal.objects.exclude(type=Goal.PERSONAL)
 
@@ -110,6 +126,9 @@ class Command(BaseCommand):
                 "[randomize_daily_goals] Something went wrong."))
 
     def reset_streaks(self):
+        """
+        Will reset a users streak to 0 if they havent completed a task in the previous day 
+        """
         try:
             users = User.objects.filter(
                 date_last_task_completed__lt=self.today)
