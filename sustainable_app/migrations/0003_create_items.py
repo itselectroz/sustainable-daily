@@ -6,9 +6,9 @@ items = [
     (
         "character",
         [
-            ("cat", 0, True, 3),
+            ("cat", 0, True, 5),
             ("fish", 200, True, 7),
-            ("frog", 400, True, 5),
+            ("frog", 400, True, 3),
             ("bird", 600, True, 9),
             ("badger", 800, True, 0),
             ("fox", 1000, True, 11),
