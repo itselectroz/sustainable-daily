@@ -6,7 +6,7 @@ from .register import register, privacy_policy
 from .logout import logout
 from .password_reset import password_reset, forgot_password
 
-from .home import home, complete_personal, update_water, update_daily_goal_status, update_recycle
+from .home import home, complete_personal, update_daily_goal_status
 from .leaderboard import leaderboard
 from .profile import profile, equip, purchase
 
@@ -18,7 +18,7 @@ from .game_keeper import game_keeper, game_keeper_locations, game_keeper_surveys
 
 __all__ = [
     'login', 'register', 'privacy_policy', 'logout', 'password_reset', 'forgot_password',
-    'home', 'complete_personal', 'update_water', 'update_recycle', 'update_daily_goal_status',
+    'home', 'complete_personal', 'update_daily_goal_status',
     'leaderboard', 'profile', 'equip', 'purchase',
     'quiz', 'survey', 'qr_callback', 'view_location',
     'game_keeper', 'game_keeper_locations', 'game_keeper_surveys', 'game_keeper_questions',

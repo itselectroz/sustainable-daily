@@ -60,18 +60,6 @@ def complete_personal(request):
 
         return HttpResponse(status=200)
 
-def update_water(request):
-    if not request.user or not request.user.is_authenticated:
-        raise HttpResponseForbidden()
-
-    Statistics.increment_quantity("water")
-    return HttpResponse(status=200)
-
-def update_recycle(request):
-    Statistics.increment_quantity("plastic")
-    return HttpResponse(status=200)
-    
-
 def update_daily_goal_status(request):
     """
     Completes a daily goal, errors if the goal does not exist.
