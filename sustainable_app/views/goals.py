@@ -10,6 +10,10 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url=reverse_lazy('login'))
 def quiz(request):
+    """
+    Gets quiz questions and renders the quiz
+    """
+
     # Get up to 5 random questions
     questions = QuizQuestion.objects.order_by('?')[:5]
 
@@ -29,6 +33,9 @@ def quiz(request):
 
 @login_required(login_url=reverse_lazy('login'))
 def survey(request, id):
+    """
+    Renders survey
+    """
     goal = get_object_or_404(Goal, id=id)
     active_survey = get_object_or_404(Survey, goal=goal)
     questions = SurveyQuestion.objects.filter(survey=active_survey)
@@ -65,9 +72,15 @@ def survey(request, id):
 
 @login_required(login_url=reverse_lazy('login'))
 def minigame_catching(request):
+    """
+    Renders catching minigame
+    """
     return render(request, 'sustainable_app/minigame_catching.html')
 
 
 @login_required(login_url=reverse_lazy('login'))
 def minigame_sorting(request):
+    """
+    Renders sorting minigame
+    """
     return render(request, 'sustainable_app/sorting.html')

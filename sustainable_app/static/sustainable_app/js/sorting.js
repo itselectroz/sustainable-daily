@@ -1,14 +1,14 @@
 // HTML elements
-const container = document.getElementById("container")
-const rubbish = document.getElementById("spawn")
-const scoreLabel = document.getElementById("score")
-const bins = document.querySelectorAll(".bin")
-const touchLeft = document.getElementById("left-button")
-const touchRight = document.getElementById("right-button")
-const menuScreen = document.getElementById("menu")
-const menuText = document.getElementById("menuText")
-const menuButton = document.getElementById("btnMenu")
-const buttonContainer = document.querySelector(".test")
+const container = document.getElementById("container");
+const rubbish = document.getElementById("spawn");
+const scoreLabel = document.getElementById("score");
+const bins = document.querySelectorAll(".bin");
+const touchLeft = document.getElementById("left-button");
+const touchRight = document.getElementById("right-button");
+const menuScreen = document.getElementById("menu");
+const menuText = document.getElementById("menuText");
+const menuButton = document.getElementById("btnMenu");
+const buttonContainer = document.querySelector(".test");
 
 menuText.innerText = "Catching Game";
 
@@ -24,14 +24,14 @@ const items = [
     { "image":"glass_bottel.png", "alt":"Wine Bottle", "bin":"glass", "points":1 },
     { "image":"plastic_bottel.png", "alt":"Plastic Bottle", "bin":"recycle", "points":1 },
     { "image":"sweet.png", "alt":"Sweet Wrapper", "bin":"general", "points":1 }
-]
+];
 
 // Variables
-let score = 0
-let currentImagePos = -1
-let currentImage
-let currentImageNode = -1
-let gameOver = false
+let score = 0;
+let currentImagePos = -1;
+let currentImage;
+let currentImageNode = -1;
+let gameOver = false;
 
 /**
  * Converts the bin type to column number
@@ -41,23 +41,23 @@ let gameOver = false
 function binToCol(bin) {
     switch (bin) {
         case "recycle":
-            return 1
+            return 1;
         case "glass":
-            return 2
+            return 2;
         case "general":
-            return 0
+            return 0;
         default:
             break;
-    }
+    };
 }
 
 /**
  *  Moves the rubbish down the screen
  */
 function moveRubbish() {
-    let top = parseInt(rubbish.style.top || '0')
+    let top = parseInt(rubbish.style.top || '0');
     top += 10;
-    rubbish.style.top = top + 'px'
+    rubbish.style.top = top + 'px';
 }
 
 
@@ -67,11 +67,11 @@ function moveRubbish() {
 function moveLeft() {
     // if (rubbish.classList.contains("left")) { do nothing }
     if (rubbish.classList.contains("center")) {
-        rubbish.classList.remove("center")
-        rubbish.classList.add("left")
+        rubbish.classList.remove("center");
+        rubbish.classList.add("left");
     } else if (rubbish.classList.contains("right")) {
-        rubbish.classList.remove("right")
-        rubbish.classList.add("center")
+        rubbish.classList.remove("right");
+        rubbish.classList.add("center");
     }
 }
 
@@ -81,11 +81,11 @@ function moveLeft() {
 function moveRight() {
     // if (rubbish.classList.contains("right")) { do nothing }
     if (rubbish.classList.contains("center")) {
-        rubbish.classList.remove("center")
-        rubbish.classList.add("right")
+        rubbish.classList.remove("center");
+        rubbish.classList.add("right");
     } else if (rubbish.classList.contains("left")) {
-        rubbish.classList.remove("left")
-        rubbish.classList.add("center")
+        rubbish.classList.remove("left");
+        rubbish.classList.add("center");
     }
 }
 
@@ -96,34 +96,34 @@ function moveRight() {
 function resetRubbish() {
     // Remove old rubbish piece
     if (currentImageNode != -1) {
-        rubbish.removeChild(currentImageNode)
+        rubbish.removeChild(currentImageNode);
     }
 
     // Check for game win
     currentImagePos += 1
     if ((currentImagePos) >= items.length) {
-        gameOver = true
-        return
+        gameOver = true;
+        return;
     }
 
     // Create new rubbish piece
-    rubbish.style.top = '0px'
-    currentImage = items[currentImagePos]
+    rubbish.style.top = '0px';
+    currentImage = items[currentImagePos];
 
-    let newImg = document.createElement('img')
-    newImg.src = "../static/sustainable_app/img/" + currentImage["image"]
-    newImg.alt = currentImage["alt"]
-    newImg.classList.add("rubbish")
-    currentImageNode = newImg
-    rubbish.appendChild(newImg)
+    let newImg = document.createElement('img');
+    newImg.src = "../static/sustainable_app/img/" + currentImage["image"];
+    newImg.alt = currentImage["alt"];
+    newImg.classList.add("rubbish");
+    currentImageNode = newImg;
+    rubbish.appendChild(newImg);
 
     // Center piece
     if (rubbish.classList.contains("right")) {
-        rubbish.classList.remove("right")
-        rubbish.classList.add("center")
+        rubbish.classList.remove("right");
+        rubbish.classList.add("center");
     } else if (rubbish.classList.contains("left")) {
-        rubbish.classList.remove("left")
-        rubbish.classList.add("center")
+        rubbish.classList.remove("left");
+        rubbish.classList.add("center");
     }
     // else if (rubbish.classList.contains("center")) { do nothing }
 }
@@ -132,64 +132,64 @@ function resetRubbish() {
  * Check if rubbish has reached the bins
  */
 function checkCollision() {
-    let binNo = binToCol(currentImage["bin"])
-    let bin = bins[binNo]
-    let rubbishRect = rubbish.getBoundingClientRect()
-    let binRect = bin.getBoundingClientRect()
+    let binNo = binToCol(currentImage["bin"]);
+    let bin = bins[binNo];
+    let rubbishRect = rubbish.getBoundingClientRect();
+    let binRect = bin.getBoundingClientRect();
 
     // Check if in correct bin
     if (rubbishRect.bottom > (binRect.top-100) && ((binNo == 0 && rubbish.classList.contains("left"))||(binNo == 1 && rubbish.classList.contains("center"))||(binNo == 2 && rubbish.classList.contains("right")))) {
-        score += currentImage["points"]
-        resetRubbish()
+        score += currentImage["points"];
+        resetRubbish();
     } else if (rubbishRect.bottom > (binRect.top-100)) {
-        score = Math.max(score - currentImage["points"], 0)
-        resetRubbish()
+        score = Math.max(score - currentImage["points"], 0);
+        resetRubbish();
     }
 }
 
 // Listen for arrow keys (desktop)
 document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowLeft') {
-        moveLeft()
+        moveLeft();
     } else if (event.key === 'ArrowRight') {
-        moveRight()
+        moveRight();
     }
 })
 
 // Listen for buttons (mobile)
 touchLeft.addEventListener("click", function () {
-    moveLeft()
-})
+    moveLeft();
+});
 touchRight.addEventListener("click", function () {
-    moveRight()
-})
+    moveRight();
+});
 
 /**
  * Gameloop
  */
 function update() {
     if (!gameOver) {
-        moveRubbish()
-        checkCollision()
+        moveRubbish();
+        checkCollision();
     }
 
-    scoreLabel.textContent = "Score: " + score
+    scoreLabel.textContent = "Score: " + score;
 
     if (gameOver) {
-        clearInterval(gameLoop)
-        menuButton.textContent = "Play Again"
-        menuText.innerText = "Game Over\nScore: " + score + " out of 12"
-        menuScreen.style.display = "flex"
-        container.style.display = "none"
-        buttonContainer.style.display = "none"
+        clearInterval(gameLoop);
+        menuButton.textContent = "Play Again";
+        menuText.innerText = "Game Over\nScore: " + score + " out of 12";
+        menuScreen.style.display = "flex";
+        container.style.display = "none";
+        buttonContainer.style.display = "none";
 
-        add_score(score,"sorting")
+        add_score(score,"sorting");
 
 
-        score = 0
-        currentImagePos = -1
-        currentImageNode = -1
-        gameOver = false
+        score = 0;
+        currentImagePos = -1;
+        currentImageNode = -1;
+        gameOver = false;
     }
 }
 
@@ -198,12 +198,12 @@ function update() {
  */
 function startGame() {
     // Start gameloop
-    resetRubbish()
-    gameLoop = setInterval(update, 50)
-    menu.style.display = "none"
-    menuScreen.style.display = "none"
-    container.style.display = "flex"
-    buttonContainer.style.display = "flex"
+    resetRubbish();
+    gameLoop = setInterval(update, 50);
+    menu.style.display = "none";
+    menuScreen.style.display = "none";
+    container.style.display = "flex";
+    buttonContainer.style.display = "flex";
 }
 
 /**

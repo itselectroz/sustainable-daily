@@ -12,6 +12,9 @@ import datetime
 
 
 def game_keeper(request):
+    """
+    Handles game keeper requests and sends game keepers and stats to template
+    """
     if request.method == "POST" and request.POST is not None:
         return locations_add(request)
 
@@ -42,6 +45,9 @@ def game_keeper(request):
 
 
 def game_keeper_locations(request):
+    """
+    Handles game keeper locations requests
+    """
     # request to add location
     if request.method == "POST" and request.POST is not None:
         return locations_add(request)
@@ -54,6 +60,9 @@ def game_keeper_locations(request):
 
 
 def game_keeper_surveys(request):
+    """
+    Handles game keeper survyes requests
+    """
     # request to add survey
     if request.method == "POST" and request.POST is not None:
         if request.POST.get("form-type") == "create-survey":
@@ -61,7 +70,7 @@ def game_keeper_surveys(request):
         if request.POST.get("form-type") == "create-question":
             return surveys_question_add(request)
 
-    # send all locations to template
+    # send all surveys to template
     context = {
         "surveys":  Survey.objects.all(),
         "questions": SurveyQuestion.objects.all(),
@@ -72,11 +81,14 @@ def game_keeper_surveys(request):
 
 
 def game_keeper_questions(request):
+    """
+    Handles game keeper questions requests
+    """
     # request to add question
     if request.method == "POST" and request.POST is not None:
         return questions_add(request)
 
-    # send all locations to template
+    # send all quiz questions to template
     context = {
         "questions":  QuizQuestion.objects.all()
     }
@@ -99,10 +111,12 @@ def remove_keeper(request):
     # refresh the page
     return redirect('/')
 
-# add a location
 
 
 def locations_add(request):
+    """
+    Adds a location if the user is authorized
+    """
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -161,10 +175,12 @@ def locations_add(request):
 
     return redirect(reverse('game_keeper_locations'))
 
-# remove a location
 
 
 def locations_remove(request):
+    """
+    Removes a location if the user is authorized
+    """
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -188,10 +204,12 @@ def locations_remove(request):
     # refresh the page
     return redirect(reverse('game_keeper_locations'))
 
-# add a survey
 
 
 def surveys_add(request):
+    """
+    Creates a survey if user is authorized
+    """
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -221,10 +239,12 @@ def surveys_add(request):
 
     return redirect(reverse('game_keeper_surveys'))
 
-# remove a survey
 
 
 def surveys_remove(request):
+    """
+    Removes a survey question if the user is authorized
+    """
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -252,10 +272,12 @@ def surveys_remove(request):
     # refresh the page
     return redirect(reverse('game_keeper_surveys'))
 
-# add a survey question
 
 
 def surveys_question_add(request):
+    """
+    Creates a survey question if the user is authorized
+    """
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -296,10 +318,12 @@ def surveys_question_add(request):
 
     return redirect(reverse('game_keeper_surveys'))
 
-# add a question
 
 
 def questions_add(request):
+    """
+    Creates a question if the user is authorized
+    """
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -322,10 +346,12 @@ def questions_add(request):
 
     return redirect(reverse('game_keeper_questions'))
 
-# remove a question
 
 
 def questions_remove(request):
+    """
+    Deletes a question if the user is authorized
+    """
     if (not request.user.is_authenticated or not request.user.game_keeper):
         return HttpResponse('Unauthorized', status=401)
 
@@ -344,7 +370,6 @@ def questions_remove(request):
     # refresh the page
     return redirect(reverse('game_keeper_questions'))
 
-# direct user to correct page
 
 
 def direct_user(page, request, context):

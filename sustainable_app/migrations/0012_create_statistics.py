@@ -3,6 +3,9 @@
 from django.db import migrations, models
 
 def create(apps, schema_editor):
+    """
+    Creates statistics for water and plastic bottles saved
+    """
     statistic = apps.get_model('sustainable_app', 'Statistics')
     water = statistic(name='water', quantity=0)
     plastic = statistic(name='plastic', quantity=0)
@@ -10,6 +13,9 @@ def create(apps, schema_editor):
     plastic.save()
 
 def undo_create(apps, schema_aditor):
+    """
+    Reverse function for undoing migrations
+    """
     stat = apps.get_model('sustainable_app', 'Statistics')
     try:
         water = stat.objects.get(name="water")

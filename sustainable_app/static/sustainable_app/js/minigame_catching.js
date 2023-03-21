@@ -1,6 +1,3 @@
-
-
-
 // Define html elements
 const player = document.getElementById("player");
 const rubbish_group = document.querySelector(".rubbish_group");
@@ -125,6 +122,7 @@ function generateRubbish() {
 
 /**
  * Randomly picks rubbish
+ * 
  * @returns The name and type of rubbish
  */
 function getRandomClass() {
@@ -143,16 +141,17 @@ function lostLife() {
     // Check if out of lives
     if(lives > 0) {
         lives -= 1;
-        livesElement.removeChild(livesElement.lastElementChild)
+        livesElement.removeChild(livesElement.lastElementChild);
     }
     else {
         gameState("end");
-        livesElement.removeChild(livesElement.lastElementChild)
+        livesElement.removeChild(livesElement.lastElementChild);
     }
 }
 
 /**
  * Create a new life div element
+ * 
  * @returns life div element
  */
 function createLives(num) {
@@ -166,6 +165,7 @@ function createLives(num) {
 
 /**
  * Set game to certain state
+ * 
  * @param {String} state 
  */
 function gameState(state) {
@@ -197,6 +197,9 @@ function gameState(state) {
     }
 }
 
+/**
+ * Increases the speed of the rubbish falling
+ */
 function increaseSpeed() {
     generateSpeed -= 50;
     clearInterval(rubbishTimeout);
@@ -205,6 +208,9 @@ function increaseSpeed() {
     speedTimeout = setTimeout(increaseSpeed, 5000);
 }
 
+/**
+ * Remove all rubbish
+ */
 function removeRubbish() {
     let group = document.getElementById('rubbish_group');
     group.innerHTML = '';
@@ -227,36 +233,54 @@ function exitGame() {
 
 // Movement with WASD
 
+/**
+ * Listen for relevant keydown events
+ */
 addEventListener("keydown", function(e) {
     if(e.code == "KeyD") {
-       moveRight()
+       moveRight();
     }
     if(e.code == "KeyA") {
-        moveLeft()
+        moveLeft();
     }
 })
 
+/**
+ * Listen for relevant keyup events
+ */
 addEventListener("keyup", function(e) {
     if(e.code == "KeyD") {
-        stopRight()
+        stopRight();
     }
     if(e.code == "KeyA") {
        stopLeft();
     }
 })
 
+/**
+ * Set the players right velocity
+ */
 function moveRight() {
     vxr = container.offsetWidth / 128;
 }
 
+/**
+ * Set the players left velocity
+ */
 function moveLeft() {
     vxl = -(container.offsetWidth / 128);
 }
 
+/**
+ * Remove the players right velocity
+ */
 function stopRight() {
     vxr = 0;
 }
 
+/**
+ * Remove the players left velocity
+ */
 function stopLeft() {
     vxl = 0;
 }

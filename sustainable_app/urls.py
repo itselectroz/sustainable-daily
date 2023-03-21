@@ -2,6 +2,7 @@ from django.urls import path
 
 from . import views
 
+# List of URLs for navigating the app
 urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name="register"),
@@ -12,6 +13,7 @@ urlpatterns = [
 
     path('', views.home, name="home"),
     path('complete_personal/', views.complete_personal, name="complete_personal"),
+    path('update_recycle/', views.update_recycle, name='update_recycle'),
     path('update_water/', views.update_water, name='update_water'),
     path('update_daily_goal_status/',views.update_daily_goal_status, name='update_daily_goal_status'),
     path('view_location/<int:id>/', views.view_location, name="view_location"),

@@ -170,12 +170,14 @@
   const level_num=document.getElementById("level_num");
   const user_background = document.getElementById("pfp");
   const profile_image = document.getElementById("profile_image");
+  //const xp_amount = window.getComputedStyle(xp_bar, ':before');
 
   user_level = parseInt("{{user_level}}");
   user_points = parseInt("{{user.points}}");
+  xp_bar.style.setProperty("--xp_amount", parseInt((parseInt("{{user.xp}}") / parseInt("{{xp_to_level}}")) * 100) + "%");
 
   // Set attributes of elements
-  xp_bar.setAttribute("data-label", "{{ user.xp }}");
+  xp_bar.setAttribute("data-label", "{{ user.xp }} / {{xp_to_level}}");
   point_bar.setAttribute("data-label", user_points);
   level_num.innerText = user_level;
   username.innerText = "{{ user.username }}";

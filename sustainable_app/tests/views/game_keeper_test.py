@@ -8,6 +8,9 @@ from sustainable_app.models import User, Location, QuizQuestion, Survey, SurveyQ
 
 class GameKeeperViewTests(TestCase):
     def setUp(self):
+        """
+        creates a user for testing
+        """
         self.username = 'test_user'
         self.password = 'password123'
         self.user = User.objects.create_user(

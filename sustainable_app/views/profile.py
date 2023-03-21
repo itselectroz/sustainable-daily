@@ -9,6 +9,9 @@ from sustainable_app.util import username_dict, background_dict
 
 @login_required(login_url=reverse_lazy('login'))
 def profile(request):
+    """
+    Renders profile with user data
+    """
 
     current_user = request.user
 
@@ -19,6 +22,7 @@ def profile(request):
         current_user.equipped_items.get(type="background_color"))]
 
     user_level = current_user.level()
+    xp_to_level = current_user.xp_for_level(user_level + 1)
 
     user_accessory = current_user.equipped_items.get(type="accessory")
     user_character = current_user.equipped_items.get(type="character")
@@ -45,6 +49,7 @@ def profile(request):
                "all_characters": all_characters,
                "purchasable_items": purchasable_items,
                "owned_items": owned_items,
+               "xp_to_level": xp_to_level,
                }
 
     return render(request, "sustainable_app/profile.html", context)
@@ -53,6 +58,9 @@ def profile(request):
 
 
 def equip(request):
+    """
+    Equips item selected by user
+    """
 
     current_user = request.user
 
@@ -69,6 +77,9 @@ def equip(request):
 
 
 def changeAccessory(type, name, current_user):
+    """
+    If the user owns the item they are trying to equip, removes item of same type and equips new item
+    """
     # TODO: check if the user owns the accessory
     # we currently do not have "owned_items" implemented
 
@@ -92,6 +103,9 @@ def changeAccessory(type, name, current_user):
             current_user.equipped_items.add(item_to_add.id)
     
 def purchase(request):
+    """
+    Adds purchased item to user's owned items
+    """
     current_user = request.user
     
     if not request.user.is_authenticated:

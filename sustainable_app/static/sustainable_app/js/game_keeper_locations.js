@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    
     // Request to add location
     $('.remove-location').on('click', function() {
 
@@ -24,6 +24,13 @@ const expanded_view = document.querySelector('.expanded-view');
 const image_view = document.getElementById('expanded-image');
 const download_image = document.getElementById('download-image');
 
+/**
+ * Expands a QR code image
+ * 
+ * @param {String} src 
+ * @param {Number} location_id 
+ * @param {String} type 
+ */
 function expand(src, location_id, type) {
     image_view.src = src;
     expanded_view.style.visibility = 'visible';

@@ -2,12 +2,15 @@
 
 from django.db import migrations
 
-goals = [("Workout", "", 0, 0), ("Drink Water", "", 0, 0),
+goals = [("Workout", "", 0, 0), ("Re-use Water Bottle", "", 0, 0),
          ("Recycle Something", "", 0, 0), ("Do Some Work", "", 0, 0),
          ("Eat Something Healthy", "", 0, 0)]
 
 
 def make_goals(apps, schema_editor):
+    """
+    Creates goals and add them to database
+    """
     Goal = apps.get_model('sustainable_app', 'Goal')
 
     # Add all items to database
@@ -17,6 +20,9 @@ def make_goals(apps, schema_editor):
 
 
 def undo_make_goals(apps, schema_editor):
+    """
+    Reverse function to remove goals from database for undoing migration
+    """
     Goal = apps.get_model('sustainable_app', 'Goal')
     for [name, desc, xp, points] in goals:
             try:

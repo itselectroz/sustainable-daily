@@ -1,6 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .styled-table {
@@ -63,6 +64,23 @@ html, body {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+}
+.bottle_stat{
+    display: flex;
+    flex-direction: row;
+}
+
+.plastic_bottle img{
+    width: 65px;
+}
+
+.cat_recyle img{
+    width: 65px;
+}
+
+.recycle_stat{
+    display: flex;
+    flex-direction: row;
 }
 
 .stats {

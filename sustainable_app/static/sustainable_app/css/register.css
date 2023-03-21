@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  
+  overflow: hidden;
 }
 
 .register-title {
@@ -31,17 +31,12 @@ body {
   height: 70%;
   max-width: 300px;
   max-height: 550px;
+  min-height: 500px;
   
   justify-content: center;
   align-items: center;
   background: #ffffff;
   padding: 77px 55px 33px;
-}
-
-@media only screen and (min-width: 600px) {
-  .outer-container {
-    height: 60%;
-  }
 }
 
 .tInput {

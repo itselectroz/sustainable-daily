@@ -6,6 +6,11 @@ from . import Goal, User
 
 
 class DailyData(models.Model):
+    """
+    Daily data holds information about a users activities for a specific date
+    Can return the xp and points a user has earned and the goals a user has completed on that day
+    """
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=datetime.date.today)
 
@@ -114,6 +119,11 @@ class DailyData(models.Model):
         return daily_status
 
 class DailyGoalStatus(models.Model):
+    """
+    A representation of a goal for a specific user
+    Whenever a user attempts a goal one of these objects is created for said user
+    A relation model between a user data and a goal
+    """
     user_data = models.ForeignKey(DailyData, on_delete=models.CASCADE)
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE)
 

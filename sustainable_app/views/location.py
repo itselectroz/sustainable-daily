@@ -5,6 +5,7 @@ from django.http import HttpResponseForbidden
 
 from sustainable_app.models import Goal, Location, DailyData, Statistics
 
+# Location type dictionay
 location_types = {
     'recycle': 'Recycling Bin',
     'water': 'Water Fountain'
@@ -12,6 +13,9 @@ location_types = {
 
 @login_required(login_url=reverse_lazy('login'))
 def view_location(request, id):
+    """
+    Renders location goal
+    """
     goal = get_object_or_404(Goal, id=id)
     location = get_object_or_404(Location, goal=goal)
 
@@ -21,6 +25,9 @@ def view_location(request, id):
     })
 
 def qr_callback(request, id):
+    """
+    Increments statistics based on goal
+    """
     if (not request.user.is_authenticated):
         return HttpResponseForbidden()
 

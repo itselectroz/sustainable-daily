@@ -6,6 +6,9 @@ from ..models import User, Item
 
 
 def register_user(request):
+    """
+    Registers user, creates user object and redirects according to ther user's type
+    """
     issues = []
 
     # Check all fields are present and note down those that aren't
@@ -75,6 +78,9 @@ def register_user(request):
         return redirect(reverse('home'))
 
 def register(request):
+    """
+    Handles registration request
+    """
     if request.user.is_authenticated and request.user.game_keeper == False:
         return redirect(reverse('home'))
 
@@ -98,6 +104,9 @@ def register(request):
     })
 
 def privacy_policy(request):
+    """
+    Renders privacy policy
+    """
     # No authentication checks on this page
     # It's fine for an authenticated user to see the privacy policy.
 
