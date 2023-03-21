@@ -42,7 +42,6 @@ class Command(BaseCommand):
             self.create_questions()
             self.stdout.write(self.style.SUCCESS('Successfully created dummy quiz questions.'))
             
-            call_command('dailytasks')
         except Exception as e:
             self.stdout.write(self.style.ERROR('Something went wrong:'))
             self.stderr.write(str(e))
@@ -147,6 +146,26 @@ class Command(BaseCommand):
         user4.equipped_items.add(Item.objects.get(name="u_green").id)
         user4.equipped_items.add(Item.objects.get(name="b_blue").id)
         user4.save()
+        
+        # create game_keeper
+        game_keeper = User.objects.create_user("GameKeeper", "keeper@example.com", "admin")
+        game_keeper.xp=200
+        game_keeper.points=700
+        game_keeper.first_name="Game"
+        game_keeper.last_name="Keeper"
+        game_keeper.game_keeper=True
+
+        # default items for all users
+        game_keeper.owned_items.add(Item.objects.get(name="badger").id)
+        game_keeper.owned_items.add(Item.objects.get(name="none").id)
+        game_keeper.owned_items.add(Item.objects.get(name="u_black").id)
+        game_keeper.owned_items.add(Item.objects.get(name="b_white").id)
+        # equipped items
+        game_keeper.equipped_items.add(Item.objects.get(name="badger").id)
+        game_keeper.equipped_items.add(Item.objects.get(name="none").id)
+        game_keeper.equipped_items.add(Item.objects.get(name="u_black").id)
+        game_keeper.equipped_items.add(Item.objects.get(name="b_white").id)
+        game_keeper.save()
 
 
     def create_locations(self):
@@ -162,6 +181,7 @@ class Command(BaseCommand):
             type=Goal.LOCATION,
             point_reward=100,
             xp_reward=100,
+            active=True,
         )
         goal1.url = reverse('view_location', kwargs={'id': goal1.id})
         goal1.save()
@@ -203,6 +223,7 @@ class Command(BaseCommand):
             type=Goal.LOCATION,
             point_reward=100,
             xp_reward=100,
+            active=True,
         )
         goal2.url = reverse('view_location', kwargs={'id': goal2.id})
         goal2.save()
@@ -257,8 +278,6 @@ class Command(BaseCommand):
         creates multiple dummy surveys and survey questions (for demonstration purposes)
         """
         
-        # ------------------ first survey ------------------
-        
         # create goal1
         goal1 = Goal.objects.create(
             name="test survey1",
@@ -267,6 +286,7 @@ class Command(BaseCommand):
             type=Goal.POLL,
             point_reward=100,
             xp_reward=100,
+            active=True,
         )
         goal1.url = reverse('survey', kwargs={'id': goal1.id})
         goal1.save()
