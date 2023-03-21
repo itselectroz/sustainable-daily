@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from django.core.files import File
-from ...models import User, Item, Goal, Location, Survey, SurveyQuestion, SurveyChoice, QuizQuestion
+from ...models import User, Item, Goal, Location, Survey, SurveyQuestion, SurveyChoice, QuizQuestion, Statistics
 from django.shortcuts import reverse
 import qrcode
 import shutil
@@ -41,6 +41,10 @@ class Command(BaseCommand):
             self.stdout.write("Creating dummy quiz questions...")
             self.create_questions()
             self.stdout.write(self.style.SUCCESS('Successfully created dummy quiz questions.'))
+            
+            self.stdout.write("Setting dummy Statistics...")
+            self.set_stats()
+            self.stdout.write(self.style.SUCCESS('Successfully set dummy statistics.'))
             
         except Exception as e:
             self.stdout.write(self.style.ERROR('Something went wrong:'))
@@ -377,3 +381,14 @@ class Command(BaseCommand):
             correct_answer=1,
         )
         question3.save()
+
+    def set_stats(self):
+        try:
+            temp = Statistics.objects.get(name="water")
+            temp.quantity = 237
+            temp.save()
+            temp = Statistics.objects.get(name="plastic")
+            temp.quantity = 1054
+            temp.save()
+        except Statistics.DoesNotExist:
+            self.stdout.write("ERROR: 'Statistics' NOT FOUND.")
