@@ -7,3 +7,5 @@ Pillow===9.4.0
 pypng==0.20220715.0
 qrcode==7.4.2
 typing_extensions==4.5.0
+pyflakes==3.0.1
+flake8==6.0.0
