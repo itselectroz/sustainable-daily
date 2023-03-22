@@ -79,7 +79,7 @@ class Command(BaseCommand):
         # create user2
         user2 = User.objects.create_user("MattC", "matt@example.com", "matt")
         user2.xp=(user1.xp_for_level(9) + 100)
-        user2.points=800
+        user2.points=300
         user2.streak_length=4
         user2.first_name="Matt"
         user2.last_name="Collinson"
@@ -127,7 +127,7 @@ class Command(BaseCommand):
         # create user4
         user4 = User.objects.create_user("NickDRoss", "nick@example.com", "nick")
         user4.xp=(user1.xp_for_level(7) + 100)
-        user4.points=700
+        user4.points=800
         user4.streak_length=3
         user4.first_name="Nick"
         user4.last_name="Ross"
