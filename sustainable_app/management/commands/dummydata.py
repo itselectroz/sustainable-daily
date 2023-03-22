@@ -42,9 +42,13 @@ class Command(BaseCommand):
             self.create_questions()
             self.stdout.write(self.style.SUCCESS('Successfully created dummy quiz questions.'))
             
-            self.stdout.write("Setting dummy Statistics...")
+            self.stdout.write("Setting dummy statistics...")
             self.set_stats()
             self.stdout.write(self.style.SUCCESS('Successfully set dummy statistics.'))
+            
+            self.stdout.write("Setting active goals...")
+            self.set_active_goals()
+            self.stdout.write(self.style.SUCCESS('Successfully set active goals.'))
             
         except Exception as e:
             self.stdout.write(self.style.ERROR('Something went wrong:'))
@@ -383,6 +387,9 @@ class Command(BaseCommand):
         question3.save()
 
     def set_stats(self):
+        """
+        Sets the statistics to dummy numbers (for demonstration purposes)
+        """
         try:
             temp = Statistics.objects.get(name="water")
             temp.quantity = 237
@@ -392,3 +399,15 @@ class Command(BaseCommand):
             temp.save()
         except Statistics.DoesNotExist:
             self.stdout.write("ERROR: 'Statistics' NOT FOUND.")
+            
+    def set_active_goals(self):
+        """
+        Manually sets the active daily goals (for demonstration purposes)
+        """
+        quiz = Goal.objects.filter(type=Goal.QUIZ).first()
+        quiz.active=True
+        quiz.save()
+        
+        catching = Goal.objects.get(name="minigame_catching", type=Goal.MINIGAME)
+        catching.active=True
+        catching.save()
