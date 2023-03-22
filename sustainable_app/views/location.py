@@ -33,8 +33,13 @@ def qr_callback(request, id):
 
     goal = get_object_or_404(Goal, id=id)
 
+    # Check goal is one of the active daily goals
+    if not goal.active:
+        return HttpResponseForbidden()
+
     DailyData.complete_goal(request.user, goal)
 
+    # Increment statistics
     location = get_object_or_404(Location, goal=goal)
     if location.category == location.RECYCLE:
         Statistics.increment_quantity("plastic")
