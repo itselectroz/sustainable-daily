@@ -335,6 +335,8 @@ Daily randomisation and tracking completion of daily goals was implemented by Os
 
 Anything to do with DevOps can be attributed to Harry. This includes setting up Docker, Cloud Hosting, GitHub actions and a domain.
 
+The majority of the assets within the project were created by Dora, this includes the artwork for the characters, accessories and minigames.
+
 ## End Notes
 
 Ultimately it is incredibly difficult to solely attribute a part of the project to a single person. Everyone made incredibly significant contributions to all portions of the project, the majority of which are not listed here. To see all contributions and code changes please view the [GitHub repository](https://github.com/itselectroz/ecm2434-gsep).
