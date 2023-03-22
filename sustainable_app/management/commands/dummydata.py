@@ -388,7 +388,7 @@ class Command(BaseCommand):
             a1="90",
             a2="150",
             a3="20",
-            a="380",
+            a4="380",
             correct_answer=2,
         )
         question1.save()
