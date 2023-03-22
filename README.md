@@ -84,7 +84,7 @@ For more details please refer to [Hosting](#hosting), [Docker](#docker), and [Gi
 To run the project:
 
 - Open a terminal
-- Navigate to the project directory: `cd ecm2434-gsep`
+- Navigate to the project directory: `cd sustainable-daily`
 - Migrate the database: `python manage.py migrate`
 - Run the server: `python manage.py runserver`
 - Open a browser
@@ -101,7 +101,7 @@ To run the project:
 To test the project:
 
 - Open a terminal
-- Navigate to the project directory: `cd ecm2434-gsep`
+- Navigate to the project directory: `cd sustainable-daily`
 - Migrate the database: `python manage.py migrate`
 - Run the tests: `python manage.py test`
 
@@ -117,17 +117,154 @@ We test the project using Django's built-in tests.
 
 ## Contributing to the project
 
-This section outlines the guidelines we follow when contributing code to the repository.
+This section outlines the guidelines we follow when contributing code to the repository, including our processes and policies for
 
-We have the project setup so that you are unable to commit directly to master, and instead must go through a pull request.
+- developing new features
+- coding styles and conventions
+- testing features
+- merging features into the project
+- peer reviewing pull requests
 
-All features should be implemented in a feature branch, such as `profile-tests` or `settings-page`. The branch should then be merged into the `master` branch using a pull-request.
+### Developing new features
 
-In order for a pull request to be merged it must have been reviewed by another group member, and all GitHub action workflows must be passing - linting and tests.
+We have the project setup so that you are unable to commit directly to master, and instead develop on a separate branch before using a pull request to merge the feature into production.
 
-The project is linted using flake8, which tests against the PEP8 python format.
+All features should be implemented in a feature branch, such as `profile-view-tests` or `task-streaks`.
 
-To lint the project locally, ensure `flake8` is installed and simply run `flake8` from the command line whilst in the root directory.
+Our policies about naming branches are fairly relaxed, and do not use any specific prefixes, though they should sufficiently describe the feature that is being implemented.
+
+### Coding Styles and Conventions
+
+This section will guide you through the styling and conventions throughout the project, and assist in making decisions about code style and structuring.
+
+#### Code styles to follow
+
+All Python within the project follows the [PEP8](https://peps.python.org/pep-0008) format, it should be followed for all python code including migrations, management processes and other pieces of code.
+
+You can test the project against this convention using the `flake8` module, and can be run from any Unix terminal simply by running `flake8` in the root directory. GitHub actions are also setup for linting the project.
+
+All JavaScript within the project should follow [Google's JavaScript Styling](https://google.github.io/styleguide/jsguide.html), although due to the smaller amount of JavaScript in the project this is not enforced as strongly as Python styling.
+
+#### Where to place features
+
+The project has been modularised into many directories containing application code;
+
+- **management**: this contains all management commands for the application entry point
+- **migrations**: this contains all migration scripts, manually written and automatically generated scripts
+- **models**: this contains all database models for the project
+  - majority of functionality for these models are included within the model classes
+- **static**: this contains all CSS and JavaScript files for the client
+- **templates**: this contains all HTML templates for rendering pages with Django
+- **tests**: this contains all tests for the project and is split into similar subdirectories
+- **views**: this contains all logic for rendering views and handling API requests
+
+**Where should I place my API endpoint?**
+
+This question is difficult to answer. You should individually assess where the endpoint most fits, which is generally the same view as it is called from.
+
+Examples for this include purchasing and equipping items, endpoints which are declared and implemented in the profile view file.
+
+#### How to manage migrations
+
+Migrations become a huge issue when merging features together, a general recommendation for migrations is to keep all changes in as few migrations as possible at the end of development.
+
+Once a pull request is ready to be merged, a good process to follow is:
+
+1. Delete new migration scripts
+2. Merge master into the feature branch
+3. Rerun `makemigrations` and add any manual migrations back in (fixing dependencies when needed).
+
+### Testing features
+
+When developing any sort of back-end functionality, tests should be developed in parallel. You should attempt to use test-driven development wherever possible.
+
+Test-driven development is the process of writing tests which outline the functionality the code should have, before then writing code to pass the tests.
+
+You _must_ use this development process when writing functions within models, and it is _strongly recommended_ when writing views. We do, however, recognise that sometimes it is not possible with views.
+
+These tests should be included within the test suite and be running on GitHub actions. **Always** check this before making a pull-request.
+
+Common test issues include:
+
+- not including the test file within the relevant `__init__.py`
+- not extending Django's base `Test` class
+- not properly naming test functions with the prefix `test_`
+
+#### Test naming conventions
+
+We follow Django's recommended test naming conventions which includes the functionality being tested and the conditions it is being tested under, all prefixed with `test_`. Below are some example test names:
+
+- `test_level_with_no_xp`
+- `test_load_login_as_anonymous`
+
+### Merging Features/Pull Requests
+
+The process of merging features is fairly simple from the developer perspective.
+
+You should create a pull request for the feature, requesting to merge your branch into `master`.
+The master branch is our equivalent of a staging environment.
+
+The pull request name should clearly describe what the feature is, and you should attempt to keep features small enough that a description is not needed.
+
+Should further clarification be needed about certain changes or decisions, please put them in the description of the pull request with justification.
+
+After filling out details about the pull request you should let the team know about your pull request, or directly request a review from someone through the GitHub system.
+
+The pull request and its changes should aim to be **simple**, a complex pull request is hard for peers to review.
+
+### Peer Reviewing Pull Requests
+
+In order for a pull request to be merged it must have been reviewed by another group member, and all GitHub action workflows must be passing - linting and tests. This section outlines what is expected from a peer review, and how to competently conduct one.
+
+The overall aim of a pull request is to ensure the change definitively **improves the overall code health of the system**.
+
+- Be kind
+- Explain yourself
+- Encourage each other
+- Look at the bigger picture
+- Clean code is important
+
+The general steps of a review are as follows:
+
+1. Take a broad view of the changes
+
+   - Are they beneficial for the project?
+   - Have they been implemented with sensible structure?
+   - Can the methodology be improved?
+
+2. Examine the main code of the changes
+
+   - Have sensible algorithms been chosen?
+
+3. Examine the rest of the changes in sequence
+   - Check points listed in the next section.
+
+#### What should I comment?
+
+Reviewers should **always** leave comments about code, no matter the severity. If it isn't an important change this should be clearly stated, so that the comment can be ignored if chosen.
+
+Above everything ensure you are being **kind** throughout your review, do not insult or shame someone for a decision, it could easily be you in that position. Highlight and compliment changes you think have been executed well.
+
+Ensure you are clearly explaining and justifying your criticisms.
+
+Important things to check for when reviewing code include:
+
+- **styling**: the PEP8 format comes above all personal style opinions
+- **naming**: have good names been chosen for methods and variables
+- **comments**: are complex sections commented and do the comments improve the overall clarity of the code
+- **documentation**: has all relevant documentation been updated to reflect the changes
+
+#### How do I submit my review?
+
+Using GitHub's review system you should pick the relevant review type:
+
+- **Comment** is to be used when you have comments to give, but haven't fully reviewed the PR or do not feel you are the correct person to judge whether it is ready.
+- **Approve** is to be used when you are _100% confident_ that the changes are fit for staging and will improve overall code health and quality.
+- **Changes Requested** is to be used when you have left comments about pieces of code that _must_ be changed before being merged into staging.
+
+### Information isn't listed here
+
+If you have questions, or need information about things not listed here, you should take your question up with anyone on the development team, preferably your team or project lead who will be your point of contact for development questions.
 
 <br>
 
@@ -339,6 +476,6 @@ The majority of the assets within the project were created by Dora, this include
 
 ## End Notes
 
-Ultimately it is incredibly difficult to solely attribute a part of the project to a single person. Everyone made incredibly significant contributions to all portions of the project, the majority of which are not listed here. To see all contributions and code changes please view the [GitHub repository](https://github.com/itselectroz/ecm2434-gsep).
+Ultimately it is incredibly difficult to solely attribute a part of the project to a single person. Everyone made incredibly significant contributions to all portions of the project, the majority of which are not listed here. To see all contributions and code changes please view the [GitHub repository](https://github.com/itselectroz/sustainable-daily).
 
 We can confirm that Matt Collinson has been added as a member of the GitHub repository, and that Matt, Liam, and Nick have all been invited to the Trello board we use.
