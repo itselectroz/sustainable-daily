@@ -3,11 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponse, JsonResponse, HttpResponseForbidden
-from sustainable_app.models import Goal, DailyData, Statistics
+from sustainable_app.models import Goal, DailyData
 
 
 """
-To make a new goal create it with the same name as the page it is being created for.
+To make a new goal create it with the same name as the page it
+is being created for.
+
 Give it the url to the page and the image for the daily goal.
 
 Go to the view being added, and add code to make it so the user gets a
@@ -19,6 +21,7 @@ DailyData.complete_goal(user, goal)
 """
 
 # Views
+
 
 @login_required(login_url=reverse_lazy('login'))
 def home(request):
@@ -39,7 +42,7 @@ def home(request):
         "completed": get_completed_goals(current_user),
         "streak": current_user.streak_length
     }
-    
+
     return render(request, 'sustainable_app/home.html', context)
 
 
@@ -49,7 +52,7 @@ def complete_personal(request):
     """
 
     if not request.user or not request.user.is_authenticated:
-            raise HttpResponseForbidden()
+        raise HttpResponseForbidden()
 
     goal_id = request.POST.get('goal_id', False)
     goal = Goal.objects.get(id=goal_id, type=Goal.PERSONAL)
@@ -59,6 +62,7 @@ def complete_personal(request):
         DailyData.complete_goal(request.user, goal)
 
         return HttpResponse(status=200)
+
 
 def update_daily_goal_status(request):
     """
@@ -76,7 +80,7 @@ def update_daily_goal_status(request):
 
         # Get the corresponding goal object
         try:
-            current_goal = Goal.objects.get(name = goal)
+            current_goal = Goal.objects.get(name=goal)
         except Exception as e:
             return JsonResponse({'success': False, 'error': e})
 
@@ -94,6 +98,7 @@ def update_daily_goal_status(request):
         return JsonResponse({'success': False, 'error': 'Invalid request'})
 
 # Helpers
+
 
 def get_completed_goals(user):
     """

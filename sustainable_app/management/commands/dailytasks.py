@@ -11,7 +11,6 @@ class Command(BaseCommand):
     """
     help = 'Run all daily tasks.'
 
-
     def handle(self, *args, **options):
         """
         Function run when command is called
@@ -33,7 +32,9 @@ class Command(BaseCommand):
 
     def calculate_minigame_points(self):
         """
-        Calculates the points that a user gets from all of the goals they have completed and adds it to the users points
+        Calculates the points that a user gets from all
+        of the goals they have completed,
+        and adds it to the users points
         """
         try:
 
@@ -54,8 +55,9 @@ class Command(BaseCommand):
 
     def randomize_daily_goals(self):
         """
-        Sets 5 random daily goals that will appear on the home page of users for the next day
-        
+        Sets 5 random daily goals that will appear on the
+        home page of users for the next day
+
         Will be at least one minigame and one location task then 3 random tasks
         """
         # Set 5 random daily goals to active
@@ -67,7 +69,8 @@ class Command(BaseCommand):
             goal.save()
 
         # Choose a random minigame and a random location task
-        # Looks for minigame and location task individually in case one cannot be found
+        # Looks for minigame and location task individually
+        # (in case one cannot be found)
         try:
             minigame = Goal.objects.filter(
                 type=Goal.MINIGAME).order_by('?').first()
@@ -127,7 +130,8 @@ class Command(BaseCommand):
 
     def reset_streaks(self):
         """
-        Will reset a users streak to 0 if they havent completed a task in the previous day 
+        Will reset a users streak to 0 if they haven't
+        completed a task in the previous day
         """
         try:
             users = User.objects.filter(
@@ -136,7 +140,7 @@ class Command(BaseCommand):
             for user in users:
                 user.streak_length = 0
                 user.save()
-            
+
             self.stdout.write(self.style.SUCCESS(
                 "[reset_streaks] Task completed successfully."))
 

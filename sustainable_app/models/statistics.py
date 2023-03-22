@@ -1,12 +1,13 @@
 from django.db import models
 
+
 class Statistics(models.Model):
     """
     Holds a statistic that is quantifiable, e.g. number of waterbottles saved
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, unique=True)
-    
+
     # Either plastic bottles saved or items recycled
     quantity = models.IntegerField(default=0)
 
@@ -20,6 +21,6 @@ class Statistics(models.Model):
             statistic = Statistics.objects.get(name=name)
         except Statistics.DoesNotExist:
             statistic = Statistics(name=name)
-        
+
         statistic.quantity += 1
         statistic.save()

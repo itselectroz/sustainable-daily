@@ -7,7 +7,8 @@ from ..models import User, Item
 
 def register_user(request):
     """
-    Registers user, creates user object and redirects according to ther user's type
+    Registers user, creates user object and redirects
+    according to ther user's type
     """
     issues = []
 
@@ -17,7 +18,6 @@ def register_user(request):
             issues.append(name)
 
     if len(issues) > 0:
-        # TODO: once register view has been themeified by oscar, this error stuff needs to be reimplemented
         return render(request, 'sustainable_app/register.html', {
             'error': True,
             'error_message': 'Missing required information.',
@@ -52,8 +52,10 @@ def register_user(request):
     user.first_name = first_name
     user.last_name = last_name
 
-    # if user is authenticated, is a game keeper, and wants to create a game keeper
-    if (is_admin and request.user.is_authenticated and request.user.game_keeper):
+    # if user is authenticated, is a game keeper,
+    # and wants to create a game keeper
+    if (is_admin and request.user.is_authenticated
+            and request.user.game_keeper):
         # set user game_keeper attribute to true
         user.game_keeper = True
 
@@ -89,7 +91,7 @@ def register(request):
     """
     Handles registration request
     """
-    if request.user.is_authenticated and request.user.game_keeper == False:
+    if request.user.is_authenticated and not request.user.game_keeper:
         return redirect(reverse('home'))
 
     if request.method == "POST" and request.POST is not None:

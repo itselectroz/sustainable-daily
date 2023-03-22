@@ -17,7 +17,7 @@ def authenticate_request(request):
 
     if user is not None:
         user_login(request, user)
-        if(request.user.game_keeper):
+        if (request.user.game_keeper):
             return redirect(reverse('game_keeper'))
         else:
             return redirect(reverse('home'))
@@ -31,21 +31,17 @@ def login(request):
     """
     Handles login request
     """
-    if request.user.is_authenticated and request.user.game_keeper == False:
+    if request.user.is_authenticated and not request.user.game_keeper:
         return redirect(reverse('home'))
     elif request.user.is_authenticated and request.user.game_keeper:
         return redirect(reverse('game_keeper'))
-    
 
     # if the login form was submitted
     if request.method == "POST" and request.POST is not None:
         response = authenticate_request(request)
         if response is not False:
             return response
-        
 
     return render(request, 'sustainable_app/login.html', {
-    'error': False
-})
-
-    
+        'error': False
+    })

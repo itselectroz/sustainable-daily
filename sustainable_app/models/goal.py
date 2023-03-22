@@ -5,14 +5,16 @@ class Goal(models.Model):
     """
     An object that represents a goal
     Can be a personal goal, a minigame, location, quiz or poll
-    When a goal object is added to the database it can appear on a users home page as one of the goals
-    
-    Requires the url field to be filled in to redirect to the goal so the user can complete it and 
+    When a goal object is added to the database,
+    it can appear on a users home page as one of the goals
+
+    Requires the url field to be filled in to redirect
+    to the goal so the user can complete it and
     the image field dictates what image will appear on the home page
-    
+
     Can give any amount of points or xps
     """
-    
+
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=400)

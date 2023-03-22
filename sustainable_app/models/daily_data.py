@@ -8,7 +8,8 @@ from . import Goal, User, Statistics
 class DailyData(models.Model):
     """
     Daily data holds information about a users activities for a specific date
-    Can return the xp and points a user has earned and the goals a user has completed on that day
+    Can return the xp and points a user has earned,
+    and the goals a user has completed on that day
     """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -54,7 +55,8 @@ class DailyData(models.Model):
         """
         Adds a goal to a user's completed daily goals for today's date.
 
-        If there is no `DailyData` instance for today's date, a new one is created.
+        If there is no `DailyData` instance for today's date,
+        a new one is created.
 
         :param user: The `User` instance to complete the goal for.
         :type user: `User`
@@ -121,13 +123,15 @@ class DailyData(models.Model):
             user.streak_length += 1
             user.date_last_task_completed = today
             user.save()
-        
+
         return daily_status
+
 
 class DailyGoalStatus(models.Model):
     """
     A representation of a goal for a specific user
-    Whenever a user attempts a goal one of these objects is created for said user
+    Whenever a user attempts a goal,
+    one of these objects is created for said user
     A relation model between a user data and a goal
     """
     user_data = models.ForeignKey(DailyData, on_delete=models.CASCADE)
