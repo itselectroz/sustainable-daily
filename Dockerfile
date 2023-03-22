@@ -40,4 +40,4 @@ RUN chmod +x /etc/cron.d/dailytasks
 RUN crontab /etc/cron.d/dailytasks
 
 # Start cron and runserver
-CMD ["sh", "-c", "service cron start && python manage.py dummydata && python manage.py migrate && python manage.py runserver 0.0.0.0:${PORT}"]
+CMD ["sh", "-c", "python manage.py dummydata && python manage.py migrate && python manage.py runserver 0.0.0.0:${PORT}"]
