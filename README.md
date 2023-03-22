@@ -117,7 +117,7 @@ We test the project using Django's built-in tests.
 
 ## Contributing to the project
 
-This section outlines the guidelines we follow when contributing code to the repository, including our processes and policies for
+This section outlines the guidelines we follow when contributing code to the repository, including our processes and policies for:
 
 - developing new features
 - coding styles and conventions
@@ -237,6 +237,7 @@ The general steps of a review are as follows:
    - Have sensible algorithms been chosen?
 
 3. Examine the rest of the changes in sequence
+
    - Check points listed in the next section.
 
 #### What should I comment?
