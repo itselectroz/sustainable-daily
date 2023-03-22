@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class QuizQuestion(models.Model):
     """
     Represents a question in a quiz and must have 4 answers
@@ -17,5 +18,5 @@ class QuizQuestion(models.Model):
         (3, 'a3'),
         (4, 'a4')
     ]
-    
+
     correct_answer = models.IntegerField(choices=CORRECT_CHOICES)

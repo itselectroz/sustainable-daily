@@ -4,6 +4,7 @@ from ...models import DailyGoalStatus, Goal, QuizQuestion, User
 
 import datetime
 
+
 class Command(BaseCommand):
     """
     A class for handling daily tasks (used by django, has to be called Command)
@@ -31,7 +32,8 @@ class Command(BaseCommand):
 
     def calculate_minigame_points(self):
         """
-        Calculates the points that a user gets from all of the goals they have completed,
+        Calculates the points that a user gets from all
+        of the goals they have completed,
         and adds it to the users points
         """
         try:
@@ -53,9 +55,9 @@ class Command(BaseCommand):
 
     def randomize_daily_goals(self):
         """
-        Sets 5 random daily goals that will appear on the 
+        Sets 5 random daily goals that will appear on the
         home page of users for the next day
-        
+
         Will be at least one minigame and one location task then 3 random tasks
         """
         # Set 5 random daily goals to active

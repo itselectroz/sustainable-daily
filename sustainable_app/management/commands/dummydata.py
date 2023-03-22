@@ -79,7 +79,8 @@ class Command(BaseCommand):
 
     def create_users(self):
         """
-        creates multiple users with dummy xp, points and items (for demonstration purposes)
+        Creates multiple users with dummy xp, points and items
+        (for demonstration purposes)
         """
         # create user1
         user1 = User.objects.create_user("JohnS2", "john@example.com", "john")
@@ -311,7 +312,8 @@ class Command(BaseCommand):
 
     def create_surveys(self):
         """
-        creates multiple dummy surveys and survey questions (for demonstration purposes)
+        Creates multiple dummy surveys and survey questions
+        (for demonstration purposes)
         """
 
         # create goal1
@@ -376,7 +378,8 @@ class Command(BaseCommand):
 
     def create_questions(self):
         """
-        creates multiple dummy quiz questions (for demonstration purposes)
+        Creates multiple dummy quiz questions
+        (for demonstration purposes)
         """
 
         # create question1
@@ -385,7 +388,7 @@ class Command(BaseCommand):
             a1="90",
             a2="150",
             a3="20",
-            a4="380",
+            a="380",
             correct_answer=2,
         )
         question1.save()
@@ -404,18 +407,20 @@ class Command(BaseCommand):
 
         # create question3
         question3 = QuizQuestion.objects.create(
-            question="On average what '%' of food waste in Universities is avoidable?",
+            question=("On average what '%' of food waste"
+                      " in Universities is avoidable?"),
             a1="75%",
             a2="20%",
-            a3="40",
-            a4="90",
+            a3="40%",
+            a4="90%",
             correct_answer=1,
         )
         question3.save()
 
     def set_stats(self):
         """
-        Sets the statistics to dummy numbers (for demonstration purposes)
+        Sets the statistics to dummy numbers
+        (for demonstration purposes)
         """
         try:
             temp = Statistics.objects.get(name="water")
@@ -429,13 +434,15 @@ class Command(BaseCommand):
 
     def set_active_goals(self):
         """
-        Manually sets the active daily goals (for demonstration purposes)
+        Manually sets the active daily goals
+        (for demonstration purposes)
         """
         quiz = Goal.objects.filter(type=Goal.QUIZ).first()
         quiz.active = True
         quiz.save()
 
         catching = Goal.objects.get(
-            name="minigame_catching", type=Goal.MINIGAME)
+            name="minigame_catching", type=Goal.MINIGAME
+        )
         catching.active = True
         catching.save()

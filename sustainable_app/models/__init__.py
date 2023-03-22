@@ -11,5 +11,6 @@ from .statistics import Statistics
 from .survey import Survey, SurveyChoice, SurveyQuestion
 from .daily_data import DailyData, DailyGoalStatus
 
-__all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData', 'DailyGoalStatus',
-           'QuizQuestion', 'Survey', 'SurveyChoice', 'SurveyQuestion', 'Statistics']
+__all__ = ['User', 'Item', 'Goal', 'Location', 'DailyData',
+           'DailyGoalStatus', 'QuizQuestion', 'Survey',
+           'SurveyChoice', 'SurveyQuestion', 'Statistics']
