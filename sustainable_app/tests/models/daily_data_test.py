@@ -146,14 +146,16 @@ class DailyDataModelTests(TestCase):
 
         DailyData.complete_goal(self.user, self.goal1)
 
-        self.assertIsNotNone(DailyData.objects.get(user=self.user, date=date.today()))
+        self.assertIsNotNone(DailyData.objects.get(
+            user=self.user, date=date.today()))
 
     def test_complete_goal_with_daily_data(self):
         """
         Check complete_goal uses existing daily data
         and completes daily goal
         """
-        daily_data = DailyData.objects.create(user=self.user, date=date.today())
+        daily_data = DailyData.objects.create(
+            user=self.user, date=date.today())
 
         self.assertIs(daily_data.daily_goals.all().count(), 0)
 

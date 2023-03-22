@@ -27,36 +27,32 @@ class LoginViewTests(TestCase):
         """
         checks the login page redirects to home when we are logged in
         """
-        
+
         # normal user
         self.client.login(username=self.username, password=self.password)
         response = self.client.get(reverse('login'), follow=True)
         self.assertRedirects(response, reverse('home'))
-        
-         # check for post as well
+
+        # check for post as well
         response = self.client.post(reverse('login'), {}, follow=True)
         self.assertRedirects(response, reverse('home'))
-        
+
         # game keeper
         self.user.game_keeper = True
         self.user.save()
         response = self.client.get(reverse('login'), follow=True)
         self.assertRedirects(response, reverse('game_keeper'))
-        
+
         # check for post as well
         response = self.client.post(reverse('login'), {}, follow=True)
         self.assertRedirects(response, reverse('game_keeper'))
-
-       
-        
-        
 
     def test_post_view_for_login(self):
         """
         check the user is succeessfully logged in
         upon correct username/password
         """
-        
+
         # normal user
         self.assertFalse(auth.get_user(self.client).is_authenticated)
 
@@ -67,20 +63,20 @@ class LoginViewTests(TestCase):
 
         self.assertTrue(auth.get_user(self.client).is_authenticated)
         self.assertRedirects(response, reverse('home'))
-        
+
         # logout
         self.client.logout()
-        
+
         # game keeper
         self.assertFalse(auth.get_user(self.client).is_authenticated)
         self.user.game_keeper = True
         self.user.save()
-        
+
         response = self.client.post(reverse('login'), {
             'username': self.username,
             'password': self.password
         }, follow=True)
-        
+
         self.assertTrue(auth.get_user(self.client).is_authenticated)
         self.assertRedirects(response, reverse('game_keeper'))
 

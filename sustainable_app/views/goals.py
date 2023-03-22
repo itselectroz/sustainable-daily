@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.core import serializers
 
-from sustainable_app.models import SurveyQuestion, SurveyChoice, Survey, Goal, DailyData, QuizQuestion
-from django.contrib.auth.decorators import login_required
+from sustainable_app.models import (
+    SurveyQuestion, SurveyChoice, Survey,
+    Goal, DailyData, QuizQuestion
+)
 
 
 @login_required(login_url=reverse_lazy('login'))

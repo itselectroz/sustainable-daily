@@ -26,14 +26,20 @@ def profile(request):
 
     user_accessory = current_user.equipped_items.get(type="accessory")
     user_character = current_user.equipped_items.get(type="character")
-    
-    
+
     # for dislaying point shop correctly
     all_characters = Item.objects.filter(type="character")
-    all_items = Item.objects.filter(type="accessory") | Item.objects.filter(type="username_color") | Item.objects.filter(type="background_color")
-    owned_items = current_user.owned_items.filter(type="accessory") | current_user.owned_items.filter(type="username_color") | current_user.owned_items.filter(type="background_color")
+
+    purchasable_types = [
+        "accessory", "username_color", "background_color"
+    ]
+
+    all_items = Item.objects.filter(type__in=purchasable_types)
+
+    owned_items = current_user.owned_items.filter(type__in=purchasable_types)
+
     purchasable_items = set(all_items).difference(set(owned_items))
-    
+
     # setting owned characters
     for character in all_characters:
         if character.unlock_level <= user_level:
@@ -78,10 +84,9 @@ def equip(request):
 
 def changeAccessory(type, name, current_user):
     """
-    If the user owns the item they are trying to equip, removes item of same type and equips new item
+    If the user owns the item they are trying to equip,
+    removes item of same type and equips new item
     """
-    # TODO: check if the user owns the accessory
-    # we currently do not have "owned_items" implemented
 
     # check if item is owned
     exists = False
@@ -89,42 +94,39 @@ def changeAccessory(type, name, current_user):
         if item_to_add.type == type and item_to_add.name == str(name):
             exists = True
 
-    if(exists == False):
+    if (not exists):
         return HttpResponse('Object not found', status=404)
-    
+
     # find item to remove and remove it
     for item_to_remove in current_user.equipped_items.all():
         if item_to_remove.type == type:
             current_user.equipped_items.remove(item_to_remove.id)
-            
+
     # find item to add and add it
     for item_to_add in current_user.owned_items.all():
         if item_to_add.type == type and item_to_add.name == str(name):
             current_user.equipped_items.add(item_to_add.id)
-    
+
+
 def purchase(request):
     """
     Adds purchased item to user's owned items
     """
     current_user = request.user
-    
+
     if not request.user.is_authenticated:
         return redirect(reverse('login'))
-    
+
     # Get the type and name of item
     type = request.POST.get('type', False)
     name = request.POST.get('name', False)
-    
+
     try:
         purchased_item = Item.objects.get(type=type, name=name)
         current_user.owned_items.add(purchased_item.id)
         current_user.points -= purchased_item.cost
         current_user.save()
         return HttpResponse(status=200)
-        
+
     except Item.DoesNotExist:
         return HttpResponse('Object not found', status=404)
-    
-    
-        
-        

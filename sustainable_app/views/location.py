@@ -11,6 +11,7 @@ location_types = {
     'water': 'Water Fountain'
 }
 
+
 @login_required(login_url=reverse_lazy('login'))
 def view_location(request, id):
     """
@@ -23,6 +24,7 @@ def view_location(request, id):
         'location': location,
         'type': location_types[location.category]
     })
+
 
 def qr_callback(request, id):
     """

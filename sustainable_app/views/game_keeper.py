@@ -4,11 +4,14 @@ from django.http import FileResponse, HttpResponse
 
 from io import BytesIO
 
-from sustainable_app.models import User, Location, Goal, DailyData, QuizQuestion, Survey, SurveyQuestion, SurveyChoice, Statistics
 import qrcode
 import datetime
 
-# game keeper page
+from sustainable_app.models import (
+    User, Location, Goal, QuizQuestion,
+    Survey, SurveyQuestion, SurveyChoice,
+    Statistics
+)
 
 
 def game_keeper(request):
@@ -112,7 +115,6 @@ def remove_keeper(request):
     return redirect('/')
 
 
-
 def locations_add(request):
     """
     Adds a location if the user is authorized
@@ -176,7 +178,6 @@ def locations_add(request):
     return redirect(reverse('game_keeper_locations'))
 
 
-
 def locations_remove(request):
     """
     Removes a location if the user is authorized
@@ -203,7 +204,6 @@ def locations_remove(request):
 
     # refresh the page
     return redirect(reverse('game_keeper_locations'))
-
 
 
 def surveys_add(request):
@@ -240,7 +240,6 @@ def surveys_add(request):
     return redirect(reverse('game_keeper_surveys'))
 
 
-
 def surveys_remove(request):
     """
     Removes a survey question if the user is authorized
@@ -273,7 +272,6 @@ def surveys_remove(request):
     return redirect(reverse('game_keeper_surveys'))
 
 
-
 def surveys_question_add(request):
     """
     Creates a survey question if the user is authorized
@@ -293,14 +291,14 @@ def surveys_question_add(request):
     o4 = request.POST.get('o4', '')
     survey_id = int(request.POST.get('survey_selection', ''))
 
-    try:
-        survey = Survey.objects.get(id=survey_id)
-    except Survey.DoesNotExist:
-        return HttpResponse('Object not found', status=404)
+    survey = get_object_or_404(Survey, id=survey_id)
 
     # create question object
     new_survey_question = SurveyQuestion(
-        survey=survey, question_text=question_text, pub_date=datetime.datetime.now())
+        survey=survey,
+        question_text=question_text,
+        pub_date=datetime.datetime.now()
+    )
     new_survey_question.save()
 
     # create choices objects
@@ -317,7 +315,6 @@ def surveys_question_add(request):
         new_choice.save()
 
     return redirect(reverse('game_keeper_surveys'))
-
 
 
 def questions_add(request):
@@ -341,11 +338,13 @@ def questions_add(request):
 
     # create question object
     new_question = QuizQuestion(
-        question=question, a1=a1, a2=a2, a3=a3, a4=a4, correct_answer=correct_answer)
+        question=question,
+        a1=a1, a2=a2, a3=a3, a4=a4,
+        correct_answer=correct_answer
+    )
     new_question.save()
 
     return redirect(reverse('game_keeper_questions'))
-
 
 
 def questions_remove(request):
@@ -359,17 +358,13 @@ def questions_remove(request):
     question_id = request.POST.get('question_id', False)
 
     # delete question
-    try:
-        remove_question = QuizQuestion.objects.get(id=question_id)
-    except QuizQuestion.DoesNotExist:
-        return HttpResponse('Object not found', status=404)
+    remove_question = get_object_or_404(QuizQuestion, id=question_id)
 
     # delete question with given id
     remove_question.delete()
 
     # refresh the page
     return redirect(reverse('game_keeper_questions'))
-
 
 
 def direct_user(page, request, context):
@@ -388,19 +383,19 @@ def direct_user(page, request, context):
         return redirect(reverse('home'))
 
     # render game keeper locations page
-    return render(request, 'sustainable_app/game_keeper' + page + '.html', context)
+    return render(request,
+                  'sustainable_app/game_keeper' + page + '.html', context)
 
 
 def open_file(request, location_id):
     """
-    User may download the qr code as a png file, to then print and put somewhere on campus
+    User may download the qr code as a png file,
+    to then print and put somewhere on campus
     """
 
-    try:
-        location = Location.objects.get(id=location_id)
-    except Location.DoesNotExist:
-        return HttpResponse('Object not found', status=404)
+    location = get_object_or_404(Location, id=location_id)
 
     filename = "qrcode_" + location.name + ".png"
 
-    return FileResponse(location.qr.open(), as_attachment=True, filename=filename)
+    return FileResponse(
+        location.qr.open(), as_attachment=True, filename=filename)
